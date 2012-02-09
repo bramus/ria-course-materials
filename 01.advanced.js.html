@@ -210,15 +210,15 @@ alert(typeof firstName); // number</code></pre>
 									<li class="fragment">Derived from <code>Object</code></li>
 									<li class="fragment">Define a structure to store <em>something</em> in</li>
 									<li class="fragment">
-										Have some properties
+										Instances have some properties
 										<ul>
-											<li>eg. <code>myString.length</code> of a <code>String</code></li>
+											<li>eg. <code>myString.length</code> (<code>String</code>)</li>
 										</ul>
 									</li>
 									<li class="fragment">
-										Have some specific methods to manipulate/access the stored value
+										Instances have some methods (to manipulate/access the stored value)
 										<ul>
-											<li>eg. <code>myString.toUpperCase()</code> on a <code>String</code></li>
+											<li>eg. <code>myString.toUpperCase()</code> (<code>String</code>)</li>
 										</ul>
 									</li>
 								</ul>
@@ -345,12 +345,6 @@ var forrest = { // Object Literal
 							</li>
 						</ul>
 					</section>
-
-					<section>
-						<h2>Oh, I See ...</h2>
-						<p><img src="assets/01/ohisee.png" alt="Oh, I see ..." title="Oh, I see ..." width="480" height="360" /></p>
-						<p class="fragment"><em>Or at least I hope you do</em></p>
-					</section>
 					
 					<section>
 						<h2>Global Objects and Literals (7)</h2>
@@ -386,6 +380,12 @@ alert(typeof forrestFriends);
 alert(forrestFriends instanceof Array);</code></pre>
 							</li>
 						</ul>
+					</section>
+
+					<section>
+						<h2>Oh, I See ...</h2>
+						<p><img src="assets/01/ohisee.png" alt="Oh, I see ..." title="Oh, I see ..." width="480" height="360" /></p>
+						<p class="fragment"><em>Or at least I hope you do</em></p>
 					</section>
 
 					<section>
@@ -548,7 +548,7 @@ console.log(question); // Nope, Chuck Testa! Erm, I mean global!</code></pre>
 						<h2>Variable Properties and Methods (1)</h2>
 						<ul>
 							<li class="fragment">
-								Each Global Object provides some properties and/or methods
+								Each instance of a global object provides some properties and/or methods
 								<ul>
 									<li>eg. <code>myString.length;</code></li>
 									<li>eg. <code>myString.toUpperCase();</code></li>
@@ -564,12 +564,18 @@ console.log(question); // Nope, Chuck Testa! Erm, I mean global!</code></pre>
 								Full list of properties/methods to be found on <a href="https://developer.mozilla.org/en/JavaScript/Reference#Global_Objects">Mozilla Developer Network</a> or <a href="http://www.w3schools.com/jsref/default.asp">W3Schools</a> <em>(*)</em> 
 							</li>
 						</ul>
-						<footer class="fragment"><em>(*) Use W3Schools with caution though, they're not always right</em></footer>
+						<footer class="fragment"><em>(*) Use W3Schools with caution though, they're not always right ;)</em></footer>
 					</section>
 
 					<section>
 						<h2>Variable Properties and Methods (2)</h2>
 						<ul>
+							<li class="fragment">
+								Properties and methods are also there when using literals.
+								<ul>
+									<li>JavaScript does some magic in the background to make that work</li>
+								</ul>
+							</li>
 							<li class="fragment">
 								Example
 								<pre class="bigger"><code contenteditable class="language-js">// String Instance
@@ -583,12 +589,6 @@ console.log(firstName.toUpperCase());
 // Look ma, no var
 console.log("Forrest".toUpperCase());
 console.log(["Bubba","Lieutenant Dan"].length);</code></pre>
-							</li>
-							<li class="fragment">
-								As you can see the properties and methods are also callable when using literals.
-								<ul>
-									<li>JavaScript does some magic in the background to make that work</li>
-								</ul>
 							</li>
 					</section>
 					
@@ -962,7 +962,7 @@ forrestDoes(log, "Stupid is as stupid does");</code></pre>
 						<h2>Function arguments (3)</h2>
 						<ul>
 							<li class="fragment">
-								You can even directly pass in a function on the fly
+								You can even directly pass in a function on the fly, without needing to declare it first
 								<pre class="bigger"><code contenteditable class="language-js">var forrestDoes = function(fn, whatForrestSays) {
 	fn(whatForrestSays);
 }
@@ -976,7 +976,7 @@ forrestDoes(function(what){
 }, "Stupid is as stupid does");</code></pre>
 							</li>
 							<li class="fragment">
-								We call such functions <strong><em>anonymous functions</em></strong>, as they have no name.
+								The passed in functions we call <strong><em>anonymous functions</em></strong>, as they have no name.
 								<ul>
 									<li>Also known as <em>Lambda Functions</em></li>
 								</ul>
@@ -1091,6 +1091,7 @@ var forrestSays = function(whatForrestSays) {
 forrestSays("Stupid is as stupid does");
 says("Stupid is as stupid does"); // will fail!</code></pre>
 							</li>
+							<li class="fragment">But that's not a best practice, as things can (and will) get complicated.</li>
 						</ul>
 					</section>
 
