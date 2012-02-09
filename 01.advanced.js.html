@@ -336,8 +336,11 @@ forrest.firstName = "Forrest";
 forrest.lastName = "Gump";
 
 var forrest = { // Object Literal
-	firstName : "Forrest",
-	lastName : "Gump" // no trailing comma (!)
+	firstName : "Forrest", // semi-colons to assign
+	lastName : "Gump",
+	says : function() { // works with functions too!
+		return "Stupid is as stupid does";
+	} // no trailing comma (!)
 }</code></pre>
 							</li>
 						</ul>
@@ -406,10 +409,10 @@ alert(forrestFriends instanceof Array);
 alert(forrestFriends instanceof Object);
 
 // Function literal
-var say = function() { alert("Stupid is, stupid does"); }
-alert(typeof say); // <-- the odd one out
-alert(say instanceof Function);
-alert(say instanceof Object);</code></pre>
+var says = function() { alert("Stupid is as stupid does"); }
+alert(typeof says); // <-- the odd one out
+alert(says instanceof Function);
+alert(says instanceof Object);</code></pre>
 							</li>
 						</ul>
 					</section>
@@ -448,8 +451,8 @@ alert(say instanceof Object);</code></pre>
 var forrest = {
 	firstName : "Forrest",
 	lastName : "Gump",
-	say : function() {
-		return "Stupid is, stupid does";
+	says : function() {
+		return "Stupid is as stupid does";
 	}
 }
 
@@ -457,7 +460,7 @@ var forrest = {
 console.log(forrest);
 console.log(forrest.firstName);
 console.log(forrest["firstName"]);
-console.log(forrest.say());</code></pre>
+console.log(forrest.says());</code></pre>
 							</li>
 							<li>The dot notation is the preferred way.</li>
 					</section>
@@ -510,7 +513,7 @@ console.log(parseInt("5", 10) + 6 + 7);</code></pre>
 								<pre class="bigger"><code contenteditable class="language-js">// Global
 var quote = "I had run for 3 years, 2 months, 14 days, and 16 hours."
 
-function foo() {
+var foo = function() {
 	var saying = "My name is Forrest, Forrest Gump"; // Local
 	console.log(saying);
 
@@ -724,7 +727,7 @@ with (forrest) {
 var forrest = {
 	firstName : "Forrest",
 	lastName : "Gump",
-	say : function() {
+	says : function() {
 		console.log("Stupid is as stupid does");
 	}
 }
@@ -742,7 +745,7 @@ try {
 } catch (error) {
 	console.error("ERROR! " + error.name + " : " + error.message);
 } finally {
-	forrest.say();
+	forrest.says();
 }
 </code></pre>
 					</section>
@@ -830,7 +833,7 @@ console.log(forrestSays2);</code></pre>
 					<section>
 						<h2>Shorthand Assignment</h2>
 						<pre class="bigger reveal"><code contenteditable class="language-js">// How you'd probably write it at first
-function lifeIs(boxOfChocolates) {
+var lifeIs = function(boxOfChocolates) {
 	var life;
 	
 	if (!boxOfChocolates) {
@@ -843,7 +846,7 @@ function lifeIs(boxOfChocolates) {
 }
 console.log(lifeIs('a Box of Chocolates'));</code></pre>
 						<pre class="bigger reveal"><code contenteditable class="language-js">// Better: Shorthand assignment
-function lifeIs2(boxOfChocolates) {
+var lifeIs2 = function(boxOfChocolates) {
 	return "Life is like " + (boxOfChocolates || "a Snickers bar");
 }
 console.log(lifeIs2('a Box of Chocolates'));</code></pre>
@@ -893,17 +896,92 @@ forrest && forrest.says && forrest.says();
 
 					<section>
 						<h2>Functions Recap</h2>
-						<p>function, var = function</p>
+						<ul>
+							<li class"fragment">
+								Functions can be defined in three ways
+								<pre class="bigger"><code contenteditable class="language-js">var says = new Function("what", "alert(what)"); // Function Constructor
+function says(what) { alert(what); } // function statement
+var says = function(what){ alert(what); } // Function Literal</code></pre>
+							</li>
+							<li class"fragment">
+								Preferred way is the literal notation
+							</li>
+						</ul>
 					</section>
 
 					<section>
 						<h2>Function arguments (1)</h2>
-						<p>anything possible, functions, objects</p>
+						<ul>
+							<li class="fragment">
+								Basic usage
+								<pre class="bigger"><code contenteditable class="language-js">// Function Literal, one argument (string preferably)
+var says = function(what){
+	alert(what);
+}
+
+says("Stupid is as stupid does");</code></pre>
+							</li>
+							<li class="fragment">
+								Arguments can be passed on
+								<pre class="bigger"><code contenteditable class="language-js">var says = function(what){
+	alert(what);
+}
+var forrestSays = function(whatForrestSays) {
+	says("Forrest Says '" + whatForrestSays + "'");
+}
+
+forrestSays("Stupid is as stupid does");</code></pre>
+							</li>
+						</ul>
 					</section>
 
 					<section>
-						<h2>Anonymous Functions</h2>
-						
+						<h2>Function arguments (2)</h2>
+						<ul>
+							<li class="fragment">
+								Function arguments can be anything, even functions!
+								<pre class="bigger"><code contenteditable class="language-js">var log = function(what){
+	console.log(what);
+}
+
+var say = function(what) {
+	alert(what);
+}
+
+var forrestDoes = function(fn, whatForrestSays) {
+	fn(whatForrestSays);
+}
+
+forrestDoes(say, "Stupid is as stupid does");
+forrestDoes(log, "Stupid is as stupid does");</code></pre>
+							</li>
+						</ul>
+					</section>
+
+					<section>
+						<h2>Function arguments (3)</h2>
+						<ul>
+							<li class="fragment">
+								You can even directly pass in a function on the fly
+								<pre class="bigger"><code contenteditable class="language-js">var forrestDoes = function(fn, whatForrestSays) {
+	fn(whatForrestSays);
+}
+
+forrestDoes(function(what) {
+	alert(what);
+}, "Stupid is as stupid does");
+
+forrestDoes(function(what){
+	console.log(what);
+}, "Stupid is as stupid does");</code></pre>
+							</li>
+							<li class="fragment">
+								We call such functions <strong><em>anonymous functions</em></strong>, as they have no name.
+								<ul>
+									<li>Also known as <em>Lambda Functions</em></li>
+								</ul>
+							</li>
+						</ul>
 					</section>
 
 					<section>
@@ -920,7 +998,7 @@ run();</code></pre>
 	console.log("Run Forrest, Run");
 })();</code></pre>
 							</li>
-							<li>Function name not needed actually (Anon. function)
+							<li>Function name not needed actually <small><em>(Anonymous!)</em></small>
 								<pre class="bigger"><code contenteditable class="language-js">(function() {
 	console.log("Run Forrest, Run");
 })();</code></pre>
@@ -949,22 +1027,36 @@ run();</code></pre>
 					</section>
 
 					<section>
-						<h2>First Class Citizens</h2>
-						<p>functions returning functions, (anon) functions as arguments, etc.</p>
+						<h2>Nesting Functions</h2>
+						<p>You can do that if you want</p>
 					</section>
 
 					<section>
 						<h2>Closures</h2>
-						<p>Yeah!</p>
+						<p>When returning a nested function: function itself + scope of containing function (non-local variables, passed by reference)</p>
 					</section>
 
 					<section>
-						<h2>Function arguments (2)</h2>
+						<h2>First Class Objects</h2>
+						<ul>
+							<li class="fragment">In JavaScript, functions are First Class Objects (or First Class Citizens)
+								<ul>
+									<li class="fragment">They can be created on the fly (at run-time)</li>
+									<li class="fragment">They can be passed as a parameter</li>
+									<li class="fragment">They can be assigned into a variable</li>
+									<li class="fragment">They can be returned from an other function</li>
+								</ul>
+							</li>
+						</ul>
+					</section>
+
+					<section>
+						<h2>Function arguments, again (1)</h2>
 						<p>.arguments</p>
 					</section>
 
 					<section>
-						<h2>Function arguments (3)</h2>
+						<h2>Function arguments, again (2)</h2>
 						<p>Common way: object</p>
 					</section>
 
@@ -1095,6 +1187,7 @@ run();</code></pre>
 						<li>Functions: <a href="http://www.hunlock.com/blogs/Functional_Javascript">http://www.hunlock.com/blogs/Functional_Javascript</a></li>
 						<li>Functions &amp; Closures: <a href="http://perplexed.co.uk/559_javascript_lambda_functions_and_closures.htm">http://perplexed.co.uk/559_javascript_lambda_functions_and_closures.htm</a></li>
 						<li>Closures: <a href="http://robertnyman.com/2008/10/09/explaining-javascript-scope-and-closures/">http://robertnyman.com/2008/10/09/explaining-javascript-scope-and-closures/</a></li>
+						<li>First Class Objects: <a href="http://en.wikipedia.org/wiki/First-class_object">http://en.wikipedia.org/wiki/First-class_object</a></li>
 						<li>Objects &amp; .prototype: <a href="http://peterned.home.xs4all.nl/tutorial/objecten.html">http://peterned.home.xs4all.nl/tutorial/objecten.html</a></li>
 						<li>Events: <a href="http://www.w3.org/TR/DOM-Level-2-Events/events.html">http://www.w3.org/TR/DOM-Level-2-Events/events.html</a></li>
 						<li>Events: <a href="http://www.w3.org/TR/DOM-Level-3-Events/">http://www.w3.org/TR/DOM-Level-3-Events/</a></li>
