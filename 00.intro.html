@@ -1,0 +1,414 @@
+<!doctype html>  
+<html lang="en">
+	
+	<head>
+		<meta charset="utf-8">
+		
+		<title>Rich Internet Applications &mdash; 00.intro</title>
+
+		<meta name="description" content="Rich Internet Applications &mdash; 00.intro">
+		<meta name="author" content="Bram(us) Van Damme - ikdoeict.be">
+		
+		<link href='http://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+		
+		<link rel="stylesheet" href="css/reset.css">
+		<link rel="stylesheet" href="css/main.css">
+
+		<link rel="stylesheet" href="lib/zenburn.css">
+	</head>
+	
+	<body>
+		
+		<div id="reveal">
+			
+			<!-- Any section element inside of this container is displayed as a slide -->
+			<div class="slides">
+				
+				<!-- 0 : Title -->
+				<section>
+					<h3 class="inverted">Rich Internet Applications</h3>
+					<h1>00.intro</h1>
+					
+					<footer>
+						<em><a href="http://www.ikdoeict.be/">ikdoeict.be</a> &mdash; <a href="mailto:bramus.vandamme@kahosl.be">bramus.vandamme@kahosl.be</a></em>
+					</footer>
+					<script>
+						// Delicously hacky. Look away.
+						if( navigator.userAgent.match( /(iPhone|iPad|iPod|Android)/i ) )
+						document.write( '<p style="color: rgba(0,0,0,0.3); text-shadow: none;">('+'Tap to navigate'+')</p>' );
+					</script>
+				</section>
+				
+				<!-- 1 : Slidedeck? -->
+				<section>
+
+					<section>
+						<h2>Wait? What? This is it?!</h2>
+						<ul class="short">
+							<li>Yes, it's called a slide deck.</li>
+							<li>Built with HTML/CSS/JS</li>
+							<li>Powered by <em>(a customized)</em> <a href="http://hakim.se/projects/reveal-js">Reveal.js</a></li>
+							<li>Main navigation: left/right</li>
+							<li>Sub-slides: up/down <em>(try it now!)</em></li>
+						</ul>
+					</section>
+
+					<section>
+						<h2>Yay, a subslide!</h2>
+						<ul class="short">
+							<li class="fragment">Told you it would work :-)</li>
+						</ul>
+					</section>
+
+					<section>
+						<h2>Code Examples (1)</h2>
+						<ul>
+							<li>
+								Syntax Highlighted + Editable
+								<ul>
+									<li>Thanks to <a href="http://softwaremaniacs.org/soft/highlight/en/">Highlight.js</a></li>
+								</ul>
+							</li>
+							<li>
+								Numeric values can be adjusted with the &uarr; &amp; &darr; keys
+								<ul><li>Thanks to <em>(a customized)</em> <a href="https://github.com/LeaVerou/Incrementable/">Incrementable</a></li></ul>
+							</li>
+							<li>
+								Give it a try!
+							</li>
+						</ul>
+						<pre class="bigger"><code contenteditable class="language-css">body {
+	font-size: 1em;
+	padding: 20px;
+	color: lime;
+}</code></pre>
+					</section>
+					
+					<section>
+						<h2>Code Examples (2)</h2>
+						<ul>
+							<li><span id="css-demo">Some CSS Snippets are linked to elements ...</span>
+								<pre class="bigger"><code contenteditable class="language-css" data-subject="#css-demo">color: red;</code></pre>
+							</li>
+							<li>... or to the current slide
+								<pre class="bigger"><code contenteditable class="language-css" data-subject="slide" data-step="10">font-size: 100%;</code></pre>
+								<ul>
+									<li>Thanks to <em>(a customized)</em> <a href="https://github.com/LeaVerou/CSSS/tree/master/plugins">CSS Snippets</a></li>
+								</ul>
+							</li>
+							<li>And oh, CSS Snippets don't need vendor prefixes
+								<pre class="bigger" id="rounded-demo"><code contenteditable class="language-css" data-subject="#rounded-demo">box-shadow: 0px 0px 10px #888;</code></pre>
+								<ul>
+									<li>Thanks to <a href="https://github.com/LeaVerou/prefixfree">PrefixFree</a></li>
+								</ul>
+							</li>
+						</ul>
+					</section>
+					
+					<section>
+						<h2>Code Examples (3)</h2>
+						<ul>
+							<li>Javascript blocks can even be run!</li>
+							<li>Use &ldquo;Run&rdquo; button, or hit CTRL+ENTER</li>	
+						</ul>
+						<pre class="bigger"><code contenteditable class="language-js">// A comment
+alert('OK GO!');</code></pre>
+						<ul>
+							<li class="fragment">Note
+								<ul>
+									<li>Most samples in future slides will use <code>console.log()</code></li>
+									<li><a href="http://getfirebug.com/">Firebug</a> <em>(or the like)</em> required!</li>
+								</ul>
+							</li>
+						</ul>
+					</section>
+					
+					<section>
+						<h2>Lost?</h2>
+						<ul class="short">
+							<li>Compass <em>(Bottom-Right)</em></li>
+							<li>Progress Bar <em>(Bottom)</em></li>
+							<li>Slide Overview <em>(space)</em></li>
+							<li>Back to index link <em>(Top-Left)</em></li>
+						</ul>
+					</section>
+					
+				</section>
+				
+				<!-- 2 : Prerequisites -->
+				<section>
+					
+					<section>
+						<h2>Prerequisites</h2>
+						<p>Stuff you <em>(should)</em> already know...</p>
+					</section>
+					
+					<section>
+						<h2>Webtechnieken1</h2>
+						<ul>
+							<li>XHTML
+								<ul>
+									<li>Correct use of elements</li>
+									<li>Propper syntax / validation</li>
+								</ul>
+							</li>
+							<li>CSS
+								<ul>
+									<li>Text styling &amp; Backgrounds</li>
+									<li>Box Model</li>
+									<li>Positioning with float/absolute/relative/fixed</li>
+								</ul>
+							</li>
+							<li>Basic Javascript
+								<ul>
+									<li>Variables &amp; Functions</li>
+									<li>Unbotrusive</li>
+									<li>Formchecking</li>
+								</ul>
+							</li>
+						</ul>
+					</section>
+					
+					<section>
+						<h2>Webtechnieken2</h2>
+						<ul>
+							<li>Client-Server
+								<ul>
+									<li>GET/POST</li>
+								</ul>
+							</li>
+							<li>PHP Basics
+								<ul>
+									<li>Syntax</li>
+									<li>Forms</li>
+									<li>Files &amp; Folders</li>
+									<li>Persistency</li>
+								</ul>
+							</li>
+							<li>PHP Intermediate
+								<ul>
+									<li>Code Organisation and Classes</li>
+									<li>Templates</li>
+									<li>Database Connectivity (MySQL)</li>
+								</ul>
+							</li>
+						</ul>
+					</section>
+					
+					<section>
+						<h2>Webtechnieken3</h2>
+						<ul>
+							<li>PHP Intermediate
+								<ul>
+									<li>Code Libraries (Plonk)</li>
+									<li>Object Oriented Websites</li>
+								</ul>
+							</li>
+							<li>Use Cases, Wireframes &amp; Storyboarding
+								<ul>
+									<li>Flow!</li>
+								</ul>
+							</li>
+							<li>New techniques
+								<ul>
+									<li>HTML5</li>
+									<li>CSS3</li>
+									<li>New JS
+										<ul>
+											<li>Drag and Drop, Geolocation, Notifications, ...</li>
+										</ul>
+									</li>
+								</ul>
+							</li>
+						</ul>
+					</section>
+					
+					<section>
+						<h2>Gegevensbanken</h2>
+						<ul>
+							<li>Structured Query Language
+								<ul>
+									<li>Basic CRUD Actions <em>(INSERT, SELECT, UPDATE, DELETE)</em></li>
+									<li>Subqueries &amp; Joins <em>(left, right, inner)</em></li>
+									<li>Calculations <em>(numbers, dates, etc.)</em></li>
+									<li>Optimization <em>(EXPLAIN ...)</em></li>
+								</ul>
+							</li>
+							<li>Basic Administration
+								<ul>
+									<li>Import &amp; Export</li>
+									<li>User Management</li>
+								</ul>
+							</li>
+						</ul>
+					</section>
+
+					<section>
+						<h2>Firebug (or the like)</h2>
+						<iframe src="http://player.vimeo.com/video/6313836" width="500" height="375" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>
+						<p>Seriously, without this tool you can't be a webdeveloper.</p>
+					</section>
+					
+				</section>
+
+				<!-- 3 : Contents of this course -->
+				<section>
+					
+					<section>
+						<h2>Course Subjects</h2>
+						<ul>
+							<li class="fragment">Advanced Javascript</li>
+							<li class="fragment">Javascript Libraries and jQuery Basics</li>
+							<li class="fragment">jQuery Intermediate
+								<ul>
+									<li class="fragment">jQuery Plugins &amp; Performance</li>
+									<li class="fragment">Ajax &amp; JSON</li>
+								</ul>
+							</li>
+							<li class="fragment">APIs, JSON &amp; PHP</li>
+							<li class="fragment">Things you should know as a webdeveloper</li>
+							<li class="fragment">Responsive Webdesign
+								<ul>
+									<li class="fragment">Introduction</li>
+									<li class="fragment">Fluid Layouts</li>
+									<li class="fragment">Media Queries</li>
+									<li class="fragment">Mobile First</li>
+									<li class="fragment">Challenges</li>
+								</ul>
+							</li>
+						</ul>
+					</section>
+					
+					<section>
+						<h2>What about mobile apps?</h2>
+						
+						<ul class="short">
+							<li class="fragment">Alas, no time this year</li>
+							<li class="fragment">But things will change next year
+								<ul>
+									<li><strong>RIA</strong> &rarr; <strong>Web &amp; Mobile Development</strong></li>
+									<li>Exit Javascript
+										<ul>
+											<li>Moves forward to Webscripting1 &amp; Webscripting2 <em>(*)</em></li>
+										</ul>
+									</li>
+									<li>Enter Mobile Development
+										<ul>
+											<li>iOS, Android, etc.</li>
+										</ul>
+									</li>
+								</ul>
+							</li>
+						</ul>
+						
+						<footer class="fragment"><small>(*) Other name changes: Webtechnieken2 &rarr; Webscripting1; Webtechnieken3 &rarr; Webscripting2</small></footer>
+						
+					</section>
+					
+				</section>
+
+				<!-- 5 : Methodology -->
+				<section>
+					<h2>Methodology</h2>
+					<ul>
+						<li>Instructors
+							<ul>
+								<li>Bram(us) Van Damme &mdash; <a href="mailto:bramus.vandamme@kahosl.be">bramus.vandamme@kahosl.be</a></li>
+								<li>Davy De Winne &mdash; <a href="mailto:davy.dewinne@kahosl.be">davy.dewinne@kahosl.be</a></li>
+							</ul>
+						</li>
+						<li>Weekly hands-on labs
+							<ul>
+								<li>Theoretical background + practice throughout timeslot</li>
+							</ul>
+						</li>
+						<li>Study materials, tasks and announcements
+							<ul>
+								<li>Toledo</li>
+								<li>Check it ... <strong>regularly</strong></li>
+							</ul>
+						</li>
+					</ul>
+				</section>
+
+				<!-- 6 : Evaluation -->
+				<section>
+					<h2>Evaluation</h2>
+					<ul>
+						<li class="fragment">Permanent: 30%
+							<ul>
+								<li>Progress, Accuracy, Attitude, Programming Style, ...</li>
+							</ul>
+						</li>
+						<li class="fragment">Project #1: 30%
+							<ul>
+								<li>Deadline some time before the Easter holiday</li>
+							</ul>
+						</li>
+						<li class="fragment">Project #2: 40%
+							<ul>
+								<li>End Term Project</li>
+								<li>Free to choose what to do <em>(proposal must be approved by us first)</em></li>
+								<li>Deadline at the end of the semester</li>
+								<li>Presentation/Demonstration/Evaluation at the end of the semester</li>
+								<li>More details later ... :)</li>
+							</ul>
+						</li>
+					</ul>
+				</section>
+
+				<!-- 7 : Domestic Conventions -->
+				<section>
+					<h2>Domestic Conventions<br /><small>(Huishoudelijk Reglement)</small></h2>
+					<ul>
+						<li>Do apply</li>
+						<li>Can be found on Toledo</li>
+						<li>Rules/Conventions about
+							<ul>
+								<li>Plagiarism</li>
+								<li>Deadlines and Uploads</li>
+								<li>Absences</li>
+								<li>Code Style and Code Layout</li>
+							</ul>
+						</li>
+					</ul>
+				</section>
+				
+				<!-- 8: The END -->
+				<section>
+					<h2>Questions?</h2>
+					<footer>
+						<em><a href="http://www.ikdoeict.be/">ikdoeict.be</a> &mdash; <a href="mailto:bramus.vandamme@kahosl.be">bramus.vandamme@kahosl.be</a></em>
+					</footer>
+				</section>
+				
+			</div>
+
+			<!-- The navigational controls UI -->
+			<aside class="controls">
+				<a class="left" href="#">&#x25C4;</a>
+				<a class="right" href="#">&#x25BA;</a>
+				<a class="up" href="#">&#x25B2;</a>
+				<a class="down" href="#">&#x25BC;</a>
+			</aside>
+			
+			<!-- Index Link -->
+			<aside class="back">
+				<a href="index.html">&larr; Back to index</a>
+			</aside>
+			
+			<!-- Displays presentation progress, max value changes via JS to reflect # of slides -->
+			<div class="progress"><span></span></div>
+			
+		</div>
+		
+		<script src="js/reveal.js"></script>
+		<script src="lib/highlight.js"></script>
+		<script src="lib/prefixfree.js"></script>
+		<script src="lib/css-snippets.js"></script>
+		<script src="lib/css-edit.js"></script>
+		<script src="lib/incrementable.js"></script>
+		<script src="js/main.js"></script>
+
+	</body>
+</html>
