@@ -1,0 +1,1131 @@
+<!doctype html>  
+<html lang="en">
+	
+	<head>
+		<meta charset="utf-8">
+		
+		<title>Rich Internet Applications &mdash; 01.Advanced.JS</title>
+
+		<meta name="description" content="Rich Internet Applications &mdash; 01.Advanced.JS">
+		<meta name="author" content="Bram(us) Van Damme - ikdoeict.be">
+		
+		<link href='http://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+		
+		<link rel="stylesheet" href="css/reset.css">
+		<link rel="stylesheet" href="css/main.css">
+
+		<link rel="stylesheet" href="lib/zenburn.css">
+	</head>
+	
+	<body>
+		
+		<div id="reveal">
+			
+			<!-- Any section element inside of this container is displayed as a slide -->
+			<div class="slides">
+
+
+				
+				<!-- 0 : Title -->
+				<section>
+					<h3 class="inverted">Rich Internet Applications</h3>
+					<h1>01.Advanced.JS</h1>
+					
+					<footer>
+						<em><a href="http://www.ikdoeict.be/">ikdoeict.be</a> &mdash; <a href="mailto:bramus.vandamme@kahosl.be">bramus.vandamme@kahosl.be</a></em>
+					</footer>
+					<script>
+						// Delicously hacky. Look away.
+						if( navigator.userAgent.match( /(iPhone|iPad|iPod|Android)/i ) )
+						document.write( '<p style="color: rgba(0,0,0,0.3); text-shadow: none;">('+'Tap to navigate'+')</p>' );
+					</script>
+				</section>
+
+
+				
+				<!-- 1 : JavaScript? -->
+				<section>
+
+					<section>
+						<h2>JavaScript?</h2>
+						<p><img src="assets/01/quiz.png" alt="What is the world's most popular language?" title="What is the world's most popular language?" width="429" height="333" /></p>
+						<p class="fragment">Yeah, JavaScript!</p>
+					</section>
+					
+				</section>
+
+
+
+				<!-- 2: JavaScript 101 -->
+				<section>
+
+					<section>
+						<h2>JavaScript 101</h2>
+						<p><img src="assets/01/forrestgump.jpg" alt="Forrest Gump" title="Forrest Gump" width="467" height="350" /></p>
+						<p>Because <strong>Forrest Gump</strong> is one of those movies ...</p>
+					</section>
+
+					<section>
+						<h2>JavaScript 101</h2>
+						<p>
+							<figure>
+								<img src="assets/01/robertnyman.jpg" alt="Robert Nyman" title="Robert Nyman" width="467" height="350" />
+								<figcaption>Photo by <a href="http://www.flickr.com/photos/manssandstrom/4132454413/in/photostream/">Måns Sandström</a></figcaption>
+							</figure>
+						</p>
+						<p style="font-size: 80%">... and because <a href="http://www.robertnyman.com/">Robert Nyman</a> made <a href="http://www.slideshare.net/robnyman/javascript-like-a-box-of-chocolates">an awesome presentation</a> about it.</p>
+					</section>
+					
+				</section>
+
+
+
+				<!-- 3: JavaScript Variables -->
+				<section>
+
+					<section>
+						<h2>JavaScript 101: Variables</h2>
+						<p><img src="assets/01/likeaboxofchocolates.jpg" alt="Life is like a box of chocolates" title="Life is like a box of chocolates" width="397" height="264" /></p>
+						<q>Life is like a box of chocolates,<br />you never know what you're gonna get</q>
+					</section>
+
+					<section>
+						<h2>Before we dive in</h2>
+						<ul>
+							<li class="fragment">
+								Variables have a <em>name</em> and a <em>value</em>
+							</li>
+							<li class="fragment">
+								JavaScript is case sensitive
+								<ul>
+									<li><code>firstName</code> and <code>firstname</code> are not the same!</li>
+								</ul>
+							</li>
+							<li class="fragment">JavaScript is dynamically typed
+								<ul>
+									<li>When declaring a variable, you cannot specify the type. JavaScript will <em>guess</em> the data type when assigning a value</li>
+									<li>viz. a variable given the value <code>3</code> will be a number</li>
+								</ul>
+							</li>
+							<li class="fragment">JavaScript is weakly typed
+								<ul>
+									<li>A variable will adjust its type when a new value is assigned</li>
+									<li>viz. if that same variable is changed to <code>&quot;Hello&quot;</code> it will become a string</li>
+								</ul>
+							</li>
+						</ul>
+					</section>
+
+					<section>
+						<h2>Declaring variables</h2>
+						<ul>
+							<li class="fragment">
+								Use the <code>var</code> keyword and assign a <em>value</em> to a <em>name</em>
+									<pre class="bigger"><code contenteditable class="language-js">var firstName = "Forrest";
+alert(firstName);</code></pre>
+							</li>
+							<li class="fragment">
+								Remember: JavaScript is dynamically typed and weakly typed
+								<pre class="bigger"><code contenteditable class="language-js">// Dynamic typing
+var firstName = "Forrest";
+alert(typeof firstName); // string
+
+// Weak typing
+firstName = 3;
+alert(typeof firstName); // number</code></pre>
+							</li>
+						</ul>
+					</section>
+					
+					<section>
+						<h2>JavaScript Data Types (1)</h2>
+						<ul>
+							<li>JavaScript supports these Primitive Data Types
+								<ul>
+									<li><code>string</code></li>
+									<li><code>number</code>
+										<ul>
+											<li>No real distinction for float/double/int!</li>
+										</ul>
+									</li>
+									<li><code>boolean</code></li>
+									<li><code>null</code>
+										<ul>
+											<li>empty value</li>
+										</ul>
+									</li>
+									<li><code>undefined</code>
+										<ul>
+											<li>no value given</li>
+										</ul>
+									</li>
+								</ul>
+							</li>
+						</ul>
+					</section>
+
+					<section>
+						<h2>JavaScript Data Types (2)</h2>
+						<ul>
+							<li>What about <code>Array</code>? And <code>Date</code>? And ...?
+								<ul class="fragment"><li>Well, those are <code>Object</code>s really</li></ul>
+							</li>
+							<li class="fragment">And oh, next to <code>string</code> you also have something like <code>String</code>
+								<ul>
+									<li class="fragment">The former is the data type</li>
+									<li class="fragment">And the latter is ... an <code>Object</code></li>
+								</ul>
+							</li>
+							<li class="fragment">
+								And then you have functions
+								<ul>
+									<li class="fragment">Those are functions</li>
+									<li class="fragment">
+										... but JavaScript treats them as <em>First Class Objects</em>
+									</li>
+								</ul>
+							</li>
+						</ul>
+					</section>
+					
+					<section>
+						<h2>Not Sure If ...</h2>
+						<p><img src="assets/01/notsureif.png" alt="Not Sure If ..." title="Not Sure If ..." width="480" height="360" /></p>
+						<p class="fragment"><em>Let me explain on the next few slides ;)</em></p>
+					</section>
+
+					<section>
+						<h2>Global Objects and Literals (1)</h2>
+						<ul>
+							<li class="fragment">
+								In JavaScript nearly everything is built upon <code>Object</code>
+								<ul>
+									<li><code>Object</code> is the core of the language</li>
+									<li>With this thing, you can declare anything you want if you extend upon it.</li>
+								</ul>
+							</li>
+							<li class="fragment">
+								JavaScript provides some global objects such as <code>String</code>, <code>Number</code>, <code>Boolean</code>, <code>Array</code>, etc.
+								<ul>
+									<li class="fragment">Derived from <code>Object</code></li>
+									<li class="fragment">Define a structure to store <em>something</em> in</li>
+									<li class="fragment">
+										Have some properties
+										<ul>
+											<li>eg. <code>myString.length</code> of a <code>String</code></li>
+										</ul>
+									</li>
+									<li class="fragment">
+										Have some specific methods to manipulate/access the stored value
+										<ul>
+											<li>eg. <code>myString.toUpperCase()</code> on a <code>String</code></li>
+										</ul>
+									</li>
+								</ul>
+							</li>
+						</ul>
+					</section>
+					
+					<section>
+						<h2>Global Objects and Literals (2)</h2>
+						<ul>
+							<li class="fragment">
+								Normally, one would do something like this
+								<pre class="bigger"><code contenteditable class="language-js">var firstName = new String("Forrest");</code></pre>
+								<ul>
+									<li class="fragment">What you get back is an instance of <code>String</code></li>
+									<li class="fragment">The type of the instance itself is <code>Object</code></li>
+									<li class="fragment">The type of the value inside that instance is <code>string</code></li>
+								</ul>
+							</li>
+							<li class="fragment">Let's pull out some code to test this
+								<pre class="bigger"><code contenteditable class="language-js">var firstName = new String("Forrest");
+alert(firstName instanceof String);
+alert(typeof firstName);
+alert(typeof (firstName.toString()));</code></pre>
+							</li>
+						</ul>
+					</section>
+					
+					<section>
+						<h2>Global Objects and Literals (3)</h2>
+						<ul>
+							<li class="fragment">
+								But next to that syntax, JavaScript also provides something named the <em>literal notation</em>
+							</li>
+							<li class="fragment">Literals allow you to immediately assign a value to a variable
+								<pre class="bigger"><code contenteditable class="language-js">var firstName = "Forrest";</code></pre>
+								<ul>
+									<li class="fragment">What you get back is the value</li>
+									<li class="fragment">The type of the value is <code>string</code> (weak typing in action)</li>
+								</ul>
+							</li>
+							<li class="fragment">
+								Again, some code
+								<pre class="bigger"><code contenteditable class="language-js">var firstName = "Forrest";
+alert(firstName instanceof String);
+alert(typeof firstName);</code></pre>
+							</li>
+						</ul>
+					</section>
+
+					<section>
+						<h2>Still Not Sure?</h2>
+						<p><img src="assets/01/notsureif.png" alt="Not Sure If ..." title="Not Sure If ..." width="480" height="360" /></p>
+						<p class="fragment"><em>It's not that hard, really!</em></p>
+					</section>
+
+					<section>
+						<h2>Global Objects and Literals (4)</h2>
+						<ul>
+							<li class="fragment">
+								You know, this literal thing isn't new, you've been doing it all along; in Java for example:
+								<pre class="bigger"><code class="language-java">String str = new String("Not Literal");
+String str = "literal";</code></pre>
+							</li>
+							<li class="fragment">JavaScript provides literals for:
+								<ul>
+									<li><code>String</code></li>
+									<li><code>Number</code></li>
+									<li><code>Boolean</code></li>
+									<li><code>RegExp</code></li>
+									<li><code>Function</code> <em>(*)</em></li>
+									<li><code>Array</code></li>
+									<li><code>Object</code></li>
+								</ul>
+							</li>
+						</ul>
+						<footer class="fragment"><em>(*) Function is the odd one here (see further)</em></footer>
+					</section>
+
+					<section>
+						<h2>Global Objects and Literals (5)</h2>
+						<ul>
+							<li class="fragment">
+								Example (1)
+								<pre class="bigger"><code contenteditable class="language-js">var firstName = new String("Forrest");
+var firstName = "Forrest"; // String Literal
+
+var birthYear = new Number("1945");
+var birthYear = 1945; // Number Literal
+
+var isRunning = new Boolean("false");
+var isRunning = false; // Boolean Literal
+
+var hasR = new RegExp("r","i");
+var hasR = /r/i; // RegExp Literal
+
+var says = new Function("what", "alert(what)");
+function says(what) { alert(what); } // The function statement
+var says = function(what){ alert(what); } // Function Literal</code></pre>
+							</li>
+						
+						</ul>
+					</section>
+
+					<section>
+						<h2>Global Objects and Literals (6)</h2>
+						<ul>
+							<li class="fragment">
+								Example (2)
+								<pre class="bigger"><code contenteditable class="language-js">var forrestFriends = new Array("Bubba", "Lieutenant Dan");
+var forrestFriends = ["Bubba","Lieutenant Dan"]; // Array Literal
+
+var forrest = new Object();
+forrest.firstName = "Forrest";
+forrest.lastName = "Gump";
+
+var forrest = { // Object Literal
+	firstName : "Forrest",
+	lastName : "Gump" // no trailing comma (!)
+}</code></pre>
+							</li>
+
+						</ul>
+					</section>
+
+					<section>
+						<h2>Global Objects and Literals (7)</h2>
+						<ul>
+							<li class="fragment">
+								<span>Remember that if it exists as a primitive data type (viz. <code>string</code>, <code>number</code>, <code>boolean</code>), you'll get the primitive returned when using the literal notation!</span>
+								<pre class="bigger"><code contenteditable class="language-js">// String Instance
+var lastName = new String("Gump");
+alert(typeof lastName);
+alert(lastName instanceof String);
+
+// String Literal
+var firstName = "Forrest";
+alert(typeof firstName);
+alert(firstName instanceof String);</code></pre>
+							</li>
+						</ul>
+					</section>
+
+					<section>
+						<h2>Global Objects and Literals (8)</h2>
+						<ul>
+							<li class="fragment">
+								If no primitive variant exists (<code>Object</code>, <code>Array</code>, <code>RegExp</code>, <code>Function</code>), the literal <em>will</em> return an instance when using the literal notation.
+								<pre class="bigger"><code contenteditable class="language-js">// Array Instance
+var forrestFriends = new Array("Bubba", "Lieutenant Dan");
+alert(typeof forrestFriends);
+alert(forrestFriends instanceof Array);
+
+// Array Literal
+var forrestFriends = ["Bubba","Lieutenant Dan"];
+alert(typeof forrestFriends);
+alert(forrestFriends instanceof Array);</code></pre>
+							</li>
+						</ul>
+					</section>
+
+					<section>
+						<h2>Global Objects and Literals (9)</h2>
+						<ul>
+							<li class="fragment">
+								Remember when I told you all Global Objects (such as <code>String</code>) derive from <code>Object</code>?
+							</li>
+							<li class="fragment">
+								Here's some code proof:
+								<pre class="bigger"><code contenteditable class="language-js">// Number Instance
+var birthYear = new Number("1945");
+alert(typeof birthYear);
+alert(birthYear instanceof Number);
+alert(birthYear instanceof Object);
+
+// Array Instance
+var forrestFriends = ["Bubba", "Lieutenant Dan"];
+alert(typeof forrestFriends);
+alert(forrestFriends instanceof Array);
+alert(forrestFriends instanceof Object);
+
+// Function literal
+var say = function() { alert("Stupid is, stupid does"); }
+alert(typeof say); // <-- the odd one out
+alert(say instanceof Function);
+alert(say instanceof Object);</code></pre>
+							</li>
+						</ul>
+					</section>
+
+					<section>
+						<h2>Global Objects and Literals (10)</h2>
+						<ul>
+							<li class="fragment">
+								What you should remember from all this
+								<ul>
+									<li>Literal Notations are shorthands</li>
+									<li>Literal Notations return a direct value instead of an object if possible</li>
+								</ul>
+							</li>
+							<li class="fragment">
+								What you must know about Literals
+								<ul>
+									<li>Literal Notations are the preferred way to write JavaScript</li>
+									<li>Literal Notations are all around, even some of the current techniques (think JSON) are built upon this principle</li>
+								</ul>
+							</li>
+						</ul>
+					</section>
+
+					<section>
+						<h2>Oh, I See ...</h2>
+						<p><img src="assets/01/ohisee.png" alt="Oh, I see ..." title="Oh, I see ..." width="480" height="360" /></p>
+						<p class="fragment"><em>Now, back to variables</em></p>
+					</section>
+
+					<section>
+						<h2>Accessing Object Properties</h2>
+						<ul>
+							<li>Via square brackets, or via dot notation
+								<pre class="bigger"><code contenteditable class="language-js">// Object Literal
+var forrest = {
+	firstName : "Forrest",
+	lastName : "Gump",
+	say : function() {
+		return "Stupid is, stupid does";
+	}
+}
+
+// test
+console.log(forrest);
+console.log(forrest.firstName);
+console.log(forrest["firstName"]);
+console.log(forrest.say());</code></pre>
+							</li>
+							<li>The dot notation is the preferred way.</li>
+					</section>
+
+					<section>
+						<h2>Implicit Type Conversion (1)</h2>
+						<ul>
+							<li>JavaScript will change the variable types on the fly when using them.</li>
+							<li>Known as <em>coercion</em></li>
+						</ul>
+						<pre class="bigger"><code contenteditable class="language-js">// Various "false" values
+var nullVal = null;
+var undefinedVal = undefined;
+var zeroVal = 0;
+var falseVal = false;
+var emptyString = "";
+
+if (emptyString) {
+	console.log("Not false");
+} else {
+	console.log("False");
+}</code></pre>
+						<pre class="bigger"><code contenteditable class="language-js">console.log("5" + 6 + 7);</code></pre>
+					</section>
+
+					<section>
+						<h2>Implicit Type Conversion (2)</h2>
+						<ul>
+							<li>Fixable by using the <em>identity operator</em>
+								<pre class="bigger"><code contenteditable class="language-js">// Equality
+console.log((7 == "7") ? "true" : "false");
+
+// Identity
+console.log((7 === "7") ? "true" : "false");</code></pre>
+							</li>
+							<li>Or by explicitly casting a variable to being a certain type
+								<pre class="bigger"><code contenteditable class="language-js">// Type Coercion (default)
+console.log("5" + 6 + 7);
+
+// Prevent Type Coercion
+console.log(parseInt("5", 10) + 6 + 7);</code></pre>
+							</li>
+						</ul>
+					</section>
+
+					<section>
+						<h2>Scope (1)</h2>
+						<ul>
+							<li>Global or Local
+								<pre class="bigger"><code contenteditable class="language-js">// Global
+var quote = "I had run for 3 years, 2 months, 14 days, and 16 hours."
+
+function foo() {
+	var saying = "My name is Forrest, Forrest Gump"; // Local
+	console.log(saying);
+
+	console.log(quote); // Access to Global
+	
+    question = "Why don't you love me, Jenny?"; // Local ?
+	console.log(question);
+}
+
+foo();
+console.log(quote);
+// console.log(saying); // disabled, will fail
+console.log(question); // Nope, Chuck Testa! Erm, I mean global!</code></pre>
+							</li>
+						</ul>
+					</section>
+
+					<section>
+						<h2>Scope (2)</h2>
+						<ul>
+							<li>
+								Best practice: <strong>Always</strong> use the <code>var</code> keyword inside functions, loops, etc.
+								<ul>
+									<li>Prevents pollution of the global scope</li>
+									<li>Prevents overwriting (by others)</li>
+								</ul>
+							</li>
+						</ul>
+					</section>
+
+					<section>
+						<h2>Variable Properties and Methods (1)</h2>
+						<ul>
+							<li class="fragment">
+								Each Global Object provides some properties and/or methods
+								<ul>
+									<li>eg. <code>myString.length;</code></li>
+									<li>eg. <code>myString.toUpperCase();</code></li>
+								</ul>
+							</li>
+							<li class="fragment">
+								Next to instance methods, they also <em>can</em> provide static methods
+								<ul>
+									<li>eg. <code>Array.isArray()</code></li>
+								</ul>
+							</li>
+							<li class="fragment">
+								Full list of properties/methods to be found on <a href="https://developer.mozilla.org/en/JavaScript/Reference#Global_Objects">Mozilla Developer Network</a> or <a href="http://www.w3schools.com/jsref/default.asp">W3Schools</a> <em>(*)</em> 
+							</li>
+						</ul>
+						<footer class="fragment"><em>(*) Use W3Schools with caution though, they're not always right</em></footer>
+					</section>
+
+					<section>
+						<h2>Variable Properties and Methods (2)</h2>
+						<ul>
+							<li class="fragment">
+								Example
+								<pre class="bigger"><code contenteditable class="language-js">// String Instance
+var firstName = new String("Forrest");
+console.log(firstName.toUpperCase());
+
+// String Literal
+var firstName = "Forrest";
+console.log(firstName.toUpperCase());
+
+// Look ma, no var
+console.log("Forrest".toUpperCase());
+console.log(["Bubba","Lieutenant Dan"].length);</code></pre>
+							</li>
+							<li class="fragment">
+								As you can see the properties and methods are also callable when using literals.
+								<ul>
+									<li>JavaScript does some magic in the background to make that work</li>
+								</ul>
+							</li>
+					</section>
+					
+				</section>
+
+				<!-- 4: JavaScript Control Structures -->
+				<section>
+
+					<section>
+						<h2>JavaScript 101: Control Structures</h2>
+						<p><img src="assets/01/stoppedrunning.jpg" alt="" title="Feather" width="467" height="298" /></p>
+						<q>I had run for 3 years, 2 months, 14 days, and 16 hours.</q>
+					</section>
+
+					<section>
+						<h2>If-Else &amp; Switch-Case(-Default)</h2>
+						<pre class="bigger reveal"><code contenteditable class="language-js">// If statement
+var badGrades = true;
+if (badGrades) {
+	console.log("Mom sleeps with teacher");
+} else {
+	console.log("Mom does not sleep with teacher");
+}
+
+// Switch statement
+var age = 10,
+	lifeState;
+	
+switch (age) {
+	case 10:
+		lifeState = "Young";
+	break;
+	case 60:
+		lifeState = "Old";
+	break;
+	default:
+		lifeState = "unknown";
+	break;
+}
+
+console.log(lifeState);</code></pre>
+					</section>
+
+					<section>
+						<h2>For</h2>
+						<pre class="bigger reveal"><code contenteditable class="language-js">// Var we'll be using
+var forrestFriends = ["Bubba", "Lieutenant Dan"];
+
+// For
+for (var i = 0; i < forrestFriends.length; i++) {
+	console.log(forrestFriends[i]);
+}</code></pre>
+						<p><small>Note: fragment can be optimized, but more on that later ;)</small></p>
+					</section>
+
+					<section>
+						<h2>For-In</h2>
+						<pre class="bigger reveal"><code contenteditable class="language-js">// Vars we'll be using
+var forrest = {
+	firstName : "Forrest",
+	lastName : "Gump" // no trailing comma (!)
+}
+var forrestFriends = ["Bubba", "Lieutenant Dan"];
+
+// For - In (Array)
+for (var friend in forrestFriends) {
+	console.log(forrestFriends[friend]);
+}
+
+// For - In (Object)
+for (var prop in forrest) {
+	console.log(prop + " = " + forrest[prop]);
+}</code></pre>
+					</section>
+
+					<section>
+						<h2>For Each-In</h2>
+						<pre class="bigger reveal"><code contenteditable class="language-js">// Vars we'll be using
+var forrest = {
+	firstName : "Forrest",
+	lastName : "Gump" // no trailing comma (!)
+}
+var forrestFriends = ["Bubba", "Lieutenant Dan"];
+
+// For Each - In (Array)
+for each (var friend in forrestFriends) {
+	console.log(friend);
+}
+
+// For Each - In (Object)
+for each (var prop in forrest) {
+	console.log(prop);
+}</code></pre>	
+						<p>Note: Only works in Firefox!</p>
+					</section>
+
+					<section>
+						<h2>While &amp; Do-While</h2>
+						<pre class="bigger reveal"><code contenteditable class="language-js">// While
+var count = 5;
+while (count > 0) {
+	console.log(count);
+	count--;
+}
+
+// Do - While
+var count = 5;
+do {
+	console.log(count);
+	count--;
+} while (count > 0);
+
+// Tip: retry this example with count = 0 as starting value
+</code></pre>
+					</section>
+
+					<section>
+						<h2>With</h2>
+						<pre class="bigger reveal"><code contenteditable class="language-js">// Vars we'll be using
+var forrest = {
+	firstName : "Forrest",
+	lastName : "Gump" // no trailing comma (!)
+}
+
+// With
+with (forrest) {
+	console.log(firstName);
+	console.log(lastName);
+}
+</code></pre>
+					</section>
+
+					<section>
+						<h2>Try-Catch(-Finally)</h2>
+						<pre class="bigger reveal"><code contenteditable class="language-js">// Vars we'll be using
+var forrest = {
+	firstName : "Forrest",
+	lastName : "Gump",
+	say : function() {
+		console.log("Stupid is as stupid does");
+	}
+}
+
+// Try-Catch
+try {
+	forrest.functionDoesNotExist();
+} catch (error) {
+	console.error("ERROR! " + error.name + " : " + error.message);
+}
+
+// Try-Catch-Finally
+try {
+	forrest.functionDoesNotExist();
+} catch (error) {
+	console.error("ERROR! " + error.name + " : " + error.message);
+} finally {
+	forrest.say();
+}
+</code></pre>
+					</section>
+
+					<section>
+						<h2>Break</h2>
+						<ul style="font-size: 80%;" class="short reveal">
+							<li>Jumps to the end of the statement and aborts the current task</li>
+							<li>Valid inside <code>switch</code>, <code>for</code>, <code>for-in</code>, <code>while</code>, and <code>do-while</code></li>
+						</ul>
+						<pre class="bigger reveal"><code contenteditable class="language-js">for (var x = 1; x <= 5; x++) {
+	var y = 1;
+	while (y <= 7) {
+		if (y == 5) { break; }
+		console.log(x + "-" + y);
+		y++;
+	}
+}</code></pre>	
+						<pre class="bigger reveal"><code contenteditable class="language-js">myForLoop:
+for (var x = 1; x <= 5; x++) {
+	var y = 1;
+	while (y <= 7) {
+		if (y == 5) { break myForLoop; }
+		console.log(x + "-" + y);
+		y++;
+	}
+}</code></pre>
+					</section>
+
+					<section>
+						<h2>Continue</h2>
+						<ul style="font-size: 80%;" class="short reveal">
+							<li>Jumps back to start of statement and continues with next item</li>
+							<li>Valid inside <code>for</code>, <code>for-in</code>, <code>while</code>, and <code>do-while</code></li>
+						</ul>
+						<pre class="bigger reveal"><code contenteditable class="language-js">for (var x = 1; x <= 5; x++) {
+	for (var y = 1; y <= 7; y++) {
+		if (y == 5) continue;
+		console.log(x + "-" + y);
+	}
+}</code></pre>	
+						<pre class="bigger reveal"><code contenteditable class="language-js">myForLoop:
+for (var x = 1; x <= 5; x++) {
+	for (var y = 1; y <= 7; y++) {
+		if (y == 5) { continue myForLoop; }
+		console.log(x + "-" + y);
+	}
+}</code></pre>	
+					</section>
+					
+				</section>
+
+
+
+				<!-- 5: Little Big Details -->
+				<section>
+
+					<section>
+						<h2>JavaScript 101: Little Big Details</h2>
+						<p><img src="assets/01/feather.jpg" alt="Feather" title="Feather" width="467" height="298" /></p>
+						<q>My name is Forrest, Forrest Gump.</q>
+					</section>
+
+					<section>
+						<h2>Ternary Operator</h2>
+						<pre class="bigger reveal"><code contenteditable class="language-js">// A var we'll need
+var looking = false;
+
+// How you'd probably write it at first
+var forrestSays;
+if (looking) {
+	forrestSays = "I gotta find Bubba!"
+} else {
+	forrestSays = "It's OK";
+}
+console.log(forrestSays);</code></pre>
+						<pre class="bigger reveal"><code contenteditable class="language-js">// A var we'll need
+var looking = false;
+
+// Better: Ternary operators
+var forrestSays2 = (looking) ? "I gotta find Bubba!" : "It's OK";
+console.log(forrestSays2);</code></pre>
+					</section>
+
+					<section>
+						<h2>Shorthand Assignment</h2>
+						<pre class="bigger reveal"><code contenteditable class="language-js">// How you'd probably write it at first
+function lifeIs(boxOfChocolates) {
+	var life;
+	
+	if (!boxOfChocolates) {
+		life = "a Snickers bar";
+	} else {
+		life = boxOfChocolates;
+	}
+	
+	return "Life is like " + life;
+}
+console.log(lifeIs('a Box of Chocolates'));</code></pre>
+						<pre class="bigger reveal"><code contenteditable class="language-js">// Better: Shorthand assignment
+function lifeIs2(boxOfChocolates) {
+	return "Life is like " + (boxOfChocolates || "a Snickers bar");
+}
+console.log(lifeIs2('a Box of Chocolates'));</code></pre>
+					</section>
+
+					<section>
+						<h2>Short-Ciruit Logic</h2>
+						<pre class="bigger reveal"><code contenteditable class="language-js">// An Object we'll need
+var forrest = {
+	firstName : "Forrest",
+	lastName : "Gump",
+	says : function() {
+		console.log("Stupid is as stupid does");
+	}
+}
+
+// How you'd probably write it at first
+if ((forrest != null) && (typeof forrest.says == "function")) {
+	forrest.says();
+}</code></pre>
+						<pre class="bigger reveal"><code contenteditable class="language-js">// An Object we'll need
+var forrest = {
+	firstName : "Forrest",
+	lastName : "Gump",
+	says : function() {
+		console.log("Stupid is as stupid does");
+	}
+}
+
+// Better: Short-circuit logic
+forrest && forrest.says && forrest.says();
+</code></pre>
+					</section>
+					
+				</section>
+
+
+
+				<!-- 6 : Advanced JavaScript : Functions-->
+				<section>
+
+					<section>
+						<h2>Advanced JavaScript: Functions</h2>
+						<p><img src="assets/01/runforrestrun.jpg" alt="Run Forrest, Run" title="Run Forrest, Run" width="467" height="350" /></p>
+						<q>Run Forrest, Run!</q>
+					</section>
+
+					<section>
+						<h2>Functions Recap</h2>
+						<p>function, var = function</p>
+					</section>
+
+					<section>
+						<h2>Function arguments (1)</h2>
+						<p>anything possible, functions, objects</p>
+					</section>
+
+					<section>
+						<h2>Anonymous Functions</h2>
+						
+					</section>
+
+					<section>
+						<h2>First Class Citizens</h2>
+						<p>functions returning functions, (anon) functions as arguments, etc.</p>
+					</section>
+
+					<section>
+						<h2>Self Invoking Functions (1)</h2>
+						<ul>
+							<li>Consider this function
+								<pre class="bigger"><code contenteditable class="language-js">function run() {
+	console.log("Run Forrest, Run");
+}
+run();</code></pre>
+							</li>
+							<li>This works fine too
+								<pre class="bigger"><code contenteditable class="language-js">(function run() {
+	console.log("Run Forrest, Run");
+})();</code></pre>
+							</li>
+							<li>Function name not needed actually (Anon. function)
+								<pre class="bigger"><code contenteditable class="language-js">(function() {
+	console.log("Run Forrest, Run");
+})();</code></pre>
+							</li>
+						</ul>
+					</section>
+
+					<section>
+						<h2>Self Invoking Functions (2)</h2>
+						<ul>
+							<li>
+								Works with function parameters too
+								<pre class="bigger"><code contenteditable class="language-js">(function(what) {
+	console.log(what);
+})("Run Forrest, Run");</code></pre>
+							</li>
+							<li>
+								Or, if you want:
+								<pre class="bigger"><code contenteditable class="language-js">var toSay = "Run Forrest, Run";
+
+(function(what) {
+	console.log(what);
+})(toSay);</code></pre>
+							</li>
+						</ul>
+						
+					</section>
+
+					<section>
+						<h2>Closures</h2>
+						<p>Yeah!</p>
+					</section>
+
+					<section>
+						<h2>Function arguments (2)</h2>
+						<p>.arguments</p>
+					</section>
+
+					<section>
+						<h2>Function arguments (3)</h2>
+						<p>Common way: object</p>
+					</section>
+
+					<section>
+						<h2>Apply &amp; Curry</h2>
+						<p>??? Not sure wether to talk about this ...</p>
+					</section>
+
+				</section>
+
+
+
+				<!-- 7 : Advanced JavaScript : Objects, Objects &amp; Objects -->
+				<section>
+
+					<section>
+						<h2>Advanced JavaScript: Objects</h2>
+						<p><img src="assets/01/army.jpg" alt="To do whatever you tell me, drill sergeant!" title="To do whatever you tell me, drill sergeant!" width="467" height="316" /></p>
+						<q>Gump! What's your sole purpose in this army?</q><br /> 
+						<q>To do whatever you tell me, drill sergeant!</q>
+					</section>
+
+					<section>
+						<h2>Objects &amp; Inheritance</h2>
+						<p>...</p>
+					</section>
+
+					<section>
+						<h2>Extending Built-In Objects</h2>
+						<p>Number.fahrenheitToCelcius, use caution!</p>
+					</section>
+
+					<section>
+						<h2>Structure &amp; Code Organization</h2>
+						<p>Namespaces, Module Pattern</p>
+					</section>
+				
+				</section>
+
+
+
+				<!-- 8 : JavaScript in the browser -->
+				<section>
+
+					<section>
+						<h2>JavaScript in the browser</h2>
+						<p><img src="assets/01/browserwars.jpg" alt="Stupid is as stupid does" title="Stupid is as stupid does" width="467" height="350" /></p>
+						<q>Stupid is as stupid does</q>
+					</section>
+
+					<section>
+						<h2>The DOM</h2>
+						<p>What. The Problem. Built-In Objects.</p>
+					</section>
+
+					<section>
+						<h2>Selecting &amp; Traversing</h2>
+						<p>Built-In instances/properties (window, document, ...), getElementByX, querySelector</p>
+						<p>parentNode, childNodes, etc.</p>
+					</section>
+
+					<section>
+						<h2>Events</h2>
+						<p>Old way: .on<em>Event</em>, New way: addEventListener</p>
+					</section>
+
+					<section>
+						<h2>Capturing &amp; Bubbling </h2>
+						<p>capture vs bubble</p>
+					</section>
+
+					<section>
+						<h2>Unobtrusive</h2>
+
+					</section>
+
+					<section>
+						<h2>OldIE and the like</h2>
+						<p>Something worth noting</p>
+					</section>
+
+					<section>
+						<h2>Best Practice</h2>
+						<ul>
+							<li class="fragment">
+								Place JavaScripts at the bottom of the page
+								<ul>
+									<li>Just before <code>&lt;/body&gt;</code></li>
+									<li>I'll tell you later <em>why</em> that is ;-)</li>
+								</ul>
+							</li>
+							<li class="fragment">
+								Don't extend built-in Objects
+								<ul>
+									<li>Because you might implement it differently</li>
+									<li>Because you might use a name that later will be used by the browser/JavaScript</li>
+								</ul>
+							</li>
+						</ul>
+					</section>
+
+				</section>
+
+
+
+				<!-- The END -->
+				<section>
+					<h2>Questions?</h2>
+					<footer>
+						<em><a href="http://www.ikdoeict.be/">ikdoeict.be</a> &mdash; <a href="mailto:bramus.vandamme@kahosl.be">bramus.vandamme@kahosl.be</a></em>
+					</footer>
+				</section>
+
+
+
+				<!-- Sources -->
+				<section id="sources">
+					<h2>Sources</h2>
+					<ul>
+						<li>Basic Structure (Javasctript 101) &amp; Little Big Details: <a href="http://www.slideshare.net/robnyman/javascript-like-a-box-of-chocolates">http://www.slideshare.net/robnyman/javascript-like-a-box-of-chocolates</a></li>
+						<li>Values, Variables, and Literals: <a href="https://developer.mozilla.org/en/JavaScript/Guide/Values%2C_Variables%2C_and_Literals">https://developer.mozilla.org/en/JavaScript/Guide/Values%2C_Variables%2C_and_Literals</a></li>
+						<li>JavaScript Global Objects: <a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects">https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects</a></li>
+						<li>Forrest Gump Screengrabs: <a href="http://www.speakinggump.com/">http://www.speakinggump.com/wordpress/</a></li>
+						<li>Forrest stopped running screengrab: <a href="http://www.flickr.com/photos/ashdmarcin/5186789653/">http://www.flickr.com/photos/ashdmarcin/5186789653/</a></li>
+						<li>Not Sure If: <a href="http://knowyourmeme.com/memes/futurama-fry-not-sure-if-x">http://knowyourmeme.com/memes/futurama-fry-not-sure-if-x</a></li>
+						<li>Control Structures: <a href="http://www.howtocreate.co.uk/tutorials/javascript/controls">http://www.howtocreate.co.uk/tutorials/javascript/controls</a></li>
+						<li>Advanced JS:<a href="https://kkaefer.com/files/2008/10/AdvJS-BarCamp.pdf">https://kkaefer.com/files/2008/10/AdvJS-BarCamp.pdf</a></li>
+						<li>Functions: <a href="http://www.hunlock.com/blogs/Functional_Javascript">http://www.hunlock.com/blogs/Functional_Javascript</a></li>
+						<li>Functions &amp; Closures: <a href="http://perplexed.co.uk/559_javascript_lambda_functions_and_closures.htm">http://perplexed.co.uk/559_javascript_lambda_functions_and_closures.htm</a></li>
+						<li>Closures: <a href="http://robertnyman.com/2008/10/09/explaining-javascript-scope-and-closures/">http://robertnyman.com/2008/10/09/explaining-javascript-scope-and-closures/</a></li>
+						<li>Objects &amp; .prototype: <a href="http://peterned.home.xs4all.nl/tutorial/objecten.html">http://peterned.home.xs4all.nl/tutorial/objecten.html</a></li>
+						<li>Events: <a href="http://www.w3.org/TR/DOM-Level-2-Events/events.html">http://www.w3.org/TR/DOM-Level-2-Events/events.html</a></li>
+						<li>Events: <a href="http://www.w3.org/TR/DOM-Level-3-Events/">http://www.w3.org/TR/DOM-Level-3-Events/</a></li>
+						<li>Bubbling vs. Capturing: <a href="http://www.quirksmode.org/js/events_order.html">http://www.quirksmode.org/js/events_order.html</a></li>
+						<li>Bubbling vs. Capturing (samples): <a href="http://javascript.info/tutorial/bubbling-and-capturing">http://javascript.info/tutorial/bubbling-and-capturing</a></li>
+					</ul>
+				</section>
+				
+			</div>
+
+			<!-- The navigational controls UI -->
+			<aside class="controls">
+				<a class="left" href="#">&#x25C4;</a>
+				<a class="right" href="#">&#x25BA;</a>
+				<a class="up" href="#">&#x25B2;</a>
+				<a class="down" href="#">&#x25BC;</a>
+			</aside>
+
+			<!-- Index Link -->
+			<aside class="back">
+				<a href="index.html">&larr; Back to index</a>
+			</aside>
+
+			<!-- Displays presentation progress, max value changes via JS to reflect # of slides -->
+			<div class="progress"><span></span></div>
+			
+		</div>
+		
+		<script src="js/reveal.js"></script>
+		<script src="lib/highlight.js"></script>
+		<script src="lib/prefixfree.js"></script>
+		<script src="lib/css-snippets.js"></script>
+		<script src="lib/css-edit.js"></script>
+		<script src="lib/incrementable.js"></script>
+		<script src="js/main.js"></script>
+
+	</body>
+</html>
