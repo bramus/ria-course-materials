@@ -897,13 +897,13 @@ forrest && forrest.says && forrest.says();
 					<section>
 						<h2>Functions Recap</h2>
 						<ul>
-							<li class"fragment">
+							<li class="fragment">
 								Functions can be defined in three ways
 								<pre class="bigger"><code contenteditable class="language-js">var says = new Function("what", "alert(what)"); // Function Constructor
 function says(what) { alert(what); } // function statement
 var says = function(what){ alert(what); } // Function Literal</code></pre>
 							</li>
-							<li class"fragment">
+							<li class="fragment">
 								Preferred way is the literal notation
 							</li>
 						</ul>
@@ -985,20 +985,35 @@ forrestDoes(function(what){
 					</section>
 
 					<section>
+						<h2>Return Values</h2>
+						<ul>
+							<li class="fragment">Functions can return values if they want</li>
+							<li class="fragment">
+								Use the <code>return</code> statement
+								<pre class="bigger"><code contenteditable class="language-js">....</code></pre>
+							</li>
+							<li class="fragment">
+								Return values can be anything, even functions!
+								<pre class="bigger"><code contenteditable class="language-js">....</code></pre>
+							</li>
+						</ul>
+					</section>
+
+					<section>
 						<h2>Self Invoking Functions (1)</h2>
 						<ul>
-							<li>Consider this function
+							<li class="fragment">Consider this function
 								<pre class="bigger"><code contenteditable class="language-js">function run() {
 	console.log("Run Forrest, Run");
 }
 run();</code></pre>
 							</li>
-							<li>This works fine too
+							<li class="fragment">This works fine too
 								<pre class="bigger"><code contenteditable class="language-js">(function run() {
 	console.log("Run Forrest, Run");
-})();</code></pre>
+})(); // function has become self-invoking</code></pre>
 							</li>
-							<li>Function name not needed actually <small><em>(Anonymous!)</em></small>
+							<li class="fragment">Function name not needed actually <small><em>(Anonymous!)</em></small>
 								<pre class="bigger"><code contenteditable class="language-js">(function() {
 	console.log("Run Forrest, Run");
 })();</code></pre>
@@ -1009,13 +1024,13 @@ run();</code></pre>
 					<section>
 						<h2>Self Invoking Functions (2)</h2>
 						<ul>
-							<li>
+							<li class="fragment">
 								Works with function parameters too
 								<pre class="bigger"><code contenteditable class="language-js">(function(what) {
 	console.log(what);
 })("Run Forrest, Run");</code></pre>
 							</li>
-							<li>
+							<li class="fragment">
 								Or, if you want:
 								<pre class="bigger"><code contenteditable class="language-js">var toSay = "Run Forrest, Run";
 
@@ -1027,27 +1042,90 @@ run();</code></pre>
 					</section>
 
 					<section>
-						<h2>Nesting Functions</h2>
-						<p>You can do that if you want</p>
-					</section>
-
-					<section>
-						<h2>Closures</h2>
-						<p>When returning a nested function: function itself + scope of containing function (non-local variables, passed by reference)</p>
-					</section>
-
-					<section>
-						<h2>First Class Objects</h2>
+						<h2>Nesting Functions (1)</h2>
 						<ul>
-							<li class="fragment">In JavaScript, functions are First Class Objects (or First Class Citizens)
-								<ul>
-									<li class="fragment">They can be created on the fly (at run-time)</li>
-									<li class="fragment">They can be passed as a parameter</li>
-									<li class="fragment">They can be assigned into a variable</li>
-									<li class="fragment">They can be returned from an other function</li>
-								</ul>
+							<li class="fragment">
+								It's possible to nest functions
+								<pre class="bigger"><code contenteditable class="language-js">var forrestSays = function(whatForrestSays) {
+	var says = function(what) {
+		alert(what);
+	}
+	
+	says(whatForrestSays);
+}
+
+forrestSays("Stupid is as stupid does");</code></pre>
+							</li>
+							<li class="fragment">
+								Keep the scope in mind!
+								<pre class="bigger"><code contenteditable class="language-js">var forrestSays = function(whatForrestSays) {
+	var says = function(what) {
+		alert(what);
+	}
+
+	says(whatForrestSays);
+}
+
+forrestSays("Stupid is as stupid does");
+says("Stupid is as stupid does"); // will fail!</code></pre>
 							</li>
 						</ul>
+					</section>
+
+					<section>
+						<h2>Nesting Functions (2)</h2>
+						<ul>
+							<li class="fragment">
+								Scope also allows you to re-use names
+								<pre class="bigger"><code contenteditable class="language-js">var says = function(what) {
+	alert("Outer says, says '" + what + "'");
+}
+var forrestSays = function(whatForrestSays) {
+	var says = function(what) {
+		alert("Inner says, says '" + what + "'");
+	}
+
+	says(whatForrestSays);
+}
+
+forrestSays("Stupid is as stupid does");
+says("Stupid is as stupid does"); // will fail!</code></pre>
+							</li>
+						</ul>
+					</section>
+
+					<section>
+						<h2>Nesting Functions (3)</h2>
+						<ul>
+							<li class="fragment">
+								Nesting Functions can be fun ...
+								<pre class="bigger"><code contenteditable class="language-js">....</code></pre>
+							</li>
+							<li class="fragment">
+								... but can also give you a headache
+								<pre class="bigger"><code contenteditable class="language-js">....</code></pre>
+							</li>
+							<li class="fragment">
+								The <em>culprit</em> is something named <em>Closures</em>
+							</li>
+						</ul>
+					</section>
+					
+					<section>
+						<h2>Closures?</h2>
+						<p><img src="assets/01/notsureif.png" alt="Not Sure If ..." title="Not Sure If ..." width="480" height="360" /></p>
+						<p><em>Oh boy, here we go again ...</em></p>
+					</section>
+					
+					<section>
+						<h2>Closures</h2>
+						<p>When using a nested function, a closure is created: function itself + scope of containing function (non-local variables, passed by reference)</p>
+					</section>
+					
+					<section>
+						<h2>Oh, I See ...</h2>
+						<p><img src="assets/01/ohisee.png" alt="Oh, I see ..." title="Oh, I see ..." width="480" height="360" /></p>
+						<p class="fragment"><em>Or at least I hope you do</em></p>
 					</section>
 
 					<section>
@@ -1063,6 +1141,29 @@ run();</code></pre>
 					<section>
 						<h2>Apply &amp; Curry</h2>
 						<p>??? Not sure wether to talk about this ...</p>
+					</section>
+
+					<section>
+						<h2>Functions Summary</h2>
+						<ul>
+							<li class="fragment">In JavaScript, functions are <em>First Class Objects</em>
+								<ul>
+									<li class="fragment">They can be created on the fly (at run-time)</li>
+									<li class="fragment">They can be passed as a parameter</li>
+									<li class="fragment">They can be assigned into a variable</li>
+									<li class="fragment">They can be returned from an other function</li>
+								</ul>
+							</li>
+							<li class="fragment">
+								Functions can be anonymous
+							</li>
+							<li class="fragment">
+								Functions can be self-invoking
+							</li>
+							<li class="fragment">
+								When nesting functions, a closure is created
+							</li>
+						</ul>
 					</section>
 
 				</section>
