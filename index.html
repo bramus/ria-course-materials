@@ -1,0 +1,100 @@
+<!doctype html>  
+<html lang="en">
+	
+	<head>
+		<meta charset="utf-8">
+		
+		<title>Rich Internet Applications</title>
+
+		<meta name="description" content="Rich Internet Applications">
+		<meta name="author" content="Bram(us) Van Damme - ikdoeict.be">
+		
+		<link href='http://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+		
+		<link rel="stylesheet" href="css/reset.css">
+		<link rel="stylesheet" href="css/main.css">
+		<style>
+		
+			/* clearfix */
+			.clearfix:after {
+				content: ".";
+				display: block;
+				clear: both;
+				visibility: hidden;
+				line-height: 0;
+				height: 0;
+			}
+
+			.clearfix {
+				display: inline-block;
+			}
+
+			html[xmlns] .clearfix {
+				display: block;
+			}
+
+			* html .clearfix {
+				height: 1%;
+			}
+			
+			/* main overrides */
+			html, body {
+				overflow: auto;
+			}
+			
+			#reveal .intro section footer {
+				position: static;
+			}
+			
+			/* intro */
+			#reveal .intro {
+				width: 1200px;
+				padding: 20px 0px;
+				text-align: center;
+				margin: 0 auto 0;
+			}
+			
+			#reveal .intro > section {
+				width: 100%;
+				min-height: 600px;
+			}
+			
+			#reveal .intro ul.thumbs {
+				padding: 0;
+				margin: 0 auto 50px;
+				list-style: none;
+			}
+			
+			#reveal .intro ul.thumbs li {
+				width: 150px;
+				float: left;
+				margin: 0 25px 25px 25px;
+			}
+			
+			#reveal .intro ul.thumbs li img {
+				max-width: 100%;
+			}
+		</style>
+	</head>
+	
+	<body>
+		
+		<div id="reveal">
+			<div class="intro">
+				<section>
+					<h1>Rich Internet Applications<small>*</small></h1>
+					<h3>Professional Bachelor ICT &mdash; 2011-2012</h3>
+					<ul class="thumbs clearfix">
+						<li><a href="00.intro.html" title="00.intro"><img src="assets/index/00.jpg" alt="00.intro" title="00.intro" /></li>
+						<li><a href="01.advanced.js.html" title="01.Advanced.JS"><img src="assets/index/01.jpg" alt="00.Advanced.JS" title="01.Advanced.JS" /></a></li>
+					</ul>
+					<footer>
+						<em><a href="http://www.ikdoeict.be/">ikdoeict.be</a> &mdash; <a href="mailto:bramus.vandamme@kahosl.be">bramus.vandamme@kahosl.be</a></em><br />
+						<small style="vertical-align: baseline; opacity: 0.2;">(* next year to be renamed to &ldquo;Web &amp; Mobile Development&rdquo;)</small>
+					</footer>
+				</section>
+			</div>
+		</div>
+		
+	</body>
+</html>
