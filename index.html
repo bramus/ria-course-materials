@@ -74,6 +74,43 @@
 			#reveal .intro ul.thumbs li img {
 				max-width: 100%;
 			}
+			
+			#reveal #about {
+				position: absolute;
+				height: 415px;
+				right: 0;
+				top: 110px;
+				overflow: hidden;
+				width: 30px;
+				padding: 15px 0 0 20px;
+				
+				-webkit-transition: all .2s ease;
+				   -moz-transition: all .2s ease;
+				    -ms-transition: all .2s ease;
+				     -o-transition: all .2s ease;
+				        transition: all .2s ease;
+				
+				-webkit-box-shadow: -10px 0px 25px #1c1e20;
+				-moz-box-shadow:    -10px 0px 25px #1c1e20;
+				box-shadow:         -10px 0px 25px #1c1e20;
+				z-index: 99999;
+				opacity: 0.8;
+				background: rgba(46,49,51,0.9);
+			}
+			
+			#reveal #about:hover {
+				width: 240px;
+				opacity: 1;
+			}
+			
+			#reveal #about p {
+				font-size: 15px;
+				line-height: 1.2;
+				margin-bottom: 24px;
+				text-align: left;
+				opacity: 0.8;
+				width: 230px;
+			}
 		</style>
 	</head>
 	
@@ -93,6 +130,12 @@
 						<small style="vertical-align: baseline; opacity: 0.2;">(* next year to be renamed to &ldquo;Web &amp; Mobile Development&rdquo;)</small>
 					</footer>
 				</section>
+			</div>	
+			<div id="about">
+				<p>This collection of slides form the course materials for the <strong>Rich Internet Applications</strong> course, part of the <a href="http://www.ikdoeict.be/">Professional Bachelor ICT</a> study program, taught at <a href="http://www.kahosl.be/">KaHo Sint-Lieven</a>, Ghent, Belgium.</p>
+				<p>The materials were developed by Bram(us) Van Damme who blogs over at <a href="http://www.bram.us/">bram.us</a> and Twitters as <a href="http://www.twitter.com/bramus">@bramus</a>.</p>
+				<p>The materials may be used freely, as long as credit and a link to both bram.us and ikdoeict.be are present.</p>
+				<p>Suggestions and additions may be mailed to Bramus, or sent via a pull request on GitHub.</p>
 			</div>
 		</div>
 		
