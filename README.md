@@ -1,4 +1,4 @@
-# Rich Internet Applications
+# Rich Internet Applications Course Materials
 
 This collection of slides form the course materials for the Rich Internet Applications course, part of the [Professional Bachelor ICT](http://www.ikdoeict.be/) study programme, taught at [KaHo Sint-Lieven](http://www.kahosl.be/), Ghent, Belgium.
 
