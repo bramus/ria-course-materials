@@ -1,5 +1,7 @@
 /**
  * Copyright (C) 2011 Hakim El Hattab, http://hakim.se
+ *
+ * Version modified by Bramus! - http://www.bram.us/
  * 
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -475,6 +477,10 @@ var Reveal = (function(){
 		if( config.progress ) {
 			dom.progressbar.style.width = ( indexh / ( document.querySelectorAll( HORIZONTAL_SLIDES_SELECTOR ).length - 1 ) ) * window.innerWidth + 'px';
 		}
+
+		// Update navgivation
+		var curLoc = getCurrentSlideIndex();
+		document.getElementById('revealIndex').innerHTML = "/" + (curLoc.h ? (curLoc.h + (curLoc.v ? ("/" + curLoc.v) : "")) : "");
 
 		// Close the overview if it's active
 		if( overviewIsActive() ) {
