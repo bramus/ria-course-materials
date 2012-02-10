@@ -383,13 +383,13 @@ html {
 	position: fixed;
 	width: 120px;
 	height: 20px;
-	left: 4px;
-	top: -16px;
+	left: 10px;
+	top: -4px;
 }
 
 	#reveal .back a {
 		font-size: 14px;
-		opacity: 0.3;
+		opacity: 0.1;
 		white-space: nowrap;
 	}
 
@@ -397,6 +397,30 @@ html {
 		opacity: 0.7;
 		color: hsl(185, 85%, 70%);
 	}
+
+/*********************************************
+ * IKDOEICT BRANDING
+ *********************************************/
+
+#reveal #ikdoeict {
+	display: block;
+	width: 100px;
+	height: 59px;
+	text-indent: -999px;
+	overflow: hidden;
+	text-decoration: none;
+	position: absolute;
+	/* bottom: 15px;
+	left: 10px; */
+	top: 0;
+	right: 7px;
+	background: transparent url(../assets/ikdoeict.png) no-repeat;
+	opacity: 0.75;
+}
+
+#reveal #ikdoeict:hover {
+	opacity: 1;
+}
 
 /*********************************************
  * PROGRESS BAR
