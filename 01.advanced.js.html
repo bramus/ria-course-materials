@@ -985,7 +985,35 @@ forrestSays("Stupid is as stupid does");</code></pre>
 						<h2>Function arguments (2)</h2>
 						<ul>
 							<li class="fragment">
-								Function arguments can be anything, even functions!
+								Arguments are passed by value
+								<pre class="bigger"><code contenteditable class="language-js">// function expression, one argument (string preferably)
+var says = function(what){
+	what = "My name is Forrest, Forrest Gump";
+}
+var what = "Stupid is as stupid does";
+alert(what);
+change(what);
+alert(what);</code></pre>
+							</li>
+							<li class="fragment">
+								More obvious if you write it like so
+								<pre class="bigger"><code contenteditable class="language-js">// function expression, one argument (string preferably)
+var says = function(otherWhat){
+	otherWhat = "My name is Forrest, Forrest Gump";
+}
+var what = "Stupid is as stupid does";
+alert(what);
+change(what);
+alert(what);</code></pre>
+							</li>
+						</ul>
+					</section>
+
+					<section>
+						<h2>Function arguments (3)</h2>
+						<ul>
+							<li class="fragment">
+								Function arguments can be anything, even other functions!
 								<pre class="bigger"><code contenteditable class="language-js">var log = function(what){
 	console.log(what);
 }
@@ -1005,7 +1033,7 @@ forrestDoes(log, "Stupid is as stupid does");</code></pre>
 					</section>
 
 					<section>
-						<h2>Function arguments (3)</h2>
+						<h2>Function arguments (4)</h2>
 						<ul>
 							<li class="fragment">
 								You can even directly pass in a function on the fly, without needing to declare it first
@@ -1026,21 +1054,6 @@ forrestDoes(function(what){
 								<ul>
 									<li>Also known as <em>Lambda Functions</em></li>
 								</ul>
-							</li>
-						</ul>
-					</section>
-
-					<section>
-						<h2>Return Values</h2>
-						<ul>
-							<li class="fragment">Functions can return values if they want</li>
-							<li class="fragment">
-								Use the <code>return</code> statement
-								<pre class="bigger"><code contenteditable class="language-js">....</code></pre>
-							</li>
-							<li class="fragment">
-								Return values can be anything, even functions!
-								<pre class="bigger"><code contenteditable class="language-js">....</code></pre>
 							</li>
 						</ul>
 					</section>
@@ -1093,7 +1106,7 @@ run();</code></pre>
 						<h2>Self Invoking Functions (3)</h2>
 						<ul>
 							<li class="fragment">
-								Iffys works with function parameters too
+								Iffys work with function parameters too
 								<pre class="bigger"><code contenteditable class="language-js">(function(what) {
 	console.log(what);
 })("Run Forrest, Run");</code></pre>
@@ -1164,53 +1177,385 @@ says("Stupid is as stupid does"); // will fail!</code></pre>
 					</section>
 
 					<section>
-						<h2>Nesting Functions (3)</h2>
+						<h2>Return Values (1)</h2>
 						<ul>
+							<li class="fragment">Functions can return values if they want</li>
 							<li class="fragment">
-								Nesting Functions can be fun ...
-								<pre class="bigger"><code contenteditable class="language-js">// happens
-function happens(what) {
+								Use the <code>return</code> statement
+								<pre class="bigger"><code contenteditable class="language-js">var say = function(what,verb){
+	return what + " " + verb;
+}
+
+var shitHappens = say("Shit","happens");
+alert(shitHappens);</code></pre>
+							</li>
+							<li class="fragment">
+								Return values can be anything, even functions!
+								<pre class="bigger"><code contenteditable class="language-js">var say = function(what) {
     return function(verb) {
         return what + " " + verb;
     }
 }
-var shit = happens("Shit");
+var shit = say("Shit");
 alert(shit("happens"));
 
-// breaking it down, you're basically getting this:
-// var shit = function(verb) { return "Shit" + " " + verb };</code></pre>
+// also possible
+alert(say("Shit")("happens"));</code></pre>
 							</li>
 						</ul>
 					</section>
 
 					<section>
-						<h2>Nesting Functions (4)</h2>
+						<h2>Return Values (2)</h2>
 						<ul>
 							<li class="fragment">
-								... but can also give you a headache
-								<pre class="bigger"><code contenteditable class="language-js">...</code></pre>
+								Another example
+								<pre class="bigger"><code contenteditable class="language-js">var add = function(x) {
+	return function(y) { return x + y; }
+}
+var add5 = add(5);
+var add6 = add(6);
+var eleven = add5(6); alert(eleven);
+var twelve = add6(6); alert(twelve);
+</code></pre>
 							</li>
 							<li class="fragment">
-								The <em>culprit</em> is something named <em>Closures</em>
+								What happens here is that internally <code>add5</code> has become
+									<pre class="bigger"><code contenteditable class="language-js">function(y) {
+	return x + y;
+} // How I know? Try alert(add5.toString()); in the example above ;)</code></pre>
+							</li>
+							<li class="fragment">
+								Now, how come add5 knows the value of <code>x</code>?
+								<ul>
+									<li>Mind you, <code>x</code> is not part of the global scope</li>
+								</ul>
 							</li>
 						</ul>
-					</section>
-					
-					<section>
-						<h2>Closures?</h2>
-						<p><img src="assets/01/notsureif.png" alt="Not Sure If ..." title="Not Sure If ..." width="480" height="360" /></p>
-						<p><em>Oh boy, here we go again ...</em></p>
 					</section>
 					
 					<section>
 						<h2>Closures</h2>
-						<p>When using a nested function, a closure is created: function itself + scope of containing function (non-local variables, passed by reference)</p>
+						<ul>
+							<li class="fragment">
+								Turns out JavaScript does something magical known as creating <strong><em>closures</em></strong> when you create a function
+							</li>
+							<li class="fragment">
+								A closure a special kind of object that holds two components:
+								<ul>
+									<li>The created function</li>
+									<li>The environment in which it was created (<code>LexicalEnvironment</code>)</li>
+								</ul>
+							</li>
+							<li class="fragment">
+								The environment consists of all local variables that were in scope at the time the closure was created.
+							</li>
+							<li class="fragment">
+								The function can access the environment, thus can access the (non-local) variables
+							</li>
+						</ul>
 					</section>
-					
+
 					<section>
-						<h2>Oh, I See ...</h2>
-						<p><img src="assets/01/ohisee.png" alt="Oh, I see ..." title="Oh, I see ..." width="480" height="360" /></p>
-						<p class="fragment"><em>Or at least I hope you do</em></p>
+						<h2>Not sure if ...</h2>
+						<p><img src="assets/01/notsureif.png" alt="Not Sure If ..." title="Not Sure If ..." width="480" height="360" /></p>
+						<p><em>Yeah, I understand ... lets just check an example</em></p>
+					</section>
+
+					<section>
+						<h2>Closures: Example (1)</h2>
+						<ul>
+							<li class="fragment">
+								Example
+								<pre class="bigger"><code contenteditable class="language-js">var firstName = "Forrest";
+
+var forrestFriends = function() {
+	var friends = ["Bubba", "Lieutenant Dan"];
+	var friendsCount = function() {
+		return friends.length;
+	}
+	var joinFriends = function() {
+		return firstName + " has " + friendsCount() + " friends: " + friends.join(", ");
+	}
+	return joinFriends();
+}
+
+alert(forrestFriends());</code></pre>
+								<ul>
+									<li class="fragment">
+										When <code>joinFriends</code> (or <code>friendsCount</code>) is created, a <em>closure</em> is created
+									</li>
+									<li class="fragment">
+										The closure holds the function itself and the variables in scope.
+									</li>
+									<li class="fragment">
+										Now, what is the scope when the function is created?
+									</li>
+								</ul>
+							</li>
+						</ul>
+					</section>
+
+					<section>
+						<h2>Closures: Example (2)</h2>
+						<ul>
+							<li>
+								Example (continued)
+								<pre class="bigger"><code contenteditable class="language-js">var firstName = "Forrest";
+
+var forrestFriends = function() {
+	var friends = ["Bubba", "Lieutenant Dan"];
+	var friendsCount = function() {
+		return friends.length;
+	}
+	var joinFriends = function() {
+		return firstName + " has " + friendsCount() + " friends: " + friends.join(", ");
+	}
+	return joinFriends();
+}
+
+alert(forrestFriends());</code></pre>
+								<ul>
+									<li class="fragment">
+										The scope of <code>joinFriends</code> is everything on the same level of it, thus everything inside the curly brackets of <code>forrestFriends</code>
+										<ul>
+											<li class="fragment">
+												So the <code>LexicalEnvironment</code> of the created closure holds the variables<br /> <code>friends</code>, <code>friendsCount</code> and <code>joinFriends</code>
+											</li>
+										</ul>
+									</li>
+								</ul>
+							</li>
+						</ul>
+					</section>
+
+					<section>
+						<h2>Closures: Example (3)</h2>
+						<ul>
+							<li>
+								Example (continued)
+								<pre class="bigger"><code contenteditable class="language-js">var firstName = "Forrest";
+
+var forrestFriends = function() {
+	var friends = ["Bubba", "Lieutenant Dan"];
+	var friendsCount = function() {
+		return friends.length;
+	}
+	var joinFriends = function() {
+		return firstName + " has " + friendsCount() + " friends: " + friends.join(", ");
+	}
+	return joinFriends();
+}
+
+alert(forrestFriends());</code></pre>
+								<ul>
+									<li class="fragment">
+										What about <code>firstName</code>? That wasn't part of the current scope?
+										<ul>
+											<li class="fragment">
+												When a function can't find a variable inside the <code>LexicalEnvironment</code>, it will try the outer <code>LexicalEnvironment</code> (viz. go up one level) to (hope to) find it there
+											</li>
+											<li class="fragment">
+												Here in this case, it goes up to the global <code>LexicalEnvironment</code>
+											</li>
+										</ul>
+									</li>
+								</ul>
+							</li>
+						</ul>
+					</section>
+
+					<section>
+						<h2>Closures: Summarized</h2>
+						<ul>
+							<li class="fragment">
+								In short, when a function is created, it can access the non-local variables (outer variables) thanks to the <em>closure</em> that was created.
+							</li>
+							<li class="fragment">
+								And it doesn't stop there ...
+							</li>
+						</ul>
+					</section>
+
+					<section>
+						<h2>Oh boy ...</h2>
+						<p><img src="assets/01/stillseeingit.png" alt="Still seeing it?" title="Still seeing it?" width="480" height="360" /></p>
+						<p class="fragment"><em>Please, bear with me</em></p>
+					</section>
+
+					<section>
+						<h2>Closures: Vars linked by Reference</h2>
+						<ul>
+							<li class="fragment">
+								The variables are linked by reference to the <code>LexicalEnvironment</code>
+								<pre class="bigger"><code contenteditable class="language-js">var firstName = "Forrest";
+
+var forrestFriends = function() {
+	var friends = ["Bubba", "Lieutenant Dan"];
+	var friendsCount = function() {
+		return friends.length;
+	}
+	var joinFriends = function() {
+		return firstName + " has " + friendsCount() + " friends: " + friends.join(", ");
+	}
+	friends.unshift("Jenny"); // Add a new friend named Jenny
+	return joinFriends();
+}
+
+alert(forrestFriends());</code></pre>
+							</li>
+						</ul>
+					</section>
+
+					<section>
+						<h2>Closures: Returning functions</h2>
+						<ul>
+							<li class="fragment">
+								With nested functions: when the outer function has finished, the closure still lives on
+								<pre class="bigger"><code contenteditable class="language-js">var firstName = "Forrest";
+
+var forrestFriends = function() {
+	var friends = ["Bubba", "Lieutenant Dan"];
+	var friendsCount = function() {
+		return friends.length;
+	}
+	var joinFriends = function() {
+		return firstName + " has " + friendsCount() + " friends: " + friends.join(", ");
+	}
+	return joinFriends;
+}
+
+var ff = forrestFriends();
+// at this moment, the outer function has ended
+// only joinFriends() was returned
+// what about friends and friendsCount? Will they still exist?
+alert(ff());</code></pre>
+							</li>
+						</ul>
+					</section>
+
+					<section>
+						<h2>Closures: The Loop Problem (1)</h2>
+						<ul>
+							<li class="fragment">
+								Now that we understand closures, what about this?
+								<pre class="bigger"><code contenteditable class="language-js">var link,
+    target = Reveal.getCurrentSlide().querySelector('.result');
+
+target.innerHTML = ''; // clear the target
+
+for (var i = 0; i < 3; i++) { // add three links
+    link = document.createElement("a");
+	link.style.marginRight = "10px";
+    link.innerHTML = "Link " + i;
+    link.onclick = function() { // function created, ergo closure created!
+        alert("I am link " + i);
+    };
+	target.appendChild(link);
+};</code></pre>
+																<div class="result" style="text-align: center;"><em>(Run the code example to see the result appear here)</em></div>
+							</li>
+							<li class="fragment">
+								Remember: variables are linked by reference to the <code>LexicalEnvironment</code>!
+							</li>
+						</ul>
+					</section>
+
+					<section>
+						<h2>Closures: The Loop Problem (2)</h2>
+						<ul>
+							<li class="fragment">
+								Maybe we can fix it with a local variable?
+								<pre class="bigger"><code contenteditable class="language-js">var link,
+    target = Reveal.getCurrentSlide().querySelector('.result');
+
+target.innerHTML = ''; // clear the target
+
+for (var i = 3; i < 6; i++) { // add three links
+    link = document.createElement("a");
+	link.style.marginRight = "10px";
+    link.innerHTML = "Link " + i;
+    var j = i; // introduction of a local variable
+    link.onclick = function() { // function created, ergo closure created!
+        alert("I am link " + j);
+    };
+	target.appendChild(link);
+};</code></pre>
+																<div class="result" style="text-align: center;"><em>(Run the code example to see the result appear here)</em></div>
+							</li>
+							<li class="fragment">
+								Alas, when copying variables in JavaScript: by reference
+							</li>
+						</ul>
+					</section>
+
+					<section>
+						<h2>Closures: The Loop Problem (3)</h2>
+						<ul>
+							<li class="fragment">
+								What now?
+							</li>
+							<li class="fragment">
+								Well ...
+								<ul>
+									<li class="fragment">
+										Remember this?
+										<pre class="bigger"><code contenteditable class="language-js">var toSay = "Run Forrest, Run";
+
+(function(what) {
+	console.log(what);
+})(toSay);</code></pre>
+									</li>
+									<li class="fragment">
+										And remember that variables are passed by value to functions?
+									</li>
+								</ul>
+							</li>
+							<li class="fragment">
+								That gives us a foot in the door
+							</li>
+						</ul>
+					</section>
+
+					<section>
+						<h2>Closures: The Loop Problem (4)</h2>
+						<ul>
+							<li class="fragment">
+								Iffy to the resue!
+								<pre class="bigger"><code contenteditable class="language-js">var link,
+    target = Reveal.getCurrentSlide().querySelector('.result');
+
+target.innerHTML = ''; // clear the target
+
+for (var i = 6; i < 9; i++) { // add three links
+    link = document.createElement("a");
+	link.style.marginRight = "10px";
+    link.innerHTML = "Link " + i;
+    link.onclick = function(j) { // This one just became an iffy
+		return function() { // and returns a function
+        	alert("I am link " + j);
+		};
+    }(i);
+	target.appendChild(link);
+};</code></pre>
+																<div class="result" style="text-align: center;"><em>(Run the code example to see the result appear here)</em></div>
+							</li>
+						</ul>
+					</section>
+										
+					<section>
+						<h2>Closures: In Closing</h2>
+						<ul>
+							<li>Don't worry, that's it for closures</li>
+							<li>
+								If you really want to go deep into this subject, feel free to read these links
+								<ul>
+									<li><a href="https://developer.mozilla.org/en/JavaScript/Guide/Closures">Mozilla Developer Network: Closures</a></li>
+									<li><a href="http://javascript.info/tutorial/closures">JavaScript.info: Closures</a> <em>(great info on <code>LexicalEnvironment</code>)</em></li>
+									<li><a href="http://javascriptweblog.wordpress.com/2010/10/25/understanding-javascript-closures/">Angus Croll: Understanding JavaScript Closures</a></li>	
+								</ul>
+							</li>
+						</ul>
 					</section>
 
 					<section>
@@ -1246,7 +1591,7 @@ alert(shit("happens"));
 								Functions can be self-invoking
 							</li>
 							<li class="fragment">
-								When nesting functions, a closure is created
+								When creating a function, a closure is created. The function can have access to the non-local variables, which are linked by reference to the <code>LexicalEnvironment</code>
 							</li>
 						</ul>
 					</section>
@@ -1367,23 +1712,21 @@ alert(shit("happens"));
 				<section id="sources">
 					<h2>Sources</h2>
 					<ul>
-						<li>Basic Structure (Javasctript 101) &amp; Little Big Details: <a href="http://www.slideshare.net/robnyman/javascript-like-a-box-of-chocolates">http://www.slideshare.net/robnyman/javascript-like-a-box-of-chocolates</a></li>
-						<li>Values, Variables, and Literals: <a href="https://developer.mozilla.org/en/JavaScript/Guide/Values%2C_Variables%2C_and_Literals">https://developer.mozilla.org/en/JavaScript/Guide/Values%2C_Variables%2C_and_Literals</a></li>
-						<li>JavaScript Global Objects: <a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects">https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects</a></li>
-						<li>Forrest Gump Screengrabs: <a href="http://www.speakinggump.com/">http://www.speakinggump.com/wordpress/</a></li>
-						<li>Forrest stopped running screengrab: <a href="http://www.flickr.com/photos/ashdmarcin/5186789653/">http://www.flickr.com/photos/ashdmarcin/5186789653/</a></li>
-						<li>Not Sure If: <a href="http://knowyourmeme.com/memes/futurama-fry-not-sure-if-x">http://knowyourmeme.com/memes/futurama-fry-not-sure-if-x</a></li>
-						<li>Control Structures: <a href="http://www.howtocreate.co.uk/tutorials/javascript/controls">http://www.howtocreate.co.uk/tutorials/javascript/controls</a></li>
-						<li>Advanced JS:<a href="https://kkaefer.com/files/2008/10/AdvJS-BarCamp.pdf">https://kkaefer.com/files/2008/10/AdvJS-BarCamp.pdf</a></li>
-						<li>Functions: <a href="http://www.hunlock.com/blogs/Functional_Javascript">http://www.hunlock.com/blogs/Functional_Javascript</a></li>
-						<li>Functions &amp; Closures: <a href="http://perplexed.co.uk/559_javascript_lambda_functions_and_closures.htm">http://perplexed.co.uk/559_javascript_lambda_functions_and_closures.htm</a></li>
-						<li>Closures: <a href="http://robertnyman.com/2008/10/09/explaining-javascript-scope-and-closures/">http://robertnyman.com/2008/10/09/explaining-javascript-scope-and-closures/</a></li>
-						<li>First Class Objects: <a href="http://en.wikipedia.org/wiki/First-class_object">http://en.wikipedia.org/wiki/First-class_object</a></li>
-						<li>Objects &amp; .prototype: <a href="http://peterned.home.xs4all.nl/tutorial/objecten.html">http://peterned.home.xs4all.nl/tutorial/objecten.html</a></li>
-						<li>Events: <a href="http://www.w3.org/TR/DOM-Level-2-Events/events.html">http://www.w3.org/TR/DOM-Level-2-Events/events.html</a></li>
-						<li>Events: <a href="http://www.w3.org/TR/DOM-Level-3-Events/">http://www.w3.org/TR/DOM-Level-3-Events/</a></li>
-						<li>Bubbling vs. Capturing: <a href="http://www.quirksmode.org/js/events_order.html">http://www.quirksmode.org/js/events_order.html</a></li>
-						<li>Bubbling vs. Capturing (samples): <a href="http://javascript.info/tutorial/bubbling-and-capturing">http://javascript.info/tutorial/bubbling-and-capturing</a></li>
+						<li>Basic Structure (Javasctript 101) &amp; Little Big Details: <a href="http://www.slideshare.net/robnyman/javascript-like-a-box-of-chocolates">SlideShare (Robert Nyman)</a></li>
+						<li>Values, Variables, and Literals: <a href="https://developer.mozilla.org/en/JavaScript/Guide/Values%2C_Variables%2C_and_Literals">Mozilla Developer Network</a></li>
+						<li>JavaScript Global Objects: <a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects">Mozilla Developer Network</a></li>
+						<li>Forrest Gump Screengrabs: <a href="http://www.speakinggump.com/">SpeakingGump</a></li>
+						<li>Forrest stopped running screengrab: <a href="http://www.flickr.com/photos/ashdmarcin/5186789653/">Flick</a></li>
+						<li>Not Sure If: <a href="http://knowyourmeme.com/memes/futurama-fry-not-sure-if-x">Know your meme</a></li>
+						<li>Control Structures: <a href="http://www.howtocreate.co.uk/tutorials/javascript/controls">HowToCreate.co.uk</a></li>
+						<li>Advanced JS:<a href="https://kkaefer.com/files/2008/10/AdvJS-BarCamp.pdf">KKaefer.com</a></li>
+						<li>Functions: <a href="http://www.hunlock.com/blogs/Functional_Javascript">Hunlock.com</a></li>
+						<li>Closures: <a href="http://www.javascriptkit.com/javatutors/closures.shtml">JavasScriptKit.com</a> &amp; <a href="http://javascript.info/tutorial/closures">JavaScript.info</a> &amp; <a href="http://javascriptweblog.wordpress.com/2010/10/25/understanding-javascript-closures/">JavaScript Weblog</a> &amp; <a href="http://jibbering.com/faq/notes/closures/">Jibbering.com</a> &amp; <a href="https://developer.mozilla.org/en/JavaScript/Guide/Closures">Mozilla Developer Network</a></li>
+						<li>First Class Objects: <a href="http://en.wikipedia.org/wiki/First-class_object">Wikipedia</a></li>
+						<li>Objects &amp; .prototype: <a href="http://peterned.home.xs4all.nl/tutorial/objecten.html">Peterned</a></li>
+						<li>Events: <a href="http://www.w3.org/TR/DOM-Level-2-Events/events.html">W3 Spec Level 2 Events</a> &amp; <a href="http://www.w3.org/TR/DOM-Level-3-Events/">W3 Spec Level 3 Events</a></li>
+						<li>Bubbling vs. Capturing: <a href="http://www.quirksmode.org/js/events_order.html">QuirksMode.org</a></li>
+						<li>Bubbling vs. Capturing (samples): <a href="http://javascript.info/tutorial/bubbling-and-capturing">JavaScript.info</a></li>
 					</ul>
 				</section>
 				
