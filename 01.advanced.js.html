@@ -75,6 +75,17 @@
 						</p>
 						<p style="font-size: 80%">... and because <a href="http://www.robertnyman.com/">Robert Nyman</a> made <a href="http://www.slideshare.net/robnyman/javascript-like-a-box-of-chocolates">an awesome presentation</a> about it, which formed the starting point for these slides.</p>
 					</section>
+
+					<section>
+						<h2>Whilst I'm at it</h2>
+						<p>
+							<figure>
+								<img src="assets/01/mathias.jpg" alt="Mathias Bynens" title="Mathias Bynens" width="480" height="360" />
+								<figcaption>Photo by <a href="http://www.addyosmani.com/">Addy Osmani</a></figcaption>
+							</figure>
+						</p>
+						<p style="font-size: 80%">Another thank you goes out to <a href="http://www.mathias.be/">Mathias Bynens</a> <em>(2nd one from the left)</em> who gave some handy remarks.</p>
+					</section>
 					
 				</section>
 
@@ -109,8 +120,12 @@
 							</li>
 							<li class="fragment">JavaScript is weakly typed
 								<ul>
-									<li>A variable will adjust its type when a new value is assigned</li>
-									<li>viz. if that same variable is changed to <code>&quot;Hello&quot;</code> it will become a string</li>
+									<li>JavaScript will adjust the type of a var when a new value is assigned
+										<ul>
+											<li>This phenomenon is known as <em>implicit type conversion</em> or <em>coercion</em></li>
+										</ul>
+									</li>
+									<li>viz. if that same variable is changed to <code>&quot;Hello&quot;</code> it'll become a string</li>
 								</ul>
 							</li>
 						</ul>
@@ -132,7 +147,7 @@ alert(typeof firstName); // string
 
 // Weak typing
 firstName = 3;
-alert(typeof firstName); // number</code></pre>
+alert(typeof firstName); // JavaScript has changed the type to number</code></pre>
 							</li>
 						</ul>
 					</section>
@@ -201,7 +216,7 @@ alert(typeof firstName); // number</code></pre>
 								In JavaScript nearly everything is built upon <code>Object</code>
 								<ul>
 									<li><code>Object</code> is the core of the language</li>
-									<li>With this thing, you can declare anything you want if you extend upon it.</li>
+									<li>With it, you can declare anything you want if you extend upon it.</li>
 								</ul>
 							</li>
 							<li class="fragment">
@@ -212,13 +227,13 @@ alert(typeof firstName); // number</code></pre>
 									<li class="fragment">
 										Instances have some properties
 										<ul>
-											<li>eg. <code>myString.length</code> (<code>String</code>)</li>
+											<li>eg. <code>myString.length;</code> (Also noted as <code>String#length</code>)</li>
 										</ul>
 									</li>
 									<li class="fragment">
 										Instances have some methods (to manipulate/access the stored value)
 										<ul>
-											<li>eg. <code>myString.toUpperCase()</code> (<code>String</code>)</li>
+											<li>eg. <code>myString.toUpperCase();</code> (Also noted as <code>String#toUpperCase</code>)</li>
 										</ul>
 									</li>
 								</ul>
@@ -242,7 +257,7 @@ alert(typeof firstName); // number</code></pre>
 								<pre class="bigger"><code contenteditable class="language-js">var firstName = new String("Forrest");
 alert(firstName instanceof String);
 alert(typeof firstName);
-alert(typeof (firstName.toString()));</code></pre>
+alert(typeof firstName.toString());</code></pre>
 							</li>
 						</ul>
 					</section>
@@ -257,7 +272,7 @@ alert(typeof (firstName.toString()));</code></pre>
 								<pre class="bigger"><code contenteditable class="language-js">var firstName = "Forrest";</code></pre>
 								<ul>
 									<li class="fragment">What you get back is the value</li>
-									<li class="fragment">The type of the value is <code>string</code> (weak typing in action)</li>
+									<li class="fragment">The type of the value is <code>string</code> (dynamic typing in action)</li>
 								</ul>
 							</li>
 							<li class="fragment">
@@ -303,21 +318,21 @@ String str = "literal";</code></pre>
 						<ul>
 							<li class="fragment">
 								Example (1)
-								<pre class="bigger"><code contenteditable class="language-js">var firstName = new String("Forrest");
+								<pre class="bigger"><code contenteditable class="language-js">var firstName = new String("Forrest"); // String Constructor
 var firstName = "Forrest"; // String Literal
 
-var birthYear = new Number("1945");
+var birthYear = new Number("1945"); // Number Constructor
 var birthYear = 1945; // Number Literal
 
-var isRunning = new Boolean("false");
+var isRunning = new Boolean("false"); // Boolean Constructor
 var isRunning = false; // Boolean Literal
 
-var hasR = new RegExp("r","i");
+var hasR = new RegExp("r","i"); // RegExp Constructor
 var hasR = /r/i; // RegExp Literal
 
-var says = new Function("what", "alert(what)");
-function says(what) { alert(what); } // The function statement
-var says = function(what){ alert(what); } // Function Literal</code></pre>
+var says = new Function("what", "alert(what)"); // Function Constructor
+var says = function(what){ alert(what); } // Function Literal
+function says(what) { alert(what); } // The function statement</code></pre>
 							</li>
 						
 						</ul>
@@ -343,6 +358,7 @@ var forrest = { // Object Literal
 	} // no trailing comma (!)
 }</code></pre>
 							</li>
+							<li class="fragment">Keys of the Object Literal may be placed between quotes. When using spaces in the keys <em>(not recommended though)</em>, quotes must be used</li>
 						</ul>
 					</section>
 					
@@ -446,7 +462,7 @@ alert(says instanceof Object);</code></pre>
 					<section>
 						<h2>Accessing Object Properties</h2>
 						<ul>
-							<li>Via square brackets, or via dot notation
+							<li class="fragment">Via square brackets, or via dot notation
 								<pre class="bigger"><code contenteditable class="language-js">// Object Literal
 var forrest = {
 	firstName : "Forrest",
@@ -462,16 +478,16 @@ console.log(forrest.firstName);
 console.log(forrest["firstName"]);
 console.log(forrest.says());</code></pre>
 							</li>
-							<li>The dot notation is the preferred way.</li>
+							<li class="fragment">The dot notation is the preferred way. Square brackets mandatory when properties have space in their name</li>
 					</section>
 
 					<section>
 						<h2>Implicit Type Conversion (1)</h2>
 						<ul>
-							<li>JavaScript will change the variable types on the fly when using them.</li>
-							<li>Known as <em>coercion</em></li>
-						</ul>
-						<pre class="bigger"><code contenteditable class="language-js">// Various "false" values
+							<li class="fragment">As mentioned: JavaScript will change variable types on the fly <em>(coercion)</em></li>
+							<li class="fragment">
+								This not only happens when assigning values, but also when using variables
+								<pre class="bigger"><code contenteditable class="language-js">// Various "false" values
 var nullVal = null;
 var undefinedVal = undefined;
 var zeroVal = 0;
@@ -479,29 +495,31 @@ var falseVal = false;
 var emptyString = "";
 
 if (emptyString) {
-	console.log("Not false");
+	console.log("truthy");
 } else {
-	console.log("False");
+	console.log("falsy"); // false-ish
 }</code></pre>
-						<pre class="bigger"><code contenteditable class="language-js">console.log("5" + 6 + 7);</code></pre>
+								<pre class="bigger"><code contenteditable class="language-js">console.log("5" + 6 + 7);</code></pre>
+							</li>
+						</ul>
 					</section>
 
 					<section>
 						<h2>Implicit Type Conversion (2)</h2>
 						<ul>
-							<li>Fixable by using the <em>identity operator</em>
+							<li class="fragment">You can prevent coercion by using the <em>identity operator</em>
 								<pre class="bigger"><code contenteditable class="language-js">// Equality
-console.log((7 == "7") ? "true" : "false");
+alert((7 == "7") ? "equal" : "not equal");
 
 // Identity
-console.log((7 === "7") ? "true" : "false");</code></pre>
+alert((7 === "7") ? "equal (identity)" : "not equal (identity)");</code></pre>
 							</li>
-							<li>Or by explicitly casting a variable to being a certain type
+							<li class="fragment">Or by explicitly casting a variable to being a certain type
 								<pre class="bigger"><code contenteditable class="language-js">// Type Coercion (default)
-console.log("5" + 6 + 7);
+alert("5" + 6 + 7);
 
 // Prevent Type Coercion
-console.log(parseInt("5", 10) + 6 + 7);</code></pre>
+alert(parseInt("5", 10) + 6 + 7);</code></pre>
 							</li>
 						</ul>
 					</section>
@@ -509,7 +527,7 @@ console.log(parseInt("5", 10) + 6 + 7);</code></pre>
 					<section>
 						<h2>Scope (1)</h2>
 						<ul>
-							<li>Global or Local
+							<li class="fragment">Global or Local
 								<pre class="bigger"><code contenteditable class="language-js">// Global
 var quote = "I had run for 3 years, 2 months, 14 days, and 16 hours."
 
@@ -528,6 +546,9 @@ console.log(quote);
 // console.log(saying); // disabled, will fail
 console.log(question); // Nope, Chuck Testa! Erm, I mean global!</code></pre>
 							</li>
+							<li class="fragment">
+								Note: the code above will fail when using <a href="https://developer.mozilla.org/en/JavaScript/Strict_mode">Strict Mode</a>
+							</li>
 						</ul>
 					</section>
 
@@ -539,6 +560,7 @@ console.log(question); // Nope, Chuck Testa! Erm, I mean global!</code></pre>
 								<ul>
 									<li>Prevents pollution of the global scope</li>
 									<li>Prevents overwriting (by others)</li>
+									<li>Works in Strict Mode</li>
 								</ul>
 							</li>
 						</ul>
@@ -550,8 +572,8 @@ console.log(question); // Nope, Chuck Testa! Erm, I mean global!</code></pre>
 							<li class="fragment">
 								Each instance of a global object provides some properties and/or methods
 								<ul>
-									<li>eg. <code>myString.length;</code></li>
-									<li>eg. <code>myString.toUpperCase();</code></li>
+									<li>eg. <code>String#length</code></li>
+									<li>eg. <code>String#toUpperCase</code></li>
 								</ul>
 							</li>
 							<li class="fragment">
@@ -561,10 +583,10 @@ console.log(question); // Nope, Chuck Testa! Erm, I mean global!</code></pre>
 								</ul>
 							</li>
 							<li class="fragment">
-								Full list of properties/methods to be found on <a href="https://developer.mozilla.org/en/JavaScript/Reference#Global_Objects">Mozilla Developer Network</a> or <a href="http://www.w3schools.com/jsref/default.asp">W3Schools</a> <em>(*)</em> 
+								Full list of properties/methods to be found on <a href="https://developer.mozilla.org/en/JavaScript/Reference#Global_Objects">Mozilla Developer Network</a> or <a href="http://es5.github.com/">the ECMAScript Spec</a> <em>(*)</em> 
 							</li>
 						</ul>
-						<footer class="fragment"><em>(*) Use W3Schools with caution though, they're not always right ;)</em></footer>
+						
 					</section>
 
 					<section>
@@ -605,12 +627,13 @@ console.log(["Bubba","Lieutenant Dan"].length);</code></pre>
 
 					<section>
 						<h2>If-Else &amp; Switch-Case(-Default)</h2>
-						<pre class="bigger reveal"><code contenteditable class="language-js">// If statement
+						<div class="fragment">
+							<pre class="bigger"><code contenteditable class="language-js">// If statement
 var badGrades = true;
 if (badGrades) {
-	console.log("Mom sleeps with teacher");
+	alert("Mom sleeps with teacher");
 } else {
-	console.log("Mom does not sleep with teacher");
+	alert("Mom does not sleep with teacher");
 }
 
 // Switch statement
@@ -629,65 +652,51 @@ switch (age) {
 	break;
 }
 
-console.log(lifeState);</code></pre>
+alert(lifeState);</code></pre>
+						</div>
 					</section>
 
 					<section>
 						<h2>For</h2>
-						<pre class="bigger reveal"><code contenteditable class="language-js">// Var we'll be using
+						<div class="fragment">
+							<pre class="bigger"><code contenteditable class="language-js">// Var we'll be using
 var forrestFriends = ["Bubba", "Lieutenant Dan"];
 
 // For
 for (var i = 0; i < forrestFriends.length; i++) {
-	console.log(forrestFriends[i]);
+	alert(forrestFriends[i]);
 }</code></pre>
-						<p><small>Note: fragment can be optimized, but more on that later ;)</small></p>
+						</div>
+						<p class="fragment"><small>Note: fragment can be optimized, but more on that later ;)</small></p>
 					</section>
 
 					<section>
 						<h2>For-In</h2>
-						<pre class="bigger reveal"><code contenteditable class="language-js">// Vars we'll be using
+						<div class="fragment">
+							<pre class="bigger"><code contenteditable class="language-js">// Vars we'll be using
 var forrest = {
 	firstName : "Forrest",
 	lastName : "Gump" // no trailing comma (!)
-}
+};
 var forrestFriends = ["Bubba", "Lieutenant Dan"];
 
 // For - In (Array)
 for (var friend in forrestFriends) {
-	console.log(forrestFriends[friend]);
+	alert(forrestFriends[friend]);
 }
 
 // For - In (Object)
 for (var prop in forrest) {
-	console.log(prop + " = " + forrest[prop]);
+	alert(prop + " = " + forrest[prop]);
 }</code></pre>
-					</section>
-
-					<section>
-						<h2>For Each-In</h2>
-						<pre class="bigger reveal"><code contenteditable class="language-js">// Vars we'll be using
-var forrest = {
-	firstName : "Forrest",
-	lastName : "Gump" // no trailing comma (!)
-}
-var forrestFriends = ["Bubba", "Lieutenant Dan"];
-
-// For Each - In (Array)
-for each (var friend in forrestFriends) {
-	console.log(friend);
-}
-
-// For Each - In (Object)
-for each (var prop in forrest) {
-	console.log(prop);
-}</code></pre>	
-						<p>Note: Only works in Firefox!</p>
+						</div>
+						<p class="fragment"><small>Note: When using arrays, the order is not guaranteed! Better to use <code>Array#forEach</code></small></p>
 					</section>
 
 					<section>
 						<h2>While &amp; Do-While</h2>
-						<pre class="bigger reveal"><code contenteditable class="language-js">// While
+						<div class="fragment">
+							<pre class="bigger"><code contenteditable class="language-js">// While
 var count = 5;
 while (count > 0) {
 	console.log(count);
@@ -703,11 +712,13 @@ do {
 
 // Tip: retry this example with count = 0 as starting value
 </code></pre>
+						</div>
 					</section>
 
 					<section>
 						<h2>With</h2>
-						<pre class="bigger reveal"><code contenteditable class="language-js">// Vars we'll be using
+						<div class="fragment">
+							<pre class="bigger"><code contenteditable class="language-js">// Vars we'll be using
 var forrest = {
 	firstName : "Forrest",
 	lastName : "Gump" // no trailing comma (!)
@@ -715,15 +726,18 @@ var forrest = {
 
 // With
 with (forrest) {
-	console.log(firstName);
-	console.log(lastName);
+	alert(firstName);
+	alert(lastName);
 }
 </code></pre>
+						</div>
+						<p class="fragment"><small>Note: With is <a href="http://www.yuiblog.com/blog/2006/04/11/with-statement-considered-harmful/">considered harmfull</a> and performs badly. Not suggested.</small></p>
 					</section>
 
 					<section>
 						<h2>Try-Catch(-Finally)</h2>
-						<pre class="bigger reveal"><code contenteditable class="language-js">// Vars we'll be using
+						<div class="fragment">
+							<pre class="bigger"><code contenteditable class="language-js">// Vars we'll be using
 var forrest = {
 	firstName : "Forrest",
 	lastName : "Gump",
@@ -748,15 +762,19 @@ try {
 	forrest.says();
 }
 </code></pre>
+						</div>
 					</section>
 
 					<section>
-						<h2>Break</h2>
-						<ul style="font-size: 80%;" class="short reveal">
-							<li>Jumps to the end of the statement and aborts the current task</li>
-							<li>Valid inside <code>switch</code>, <code>for</code>, <code>for-in</code>, <code>while</code>, and <code>do-while</code></li>
-						</ul>
-						<pre class="bigger reveal"><code contenteditable class="language-js">for (var x = 1; x <= 5; x++) {
+						<h2>Break (1)</h2>
+						<ul>
+							<li class="fragment">Jumps to the end of the statement &amp; aborts the current task</li>
+							<li class="fragment">
+								Valid inside <code>switch</code>, <code>for</code>, <code>for-in</code>, <code>while</code>, and <code>do-while</code>
+							</li>
+							<li class="fragment">
+								Example
+								<pre class="bigger"><code contenteditable class="language-js">for (var x = 1; x <= 5; x++) {
 	var y = 1;
 	while (y <= 7) {
 		if (y == 5) { break; }
@@ -764,7 +782,16 @@ try {
 		y++;
 	}
 }</code></pre>	
-						<pre class="bigger reveal"><code contenteditable class="language-js">myForLoop:
+							</li>
+						</ul>
+					</section>
+
+					<section>
+						<h2>Break (2)</h2>
+						<ul>
+							<li class="fragment">
+								To break the outer loop, one can make use of a <em>label</em>
+								<pre class="bigger"><code contenteditable class="language-js">myForLoop:
 for (var x = 1; x <= 5; x++) {
 	var y = 1;
 	while (y <= 7) {
@@ -773,27 +800,41 @@ for (var x = 1; x <= 5; x++) {
 		y++;
 	}
 }</code></pre>
+							</li>
+						</ul>
 					</section>
 
 					<section>
-						<h2>Continue</h2>
-						<ul style="font-size: 80%;" class="short reveal">
-							<li>Jumps back to start of statement and continues with next item</li>
-							<li>Valid inside <code>for</code>, <code>for-in</code>, <code>while</code>, and <code>do-while</code></li>
-						</ul>
-						<pre class="bigger reveal"><code contenteditable class="language-js">for (var x = 1; x <= 5; x++) {
+						<h2>Continue (1)</h2>
+						<ul>
+							<li class="fragment">Jumps back to start of statement and continues with next item</li>
+							<li class="fragment">Valid inside <code>for</code>, <code>for-in</code>, <code>while</code>, and <code>do-while</code>
+							<li class="fragment">
+								Example
+								<pre class="bigger"><code contenteditable class="language-js">for (var x = 1; x <= 5; x++) {
 	for (var y = 1; y <= 7; y++) {
 		if (y == 5) continue;
 		console.log(x + "-" + y);
 	}
 }</code></pre>	
-						<pre class="bigger reveal"><code contenteditable class="language-js">myForLoop:
+							</li>
+						</ul>
+					</section>
+
+					<section>
+						<h2>Continue (2)</h2>
+						<ul>
+							<li class="fragment">
+								Using a <em>label</em> is also possible
+								<pre class="bigger"><code contenteditable class="language-js">myForLoop:
 for (var x = 1; x <= 5; x++) {
 	for (var y = 1; y <= 7; y++) {
 		if (y == 5) { continue myForLoop; }
 		console.log(x + "-" + y);
 	}
 }</code></pre>	
+							</li>
+						</ul>
 					</section>
 					
 				</section>
@@ -811,7 +852,7 @@ for (var x = 1; x <= 5; x++) {
 
 					<section>
 						<h2>Ternary Operator</h2>
-						<pre class="bigger reveal"><code contenteditable class="language-js">// A var we'll need
+						<pre class="bigger fragment"><code contenteditable class="language-js">// A var we'll need
 var looking = false;
 
 // How you'd probably write it at first
@@ -821,18 +862,18 @@ if (looking) {
 } else {
 	forrestSays = "It's OK";
 }
-console.log(forrestSays);</code></pre>
-						<pre class="bigger reveal"><code contenteditable class="language-js">// A var we'll need
+alert(forrestSays);</code></pre>
+						<pre class="bigger fragment"><code contenteditable class="language-js">// A var we'll need
 var looking = false;
 
 // Better: Ternary operators
-var forrestSays2 = (looking) ? "I gotta find Bubba!" : "It's OK";
-console.log(forrestSays2);</code></pre>
+var forrestSays2 = looking ? "I gotta find Bubba!" : "It's OK";
+alert(forrestSays2);</code></pre>
 					</section>
 
 					<section>
 						<h2>Shorthand Assignment</h2>
-						<pre class="bigger reveal"><code contenteditable class="language-js">// How you'd probably write it at first
+						<pre class="bigger fragment"><code contenteditable class="language-js">// How you'd probably write it at first
 var lifeIs = function(boxOfChocolates) {
 	var life;
 	
@@ -844,39 +885,39 @@ var lifeIs = function(boxOfChocolates) {
 	
 	return "Life is like " + life;
 }
-console.log(lifeIs('a Box of Chocolates'));</code></pre>
-						<pre class="bigger reveal"><code contenteditable class="language-js">// Better: Shorthand assignment
+alert(lifeIs('a Box of Chocolates'));</code></pre>
+						<pre class="bigger fragment"><code contenteditable class="language-js">// Better: Shorthand assignment
 var lifeIs2 = function(boxOfChocolates) {
 	return "Life is like " + (boxOfChocolates || "a Snickers bar");
 }
-console.log(lifeIs2('a Box of Chocolates'));</code></pre>
+alert(lifeIs2('a Box of Chocolates'));</code></pre>
 					</section>
 
 					<section>
-						<h2>Short-Ciruit Logic</h2>
-						<pre class="bigger reveal"><code contenteditable class="language-js">// An Object we'll need
+						<h2>Short-Circuit Logic</h2>
+						<pre class="bigger fragment"><code contenteditable class="language-js">// An Object we'll need
 var forrest = {
 	firstName : "Forrest",
 	lastName : "Gump",
 	says : function() {
-		console.log("Stupid is as stupid does");
+		alert("Stupid is as stupid does");
 	}
 }
 
 // How you'd probably write it at first
-if ((forrest != null) && (typeof forrest.says == "function")) {
+if ((forrest != null) && (forrest.says != null)) {
 	forrest.says();
 }</code></pre>
-						<pre class="bigger reveal"><code contenteditable class="language-js">// An Object we'll need
+						<pre class="bigger fragment"><code contenteditable class="language-js">// An Object we'll need
 var forrest = {
 	firstName : "Forrest",
 	lastName : "Gump",
 	says : function() {
-		console.log("Stupid is as stupid does");
+		alert("Stupid is as stupid does");
 	}
 }
 
-// Better: Short-circuit logic
+// Short circuit logic
 forrest && forrest.says && forrest.says();
 </code></pre>
 					</section>
@@ -899,12 +940,17 @@ forrest && forrest.says && forrest.says();
 						<ul>
 							<li class="fragment">
 								Functions can be defined in three ways
-								<pre class="bigger"><code contenteditable class="language-js">var says = new Function("what", "alert(what)"); // Function Constructor
-function says(what) { alert(what); } // function statement
-var says = function(what){ alert(what); } // Function Literal</code></pre>
+								<pre class="bigger"><code contenteditable class="language-js">// Function Constructor
+var says = new Function("what", "alert(what)");
+
+// function statement or function declaration
+function says(what) { alert(what); }
+
+// function expression or function operator
+var says = function(what){ alert(what); }</code></pre>
 							</li>
 							<li class="fragment">
-								Preferred way is the literal notation
+								Preferred way is via the function expression
 							</li>
 						</ul>
 					</section>
@@ -914,7 +960,7 @@ var says = function(what){ alert(what); } // Function Literal</code></pre>
 						<ul>
 							<li class="fragment">
 								Basic usage
-								<pre class="bigger"><code contenteditable class="language-js">// Function Literal, one argument (string preferably)
+								<pre class="bigger"><code contenteditable class="language-js">// function expression, one argument (string preferably)
 var says = function(what){
 	alert(what);
 }
@@ -1013,10 +1059,11 @@ run();</code></pre>
 	console.log("Run Forrest, Run");
 })(); // function has become self-invoking</code></pre>
 							</li>
-							<li class="fragment">Function name not needed actually <small><em>(Anonymous!)</em></small>
+							<li class="fragment">
+								Best practice is to make the function <em>anonymous</em>, because the above <a href="http://kangax.github.com/nfe/">can give problems</a>
 								<pre class="bigger"><code contenteditable class="language-js">(function() {
 	console.log("Run Forrest, Run");
-})();</code></pre>
+})(); // better</code></pre>
 							</li>
 						</ul>
 					</section>
@@ -1025,13 +1072,34 @@ run();</code></pre>
 						<h2>Self Invoking Functions (2)</h2>
 						<ul>
 							<li class="fragment">
-								Works with function parameters too
+								So we came up with this
+								<pre class="bigger"><code contenteditable class="language-js">(function() {
+	console.log("Run Forrest, Run");
+})(); // </code></pre>
+							</li>
+							<li class="fragment">
+								We call this syntax an <em>Immediately-Invoked Function Expression</em> (pronounced <em>iffy</em>) 
+							</li>
+							<li class="fragment">
+								This is also possible, as preferred by <a href="http://www.crockford.com/">Douglas Crockford</a>
+								<pre class="bigger"><code contenteditable class="language-js">(function() {
+	console.log("Run Forrest, Run");
+}()); // The Crockford Way</code></pre>
+							</li>
+						</ul>
+					</section>
+
+					<section>
+						<h2>Self Invoking Functions (3)</h2>
+						<ul>
+							<li class="fragment">
+								Iffys works with function parameters too
 								<pre class="bigger"><code contenteditable class="language-js">(function(what) {
 	console.log(what);
 })("Run Forrest, Run");</code></pre>
 							</li>
 							<li class="fragment">
-								Or, if you want:
+								Or, if you want
 								<pre class="bigger"><code contenteditable class="language-js">var toSay = "Run Forrest, Run";
 
 (function(what) {
@@ -1100,11 +1168,27 @@ says("Stupid is as stupid does"); // will fail!</code></pre>
 						<ul>
 							<li class="fragment">
 								Nesting Functions can be fun ...
-								<pre class="bigger"><code contenteditable class="language-js">....</code></pre>
+								<pre class="bigger"><code contenteditable class="language-js">// happens
+function happens(what) {
+    return function(verb) {
+        return what + " " + verb;
+    }
+}
+var shit = happens("Shit");
+alert(shit("happens"));
+
+// breaking it down, you're basically getting this:
+// var shit = function(verb) { return "Shit" + " " + verb };</code></pre>
 							</li>
+						</ul>
+					</section>
+
+					<section>
+						<h2>Nesting Functions (4)</h2>
+						<ul>
 							<li class="fragment">
 								... but can also give you a headache
-								<pre class="bigger"><code contenteditable class="language-js">....</code></pre>
+								<pre class="bigger"><code contenteditable class="language-js">...</code></pre>
 							</li>
 							<li class="fragment">
 								The <em>culprit</em> is something named <em>Closures</em>
@@ -1140,7 +1224,7 @@ says("Stupid is as stupid does"); // will fail!</code></pre>
 					</section>
 
 					<section>
-						<h2>Apply &amp; Curry</h2>
+						<h2>Call &amp; Apply &amp; Curry</h2>
 						<p>??? Not sure wether to talk about this ...</p>
 					</section>
 
@@ -1188,7 +1272,7 @@ says("Stupid is as stupid does"); // will fail!</code></pre>
 
 					<section>
 						<h2>Extending Built-In Objects</h2>
-						<p>Number.fahrenheitToCelcius, use caution!</p>
+						<p>Number#fahrenheitToCelcius, use caution!</p>
 					</section>
 
 					<section>
@@ -1255,6 +1339,11 @@ says("Stupid is as stupid does"); // will fail!</code></pre>
 								<ul>
 									<li>Because you might implement it differently</li>
 									<li>Because you might use a name that later will be used by the browser/JavaScript</li>
+									<li>Because when using a <code>for...in</code> these will appear inside your loop
+										<ul>
+											<li>Can be fixed <a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Object/HasOwnProperty#Example:_Iterating_over_the_properties_of_an_object">by using <code>Object#hasOwnProperty</code> inside your loop</a></li>
+										</ul>
+									</li>
 								</ul>
 							</li>
 						</ul>
