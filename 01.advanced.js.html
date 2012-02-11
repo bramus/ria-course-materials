@@ -2060,8 +2060,89 @@ alert(f.fahrenheitToCelcius());
 					</section>
 
 					<section>
-						<h2>What about inheritance?</h2>
-						<p>...</p>
+						<h2>What about inheritance? (1)</h2>
+						<ul>
+							<li class="fragment">
+								Inheritance is possible, by doing something oddlooking like so
+								<pre class="bigger"><code contenteditable class="language-js">var Person = function(firstName, lastName) {
+    this.firstName = firstName;
+	this.lastName = lastName;
+}
+
+Person.prototype.fullName = function() {
+	return this.firstName + " " + this.lastName;
+}
+
+var Actor = function(firstName, lastName) {
+	this.firstName = firstName;
+	this.lastName = lastName;
+}
+Actor.prototype = new Person; // Inheritance
+
+var forrest = new Person("Forrest","Gump");
+var tomhanks = new Actor("Tom","Hanks");
+
+alert(forrest.fullName());
+alert(tomhanks.fullName());</code></pre>
+							</li>
+						</ul>
+					</section>
+
+					<section>
+						<h2>What about inheritance? (2)</h2>
+						<ul>
+							<li class="fragment">
+								We can omit repeating the constructor by making use of <code>Function#call</code>
+								<pre class="bigger"><code contenteditable class="language-js">var Person = function(firstName, lastName) {
+    this.firstName = firstName;
+	this.lastName = lastName;
+}
+
+Person.prototype.fullName = function() {
+	return this.firstName + " " + this.lastName;
+}
+
+var Actor = function(firstName, lastName) {
+	Person.call(this, firstName, lastName);
+}
+Actor.prototype = new Person;
+
+var forrest = new Person("Forrest","Gump");
+var tomhanks = new Actor("Tom","Hanks");
+
+alert(forrest.fullName());
+alert(tomhanks.fullName());</code></pre>
+								<ul>
+									<li class="fragment">This way of inheriting is known as <em>pseudoclassical inheritance</em></li>
+								</ul>
+							</li>
+						</ul>
+					</section>
+
+					<section>
+						<h2>What about inheritance? (3)</h2>
+						<ul>
+							<li class="fragment">
+								Note that when extending the prototype of the parent class, the derived class gets it too!
+								<pre class="bigger"><code contenteditable class="language-js">var Person = function(firstName, lastName) {
+    this.firstName = firstName;
+	this.lastName = lastName;
+}
+
+var Actor = function(firstName, lastName) {
+	Person.call(this, firstName, lastName);
+}
+Actor.prototype = new Person;
+
+Person.prototype.isHuman = true;
+
+var forrest = new Person("Forrest","Gump");
+var tomhanks = new Actor("Tom","Hanks");
+
+alert(forrest.isHuman ? "Human" : "Not Human");
+alert(tomhanks.isHuman ? "Human" : "Not Human");</code></pre>
+							</li>
+						</ul>
 					</section>
 
 					<section>
@@ -2071,7 +2152,7 @@ alert(f.fahrenheitToCelcius());
 
 					<section>
 						<h2>Namespacing</h2>
-						
+						<p>...</p>
 					</section>
 				
 				</section>
@@ -2173,7 +2254,8 @@ alert(f.fahrenheitToCelcius());
 						<li>Closures: <a href="http://www.javascriptkit.com/javatutors/closures.shtml">JavasScriptKit.com</a> &amp; <a href="http://javascript.info/tutorial/closures">JavaScript.info</a> &amp; <a href="http://javascriptweblog.wordpress.com/2010/10/25/understanding-javascript-closures/">JavaScript Weblog</a> &amp; <a href="http://jibbering.com/faq/notes/closures/">Jibbering.com</a> &amp; <a href="https://developer.mozilla.org/en/JavaScript/Guide/Closures">Mozilla Developer Network</a></li>
 						<li>First Class Objects: <a href="http://en.wikipedia.org/wiki/First-class_object">Wikipedia</a></li>
 						<li>Call and Apply: <a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Function/apply">Mozilla Developer Network</a> &amp; <a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Function/call">Mozilla Developer Network</a> &amp; <a href="http://javascript.info/tutorial/this#fourth-explicit-this">JavaScript.info</a></li>
-						<li>Objects &amp; .prototype: <a href="http://peterned.home.xs4all.nl/tutorial/objecten.html">Peterned</a></li>
+						<li>this: <a href="http://stage.learn.jquery.com/javascript-101/this-keyword/">Learn jQuery</a></li>
+						<li>Objects &amp; .prototype: <a href="http://stackoverflow.com/questions/892595/javascript-prototypal-inheritance">StackOverflow</a> &amp; <a href="http://bolinfest.com/javascript/inheritance.php">Inheritance Patterns in JavaScript</a></li>
 						<li>Events: <a href="http://www.w3.org/TR/DOM-Level-2-Events/events.html">W3 Spec Level 2 Events</a> &amp; <a href="http://www.w3.org/TR/DOM-Level-3-Events/">W3 Spec Level 3 Events</a></li>
 						<li>Bubbling vs. Capturing: <a href="http://www.quirksmode.org/js/events_order.html">QuirksMode.org</a></li>
 						<li>Bubbling vs. Capturing (samples): <a href="http://javascript.info/tutorial/bubbling-and-capturing">JavaScript.info</a></li>
