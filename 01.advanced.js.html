@@ -1862,18 +1862,216 @@ alert(says(forrest));</code></pre>
 					</section>
 
 					<section>
-						<h2>Objects &amp; Inheritance</h2>
+						<h2>Objects Recap</h2>
+						<ul>
+							<li class="fragment">
+								Creating an <code>Object</code>
+								<pre class="bigger"><code contenteditable class="language-js">// Object Constructor
+var forrest = new Object();
+forrest.firstName = "Forrest";
+forrest.lastName = "Gump";
+forrest.says = function() {
+	return "Stupid is as stupid does";
+}
+
+alert(forrest.says());
+
+// Object Literal
+var forrest = {
+    firstName : "Forrest",
+    lastName : "Gump",
+    says : function() {
+        return "Stupid is as stupid does";
+    } // no trailing comma (!)
+}
+
+alert(forrest.says());</code></pre>
+							</li>
+						</ul>
+					</section>
+					
+					<section>
+						<h2>Accessing inner properties</h2>
+						<ul>
+							<li class="fragment">
+								Just use the <code>this</code> keyword
+								<pre class="bigger"><code contenteditable class="language-js">// Object Literal
+var forrest = {
+    firstName : "Forrest",
+    lastName : "Gump",
+    says : function() {
+        return this.firstName + " says 'Stupid is as stupid does'";
+    }
+}
+
+alert(forrest.says());</code></pre>
+							</li>
+						</ul>
+					</section>
+
+					<section>
+						<h2>What is <code>this</code>?</h2>
+						<ul>
+							<li class="fragment">
+								It depends, actually
+								<ol>
+									<li class="fragment">If the function is invoked using <code>Function#call</code> or <code>Function#apply</code>, this will be set to the first argument passed to <code>call</code>/<code>apply</code>. If the first argument passed to <code>call</code>/<code>apply</code> is <code>null</code> or <code>undefined</code>, this will refer to the global object.</li>
+									<li class="fragment">If the function being invoked was created using <code>Function#bind</code>, this will be the first argument that was passed to bind at the time the function was created.</li>
+									<li class="fragment">If the function is being invoked as a method of an object, <code>this</code> will refer to that object.</code>
+									<li class="fragment">Otherwise, the function is being invoked as a standalone function not attached to any object, and this will refer to the global object.</li>
+								</ol>
+							</li>
+						</ul>
+					</section>
+					
+					
+
+					<section>
+						<h2>Multiple Objects</h2>
+						<ul>
+							<li class="fragment">
+							Creating multiple <code>Object</code>
+							<pre class="bigger"><code contenteditable class="language-js">var forrest = { // Forrest 
+    firstName : "Forrest",
+    lastName : "Gump",
+    says : function() {
+        return this.firstName + " says 'Stupid is as stupid does'";
+    }
+}
+
+var dan = { // Lieutenant Dan 
+	firstName : "Dan",
+	lastName : "Taylor",
+	says : function() {
+		return this.firstName + " says 'I'm here to try out my sea legs'";
+	}
+}
+
+// Jenny
+// ...
+</code></pre>
+							<ul>
+								<li class="fragment">Yeah, that looks quite cumbersome</li>
+								<li class="fragment">What if we could implement some of the OO stuff we know from Java and the like?</li>
+							</ul>
+							</li>
+						</ul>
+					</section>
+
+					<section>
+						<h2>Object Constructor</h2>
+						<ul>
+							<li class="fragment">
+							In JavaScript, you can create a constructor by using a function
+							<pre class="bigger"><code contenteditable class="language-js">var Person = function(firstName, lastName, sentence) {
+    this.firstName = firstName;
+	this.lastName = lastName;
+	this.sentence = sentence;
+	
+    this.says = function() {
+    	return this.firstName + " says '" + this.sentence + "'";
+    }
+}
+
+var forrest = new Person("Forrest","Gump","Stupid is as stupid does");
+var dan = new Person("Dan","Taylor","I'm here to try out my sea legs");
+
+alert(forrest.says());
+alert(dan.says());
+</code></pre>
+							<ul>
+								<li class="fragment">When documenting, we can talk about <code>Person#firstName</code>, <code>Person#lastName</code>, <code>Person#sentence</code> and <code>Person#says</code> as those are propertiers/methods of <code>Person</code></li>
+							</ul>
+							</li>
+						</ul>
+					</section>
+
+					<section>
+						<h2>Object.prototype (1)</h2>
+						<ul>
+							<li class="fragment">
+								Internally, JavaScript stores <code>Person#firstName</code> and the others in the <code>.prototype</code> of <code>Person</code>
+								<ul>
+									<li class="fragment">
+										When we say <code>Person#firstName</code>, we actually say <code>Person.prototype.firstName</code>
+									</li>
+								</ul>
+							</li>
+							<li class="fragment">
+								If you add a new property/method to <code>.prototype</code>, you're basically changing the class definition
+							</li>
+							<li class="fragment">
+								You can take a look of what is in <code>.prototype</code>
+								<pre class="bigger"><code contenteditable class="language-js">console.log(String.prototype);</code></pre>
+							</li>
+						</ul>
+					</section>
+
+					<section>
+						<h2>Object.prototype (2)</h2>
+						<ul>
+							<li class="fragment">
+								If you add a new property/method to <code>.prototype</code>, you're basically changing the class definition
+								<pre class="bigger"><code contenteditable class="language-js">var Person = function(firstName, lastName) {
+    this.firstName = firstName;
+	this.lastName = lastName;
+}
+
+Person.prototype.isRunning = false;
+Person.prototype.run = function() { this.isRunning = true; }
+
+var forrest = new Person("Forrest","Gump");
+var dan = new Person("Dan","Taylor");
+
+alert(forrest.isRunning ? "Forrest is running" : "Forrest is not running");
+alert(dan.isRunning ? "Dan is running" : "Dan is not running");
+
+forrest.run();
+
+alert(forrest.isRunning ? "Forrest is running" : "Forrest is not running");
+alert(dan.isRunning ? "Dan is running" : "Dan is not running");</code></pre>
+							</li>
+						</ul>
+					</section>
+
+					<section>
+						<h2>Extending Built-In Objects (1)</h2>
+						<ul>
+							<li class="fragment">
+								You can also add new functionality to the global objects by this
+								<pre class="bigger"><code contenteditable class="language-js">Number.prototype.fahrenheitToCelcius = function() {
+	return (parseInt(this,10) - 32) / 1.8;
+}
+Number.prototype.celciusToFahrenheit = function() {
+	return (parseInt(this,10) * 1.8) + 32;
+}
+
+var c = 40;
+var f = 104;
+
+alert(c.celciusToFahrenheit());
+alert(f.fahrenheitToCelcius());
+</code></pre>
+								<ul>
+									<li class="fragment">Use with caution though (see further)!</li>
+								</ul>
+							</li>
+						</ul>
+					</section>
+
+					<section>
+						<h2>What about inheritance?</h2>
 						<p>...</p>
 					</section>
 
 					<section>
-						<h2>Extending Built-In Objects</h2>
-						<p>Number#fahrenheitToCelcius, use caution!</p>
+						<h2>What about private datamembers?</h2>
+						<p>...</p>
 					</section>
 
 					<section>
-						<h2>Structure &amp; Code Organization</h2>
-						<p>Namespaces, Module Pattern</p>
+						<h2>Namespacing</h2>
+						
 					</section>
 				
 				</section>
