@@ -147,7 +147,9 @@ html {
     }  
 
     #reveal ol ol,
-    #reveal ul ul {
+	#reveal ol ul,
+    #reveal ul ul,
+ 	#reveal ul ol {
         font-size: 80%;
         line-height: 1.4em;
         margin-left: 40px;
@@ -156,7 +158,6 @@ html {
 
 #reveal ol {
 	list-style: decimal;
-	list-style-position: inside;
 }
 
 #reveal ul {
