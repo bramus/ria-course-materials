@@ -132,11 +132,11 @@
 					</section>
 
 					<section>
-						<h2>Declaring variables</h2>
+						<h2>Declaring variables (1)</h2>
 						<ul>
 							<li class="fragment">
 								Use the <code>var</code> keyword and assign a <em>value</em> to a <em>name</em>
-									<pre class="bigger"><code contenteditable class="language-js">var firstName = "Forrest";
+								<pre class="bigger"><code contenteditable class="language-js">var firstName = "Forrest";
 alert(firstName);</code></pre>
 							</li>
 							<li class="fragment">
@@ -148,6 +148,23 @@ alert(typeof firstName); // string
 // Weak typing
 firstName = 3;
 alert(typeof firstName); // JavaScript has changed the type to number</code></pre>
+							</li>
+						</ul>
+					</section>
+
+					<section>
+						<h2>Declaring variables (2)</h2>
+						<ul>
+							<li class="fragment">
+								It's possible to declare multiple vars at once.
+							</li>
+							<li class="fragment">
+								Just separate them by a comma
+								<pre class="bigger"><code contenteditable class="language-js">var firstName = "Forrest",
+    lastName = "Gump";
+
+alert(firstName);
+alert(lastName);</code></pre>
 							</li>
 						</ul>
 					</section>
@@ -705,7 +722,20 @@ for (var i = 0; i < forrestFriends.length; i++) {
 	alert(forrestFriends[i]);
 }</code></pre>
 						</div>
-						<p class="fragment"><small>Note: fragment can be optimized, but more on that later ;)</small></p>
+					</section>
+
+					<section>
+						<h2>For (optimized)</h2>
+						<p class="fragment">Performance can be improved by caching variables. That way JavaScript doesn't have to look up everything again.</p>
+						<div class="fragment">
+							<pre class="bigger"><code contenteditable class="language-js">// Var we'll be using
+var forrestFriends = ["Bubba", "Lieutenant Dan"];
+
+// For
+for (var i = 0, len = forrestFriends.length; i < len; i++) {
+	alert(forrestFriends[i]);
+}</code></pre>
+						</div>
 					</section>
 
 					<section>
@@ -970,7 +1000,7 @@ forrest && forrest.says && forrest.says();
 					<section>
 						<h2>Advanced JavaScript: Functions</h2>
 						<p><img src="assets/01/runforrestrun.jpg" alt="Run Forrest, Run" title="Run Forrest, Run" width="467" height="350" /></p>
-						<q>Run Forrest, Run!</q>
+						<q>Run Forrest, <code>Run()</code></q>
 					</section>
 
 					<section>
@@ -1606,18 +1636,183 @@ for (var i = 6; i < 9; i++) { // add three links
 					</section>
 
 					<section>
-						<h2>Function arguments, again (1)</h2>
-						<p>.arguments</p>
+						<h2>Function arguments: Again (1)</h2>
+						<ul>
+							<li class="fragment">
+								Say you have a function that should work given any number of parameters
+								<pre class="bigger"><code contenteditable class="language-js">var sum = function(a, b, c, d, e) {
+	return a + b + c + d + e
+}
+alert(sum(1,2)); // NaN (!)
+alert(sum(1,2,3,4,5)); // 15
+alert(sum(1,2,3,4,5,6)); // What now?</code></pre>
+								<ul>
+									<li class="fragment">You can tell by just looking at it: that's bound to fail and is cumbersome to work with</li>
+								</ul>
+							</li>
+						</ul>
 					</section>
 
 					<section>
-						<h2>Function arguments, again (2)</h2>
-						<p>Common way: object</p>
+						<h2>Function arguments: Again (2)</h2>
+						<ul>
+							<li class="fragment">
+								JavaScript provides an <code>arguments</code> variable inside each function
+								<pre class="bigger"><code contenteditable class="language-js">var sum = function() {
+	alert(typeof arguments);
+	alert(arguments instanceof Object);
+	alert(arguments instanceof Array);
+}
+sum(1,2);</code></pre>
+								<ul>
+									<li class="fragment">But beware, that <code>arguments</code> variable is an <code>Object</code>, and not an <code>Array</code>, as you can see!</li>
+									<li class="fragment">Not a real problem, as you can loop over an <code>Object</code> with a <code>for</code> loop just as you'd do with an <code>Array</code>
+								</ul>
+							</li>
+						</ul>
 					</section>
 
 					<section>
-						<h2>Call &amp; Apply &amp; Curry</h2>
-						<p>??? Not sure wether to talk about this ...</p>
+						<h2>Function arguments: Again (3)</h2>
+						<ul>
+							<li class="fragment">
+								Working example
+								<pre class="bigger"><code contenteditable class="language-js">var sum = function() {
+	var sum = 0;
+	for (var i = 0, len = arguments.length; i < len; i++) {
+		sum += parseInt(arguments[i]);
+	}
+	return sum;
+}
+alert(sum(1,2));
+alert(sum(1,2,3,4,5));
+alert(sum(1,2,3,4,5,6));</code></pre>
+							</li>
+						</ul>
+					</section>
+
+					<section>
+						<h2>Function arguments: Again (4)</h2>
+						<ul>
+							<li class="fragment">
+								What if you'd want to pass the <code>arguments</code> to an other function?
+								<pre class="bigger"><code contenteditable class="language-js">var otherFunc=function() {
+	alert("otherFunc : " + arguments.length);
+}
+
+var myFunc = function() {
+	alert("myFunc : " + arguments.length);
+	otherFunc(arguments);
+}
+myFunc(1,2,3,4,5,6,7,8,9,10);</code></pre>
+							</li>
+							<li class="fragment">
+								JavaScript has an answer to that: <code>Function#apply</code> and <code>Function#call</code>
+							</li>
+						</ul>
+					</section>
+
+					<section>
+						<h2>Function#apply</h2>
+						<ul>
+							<li class="fragment">
+								<code>Function#apply</code> allows you to call an other function and give it a new meaning of <code>this</code>. Arguments passed in via an <code>Array</code> like <code>Object</code>
+								<pre class="bigger"><code class="donthighlight">Function#apply(this, Array(arg1[, arg2[, ...[, argN]]]));</code></pre>
+							</li>
+							<li class="fragment">
+								Updated example
+								<pre class="bigger"><code contenteditable class="language-js">var otherFunc = function() {
+	alert("otherFunc : " + arguments.length);
+}
+
+var myFunc = function() {
+	alert("myFunc : " + arguments.length);
+	otherFunc.apply(this, arguments);
+}
+myFunc(1,2,3,4,5,6,7,8,9,10);</code></pre>
+								<ul>
+									<li class="fragment">More on the meaning of <code>this</code> later</li>
+								</ul>
+							</li>
+						</ul>
+					</section>
+
+					<section>
+						<h2>Function#call</h2>
+						<ul>
+							<li class="fragment">
+								<code>Function#call</code> does the same as	<code>Function#apply</code>, but passed in arguments must be passed in one by one (comma separated)
+								<pre class="bigger"><code class="donthighlight">Function#call(this, arg1[, arg2[, ...[, argN]]]);</code></pre>
+							</li>
+							<li class="fragment">
+								We prefer <code>Function#apply</code> though, as we can immediately pass in <code>arguments</code> or any other <code>Array</code> or <code>Object</code>
+							</li>
+						</ul>
+					</section>
+
+					<section>
+						<h2>Function#bind</h2>
+						<ul>
+							<li class="fragment">
+								To make things complete, <code>Function#bind</code> also exists, but we'll touch that later ;-)
+							</li>
+						</ul>
+					</section>
+
+					<section>
+						<h2>Function arguments: DIY (1)</h2>
+						<ul>
+							<li class="fragment">
+								Say we have this
+								<pre class="bigger"><code contenteditable class="language-js">var says = function() {
+	var firstName = arguments[0],
+	    sentence = arguments[1];
+	
+	return firstName + " says '" + sentence + "'";
+}
+
+alert(says("Forrest","Stupid is as stupid does"));</code></pre>
+							</li>
+							<li class="fragment">
+								Not so difficult to remember that index <code>0</code> is <code>who</code> and index <code>1</code> is <code>what</code> in this example
+								<ul>
+									<li class="fragment">But what if we have a function that can take up to ten arguments?</li>
+									<li class="fragment">But what if we have a function that can take up to ten arguments, of which not all are mandatory?</li>
+								</ul>
+							</li>
+						</ul>
+					</section>
+
+					<section>
+						<h2>Function arguments: DIY (2)</h2>
+						<ul>
+							<li class="fragment">
+								Would be neat if we could have named arguments or something like an associative array ...
+							</li>
+							<li class="fragment">
+								... and we can! By using an <code>Object</code>
+								<pre class="bigger"><code contenteditable class="language-js">var says = function(person) {
+	return person.firstName + " says '" + person.sentence + "'";
+}
+
+var forrest = {
+	firstName : "Forrest",
+	lastName : "Gump",
+	sentence : "Stupid is as stupid does",
+	birthYear : 1945
+}
+
+alert(says(forrest));</code></pre>
+							</li>
+							<li class="fragment">
+								Benefits
+								<ul>
+									<li>Named variables</li>
+									<li>Sequence of parameters not important</li>
+									<li>Easy working with optional parameters</li>
+								</ul>
+							</li>
+						</ul>
 					</section>
 
 					<section>
@@ -1641,6 +1836,12 @@ for (var i = 6; i < 9; i++) { // add three links
 								When creating a function, a closure is created.
 								<ul>
 									<li class="fragment">The function can have access to the non-local variables, which are linked by reference to the <code>LexicalEnvironment</code></li>
+								</ul>
+							</li>
+							<li class="fragment">
+								Anything can be a function argument
+								<ul>
+									<li class="fragment">Also possible to use built-in <code>arguments</code> or pass in your own <code>Object</code>
 								</ul>
 							</li>
 						</ul>
@@ -1773,6 +1974,7 @@ for (var i = 6; i < 9; i++) { // add three links
 						<li>Functions: <a href="http://www.hunlock.com/blogs/Functional_Javascript">Hunlock.com</a></li>
 						<li>Closures: <a href="http://www.javascriptkit.com/javatutors/closures.shtml">JavasScriptKit.com</a> &amp; <a href="http://javascript.info/tutorial/closures">JavaScript.info</a> &amp; <a href="http://javascriptweblog.wordpress.com/2010/10/25/understanding-javascript-closures/">JavaScript Weblog</a> &amp; <a href="http://jibbering.com/faq/notes/closures/">Jibbering.com</a> &amp; <a href="https://developer.mozilla.org/en/JavaScript/Guide/Closures">Mozilla Developer Network</a></li>
 						<li>First Class Objects: <a href="http://en.wikipedia.org/wiki/First-class_object">Wikipedia</a></li>
+						<li>Call and Apply: <a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Function/apply">Mozilla Developer Network</a> &amp; <a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Function/call">Mozilla Developer Network</a> &amp; <a href="http://javascript.info/tutorial/this#fourth-explicit-this">JavaScript.info</a></li>
 						<li>Objects &amp; .prototype: <a href="http://peterned.home.xs4all.nl/tutorial/objecten.html">Peterned</a></li>
 						<li>Events: <a href="http://www.w3.org/TR/DOM-Level-2-Events/events.html">W3 Spec Level 2 Events</a> &amp; <a href="http://www.w3.org/TR/DOM-Level-3-Events/">W3 Spec Level 3 Events</a></li>
 						<li>Bubbling vs. Capturing: <a href="http://www.quirksmode.org/js/events_order.html">QuirksMode.org</a></li>
