@@ -331,7 +331,7 @@ var hasR = new RegExp("r","i"); // RegExp Constructor
 var hasR = /r/i; // RegExp Literal
 
 var says = new Function("what", "alert(what)"); // Function Constructor
-var says = function(what){ alert(what); } // Function Literal
+var says = function(what) { alert(what); } // Function Literal
 function says(what) { alert(what); } // The function statement</code></pre>
 							</li>
 						
@@ -358,7 +358,6 @@ var forrest = { // Object Literal
 	} // no trailing comma (!)
 }</code></pre>
 							</li>
-							<li class="fragment">Keys of the Object Literal may be placed between quotes. When using spaces in the keys <em>(not recommended though)</em>, quotes must be used</li>
 						</ul>
 					</section>
 					
@@ -477,8 +476,11 @@ console.log(forrest);
 console.log(forrest.firstName);
 console.log(forrest["firstName"]);
 console.log(forrest.says());</code></pre>
+								<ul>
+									<li class="fragment">The <em>keys</em> of the Object Literal may be placed between quotes. When using spaces/special chars in the keys <em>(not recommended though)</em>, quotes must be used</li>
+									<li class="fragment">The dot notation to accessing properties is the preferred way. Square brackets mandatory when properties have spaces in their name</li>
+								</ul>
 							</li>
-							<li class="fragment">The dot notation is the preferred way. Square brackets mandatory when properties have space in their name</li>
 					</section>
 
 					<section>
@@ -545,9 +547,14 @@ foo();
 console.log(quote);
 // console.log(saying); // disabled, will fail
 console.log(question); // Nope, Chuck Testa! Erm, I mean global!</code></pre>
-							</li>
-							<li class="fragment">
-								Note: the code above will fail when using <a href="https://developer.mozilla.org/en/JavaScript/Strict_mode">Strict Mode</a>
+								<ul>
+									<li class="fragment">
+										The scope is also known as the <em>environment</em> in which a variable lives
+									</li>
+									<li class="fragment">
+										Note: the code above will fail when using <a href="https://developer.mozilla.org/en/JavaScript/Strict_mode">Strict Mode</a>, the <code>var</code> keyword is mandatory in it.
+									</li>
+								</ul>
 							</li>
 						</ul>
 					</section>
@@ -583,7 +590,7 @@ console.log(question); // Nope, Chuck Testa! Erm, I mean global!</code></pre>
 								</ul>
 							</li>
 							<li class="fragment">
-								Full list of properties/methods to be found on <a href="https://developer.mozilla.org/en/JavaScript/Reference#Global_Objects">Mozilla Developer Network</a> or <a href="http://es5.github.com/">the ECMAScript Spec</a> <em>(*)</em> 
+								Full list of properties/methods to be found on <a href="https://developer.mozilla.org/en/JavaScript/Reference#Global_Objects">Mozilla Developer Network</a> or <a href="http://es5.github.com/">the ECMAScript Spec</a>
 							</li>
 						</ul>
 						
@@ -593,25 +600,56 @@ console.log(question); // Nope, Chuck Testa! Erm, I mean global!</code></pre>
 						<h2>Variable Properties and Methods (2)</h2>
 						<ul>
 							<li class="fragment">
-								Properties and methods are also there when using literals.
+								Properties and methods are also there if a simple type is returned when using literals.
 								<ul>
-									<li>JavaScript does some magic in the background to make that work</li>
+									<li class="fragment">JavaScript does some magic in the background to make that work</li>
 								</ul>
 							</li>
 							<li class="fragment">
 								Example
 								<pre class="bigger"><code contenteditable class="language-js">// String Instance
-var firstName = new String("Forrest");
+var firstName = new String("Forrest"); // an instance of String
 console.log(firstName.toUpperCase());
 
 // String Literal
-var firstName = "Forrest";
+var firstName = "Forrest"; // a variable of the type string
 console.log(firstName.toUpperCase());
 
 // Look ma, no var
 console.log("Forrest".toUpperCase());
 console.log(["Bubba","Lieutenant Dan"].length);</code></pre>
 							</li>
+					</section>
+
+					<section>
+						<h2>Variables 101: Summary</h2>
+						<ul>
+							<li class="fragment">
+								JavaScript is weakly and dynamically typed
+								<ul>
+									<li class="fragment">Coercion!</li>
+								</ul>
+							</li>
+							<li class="fragment">
+								In JavaScript, everything is an <code>Object</code>
+								<ul>
+									<li class="fragment">JavaScript provides properties and methods which you can call/access</li>
+								</ul>
+							</li>
+							<li class="fragment">
+								JavaScript provides a shorthand, which is called the <strong>Literal Notation</strong>
+								<ul>
+									<li class="fragment">
+										A primitive type will be returned when possible (<code>String</code>, <code>Number</code>, <code>Boolean</code>)
+									</li>
+								</ul>
+							<li class="fragment">
+								Variables have a certain scope in which they are accessible. 
+								<ul>
+									<li>It's possible to access variables from an outer scope</li>
+								</ul>
+							</li>
+						</ul>	
 					</section>
 					
 				</section>
@@ -731,7 +769,7 @@ with (forrest) {
 }
 </code></pre>
 						</div>
-						<p class="fragment"><small>Note: With is <a href="http://www.yuiblog.com/blog/2006/04/11/with-statement-considered-harmful/">considered harmfull</a> and performs badly. Not suggested.</small></p>
+						<p class="fragment"><small>Note: With is <a href="http://www.yuiblog.com/blog/2006/04/11/with-statement-considered-harmful/">considered harmful</a> and performs badly. Not suggested.</small></p>
 					</section>
 
 					<section>
@@ -947,7 +985,7 @@ var says = new Function("what", "alert(what)");
 function says(what) { alert(what); }
 
 // function expression or function operator
-var says = function(what){ alert(what); }</code></pre>
+var says = function(what) { alert(what); }</code></pre>
 							</li>
 							<li class="fragment">
 								Preferred way is via the function expression
@@ -961,7 +999,7 @@ var says = function(what){ alert(what); }</code></pre>
 							<li class="fragment">
 								Basic usage
 								<pre class="bigger"><code contenteditable class="language-js">// function expression, one argument (string preferably)
-var says = function(what){
+var says = function(what) {
 	alert(what);
 }
 
@@ -969,7 +1007,7 @@ says("Stupid is as stupid does");</code></pre>
 							</li>
 							<li class="fragment">
 								Arguments can be passed on
-								<pre class="bigger"><code contenteditable class="language-js">var says = function(what){
+								<pre class="bigger"><code contenteditable class="language-js">var says = function(what) {
 	alert(what);
 }
 var forrestSays = function(whatForrestSays) {
@@ -987,7 +1025,7 @@ forrestSays("Stupid is as stupid does");</code></pre>
 							<li class="fragment">
 								Arguments are passed by value
 								<pre class="bigger"><code contenteditable class="language-js">// function expression, one argument (string preferably)
-var says = function(what){
+var says = function(what) {
 	what = "My name is Forrest, Forrest Gump";
 }
 var what = "Stupid is as stupid does";
@@ -996,9 +1034,9 @@ change(what);
 alert(what);</code></pre>
 							</li>
 							<li class="fragment">
-								More obvious if you write it like so
-								<pre class="bigger"><code contenteditable class="language-js">// function expression, one argument (string preferably)
-var says = function(otherWhat){
+								More obvious if you write it like this
+								<pre class="bigger"><code contenteditable class="language-js">
+var says = function(otherWhat) {
 	otherWhat = "My name is Forrest, Forrest Gump";
 }
 var what = "Stupid is as stupid does";
@@ -1014,7 +1052,7 @@ alert(what);</code></pre>
 						<ul>
 							<li class="fragment">
 								Function arguments can be anything, even other functions!
-								<pre class="bigger"><code contenteditable class="language-js">var log = function(what){
+								<pre class="bigger"><code contenteditable class="language-js">var log = function(what) {
 	console.log(what);
 }
 
@@ -1041,11 +1079,11 @@ forrestDoes(log, "Stupid is as stupid does");</code></pre>
 	fn(whatForrestSays);
 }
 
-forrestDoes(function(what) {
+forrestDoes(function(what) { // say from the previous example
 	alert(what);
 }, "Stupid is as stupid does");
 
-forrestDoes(function(what){
+forrestDoes(function(what) { // log from the previous example
 	console.log(what);
 }, "Stupid is as stupid does");</code></pre>
 							</li>
@@ -1063,20 +1101,23 @@ forrestDoes(function(what){
 						<ul>
 							<li class="fragment">Consider this function
 								<pre class="bigger"><code contenteditable class="language-js">function run() {
-	console.log("Run Forrest, Run");
+	alert("Run Forrest, Run");
 }
 run();</code></pre>
 							</li>
 							<li class="fragment">This works fine too
 								<pre class="bigger"><code contenteditable class="language-js">(function run() {
-	console.log("Run Forrest, Run");
+	alert("Run Forrest, Run");
 })(); // function has become self-invoking</code></pre>
 							</li>
 							<li class="fragment">
-								Best practice is to make the function <em>anonymous</em>, because the above <a href="http://kangax.github.com/nfe/">can give problems</a>
+								Best practice is to make the function <em>anonymous</em>
 								<pre class="bigger"><code contenteditable class="language-js">(function() {
-	console.log("Run Forrest, Run");
+	alert("Run Forrest, Run");
 })(); // better</code></pre>
+								<ul>
+									<li class="fragment">If you really want to know: the named function <a href="http://kangax.github.com/nfe/">can give problems</a></li>
+								</ul>
 							</li>
 						</ul>
 					</section>
@@ -1088,7 +1129,7 @@ run();</code></pre>
 								So we came up with this
 								<pre class="bigger"><code contenteditable class="language-js">(function() {
 	console.log("Run Forrest, Run");
-})(); // </code></pre>
+})();</code></pre>
 							</li>
 							<li class="fragment">
 								We call this syntax an <em>Immediately-Invoked Function Expression</em> (pronounced <em>iffy</em>) 
@@ -1148,7 +1189,7 @@ forrestSays("Stupid is as stupid does");</code></pre>
 }
 
 forrestSays("Stupid is as stupid does");
-says("Stupid is as stupid does"); // will fail!</code></pre>
+says("Stupid is as stupid does"); // will fail, not in scope!</code></pre>
 							</li>
 						</ul>
 					</section>
@@ -1170,7 +1211,7 @@ var forrestSays = function(whatForrestSays) {
 }
 
 forrestSays("Stupid is as stupid does");
-says("Stupid is as stupid does"); // will fail!</code></pre>
+says("Stupid is as stupid does"); // won't fail</code></pre>
 							</li>
 							<li class="fragment">But that's not a best practice, as things can (and will) get complicated.</li>
 						</ul>
@@ -1182,7 +1223,7 @@ says("Stupid is as stupid does"); // will fail!</code></pre>
 							<li class="fragment">Functions can return values if they want</li>
 							<li class="fragment">
 								Use the <code>return</code> statement
-								<pre class="bigger"><code contenteditable class="language-js">var say = function(what,verb){
+								<pre class="bigger"><code contenteditable class="language-js">var say = function(what,verb) {
 	return what + " " + verb;
 }
 
@@ -1283,7 +1324,7 @@ var forrestFriends = function() {
 alert(forrestFriends());</code></pre>
 								<ul>
 									<li class="fragment">
-										When <code>joinFriends</code> (or <code>friendsCount</code>) is created, a <em>closure</em> is created
+										When <code>joinFriends</code> <em>(or any of the other functions)</em> is created, a <strong><em>closure</em></strong> is created
 									</li>
 									<li class="fragment">
 										The closure holds the function itself and the variables in scope.
@@ -1356,7 +1397,7 @@ alert(forrestFriends());</code></pre>
 												When a function can't find a variable inside the <code>LexicalEnvironment</code>, it will try the outer <code>LexicalEnvironment</code> (viz. go up one level) to (hope to) find it there
 											</li>
 											<li class="fragment">
-												Here in this case, it goes up to the global <code>LexicalEnvironment</code>
+												Here in this case, it goes up to the <code>LexicalEnvironment</code> of the closure created when <code>forrestFriends</code> was created; and that one has access to the global scope
 											</li>
 										</ul>
 									</li>
@@ -1380,14 +1421,14 @@ alert(forrestFriends());</code></pre>
 					<section>
 						<h2>Oh boy ...</h2>
 						<p><img src="assets/01/stillseeingit.png" alt="Still seeing it?" title="Still seeing it?" width="480" height="360" /></p>
-						<p class="fragment"><em>Please, bear with me</em></p>
+						<p class="fragment"><em>Please, bear with me, there are some facts you should know</em></p>
 					</section>
 
 					<section>
 						<h2>Closures: Vars linked by Reference</h2>
 						<ul>
 							<li class="fragment">
-								The variables are linked by reference to the <code>LexicalEnvironment</code>
+								Fact: The variables are linked by reference to the <code>LexicalEnvironment</code>
 								<pre class="bigger"><code contenteditable class="language-js">var firstName = "Forrest";
 
 var forrestFriends = function() {
@@ -1398,7 +1439,7 @@ var forrestFriends = function() {
 	var joinFriends = function() {
 		return firstName + " has " + friendsCount() + " friends: " + friends.join(", ");
 	}
-	friends.unshift("Jenny"); // Add a new friend named Jenny
+	friends.unshift("Jenny"); // Change friends, after the function was created
 	return joinFriends();
 }
 
@@ -1411,7 +1452,7 @@ alert(forrestFriends());</code></pre>
 						<h2>Closures: Returning functions</h2>
 						<ul>
 							<li class="fragment">
-								With nested functions: when the outer function has finished, the closure still lives on
+								Fact: With nested functions: when the outer function has finished, the closure still lives on
 								<pre class="bigger"><code contenteditable class="language-js">var firstName = "Forrest";
 
 var forrestFriends = function() {
@@ -1546,13 +1587,19 @@ for (var i = 6; i < 9; i++) { // add three links
 					<section>
 						<h2>Closures: In Closing</h2>
 						<ul>
-							<li>Don't worry, that's it for closures</li>
-							<li>
-								If you really want to go deep into this subject, feel free to read these links
+							<li class="fragment">Don't worry, that's it for closures</li>
+							<li class="fragment">
+								If you want to have a full understanding of closures, feel free to read these links
 								<ul>
 									<li><a href="https://developer.mozilla.org/en/JavaScript/Guide/Closures">Mozilla Developer Network: Closures</a></li>
 									<li><a href="http://javascript.info/tutorial/closures">JavaScript.info: Closures</a> <em>(great info on <code>LexicalEnvironment</code>)</em></li>
 									<li><a href="http://javascriptweblog.wordpress.com/2010/10/25/understanding-javascript-closures/">Angus Croll: Understanding JavaScript Closures</a></li>	
+								</ul>
+							</li>
+							<li class="fragment">
+								And if you really can't get enough
+								<ul>
+									<li class="fragment">Dmitry Soshikov has written <a href="http://dmitrysoshnikov.com/ecmascript/es5-chapter-3-1-lexical-environments-common-theory/">a very techinical paper on just about everything regarding scope and environments</a></li>
 								</ul>
 							</li>
 						</ul>
@@ -1591,7 +1638,10 @@ for (var i = 6; i < 9; i++) { // add three links
 								Functions can be self-invoking
 							</li>
 							<li class="fragment">
-								When creating a function, a closure is created. The function can have access to the non-local variables, which are linked by reference to the <code>LexicalEnvironment</code>
+								When creating a function, a closure is created.
+								<ul>
+									<li class="fragment">The function can have access to the non-local variables, which are linked by reference to the <code>LexicalEnvironment</code></li>
+								</ul>
 							</li>
 						</ul>
 					</section>
