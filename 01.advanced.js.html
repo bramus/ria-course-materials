@@ -2218,14 +2218,243 @@ alert(forrest.whatDoesHeSay());</code></pre>
 					</section>
 
 					<section>
-						<h2>The DOM</h2>
-						<p>What. The Problem. Built-In Objects.</p>
+						<h2>Document Object Model</h2>
+						<ul>
+							<li class="fragment">
+								JavaScript is implemented as a scripting language in the browser
+								<ul>
+									<li class="fragment">Not all browsers implement the same version of JavaScript (eg. <code>Array#forEach</code> is only available since JavaScript 1.6)</li>
+									<li class="fragment">Not all browsers implement it in the same way, or have their own additions (eg. <code>for each ... in</code> in Firefox)</li>
+								</ul>
+							</li>
+							<li class="fragment">
+								The browser also provides an API named the <strong><em>Document Object Model</em></strong> (<strong><em>DOM</em></strong>)
+								<ul>
+									<li class="fragment">The DOM provides a structural representation of the document, enabling one to modify its content and visual presentation.</li>
+								</ul>
+							</li>
+							<li class="fragment">
+								Via JavaScript you can access the DOM
+								<ul>
+									<li class="fragment">The code you'll write is written in JavaScript, but it uses the DOM to access the web page and its elements.</li>
+								</ul>
+							</li>
+						</ul>
 					</section>
 
 					<section>
-						<h2>Selecting &amp; Traversing</h2>
-						<p>Built-In instances/properties (window, document, ...), getElementByX, querySelector</p>
-						<p>parentNode, childNodes, etc.</p>
+						<h2>The DOM (1)</h2>
+						<ul>
+							<li class="fragment">
+								The DOM is one big tree, representing all the nodes of the document.
+							</li>
+							<li class="fragment">
+								Consider this document ...
+								<pre class="bigger"><code contenteditable class="language-html">&lt;!DOCTYPE HTML&gt;
+&lt;html&gt;
+	&lt;head&gt;
+		&lt;title&gt;The document&lt;/title&gt;
+	&lt;/head&gt;
+	&lt;body&gt;
+		&lt;div&gt;Data&lt;/div&gt;
+		&lt;ul&gt;
+			&lt;li&gt;Warning&lt;/li&gt;
+			&lt;li&gt;&lt;/li&gt;
+		&lt;/ul&gt;
+		&lt;div&gt;Top Secret!&lt;/div&gt;
+	&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+							</li>
+						</ul>
+					</section>
+
+					<section>
+						<h2>The DOM (2)</h2>
+						<ul>
+							<li class="fragment">
+								 ... the DOM tree would look like this
+							</li>
+						</ul>	
+						<p style="text-align: center;">
+							<figure class="fragment">
+								<img src="assets/01/simpledom2.png" alt="" title="" height="335" width="500" />
+								<figcaption>Figure by <a href="http://javascript.info/tutorial/dom-nodes">JavaScript.info</a></figcaption>
+							</figure>
+						</p>
+					</section>
+
+					<section>
+						<h2>The DOM (3)</h2>
+						<ul>
+							<li class="fragment">
+								 Actually, it would look like this
+							</li>
+						</ul>	
+						<p style="text-align: center;">
+							<figure class="fragment">
+								<img src="assets/01/simpledom2_white.png" alt="" title="" height="335" width="558" />
+								<figcaption>Figure by <a href="http://javascript.info/tutorial/dom-nodes">JavaScript.info</a></figcaption>
+							</figure>
+							<p class="fragment">Yes, whitespace counts as a node too!</p>
+						</p>
+					</section>
+
+					<section>
+						<h2>Selecting Elements</h2>
+						<ul>
+							<li class="fragment">
+								<code>window.document</code> offers quite a few ways of selecting elements from the document
+								<pre class="bigger"><code contenteditable class="language-js dontrun">// get one element with the given id
+var el = document.getElementById('siteWrapper');
+
+// get all links (&lt;a&gt; elements)
+var links = document.getElementsByTagName('a');
+document.links; // or use the built-in property!
+
+// get all elements with the class foo
+var foos = document.getElementsByClassName('foo');
+
+// get elements based on a CSS selector
+var els = document.querySelectorAll('code pre');
+
+// get elements based on CSS selector
+var el = document.querySelector('code pre'); // only returns the first match</code></pre>
+							</li>
+						</ul>
+					</section>
+
+					<section>
+						<h2>Manipulating Elements (1)</h2>
+						<ul>
+							<li class="fragment">
+								Once you have selected an element, you can manipulate it
+								<pre class="bigger"><code contenteditable class="language-js">// change CSS properties
+document.getElementById('manipulating-demo').style.border = "1px solid #FFF";
+document.getElementById('manipulating-demo').style.padding = "20px";
+
+// change text
+document.getElementById('manipulating-demo').innerHTML = "Code has been run, I am changed";
+
+// add "test" classname
+document.getElementById('manipulating-demo').className = "test";
+
+// give notice
+alert("The element #" + document.getElementById('manipulating-demo').id + " was changed");</code></pre>
+								<p id="manipulating-demo" style="text-align: center;">Run example above to change me</p>
+							</li>
+						</ul>
+					</section>
+
+					<section>
+						<h2>Manipulating Elements (2)</h2>
+						<ul>
+							<li class="fragment">
+								Fragment can heavily be optimized by caching the variable so that the DOM lookup takes place only once
+								<pre class="bigger"><code contenteditable class="language-js">// cache the variable
+var el = document.getElementById('manipulating-demo2');
+
+// change CSS properties
+el.style.border = "1px solid #FFF";
+el.style.padding = "20px";
+
+// change text
+el.innerHTML = "Code has been run, I am changed";
+
+// add "test" classname
+el.className = "test";
+
+// give notice
+alert("The element #" + el.id + " was changed");</code></pre>
+								<p id="manipulating-demo2" style="text-align: center;">Run example above to change me</p>
+							</li>
+						</ul>
+					</section>
+
+					<section>
+						<h2>Manipulating Elements (3)</h2>
+						<ul>
+							<li class="fragment">
+								Here's another unoptimized example
+<pre class="bigger"><code contenteditable class="language-js">var allSpans = document.querySelectorAll("#manipulating-unoptimized span");
+for (var i = 0; i < allSpans.length; i++) {
+	allSpans[i].className = "test";
+	allSpans[i].style.border = "1px solid #FFF";
+	allSpans[i].style.padding = "5px";
+	allSpans[i].style.margin = "5px";
+}
+</code></pre>
+								<p id="manipulating-unoptimized" style="text-align: center;"><span>1</span><span>2</span><span>3</span></p>
+							</li>
+						</ul>
+					</section>
+
+					<section>
+						<h2>Manipulating Elements (4)</h2>
+						<ul>
+							<li class="fragment">
+								Optimized version
+<pre class="bigger"><code contenteditable class="language-js">var allSpans = document.querySelectorAll("#manipulating-optimized span");
+for (var i = 0, len = allSpans.length; i < len; i++) {
+	var curSpan = allSpans[i];
+	curSpan.className = "test";
+	curSpan.style.border = "1px solid #FFF";
+	curSpan.style.padding = "5px";
+	curSpan.style.margin = "5px";
+}
+</code></pre>
+								<p id="manipulating-optimized" style="text-align: center;"><span>4</span><span>5</span><span>6</span></p>
+							</li>
+						</ul>
+					</section>
+
+					<section>
+						<h2>Manipulating Elements</h2>
+						<ul>
+							<li class="fragment">
+								Full list of methods and properties which you can use to manipulate and to traverse can be read on the <a href="https://developer.mozilla.org/en/DOM/Element">Mozilla Developer Network <code>Element</code> reference</a>
+							</li>
+						</ul>
+					</section>
+
+					<section>
+						<h2>Traversing (1)</h2>
+						<ul>
+							<li class="fragment">
+								Once you have an element selected, you can go up/down the DOM tree in a parent/child/sibilings methodology
+							</li>
+						</ul>	
+						<p style="text-align: center;">
+							<div class="fragment">
+								<figure>
+									<img src="assets/01/children.png" alt="" title="" height="186" width="429" />
+									<figcaption>Figure by <a href="http://javascript.info/tutorial/traversing-dom">JavaScript.info</a></figcaption>
+								</figure>
+								<figure>
+									<img src="assets/01/siblings.png" alt="" title="" height="186" width="426" />
+									<figcaption>Figure by <a href="http://javascript.info/tutorial/traversing-dom">JavaScript.info</a></figcaption>
+								</figure>
+							</div>
+						</p>
+					</section>
+
+					<section>
+						<h2>Traversing (2)</h2>
+						<ul>
+							<li class="fragment">
+								Note that <code>Node#childNodes</code> also takes the whitespace nodes into account!
+								<ul>
+									<li class="fragment">If you only want the element nodes, you must use <code>Node#children</code></li>
+								</ul>
+							</li>
+							<li class="fragment">
+								In short
+								<ul>
+									<li>Up the DOM tree: <code>Node#parentNode</code></li>
+									<li>Down the DOM tree: <code>Node#childNodes</code>/<code>Node#children</code>, <code>Node#firstChilde</code>, <code>Node#lastChild</code></li>
+									<li>Left/Right on the DOM tree: <code>Node#previousSibling</code>, <code>Node#nextSibling</code></li>
+								</ul>
+							</li>
+						</ul>	
 					</section>
 
 					<section>
@@ -2392,7 +2621,7 @@ alert(WHATEVER.foo.baz("test"));</code></pre>
 									<li>Prevents conflicts</li>
 							</li>
 							<li class="fragment">
-								Cache your variable
+								Cache your variables
 							</li>
 							<li class="fragment">
 								Don't extend built-in Objects
@@ -2443,6 +2672,7 @@ alert(WHATEVER.foo.baz("test"));</code></pre>
 						<li>Objects &amp; .prototype: <a href="http://stackoverflow.com/questions/892595/javascript-prototypal-inheritance">StackOverflow</a> &amp; <a href="http://bolinfest.com/javascript/inheritance.php">Inheritance Patterns in JavaScript</a></li>
 						<li>Module Pattern: <a href="http://www.yuiblog.com/blog/2007/06/12/module-pattern/">YUI Blog</a></li>
 						<li>Namespacing: <a href="http://addyosmani.com/blog/essential-js-namespacing/">AddyOsmani.com</a> &amp; <a href="http://javascriptweblog.wordpress.com/2010/12/07/namespacing-in-javascript/">JavaScript Weblog</a></li>
+						<li>DOM: <a href="https://developer.mozilla.org/en/DOM">Mozilla Developer Network</a> &amp; <a href="https://developer.mozilla.org/en/DOM/window">MDN: window</a> &amp; <a href="https://developer.mozilla.org/en/DOM/document">MDN: document</a> &amp; <a href="http://javascript.info/tutorial/dom-nodes">JavaScript.info (DOM Nodes)</a> &amp; <a href="http://javascript.info/tutorial/traversing-dom">JavaScript.info (Traversing)</a></li>
 						<li>Events: <a href="http://www.w3.org/TR/DOM-Level-2-Events/events.html">W3 Spec Level 2 Events</a> &amp; <a href="http://www.w3.org/TR/DOM-Level-3-Events/">W3 Spec Level 3 Events</a></li>
 						<li>Bubbling vs. Capturing: <a href="http://www.quirksmode.org/js/events_order.html">QuirksMode.org</a></li>
 						<li>Bubbling vs. Capturing (samples): <a href="http://javascript.info/tutorial/bubbling-and-capturing">JavaScript.info</a></li>
