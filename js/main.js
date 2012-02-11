@@ -38,6 +38,9 @@ window.addEventListener('load', function() {
 		// Local reference
 		var codeBlock = codeBlocks[i];
 
+		// May we highlight it?
+		if (codeBlock.className.match(new RegExp('(\\s|^)donthighlight(\\s|$)'))) continue;
+
 		// Highlight it
 		hljs.highlightBlock(codeBlock, '    ');
 		
@@ -63,6 +66,9 @@ window.addEventListener('load', function() {
 	// Add Run Button to JS Blocks + Make Incrementable
 	var jsBlocks = document.querySelectorAll('code.language-js');
 	for (var i = 0, len = jsBlocks.length; i < len ; i++) {
+
+		// may we add the run button to it?
+		if (jsBlocks[i].className.match(new RegExp('(\\s|^)dontrun(\\s|$)'))) continue;
 
 		// Add Run button
 		var button = document.createElement('input');
