@@ -1162,10 +1162,10 @@ run();</code></pre>
 })();</code></pre>
 							</li>
 							<li class="fragment">
-								We call this syntax an <em>Immediately-Invoked Function Expression</em> (pronounced <em>iffy</em>) 
+								We call this syntax an <em>Immediately-Invoked Function Expression</em> (IIFE, pronounced <em>iffy</em>) 
 							</li>
 							<li class="fragment">
-								This is also possible, as preferred by <a href="http://www.crockford.com/">Douglas Crockford</a>
+								This is also possible
 								<pre class="bigger"><code contenteditable class="language-js">(function() {
 	console.log("Run Forrest, Run");
 }()); // The Crockford Way</code></pre>
@@ -1177,7 +1177,7 @@ run();</code></pre>
 						<h2>Self Invoking Functions (3)</h2>
 						<ul>
 							<li class="fragment">
-								Iffys work with function parameters too
+								IIFE's work with function parameters too
 								<pre class="bigger"><code contenteditable class="language-js">(function(what) {
 	console.log(what);
 })("Run Forrest, Run");</code></pre>
@@ -1592,7 +1592,7 @@ for (var i = 3; i < 6; i++) { // add three links
 						<h2>Closures: The Loop Problem (4)</h2>
 						<ul>
 							<li class="fragment">
-								Iffy to the resue!
+								IIFE to the resue!
 								<pre class="bigger"><code contenteditable class="language-js">var link,
     target = Reveal.getCurrentSlide().querySelector('.result');
 
@@ -1602,7 +1602,7 @@ for (var i = 6; i < 9; i++) { // add three links
     link = document.createElement("a");
 	link.style.marginRight = "10px";
     link.innerHTML = "Link " + i;
-    link.onclick = function(j) { // This one just became an iffy
+    link.onclick = function(j) { // This one just became an IIFE
 		return function() { // and returns a function
         	alert("I am link " + j);
 		};
@@ -1745,7 +1745,7 @@ myFunc(1,2,3,4,5,6,7,8,9,10);</code></pre>
 								<pre class="bigger"><code class="donthighlight">Function#call(this, arg1[, arg2[, ...[, argN]]]);</code></pre>
 							</li>
 							<li class="fragment">
-								We prefer <code>Function#apply</code> though, as we can immediately pass in <code>arguments</code> or any other <code>Array</code> or <code>Object</code>
+								We prefer <code>Function#apply</code> in this context though, as we can immediately pass in <code>arguments</code> or any other <code>Array</code> or <code>Object</code>
 							</li>
 						</ul>
 					</section>
@@ -2146,13 +2146,62 @@ alert(tomhanks.isHuman ? "Human" : "Not Human");</code></pre>
 					</section>
 
 					<section>
-						<h2>What about private datamembers?</h2>
-						<p>...</p>
+						<h2>Module Pattern</h2>
+						<ul>
+							<li class="fragment">
+								The <strong><em>module pattern</em></strong>, <a href="http://ejohn.org/blog/simple-javascript-inheritance/">popularized by Douglas Crockford</a>, allows having private datamembers
+								<pre class="bigger"><code contenteditable class="language-js">var forrest = function() {
+
+	var firstName = "Forrest"; // Private var
+	var says = function() { // Private function
+		return "Stupid is as stupid does";
+	}
+	
+	return {
+		lastName : "Gump", // Public var
+		getLastName : function() { // Public function
+			return this.lastName; // use this when accessing a public var
+		},
+		getFirstName : function () {
+			return firstName; // no this when accessing private vars!
+		}
+	};
+}(); // IIFE
+
+alert(forrest.getFirstName() + " " + forrest.getLastName());</code></pre>
+							</li>
+						</ul>
 					</section>
 
 					<section>
-						<h2>Namespacing</h2>
-						<p>...</p>
+						<h2>Revealing Module Pattern</h2>
+						<ul>
+							<li class="fragment">
+								Variant of the <strong><em>module pattern</em></strong>: make everything private and provide pointers to them in the public part
+								<pre class="bigger"><code contenteditable class="language-js">var forrest = function() {
+
+	var firstName = "Forrest";
+	var lastName = "Gump";
+	var says = function() {
+		return "Stupid is as stupid does";
+	}
+	var getLastName = function() {
+		return lastName;
+	}
+	var getFirstName = function () {
+		return firstName;
+	}
+
+	return {
+		getFirstName: getFirstName,
+		getLastName: getLastName,
+		whatDoesHeSay: says
+	};
+}(); // IIFE
+
+alert(forrest.whatDoesHeSay());</code></pre>
+							</li>
+						</ul>
 					</section>
 				
 				</section>
@@ -2195,12 +2244,139 @@ alert(tomhanks.isHuman ? "Human" : "Not Human");</code></pre>
 					</section>
 
 					<section>
-						<h2>OldIE and the like</h2>
-						<p>Something worth noting</p>
+						<h2>Namespacing</h2>
+						<ul>
+							<li class="fragment">
+								Say I have a function <code>animate</code>, but then include a library that defines the same function with the same name
+								<ul>
+									<li class="fragment">
+										Yes, things will go wrong
+									</li>
+								</ul>
+							</li>
+							<li class="fragment">
+								A simple fix would be to prefix all my functions with something (like <code>ikdoeict_</code>) but that isn't quite professional
+								<ul>
+									<li class="fragment">
+										Above that all the defined functions/variables would live in the global namespace
+									</li>
+								</ul>
+							</li>
+							<li class="fragment">
+								A better solution is to make use of <em><strong>namespacing</strong></em>, a technique to avoid collisions with other objects or variables in the global namespace
+								<ul>
+									<li class="fragment">Several strategies exist, we'll cover 2</li>
+								</ul>
+							</li>
+						</ul>
 					</section>
 
 					<section>
-						<h2>Best Practice</h2>
+						<h2>Namespacing: Object Literal (1)</h2>
+						<ul>
+							<li class="fragment">
+								The simplest way is to make use of the Object Literal. Just think of a name and you're good to go
+								<pre class="bigger"><code contenteditable class="language-js">var WHATEVER = {
+	foo : {
+		bar : function(x) { return x; },
+		baz : function(x) { return x; }
+	},
+	foobar : {
+		foo : function(x) { return x; },
+		bar : function(x) { return x; },
+		baz : function(x) { return x; }
+	}
+};
+
+alert(WHATEVER.foobar.foo("test"));</code></pre>
+							</li>
+						</ul>
+					</section>
+
+					<section>
+						<h2>Namespacing: Object Literal (2)</h2>
+						<ul>
+							<li class="fragment">
+								If your code spans over multiple files, then you still can use this
+								<pre class="bigger"><code contenteditable class="language-js">// file 1
+var WHATEVER = WHATEVER || {}; // use existing WHATEVER, or create a new Object
+
+WHATEVER.foo = {
+	bar : function(x) { return x; },
+	baz : function(x) { return x; }
+};
+
+// file 2
+var WHATEVER = WHATEVER || {}; // use existing WHATEVER, or create a new Object
+
+WHATEVER.foobar = {
+	foo : function(x) { return x; },
+	bar : function(x) { return x; },
+	baz : function(x) { return x; }
+};
+
+// test
+alert(WHATEVER.foo.baz("test"));</code></pre>
+							</li>
+						</ul>
+					</section>
+
+					<section>
+						<h2>Namespacing: IIFE</h2>
+						<ul>
+							<li class="fragment">
+								Using an IIFE is also possible
+								<pre class="bigger"><code contenteditable class="language-js">var WHATEVER = WHATEVER || {};
+
+(function(o){
+
+	o.foo = {
+		bar : function(x) { return x; },
+		baz : function(x) { return x; }
+	}
+
+	o.foobar = {
+		foo : function(x) { return x; },
+		bar : function(x) { return x; },
+		baz : function(x) { return x; }
+	}
+
+})(WHATEVER);
+
+// test
+alert(WHATEVER.foo.baz("test"));</code></pre>
+							</li>
+						</ul>
+					</section>
+
+					<section>
+						<h2>Namespacing: Module Pattern</h2>
+						<ul>
+							<li class="fragment">
+								The Module Pattern can also be used. Allows you to have private functions/datamembers.
+								<pre class="bigger"><code contenteditable class="language-js">var WHATEVER = (function(){
+	var privateFunction = function() { return; }
+	return {
+		foo : {
+			bar : function(x) { return x; },
+			baz : function(x) { return x; }
+		},
+		foobar : {
+			foo : function(x) { return x; },
+			bar : function(x) { return x; },
+			baz : function(x) { return x; }
+		}
+	};
+})();
+
+// test
+alert(WHATEVER.foo.baz("test"));</code></pre>
+							</li>
+						</ul>
+					</section>
+
+					<section>
+						<h2>Best Practices</h2>
 						<ul>
 							<li class="fragment">
 								Place JavaScripts at the bottom of the page
@@ -2208,6 +2384,15 @@ alert(tomhanks.isHuman ? "Human" : "Not Human");</code></pre>
 									<li>Just before <code>&lt;/body&gt;</code></li>
 									<li>I'll tell you later <em>why</em> that is ;-)</li>
 								</ul>
+							</li>
+							<li class="fragment">
+								Namespace your code
+								<ul>
+									<li>Does not pollute the global namespace</li>
+									<li>Prevents conflicts</li>
+							</li>
+							<li class="fragment">
+								Cache your variable
 							</li>
 							<li class="fragment">
 								Don't extend built-in Objects
@@ -2256,6 +2441,8 @@ alert(tomhanks.isHuman ? "Human" : "Not Human");</code></pre>
 						<li>Call and Apply: <a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Function/apply">Mozilla Developer Network</a> &amp; <a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Function/call">Mozilla Developer Network</a> &amp; <a href="http://javascript.info/tutorial/this#fourth-explicit-this">JavaScript.info</a></li>
 						<li>this: <a href="http://stage.learn.jquery.com/javascript-101/this-keyword/">Learn jQuery</a></li>
 						<li>Objects &amp; .prototype: <a href="http://stackoverflow.com/questions/892595/javascript-prototypal-inheritance">StackOverflow</a> &amp; <a href="http://bolinfest.com/javascript/inheritance.php">Inheritance Patterns in JavaScript</a></li>
+						<li>Module Pattern: <a href="http://www.yuiblog.com/blog/2007/06/12/module-pattern/">YUI Blog</a></li>
+						<li>Namespacing: <a href="http://addyosmani.com/blog/essential-js-namespacing/">AddyOsmani.com</a> &amp; <a href="http://javascriptweblog.wordpress.com/2010/12/07/namespacing-in-javascript/">JavaScript Weblog</a></li>
 						<li>Events: <a href="http://www.w3.org/TR/DOM-Level-2-Events/events.html">W3 Spec Level 2 Events</a> &amp; <a href="http://www.w3.org/TR/DOM-Level-3-Events/">W3 Spec Level 3 Events</a></li>
 						<li>Bubbling vs. Capturing: <a href="http://www.quirksmode.org/js/events_order.html">QuirksMode.org</a></li>
 						<li>Bubbling vs. Capturing (samples): <a href="http://javascript.info/tutorial/bubbling-and-capturing">JavaScript.info</a></li>
