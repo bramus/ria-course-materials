@@ -13,6 +13,7 @@
 		
 		<link rel="stylesheet" href="css/reset.css">
 		<link rel="stylesheet" href="css/main.css">
+		<link rel="stylesheet" href="assets/01/examples.css">
 
 		<link rel="stylesheet" href="lib/zenburn.css">
 	</head>
@@ -2408,7 +2409,7 @@ for (var i = 0, len = allSpans.length; i < len; i++) {
 					</section>
 
 					<section>
-						<h2>Manipulating Elements</h2>
+						<h2>Manipulating Elements (5)</h2>
 						<ul>
 							<li class="fragment">
 								Full list of methods and properties which you can use to manipulate and to traverse can be read on the <a href="https://developer.mozilla.org/en/DOM/Element">Mozilla Developer Network <code>Element</code> reference</a>
@@ -2463,13 +2464,202 @@ for (var i = 0, len = allSpans.length; i < len; i++) {
 					</section>
 
 					<section>
-						<h2>Capturing &amp; Bubbling </h2>
-						<p>capture vs bubble</p>
+						<h2>Event Handling</h2>
+						<ul>
+							<li class="fragment">
+								If an element and one of its ancestors have an event handler for the same event, what happens?
+								
+								<div class="capture-bubble-d1">1  <!-- the topmost -->
+								    <div class="capture-bubble-d2">2
+								        <div class="capture-bubble-d3">3 <!-- the innermost -->
+								        </div> 
+								    </div>
+								</div>
+									
+								<ul>
+									<li class="fragment">Will only one handler fire?</li>
+									<li class="fragment">Will all handlers fire?</li>
+									<li class="fragment">If all are fired, which one will fire first?</li>
+								</ul>
+							</li>
+						</ul>
+					</section>
+
+					<section>
+						<h2>Event Handling: Bubbling</h2>
+						<ul>
+							<li class="fragment">
+								What will happen is that the browser will fire all the events, one after the other
+							</li>
+							<li class="fragment">
+								The order in which they are fired is from the most inner element outwards. We call this <em><strong>bubbling</strong></em>
+								<div style="text-align: center; margin-top: 25px">
+									<figure>
+										<img style="background: #FFF;" src="assets/01/event-order-bubbling.gif" alt="" title="" height="202" width="392" />
+										<figcaption>Figure by <a href="http://javascript.info/tutorial/bubbling-and-capturing">JavaScript.info</a></figcaption>
+									</figure>
+								</div>
+								
+							</li>
+							<li class="fragment">
+								So the order of the events in our example will be 3 - 2 - 1
+							</li>
+						</ul>
+					</section>
+
+					<section>
+						<h2>Event Handling: Bubbling Example</h2>
+						<ul>
+							<li class="fragment" id="bubbling-demo">
+								Run the JS code and then click the center box to see bubbling in action
+								<pre class="bigger"><code contenteditable class="language-js runonce">var divs = document.querySelectorAll("#bubbling-demo div");
+for (var i = 0, len = divs.length; i < len; i++) {
+	divs[i].addEventListener("click", function(event) {
+		this.style.backgroundColor = 'yellow';
+		alert(this.className);
+		this.style.backgroundColor = '';
+	});
+}
+								</code></pre>
+								<div class="capture-bubble-d1">1  <!-- the topmost -->
+								    <div class="capture-bubble-d2">2
+								        <div class="capture-bubble-d3">3 <!-- the innermost -->
+								        </div> 
+								    </div>
+								</div>
+							</li>
+						</ul>
+					</section>
+
+					<section>
+						<h2>Event Handling: Stop bubbling</h2>
+						<ul>
+							<li class="fragment" id="stoppropagation-demo">
+								Possible with <code>Event#stopPropagation()</code>
+								<pre class="bigger"><code contenteditable class="language-js runonce">var divs = document.querySelectorAll("#stoppropagation-demo div");
+for (var i = 0, len = divs.length; i < len; i++) {
+	divs[i].addEventListener("click", function(event) {
+		this.style.backgroundColor = 'yellow';
+		alert(this.className);
+		this.style.backgroundColor = '';
+		event.stopPropagation(); // stop bubbling!
+	});
+}
+								</code></pre>
+								<div class="capture-bubble-d1">1  <!-- the topmost -->
+								    <div class="capture-bubble-d2">2
+								        <div class="capture-bubble-d3">3 <!-- the innermost -->
+								        </div> 
+								    </div>
+								</div>
+							</li>
+						</ul>
+					</section>
+
+					<section>
+						<h2>Event Handling: Capturing &amp; Bubbling</h2>
+						<ul>
+							<li class="fragment">
+								Actually, the event handling consists out of two phases:
+								<ol>
+									<li class="fragment">
+										Capturing of the event
+										<ul>
+											<li class="fragment">Goes from the outer most element inwards</li>
+											<li class="fragment">No event handlers are invoked</li>
+										</ul>
+									</li>
+									<li class="fragment">
+										The bubbling of the event
+										<ul>
+											<li class="fragment">Goes inside out</li>
+											<li class="fragment">Event handlers will be invoked</li>
+										</ul>
+									</li>
+								</ol>
+							</li>
+							<li class="fragment">
+								So in our example the event 
+								<ul>
+									<li class="fragment">First captures down through 1 - 2 - 3</li>
+									<li class="fragment">Then bubbles up through 3 - 2 - 1</li>
+							</li>
+						</ul>
+					</section>
+
+					<section>
+						<h2>Event Handling: Capturing &amp; Bubbling</h2>
+						<ul>
+							<li class="fragment">
+								Here's an image to make things clear
+								<div style="text-align: center; margin-top: 25px">
+									<figure>
+										<img style="background: #FFF;" src="assets/01/eventflow.png" alt="" title="" height="415" width="385" />
+										<figcaption>Figure by <a href="http://www.w3.org/TR/DOM-Level-3-Events/">W3C</a></figcaption>
+									</figure>
+								</div>
+							</li>
+						</ul>
+					</section>
+
+					<section>
+						<h2>Event Handling: Capturing</h2>
+						<ul>
+							<li class="fragment" id="capturing-demo">
+								Of course, it's possible to make it so that the events are fired during the capturing phase, and not the bubbling phase.
+								<pre class="bigger"><code contenteditable class="language-js runonce">var divs = document.querySelectorAll("#capturing-demo div");
+for (var i = 0, len = divs.length; i < len; i++) {
+	divs[i].addEventListener("click", function(event) {
+		this.style.backgroundColor = 'yellow';
+		alert(this.className);
+		this.style.backgroundColor = '';
+	}, true); // phase parameter!
+}
+								</code></pre>
+								<div class="capture-bubble-d1">1  <!-- the topmost -->
+								    <div class="capture-bubble-d2">2
+								        <div class="capture-bubble-d3">3 <!-- the innermost -->
+								        </div> 
+								    </div>
+								</div>
+							</li>
+						</ul>
+					</section>
+
+					<section>
+						<h2>Event Handling: Capturing &amp; Bubbling</h2>
+						<ul>
+							<li class="fragment" id="capturing-and-bubbling-demo">
+								FYI: To combine them both, hook two handlers
+								<pre class="bigger"><code contenteditable class="language-js runonce">var divs = document.querySelectorAll("#capturing-and-bubbling-demo div");
+for (var i = 0, len = divs.length; i < len; i++) {
+	divs[i].addEventListener("click", function(event) {
+		this.style.backgroundColor = 'yellow';
+		alert(this.className);
+		this.style.backgroundColor = '';
+	}, true); // capturing phase
+	divs[i].addEventListener("click", function(event) {
+		this.style.backgroundColor = 'cyan';
+		alert(this.className);
+		this.style.backgroundColor = '';
+	}, false); // bubbling phase
+}
+								</code></pre>
+								<div class="capture-bubble-d1">1  <!-- the topmost -->
+								    <div class="capture-bubble-d2">2
+								        <div class="capture-bubble-d3">3 <!-- the innermost -->
+								        </div> 
+								    </div>
+								</div>
+							</li>
+						</ul>
 					</section>
 
 					<section>
 						<h2>Unobtrusive</h2>
-
+						<ul>
+							<li class="fragment"></li>
+						</ul>
 					</section>
 
 					<section>
