@@ -685,7 +685,7 @@ console.log(question); // Nope, Chuck Testa! Erm, I mean global!</code></pre>
 							<li class="fragment">
 								Next to instance methods, they also <em>can</em> provide static methods
 								<ul>
-									<li>eg. <code>Array.isArray()</code></li>
+									<li>eg. <code>Array#isArray</code></li>
 								</ul>
 							</li>
 							<li class="fragment">
@@ -708,15 +708,15 @@ console.log(question); // Nope, Chuck Testa! Erm, I mean global!</code></pre>
 								Example
 								<pre class="bigger"><code contenteditable class="language-js">// String Instance
 var firstName = new String("Forrest"); // an instance of String
-console.log(firstName.toUpperCase());
+alert(firstName.toUpperCase());
 
 // String Literal
 var firstName = "Forrest"; // a variable of the type string
-console.log(firstName.toUpperCase());
+alert(firstName.toUpperCase());
 
 // Look ma, no var
-console.log("Forrest".toUpperCase());
-console.log(["Bubba","Lieutenant Dan"].length);</code></pre>
+alert("Forrest".toUpperCase());
+alert(["Bubba","Lieutenant Dan"].length);</code></pre>
 							</li>
 					</section>
 
@@ -730,7 +730,7 @@ console.log(["Bubba","Lieutenant Dan"].length);</code></pre>
 								</ul>
 							</li>
 							<li class="fragment">
-								In JavaScript, everything is an <code>Object</code>
+								In JavaScript, about everything is an <code>Object</code>
 								<ul>
 									<li class="fragment">JavaScript provides properties and methods which you can call/access</li>
 								</ul>
@@ -745,7 +745,7 @@ console.log(["Bubba","Lieutenant Dan"].length);</code></pre>
 							<li class="fragment">
 								Variables have a certain scope in which they are accessible. 
 								<ul>
-									<li>It's possible to access variables from an outer scope</li>
+									<li>It's possible to access variables that live in an outer scope</li>
 								</ul>
 							</li>
 						</ul>	
@@ -1586,120 +1586,10 @@ alert(ff());</code></pre>
 							</li>
 						</ul>
 					</section>
-
-					<section>
-						<h2>Closures: The Loop Problem (1)</h2>
-						<ul>
-							<li class="fragment">
-								Now that we understand closures, what about this?
-								<pre class="bigger"><code contenteditable class="language-js">var link,
-    target = Reveal.getCurrentSlide().querySelector('.result');
-
-target.innerHTML = ''; // clear the target
-
-for (var i = 0; i < 3; i++) { // add three links
-    link = document.createElement("a");
-	link.style.marginRight = "10px";
-    link.innerHTML = "Link " + i;
-    link.onclick = function() { // function created, ergo closure created!
-        alert("I am link " + i);
-    };
-	target.appendChild(link);
-};</code></pre>
-																<div class="result" style="text-align: center;"><em>(Run the code example to see the result appear here)</em></div>
-							</li>
-							<li class="fragment">
-								Remember: variables are linked by reference to the <code>LexicalEnvironment</code>!
-							</li>
-						</ul>
-					</section>
-
-					<section>
-						<h2>Closures: The Loop Problem (2)</h2>
-						<ul>
-							<li class="fragment">
-								Maybe we can fix it with a local variable?
-								<pre class="bigger"><code contenteditable class="language-js">var link,
-    target = Reveal.getCurrentSlide().querySelector('.result');
-
-target.innerHTML = ''; // clear the target
-
-for (var i = 3; i < 6; i++) { // add three links
-    link = document.createElement("a");
-	link.style.marginRight = "10px";
-    link.innerHTML = "Link " + i;
-    var j = i; // introduction of a local variable
-    link.onclick = function() { // function created, ergo closure created!
-        alert("I am link " + j);
-    };
-	target.appendChild(link);
-};</code></pre>
-																<div class="result" style="text-align: center;"><em>(Run the code example to see the result appear here)</em></div>
-							</li>
-							<li class="fragment">
-								Alas, when copying variables in JavaScript: by reference
-							</li>
-						</ul>
-					</section>
-
-					<section>
-						<h2>Closures: The Loop Problem (3)</h2>
-						<ul>
-							<li class="fragment">
-								What now?
-							</li>
-							<li class="fragment">
-								Well ...
-								<ul>
-									<li class="fragment">
-										Remember this?
-										<pre class="bigger"><code contenteditable class="language-js">var toSay = "Run Forrest, Run";
-
-(function(what) {
-	console.log(what);
-})(toSay);</code></pre>
-									</li>
-									<li class="fragment">
-										And remember that variables are passed by value to functions?
-									</li>
-								</ul>
-							</li>
-							<li class="fragment">
-								That gives us a foot in the door
-							</li>
-						</ul>
-					</section>
-
-					<section>
-						<h2>Closures: The Loop Problem (4)</h2>
-						<ul>
-							<li class="fragment">
-								IIFE to the resue!
-								<pre class="bigger"><code contenteditable class="language-js">var link,
-    target = Reveal.getCurrentSlide().querySelector('.result');
-
-target.innerHTML = ''; // clear the target
-
-for (var i = 6; i < 9; i++) { // add three links
-    link = document.createElement("a");
-	link.style.marginRight = "10px";
-    link.innerHTML = "Link " + i;
-    link.onclick = function(j) { // This one just became an IIFE
-		return function() { // and returns a function
-        	alert("I am link " + j);
-		};
-    }(i);
-	target.appendChild(link);
-};</code></pre>
-																<div class="result" style="text-align: center;"><em>(Run the code example to see the result appear here)</em></div>
-							</li>
-						</ul>
-					</section>
 										
 					<section>
 						<h2>Closures: In Closing</h2>
 						<ul>
-							<li class="fragment">Don't worry, that's it for closures</li>
 							<li class="fragment">
 								If you want to have a full understanding of closures, feel free to read these links
 								<ul>
@@ -1836,7 +1726,7 @@ myFunc(1,2,3,4,5,6,7,8,9,10);</code></pre>
 						<h2>Function#bind</h2>
 						<ul>
 							<li class="fragment">
-								To make things complete, <code>Function#bind</code> also exists, but we'll touch that later ;-)
+								To make things complete, <code>Function#bind</code> also exists, but we'll touch that later
 							</li>
 						</ul>
 					</section>
@@ -2954,6 +2844,121 @@ for (var i = 0, len = divs.length; i < len; i++) {
 								        </div> 
 								    </div>
 								</div>
+							</li>
+						</ul>
+					</section>
+					
+					<section>
+						<h2>Events: The Loop Problem (1)</h2>
+						<ul>
+							<li class="fragment">
+								Say that we have this piece of code, what will be the result?
+								<pre class="bigger"><code contenteditable class="language-js">var link,
+    target = Reveal.getCurrentSlide().querySelector('.result');
+
+target.innerHTML = ''; // clear the target
+
+for (var i = 0; i < 3; i++) { // add three links
+    link = document.createElement("a");
+	link.style.marginRight = "10px";
+    link.innerHTML = "Link " + i;
+    link.onclick = function() {
+        alert("I am link " + i);
+    };
+	target.appendChild(link);
+};</code></pre>
+																<div class="result" style="text-align: center;"><em>(Run the code example to see the result appear here)</em></div>
+							</li>
+							<li class="fragment">
+								Hint: where you attach the <code>onclick</code>, a function is created
+							</li>
+						</ul>
+					</section>
+
+					<section>
+						<h2>Closures</h2>
+						<p><img src="assets/01/notsureif.png" alt="Not Sure If ..." title="Not Sure If ..." width="480" height="360" /></p>
+						<p><em>Here we go again!</em></p>
+					</section>
+
+					<section>
+						<h2>Events: The Loop Problem (2)</h2>
+						<ul>
+							<li class="fragment">
+								Maybe we can fix it with a local variable?
+								<pre class="bigger"><code contenteditable class="language-js">var link,
+    target = Reveal.getCurrentSlide().querySelector('.result');
+
+target.innerHTML = ''; // clear the target
+
+for (var i = 3; i < 6; i++) { // add three links
+    link = document.createElement("a");
+	link.style.marginRight = "10px";
+    link.innerHTML = "Link " + i;
+    var j = i; // introduction of a local variable
+    link.onclick = function() { // function created, ergo closure created!
+        alert("I am link " + j);
+    };
+	target.appendChild(link);
+};</code></pre>
+																<div class="result" style="text-align: center;"><em>(Run the code example to see the result appear here)</em></div>
+							</li>
+							<li class="fragment">
+								Alas, when copying variables in JavaScript: by reference
+							</li>
+						</ul>
+					</section>
+
+					<section>
+						<h2>Events: The Loop Problem (3)</h2>
+						<ul>
+							<li class="fragment">
+								What now?
+							</li>
+							<li class="fragment">
+								Well ...
+								<ul>
+									<li class="fragment">
+										Remember this?
+										<pre class="bigger"><code contenteditable class="language-js">var toSay = "Run Forrest, Run";
+
+(function(what) {
+	console.log(what);
+})(toSay);</code></pre>
+									</li>
+									<li class="fragment">
+										And remember that variables are passed by value to functions?
+									</li>
+								</ul>
+							</li>
+							<li class="fragment">
+								That gives us a foot in the door
+							</li>
+						</ul>
+					</section>
+
+					<section>
+						<h2>Events: The Loop Problem (4)</h2>
+						<ul>
+							<li class="fragment">
+								IIFE to the resue!
+								<pre class="bigger"><code contenteditable class="language-js">var link,
+    target = Reveal.getCurrentSlide().querySelector('.result');
+
+target.innerHTML = ''; // clear the target
+
+for (var i = 6; i < 9; i++) { // add three links
+    link = document.createElement("a");
+	link.style.marginRight = "10px";
+    link.innerHTML = "Link " + i;
+    link.onclick = function(j) { // This one just became an IIFE
+		return function() { // and returns a function
+        	alert("I am link " + j);
+		};
+    }(i);
+	target.appendChild(link);
+};</code></pre>
+																<div class="result" style="text-align: center;"><em>(Run the code example to see the result appear here)</em></div>
 							</li>
 						</ul>
 					</section>
