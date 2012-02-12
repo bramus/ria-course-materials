@@ -52,6 +52,86 @@
 						<p><img src="assets/01/quiz.png" alt="What is the world's most popular language?" title="What is the world's most popular language?" width="429" height="333" /></p>
 						<p class="fragment">Yeah, JavaScript!</p>
 					</section>
+
+					<section>
+						<h2>Java(Script)?</h2>
+						<p>
+							<figure class="fragment">
+								<img src="assets/01/hamster.png" alt="JavaScript is to Java as Ham is to Hamster" title="JavaScript is to Java as Ham is to Hamster" width="500" height="284" style="border-color: #FFF; border-width: 12px;" />
+								<figcaption>Dixit <a href="http://adactio.com/">Jeremy Keith</a>, Cartoon by <a href="<strong>http://www.flickr.com/photos/manssandstrom/4132454413/in/photostream/</strong>">Brad Colbow</a></figcaption>
+							</figure>
+						</p>
+					</section>
+
+					<section>
+						<h2>JavaScript: History</h2>
+						<ul>
+							<li class="fragment">
+								Scripting language originally developed for Netscape 2.0
+								<ul>
+									<li>First known as Mocha or as LiveScript, later on renamed to JavaScript</li>
+								</ul>
+							</li>
+							<li class="fragment">
+								Internet Explorer 3 included its own implementation, named JScript
+								<ul>
+									<li>Implemented due to gaining popularity of JavaScript</li>
+									<li>Named differently to avoid trademark issues</li>
+								</ul>
+							</li>
+							<li class="fragment">
+								Eventually standardized in the ECMA-266 specificiation, known as ECMAScript
+								<ul>
+									<li>Several versions do exist</li>
+									<li>Current version is <a href="http://es5.github.com/">ECMAScript 5.1</a></li>
+								</ul>
+							</li>
+						</ul>
+					</section>
+
+					<section>
+						<h2>ECMAScript Dialects</h2>
+						<ul>
+							<li class="fragment">
+								Several languages/implementations are based on (some version of) ECMAScript
+								<ul>
+									<li class="fragment">Adobe's ActionScript 3 (Flash, Flex)</li>
+									<li class="fragment">JavaScript as we know it today</li>
+									<li class="fragment">...</li>
+								</ul>
+							</li>
+							<li class="fragment">
+								Officially, JavaScript is maintained by Mozilla nowadays.
+								<ul>
+									<li class="fragment">Current version JavaScript 1.8.5</li>
+									<li class="fragment">Non-Mozilla implementations claim &ldquo;JavaScript Compliance&rdquo; but actually target the ECMAScript standard.</li>
+								</ul>
+							</li>
+						</ul>
+					</section>
+
+					<section>
+						<h2>JavaScript Engines</h2>
+						<ul>
+							<li class="fragment">
+								Browsers have a built-in engine to interpret JavaScript
+								<ul>
+									<li class="fragment"><a href="https://developer.mozilla.org/en/SpiderMonkey">SpiderMonkey</a> in Firefox</li>
+									<li class="fragment"><a href="http://code.google.com/p/v8/">V8</a> in Chrome</li>
+									<li class="fragment"><a href="http://www.webkit.org/projects/javascript/index.html">JavaScriptCore</a> (SquirrelFish/Nitro) in Webkit/Safari</li>
+									<li class="fragment"><a href="http://my.opera.com/ODIN/blog/carakan-faq">Carakan</a> in Opera</li>
+									<li class="fragment"><a href="http://en.wikipedia.org/wiki/Chakra_%28JScript_engine%29">Chakra</a> in IE</li>
+								</ul>
+							</li>
+							<li class="fragment">
+								If you have access to them, these engines can be implemented in other projects
+								<uL>
+									<li class="fragment"><a href="http://nodejs.org/">Node.js</a> is powered by Google's V8</li>
+									<li class="fragment"><a href="https://developer.mozilla.org/en/Rhino">Rhino</a> is an open source JavaScript engine developed by Mozilla and written in Java</li>
+								</ul>
+							</li>
+						</ul>
+					</section>
 					
 				</section>
 
@@ -61,7 +141,7 @@
 				<section>
 
 					<section>
-						<h2>JavaScript 101</h2>
+						<h2>JavaScript 101 with Forrest Gump</h2>
 						<p><img src="assets/01/forrestgump.jpg" alt="Forrest Gump" title="Forrest Gump" width="467" height="350" /></p>
 						<p>Because <strong>Forrest Gump</strong> is one of those movies ...</p>
 					</section>
@@ -2225,7 +2305,7 @@ alert(forrest.whatDoesHeSay());</code></pre>
 								JavaScript is implemented in the browser
 								<ul>
 									<li class="fragment">Not all browsers implement the same version of JavaScript (eg. <code>Array#forEach</code> is only available since JavaScript 1.6)</li>
-									<li class="fragment">Not all browsers implement it in the same way, or have their own additions (eg. <code>for each ... in</code> in Firefox)</li>
+									<li class="fragment">Not all browsers implement it in the same way (different interpreters!), or have their own additions (eg. <code>for each ... in</code> in Firefox)</li>
 								</ul>
 							</li>
 							<li class="fragment">
@@ -3105,6 +3185,7 @@ alert(WHATEVER.foo.baz("test"));</code></pre>
 				<section id="sources">
 					<h2>Sources</h2>
 					<ul>
+						<li>JavaScript History: <a href="http://en.wikipedia.org/wiki/Javascript">Wikipedia (JavaScript)</a> &amp; <a href="http://en.wikipedia.org/wiki/ECMAScript">Wikipedia (ECMAScript)</a> &amp; <a href="https://developer.mozilla.org/en/JavaScript/About_JavaScript">Mozilla Developer Network</a></li>
 						<li>Basic Structure (Javasctript 101) &amp; Little Big Details: <a href="http://www.slideshare.net/robnyman/javascript-like-a-box-of-chocolates">SlideShare (Robert Nyman)</a></li>
 						<li>Values, Variables, and Literals: <a href="https://developer.mozilla.org/en/JavaScript/Guide/Values%2C_Variables%2C_and_Literals">Mozilla Developer Network</a></li>
 						<li>JavaScript Global Objects: <a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects">Mozilla Developer Network</a></li>
