@@ -2413,7 +2413,7 @@ for (var i = 0, len = allSpans.length; i < len; i++) {
 						<h2>Manipulating Elements (5)</h2>
 						<ul>
 							<li class="fragment">
-								Full list of methods and properties which you can use to manipulate and to traverse can be read on the <a href="https://developer.mozilla.org/en/DOM/Element">Mozilla Developer Network <code>Element</code> reference</a>
+								Full list of methods and properties which you can use to manipulate elements can be read on the <a href="https://developer.mozilla.org/en/DOM/Element">Mozilla Developer Network <code>Element</code> reference</a>
 							</li>
 						</ul>
 					</section>
@@ -2422,7 +2422,7 @@ for (var i = 0, len = allSpans.length; i < len; i++) {
 						<h2>Traversing (1)</h2>
 						<ul>
 							<li class="fragment">
-								Once you have an element selected, you can go up/down the DOM tree in a parent/child/sibilings methodology
+								Once you have an element selected, you can go up/down the DOM tree in a parent/children/sibilings methodology
 							</li>
 						</ul>	
 						<p style="text-align: center;">
@@ -2476,7 +2476,9 @@ for (var i = 0, len = allSpans.length; i < len; i++) {
 								        </div> 
 								    </div>
 								</div>
-									
+							</li>
+							<li class="fragment">
+								If I were to click the red box, which click handler will fire (if all 3 have click handlers)?
 								<ul>
 									<li class="fragment">Will only one handler fire?</li>
 									<li class="fragment">Will all handlers fire?</li>
@@ -2611,7 +2613,7 @@ for (var i = 0, len = divs.length; i < len; i++) {
 								<pre class="bigger"><code contenteditable class="language-js runonce">var divs = document.querySelectorAll("#capturing-demo div");
 for (var i = 0, len = divs.length; i < len; i++) {
 	divs[i].addEventListener("click", function(event) {
-		this.style.backgroundColor = 'yellow';
+		this.style.backgroundColor = 'cyan';
 		alert(this.className);
 		this.style.backgroundColor = '';
 	}, true); // phase parameter!
@@ -2628,19 +2630,19 @@ for (var i = 0, len = divs.length; i < len; i++) {
 					</section>
 
 					<section>
-						<h2>Event Handling: Capturing &amp; Bubbling</h2>
+						<h2>Event Handling: Capturing+Bubbling</h2>
 						<ul>
 							<li class="fragment" id="capturing-and-bubbling-demo">
 								FYI: To combine them both, hook two handlers
 								<pre class="bigger"><code contenteditable class="language-js runonce">var divs = document.querySelectorAll("#capturing-and-bubbling-demo div");
 for (var i = 0, len = divs.length; i < len; i++) {
 	divs[i].addEventListener("click", function(event) {
-		this.style.backgroundColor = 'yellow';
+		this.style.backgroundColor = 'cyan';
 		alert(this.className);
 		this.style.backgroundColor = '';
 	}, true); // capturing phase
 	divs[i].addEventListener("click", function(event) {
-		this.style.backgroundColor = 'cyan';
+		this.style.backgroundColor = 'yellow';
 		alert(this.className);
 		this.style.backgroundColor = '';
 	}, false); // bubbling phase
@@ -2810,6 +2812,7 @@ alert(WHATEVER.foo.baz("test"));</code></pre>
 								<ul>
 									<li>Does not pollute the global namespace</li>
 									<li>Prevents conflicts</li>
+								</ul>
 							</li>
 							<li class="fragment">
 								Cache your variables
