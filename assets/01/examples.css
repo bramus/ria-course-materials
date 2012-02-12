@@ -32,3 +32,22 @@
 	font-size: 12px;
 	vertical-align: top;
 }
+
+#bubbling-advantage-demo table {
+	width: 180px;
+	margin: 0 auto 0;
+	border: 1px solid #FFF;
+	border-collapse: collapse;
+	cursor: pointer;
+}
+
+#bubbling-advantage-demo table td {
+	width: 40px;
+	padding: 10px;
+	text-align: center;
+	border: 1px solid #333;
+}
+
+#bubbling-advantage-demo table td:hover {
+	background: #333;
+}

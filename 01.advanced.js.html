@@ -2502,7 +2502,9 @@ for (var i = 0, len = allSpans.length; i < len; i++) {
 										<figcaption>Figure by <a href="http://javascript.info/tutorial/bubbling-and-capturing">JavaScript.info</a></figcaption>
 									</figure>
 								</div>
-								
+								<ul>
+									<li class="fragment">In other words: the event will bubble up the DOM tree</li>
+								</ul>
 							</li>
 							<li class="fragment">
 								So the order of the events in our example will be 3 - 2 - 1
@@ -2560,10 +2562,69 @@ for (var i = 0, len = divs.length; i < len; i++) {
 					</section>
 
 					<section>
+						<h2>Event Handling: what was clicked?</h2>
+						<ul>
+							<li class="fragment" id="bubblingtarget-demo">
+								It's possible to know which was the original element that was clicked during the bubbling
+								<pre class="bigger"><code contenteditable class="language-js runonce">var divs = document.querySelectorAll("#bubblingtarget-demo div");
+for (var i = 0, len = divs.length; i < len; i++) {
+	divs[i].addEventListener("click", function(event) {
+		this.style.backgroundColor = 'yellow';
+		alert(this.className + " (click was on " + event.target.className + ")");
+		this.style.backgroundColor = '';
+	});
+}
+								</code></pre>
+								<div class="capture-bubble-d1">1  <!-- the topmost -->
+								    <div class="capture-bubble-d2">2
+								        <div class="capture-bubble-d3">3 <!-- the innermost -->
+								        </div> 
+								    </div>
+								</div>
+							</li>
+						</ul>
+					</section>
+
+					<section>
+						<h2>Bubbling: Practical Use Case</h2>
+						<ul>
+							<li class="fragment">
+								Say you have a table with 1000 cells, and you bind a click event on those cells
+								<ul>
+									<li class="fragment">Very resourceful, document will have to keep an eye on 1000 els</li>
+								</ul>
+							</li>
+							<li class="fragment" id="bubbling-advantage-demo">
+								By taking advantage of bubbling and <code>event.target</code> it's possible to bind the handler on the <code>&lt;table&gt;</code> itself.
+								<pre class="bigger"><code contenteditable class="language-js runonce">var table = document.querySelector("#bubbling-advantage-demo table");
+table.addEventListener("click", function(event) {
+	alert("Table click event (click was on " + event.target.innerHTML + ")");
+});
+								</code></pre>
+								<table>
+									<tr>
+										<td>1</td>
+										<td>2</td>
+										<td>3</td>
+									</tr>
+									<tr>
+										<td>4</td>
+										<td>5</td>
+										<td>6</td>
+									</tr>
+								</table>
+							</li>
+						</ul>
+					</section>
+
+					<section>
 						<h2>Event Handling: Capturing &amp; Bubbling</h2>
 						<ul>
 							<li class="fragment">
-								Actually, the event handling consists out of two phases:
+								So we now know this thing named bubbling which happens when an event is handled: the event bubbles up the DOM tree
+							</li>
+							<li class="fragment">
+								But actually, the event handling consists out of two phases:
 								<ol>
 									<li class="fragment">
 										Capturing of the event
