@@ -2305,7 +2305,7 @@ alert(forrest.whatDoesHeSay());</code></pre>
 								JavaScript is implemented in the browser
 								<ul>
 									<li class="fragment">Not all browsers implement the same version of JavaScript (eg. <code>Array#forEach</code> is only available since JavaScript 1.6)</li>
-									<li class="fragment">Not all browsers implement it in the same way (different interpreters!), or have their own additions (eg. <code>for each ... in</code> in Firefox)</li>
+									<li class="fragment">Not all browsers implement it in the same way (different interpreters!), or have their own additions</li>
 								</ul>
 							</li>
 							<li class="fragment">
@@ -2339,12 +2339,12 @@ alert(forrest.whatDoesHeSay());</code></pre>
 								Things mentioned here most likely won't work in oldIE
 								<ul>
 									<li class="fragment">Because they implement the DOM differently</li>
-									<li class="fragment">Because some things weren't formalized back then</li>
+									<li class="fragment">Because the DOM wasn't formalized back then</li>
 									<li class="fragment">Because Microsoft took a loose take on web standards back then</li>
 								</ul>
 							</li>
 							<li class="fragment">
-								Thankfully things have gotten better (but not ideal) with IE9, and by the looks of the previews IE10 will rock!
+								Thankfully things have gotten better (but not ideal) with IE9, and by the looks of the previews IE10 will be quite standards compliant
 							</li>
 						</ul>
 					</section>
@@ -2566,11 +2566,126 @@ for (var i = 0, len = allSpans.length; i < len; i++) {
 
 					<section>
 						<h2>Events</h2>
-						<p>Old way: .on<em>Event</em>, New way: addEventListener</p>
+						<ul>
+							<li class="fragment">
+								It's possible to listen to certain events that occur in the document/on an element
+							</li>
+							<li class="fragment">
+								An event can be seen as an action that takes place
+							</li>
+							<li class="fragment">
+								Events can be things like
+								<ul>
+									<li class="fragment">a mouse interaction (<code>click</code>, <code>mouseover</code>, <code>mouseout</code>, ..)</li>
+									<li class="fragment">a keyboard interaction (<code>keypress</code>, <code>keydown</code>, <code>keyup</code>)</li>
+									<li class="fragment">a form action (<code>submit</code>, <code>reset</code>)</li>
+									<li class="fragment">a general event such as something finished <code>load</code>ing, a <code>resize</code> of the window, an element gaining <code>focus</code>, etc.</li>
+								</ul>
+							</li>
+							<li class="fragment">
+								Basically they form the core of the scripts we'll be writing
+							</li>
+						</ul>
 					</section>
 
 					<section>
-						<h2>Event Handling</h2>
+						<h2>Hooking Events (1)</h2>
+						<ul>
+							<li class="fragment" id="onevent-demo">
+								The old way: <code>#on<em>Eventname</em></code>
+								<pre class="bigger"><code contenteditable class="language-js runonce">var p = document.querySelector("#onevent-demo p");
+									
+p.onclick = function() { alert('You clicked me!'); }
+p.onmouseover = function() { this.style.backgroundColor = "#333"; }
+p.onmouseout = function() { this.style.backgroundColor = ""; }</code></pre>
+								<p style="text-align: center; cursor: pointer;">I am the demo</p>
+							</li>
+							<li class="fragment" id="oneventtwice-demo">
+								Note that when you hook an event twice, it will be overwritten
+								<pre class="bigger"><code contenteditable class="language-js runonce">var p = document.querySelector("#oneventtwice-demo p");
+
+p.onclick = function() { alert('You clicked me (1)!'); }
+p.onclick = function() { alert('You clicked me (2)!'); }
+p.onmouseover = function() { this.style.backgroundColor = "#333"; }
+p.onmouseout = function() { this.style.backgroundColor = ""; }</code></pre>
+								<p style="text-align: center; cursor: pointer;">I am the 2nd demo</p>
+							</li>
+						</ul>
+					</section>	
+
+					<section>
+						<h2>Hooking Events (2)</h2>
+						<ul>
+							<li class="fragment" id="addeventlistener-demo">
+								The new, formalized, way: <code>#addEventListener</code>
+								<pre class="bigger"><code contenteditable class="language-js runonce">var p = document.querySelector("#addeventlistener-demo p");
+
+p.addEventListener('click', function() {
+	alert('You clicked me!'); 
+});
+p.addEventListener('mouseover', function() {
+	this.style.backgroundColor = "#333"; 
+});
+p.addEventListener('mouseout', function() {
+	this.style.backgroundColor = "";
+});</code></pre>
+								<p style="text-align: center; cursor: pointer;">I am the demo</p>
+							</li>
+							<li class="fragment">
+								It's also possible to used a named function
+							</li>
+						</ul>
+					</section>
+
+					<section>
+						<h2>Hooking Events (3)</h2>
+						<ul>
+							<li class="fragment" id="addeventlistenertwice-demo">
+								Calling <code>#addEventListener</code> multiple times for the same event
+								<pre class="bigger"><code contenteditable class="language-js runonce">var p = document.querySelector("#addeventlistenertwice-demo p");
+
+p.addEventListener('click', function() {
+	alert('You clicked me (1)!'); 
+});
+p.addEventListener('click', function() {
+	alert('You clicked me (2)!'); 
+});
+p.addEventListener('mouseover', function() {
+	this.style.backgroundColor = "#333"; 
+});
+p.addEventListener('mouseout', function() {
+	this.style.backgroundColor = "";
+});</code></pre>
+								<p style="text-align: center; cursor: pointer;">I am the demo</p>
+							</li>
+						</ul>
+					</section>
+
+					<section>
+						<h2>Removing an Event Listener</h2>
+						<ul>
+							<li class="fragment" id="removeeventlistener-demo">
+								Possible by <code>#removeEventListener</code>, but only if you've attached a named function
+								<pre class="bigger"><code contenteditable class="language-js runonce">var p = document.querySelector("#removeeventlistener-demo p");
+
+var clickHandler = function() { alert('You clicked me!'); }
+
+p.addEventListener('click', clickHandler);
+p.removeEventListener('click', clickHandler);
+
+p.addEventListener('mouseover', function() {
+	this.style.backgroundColor = "#333"; 
+});
+p.addEventListener('mouseout', function() {
+	this.style.backgroundColor = "";
+});</code></pre>
+								<p style="text-align: center; cursor: pointer;">I am the demo</p>
+							</li>
+						</ul>
+					</section>
+
+					<section>
+						<h2>Event Handling: Nested Events</h2>
 						<ul>
 							<li class="fragment">
 								If an element and one of its ancestors have an event handler for the same event, what happens?
