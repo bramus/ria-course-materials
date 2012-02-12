@@ -2245,6 +2245,31 @@ alert(forrest.whatDoesHeSay());</code></pre>
 					</section>
 
 					<section>
+						<h2>Warning: oldIE</h2>
+						<ul>
+							<li class="fragment">
+								oldIE, or Old Internet Explorer
+								<ul>
+									<li class="fragment">
+										Term to name Internet Explorer 6, 7 &amp; 8 in one gasp
+									</li>
+								</ul>
+							</li>
+							<li class="fragment">
+								Things mentioned here most likely won't work in oldIE
+								<ul>
+									<li class="fragment">Because they implement the DOM differently</li>
+									<li class="fragment">Because some things weren't formalized back then</li>
+									<li class="fragment">Because Microsoft took a loose take on web standards back then</li>
+								</ul>
+							</li>
+							<li class="fragment">
+								Thankfully things have gotten better (but not ideal) with IE9, and by the looks of the previews IE10 will rock!
+							</li>
+						</ul>
+					</section>
+
+					<section>
 						<h2>The DOM (1)</h2>
 						<ul>
 							<li class="fragment">
@@ -2540,7 +2565,7 @@ for (var i = 0, len = divs.length; i < len; i++) {
 						<h2>Event Handling: Stop bubbling</h2>
 						<ul>
 							<li class="fragment" id="stoppropagation-demo">
-								Possible with <code>Event#stopPropagation()</code>
+								Possible with <code>Event#stopPropagation</code>
 								<pre class="bigger"><code contenteditable class="language-js runonce">var divs = document.querySelectorAll("#stoppropagation-demo div");
 for (var i = 0, len = divs.length; i < len; i++) {
 	divs[i].addEventListener("click", function(event) {
@@ -2557,6 +2582,25 @@ for (var i = 0, len = divs.length; i < len; i++) {
 								        </div> 
 								    </div>
 								</div>
+							</li>
+						</ul>
+					</section>
+
+					<section>
+						<h2>Event Handling: Stop default</h2>
+						<ul>
+							<li class="fragment" id="stoppropagation-demo">
+								Possible with <code>Event#preventDefault</code>
+								<pre class="bigger"><code contenteditable class="language-js runonce">var link = document.querySelector("#stoppropagation-demo a");
+link.addEventListener("click", function(event) {
+	alert("Link is linked to " + this.href + " but won't be followed");
+	event.preventDefault(); // prevent the default action from happening
+});
+								</code></pre>
+								<p style="text-align: center;"><a href="http://www.ikdoeict.be/">Link to ikdoeict.be</a></p>
+							</li>
+							<li class="fragment">
+								In the past, this was done by <code>return false;</code>
 							</li>
 						</ul>
 					</section>
@@ -2707,8 +2751,7 @@ for (var i = 0, len = divs.length; i < len; i++) {
 		alert(this.className);
 		this.style.backgroundColor = '';
 	}, false); // bubbling phase
-}
-								</code></pre>
+}</code></pre>
 								<div class="capture-bubble-d1">1  <!-- the topmost -->
 								    <div class="capture-bubble-d2">2
 								        <div class="capture-bubble-d3">3 <!-- the innermost -->
@@ -2718,11 +2761,160 @@ for (var i = 0, len = divs.length; i < len; i++) {
 							</li>
 						</ul>
 					</section>
+					
+					<section>
+						<h2>Attaching scripts</h2>
+						<ul>
+							<li class="fragment">
+								There are two main options for attaching a script to a document
+								<ol>
+									<li class="fragment">Using an embedded script</li>
+									<li class="fragment">Using an external script</li>
+								</ol>
+							</li>
+						</ul>
+					</section>
 
 					<section>
-						<h2>Unobtrusive</h2>
+						<h2>Embedded script</h2>
 						<ul>
-							<li class="fragment"></li>
+							<li class="fragment">
+								Example:
+								<pre class="bigger"><code contenteditable class="language-html">&lt;!doctype html&gt;
+&lt;html&gt;
+	&lt;head&gt;
+		...
+		&lt;script&gt;
+			alert('hello');
+		&lt;/script&gt;
+		...
+	&lt;/head&gt;
+&lt;body&gt;
+	...
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+							</li>
+							<li class="fragment">
+								Note that scripts are interpreted immediately!
+								<ul>
+									<li>In this example you'll see an <code>alert</code> <em>before</em> the page is being rendered!</li>
+								</ul>
+							</li>
+						</ul>
+					</section>
+
+					<section>
+						<h2>External Script (1)</h2>
+						<ul>
+							<li class="fragment">
+								Example
+								<pre class="bigger"><code contenteditable class="language-html">&lt;!doctype html&gt;
+&lt;html&gt;
+	&lt;head&gt;
+		...
+		&lt;script src=&quot;path/to/my.js&quot;&gt;&lt;/script&gt;
+		...
+	&lt;/head&gt;
+&lt;body&gt;
+	...
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+							</li>
+							<li class="fragment">
+								Best practice: place the scripts at the bottom of the page, just before <code>&lt;/body&gt;</code>, to not block parallel downloads
+								<ul>
+									<li class="fragment">The <a href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec8.html#sec8.1.4">HTTP/1.1 specification</a> suggests that browsers download no more than two components <em>(scripts, images, etc)</em> in parallel per hostname</li>
+								</ul>
+							</li>
+						</ul>
+					</section>
+
+					<section>
+						<h2>External Script (2)</h2>
+						<ul>
+							<li class="fragment">
+								Updated example
+								<pre class="bigger"><code contenteditable class="language-html">&lt;!doctype html&gt;
+&lt;html&gt;
+	&lt;head&gt;
+		...
+	&lt;/head&gt;
+&lt;body&gt;
+	...
+	&lt;script src=&quot;path/to/my.js&quot;&gt;&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+							</li>
+						</ul>
+					</section>
+
+					<section>
+						<h2>Attaching scripts: Extra</h2>
+						<ul>
+							<li class="fragment">
+								Event handlers can be added directly into your HTML
+								<pre class="bigger"><code contenteditable class="language-html">&lt;a href=&quot;#&quot; onclick=&quot;alert('clicked'); return false;&quot;&gt;Click me!&lt;/a&gt;</code></pre>
+								<p style="text-align: center"><a href="#" onclick="alert('clicked'); return false;">Click me!</a></p>
+							</li>
+							<li class="fragment">
+								Or like this
+								<pre class="bigger"><code contenteditable class="language-html">&lt;a href=&quot;javascript:alert('clicked');&quot;&gt;Click me!&lt;/a&gt;</code></pre>
+								<p style="text-align: center"><a href="javascript:alert('clicked');">Click me!</a></p>
+							</li>
+							<li class="fragment">
+								Don't do this.
+								<ul>
+									<li class="fragment">Never.</li>
+									<li class="fragment">Ever.</li>
+								</ul>
+							</li>
+						</ul>
+					</section>			
+
+					<section>
+						<h2>Script execution (1)</h2>
+						<ul>
+							<li class="fragment">
+								Scripts are executed immediately, even if the document is still loading
+							</li>
+							<li class="fragment">
+								In most cases you'll only want to execute scripts when the document has finished loading. There's an event for that.
+								<pre class="bigger"><code class="language-html">&lt;!doctype html&gt;
+&lt;html&gt;
+	&lt;head&gt;
+		...
+	&lt;/head&gt;
+&lt;body&gt;
+	...
+	&lt;script src=&quot;path/to/my.js&quot;&gt;&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+								<pre class="bigger"><code class="language-js dontrun">window.onload = function() {
+	// ... your code here
+}</code></pre>
+								<ul>
+									<li class="fragment">Old syntax + Only allows for one function to be executed when the document (including images!) has finished loading</li>
+								</ul>
+							</li>
+						</ul>
+					</section>
+					
+					<section>
+						<h2>Script execution (2)</h2>
+						<ul>
+							<li class="fragment">
+								Syntax can be improved, by making use of <code>addEventListener</code>
+								<pre class="bigger"><code class="language-js dontrun">document.addEventListener('load', function(event) {
+	// ... your code here
+}, false);</code></pre>
+							</li>
+							<li class="fragment">
+								<code>load</code> is fired when everything (including images) is loaded. Most of the time you'll want to invoke your scripts when the DOM has loaded.
+								<pre class="bigger"><code class="language-js dontrun">
+document.addEventListener('DOMContentLoaded', function(event) {
+	// ... your code here
+}, false);</code></pre>
+							</li>
 						</ul>
 					</section>
 
@@ -2865,8 +3057,10 @@ alert(WHATEVER.foo.baz("test"));</code></pre>
 								Place JavaScripts at the bottom of the page
 								<ul>
 									<li>Just before <code>&lt;/body&gt;</code></li>
-									<li>I'll tell you later <em>why</em> that is ;-)</li>
 								</ul>
+							</li>
+							<li class="fragment">
+								Make use of <code>DOMContentLoaded</code>
 							</li>
 							<li class="fragment">
 								Namespace your code
@@ -2931,6 +3125,7 @@ alert(WHATEVER.foo.baz("test"));</code></pre>
 						<li>Events: <a href="http://www.w3.org/TR/DOM-Level-2-Events/events.html">W3 Spec Level 2 Events</a> &amp; <a href="http://www.w3.org/TR/DOM-Level-3-Events/">W3 Spec Level 3 Events</a></li>
 						<li>Bubbling vs. Capturing: <a href="http://www.quirksmode.org/js/events_order.html">QuirksMode.org</a></li>
 						<li>Bubbling vs. Capturing (samples): <a href="http://javascript.info/tutorial/bubbling-and-capturing">JavaScript.info</a></li>
+						<li>Scripts at the bottom: <a href="http://developer.yahoo.com/performance/rules.html">Yahoo!</a></li>
 					</ul>
 				</section>
 				
