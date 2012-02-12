@@ -180,10 +180,10 @@ html, body {
     width: 100%;
 }
 
-#reveal #sources > ul,
-#reveal #sources > ol,
-#reveal #sources > p {
-    font-size: 50%;
+#reveal #sources section > ul,
+#reveal #sources section > ol,
+#reveal #sources section > p {
+    font-size: 80%;
 	line-height: 1.4;
 }
 

@@ -115,4 +115,12 @@ window.addEventListener('load', function() {
 		
 	}
 	
+	// Print fix (Firefox, IE only though)
+	window.addEventListener('beforeprint', function(e) {
+		var els = document.querySelectorAll('#reveal .slides > section');
+		for(var i = 0, len = els.length; i < len; i++) {
+			els[i].style.display = "block";
+		}
+	});
+	
 }, false);

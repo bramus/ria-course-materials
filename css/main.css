@@ -292,9 +292,9 @@ html {
     width: 100%;
 }
 
-#reveal #sources > ul,
-#reveal #sources > ol,
-#reveal #sources > p {
+#reveal #sources section > ul,
+#reveal #sources section > ol,
+#reveal #sources section > p {
     font-size: 50%;
 	line-height: 1.4;
 }
