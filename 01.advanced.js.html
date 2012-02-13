@@ -432,8 +432,8 @@ var hasR = new RegExp("r","i"); // RegExp Constructor
 var hasR = /r/i; // RegExp Literal
 
 var says = new Function("what", "alert(what)"); // Function Constructor
-var says = function(what) { alert(what); } // Function Literal
-function says(what) { alert(what); } // The function statement</code></pre>
+var says = function(what) { alert(what); }; // Function Literal
+function says(what) { alert(what); }; // The function statement</code></pre>
 							</li>
 						
 						</ul>
@@ -457,7 +457,7 @@ var forrest = { // Object Literal
 	says : function() { // works with functions too!
 		return "Stupid is as stupid does";
 	} // no trailing comma (!)
-}</code></pre>
+};</code></pre>
 							</li>
 						</ul>
 					</section>
@@ -525,7 +525,7 @@ alert(forrestFriends instanceof Array);
 alert(forrestFriends instanceof Object);
 
 // Function literal
-var says = function() { alert("Stupid is as stupid does"); }
+var says = function() { alert("Stupid is as stupid does"); };
 alert(typeof says); // <-- the odd one out
 alert(says instanceof Function);
 alert(says instanceof Object);</code></pre>
@@ -570,7 +570,7 @@ var forrest = {
 	says : function() {
 		return "Stupid is as stupid does";
 	}
-}
+};
 
 // test
 console.log(forrest);
@@ -642,7 +642,7 @@ var foo = function() {
 	
     question = "Why don't you love me, Jenny?"; // Local ?
 	console.log(question);
-}
+};
 
 foo();
 console.log(quote);
@@ -874,7 +874,7 @@ do {
 var forrest = {
 	firstName : "Forrest",
 	lastName : "Gump" // no trailing comma (!)
-}
+};
 
 // With
 with (forrest) {
@@ -896,7 +896,7 @@ var forrest = {
 	says : function() {
 		console.log("Stupid is as stupid does");
 	}
-}
+};
 
 // Try-Catch
 try {
@@ -1036,13 +1036,13 @@ var lifeIs = function(boxOfChocolates) {
 	}
 	
 	return "Life is like " + life;
-}
+};
 alert(lifeIs('a Box of Chocolates'));</code></pre>
 						<pre class="bigger fragment"><code contenteditable class="language-js">// Better: Shorthand assignment
-var lifeIs2 = function(boxOfChocolates) {
+var lifeIs = function(boxOfChocolates) {
 	return "Life is like " + (boxOfChocolates || "a Snickers bar");
-}
-alert(lifeIs2('a Box of Chocolates'));</code></pre>
+};
+alert(lifeIs("a Box of Chocolates"));</code></pre>
 					</section>
 
 					<section>
@@ -1054,7 +1054,7 @@ var forrest = {
 	says : function() {
 		alert("Stupid is as stupid does");
 	}
-}
+};
 
 // How you'd probably write it at first
 if ((forrest != null) && (forrest.says != null)) {
@@ -1067,7 +1067,7 @@ var forrest = {
 	says : function() {
 		alert("Stupid is as stupid does");
 	}
-}
+};
 
 // Short circuit logic
 forrest && forrest.says && forrest.says();
@@ -1096,10 +1096,10 @@ forrest && forrest.says && forrest.says();
 var says = new Function("what", "alert(what)");
 
 // function statement or function declaration
-function says(what) { alert(what); }
+function says(what) { alert(what); };
 
 // function expression or function operator
-var says = function(what) { alert(what); }</code></pre>
+var says = function(what) { alert(what); };</code></pre>
 							</li>
 							<li class="fragment">
 								Preferred way is via the function expression
@@ -1115,7 +1115,7 @@ var says = function(what) { alert(what); }</code></pre>
 								<pre class="bigger"><code contenteditable class="language-js">// function expression, one argument (string preferably)
 var says = function(what) {
 	alert(what);
-}
+};
 
 says("Stupid is as stupid does");</code></pre>
 							</li>
@@ -1123,10 +1123,10 @@ says("Stupid is as stupid does");</code></pre>
 								Arguments can be passed on
 								<pre class="bigger"><code contenteditable class="language-js">var says = function(what) {
 	alert(what);
-}
+};
 var forrestSays = function(whatForrestSays) {
 	says("Forrest Says '" + whatForrestSays + "'");
-}
+};
 
 forrestSays("Stupid is as stupid does");</code></pre>
 							</li>
@@ -1140,19 +1140,19 @@ forrestSays("Stupid is as stupid does");</code></pre>
 								Non-primitives are passed by Reference
 								<pre class="bigger"><code contenteditable class="language-js">var change = function(who) {
 	who.says = "My name is Forrest, Forrest Gump";
-}
+};
 
 // Object Literal => Object Returned
 var forrest = { 
 	says : "Stupid is as stupid does"
-}
+};
 
 alert(forrest.says);
 change(forrest);
 alert(forrest.says);</code></pre>
 								<pre class="bigger"><code contenteditable class="language-js">var change = function(arr) {
 	arr.unshift("Jenny");
-}
+};
 
 // Array Literal => Array (esentially Object) Returned
 var forrestFriends = ["Bubba","Lieutenant Dan"];
@@ -1171,7 +1171,7 @@ alert(forrestFriends.length);</code></pre>
 								Primitives are passed by value
 								<pre class="bigger"><code contenteditable class="language-js">var change = function(what) {
 	what = "My name is Forrest, Forrest Gump";
-}
+};
 
 var what = "Stupid is as stupid does"; // String literal (string)
 alert(what);
@@ -1182,7 +1182,7 @@ alert(what);</code></pre>
 								Beware: if <em>a primitive variant</em> of the non-primitive argument exists, it's also passed by value!
 								<pre class="bigger"><code contenteditable class="language-js">var change = function(what) {
 	what = "My name is Forrest, Forrest Gump";
-}
+};
 
 var what = new String("Stupid is as stupid does"); // String Instance (Object)
 alert(what);
@@ -1199,15 +1199,15 @@ alert(what);</code></pre>
 								Function arguments can be anything, even other functions!
 								<pre class="bigger"><code contenteditable class="language-js">var log = function(what) {
 	console.log(what);
-}
+};
 
 var say = function(what) {
 	alert(what);
-}
+};
 
 var forrestDoes = function(fn, whatForrestSays) {
 	fn(whatForrestSays);
-}
+};
 
 forrestDoes(say, "Stupid is as stupid does");
 forrestDoes(log, "Stupid is as stupid does");</code></pre>
@@ -1225,16 +1225,16 @@ forrestDoes(log, "Stupid is as stupid does");</code></pre>
 								Can be checked by calling <code>Function#toString</code>
 								<pre class="bigger"><code contenteditable class="language-js">var log = function(what) {
 	console.log(what);
-}
+};
 
 var say = function(what) {
 	alert(what);
-}
+};
 
 var forrestDoes = function(fn, whatForrestSays) {
 	alert(fn.toString());
 	fn(whatForrestSays);
-}
+};
 
 forrestDoes(say, "Stupid is as stupid does");
 forrestDoes(log, "Stupid is as stupid does");</code></pre>
@@ -1249,7 +1249,7 @@ forrestDoes(log, "Stupid is as stupid does");</code></pre>
 								You can even directly pass in a function on the fly, without needing to declare it first
 								<pre class="bigger"><code contenteditable class="language-js">var forrestDoes = function(fn, whatForrestSays) {
 	fn(whatForrestSays);
-}
+};
 
 forrestDoes(function(what) { // say from the previous example
 	alert(what);
@@ -1274,10 +1274,13 @@ forrestDoes(function(what) { // log from the previous example
 							<li class="fragment">
 								An example
 								<pre class="bigger"><code contenteditable class="language-js">function change(fn) {
-	fn = function() { alert('changed'); }
-}
-
-var says = function() { alert("Stupid is as stupid does"); }
+	fn = function() {
+		alert('changed');
+	};
+};
+var says = function() {
+	alert("Stupid is as stupid does"); 
+};
 
 says();
 change(says);
@@ -1289,7 +1292,7 @@ says();
 							</li>
 							<li class="fragment">
 								Rather logical, if we remember this
-								<pre class="bigger"><code contenteditable class="language-js">var says = function() { }
+								<pre class="bigger"><code contenteditable class="language-js">var says = function() { };
 alert(typeof says); // Not an object!
 </code></pre>
 							</li>
@@ -1302,7 +1305,7 @@ alert(typeof says); // Not an object!
 							<li class="fragment">Consider this function
 								<pre class="bigger"><code contenteditable class="language-js">var run = function() {
 	alert("Run Forrest, Run");
-}
+};
 run();</code></pre>
 							</li>
 							<li class="fragment">
@@ -1379,10 +1382,10 @@ run();</code></pre>
 								<pre class="bigger"><code contenteditable class="language-js">var forrestSays = function(whatForrestSays) {
 	var says = function(what) {
 		alert(what);
-	}
+	};
 	
 	says(whatForrestSays);
-}
+};
 
 forrestSays("Stupid is as stupid does");</code></pre>
 							</li>
@@ -1391,10 +1394,10 @@ forrestSays("Stupid is as stupid does");</code></pre>
 								<pre class="bigger"><code contenteditable class="language-js">var forrestSays = function(whatForrestSays) {
 	var says = function(what) {
 		alert(what);
-	}
+	};
 
 	says(whatForrestSays);
-}
+};
 
 forrestSays("Stupid is as stupid does");
 says("Stupid is as stupid does"); // will fail, not in scope!</code></pre>
@@ -1409,14 +1412,13 @@ says("Stupid is as stupid does"); // will fail, not in scope!</code></pre>
 								Scope also allows you to re-use names
 								<pre class="bigger"><code contenteditable class="language-js">var says = function(what) {
 	alert("Outer says, says '" + what + "'");
-}
+};
 var forrestSays = function(whatForrestSays) {
 	var says = function(what) {
 		alert("Inner says, says '" + what + "'");
-	}
-
+	};
 	says(whatForrestSays);
-}
+};
 
 forrestSays("Stupid is as stupid does");
 says("Stupid is as stupid does"); // won't fail</code></pre>
@@ -1436,9 +1438,9 @@ says("Stupid is as stupid does"); // won't fail</code></pre>
 							<li class="fragment">Functions can return values if they want</li>
 							<li class="fragment">
 								Use the <code>return</code> statement
-								<pre class="bigger"><code contenteditable class="language-js">var say = function(what,verb) {
+								<pre class="bigger"><code contenteditable class="language-js">var say = function(what, verb) {
 	return what + " " + verb;
-}
+};
 
 var shitHappens = say("Shit","happens");
 alert(shitHappens);</code></pre>
@@ -1448,8 +1450,8 @@ alert(shitHappens);</code></pre>
 								<pre class="bigger"><code contenteditable class="language-js">var say = function(what) {
     return function(verb) {
         return what + " " + verb;
-    }
-}
+    };
+};
 var shit = say("Shit");
 alert(shit("happens"));
 
@@ -1465,8 +1467,10 @@ alert(say("Shit")("happens"));</code></pre>
 							<li class="fragment">
 								Another example
 								<pre class="bigger"><code contenteditable class="language-js">var add = function(x) {
-	return function(y) { return x + y; }
-}
+	return function(y) {
+		return x + y; 
+	};
+};
 var add5 = add(5);
 var add6 = add(6);
 var eleven = add5(6); alert(eleven);
@@ -1477,7 +1481,7 @@ var twelve = add6(6); alert(twelve);
 								What happens here is that internally <code>add5</code> has become
 									<pre class="bigger"><code contenteditable class="language-js">function(y) {
 	return x + y;
-} // How I know? Try alert(add5.toString()); in the example above ;)</code></pre>
+}; // How I know? Try alert(add5.toString()); in the example above ;)</code></pre>
 							</li>
 							<li class="fragment">
 								Now, how come add5 knows the value of <code>x</code>?
@@ -1527,12 +1531,12 @@ var forrestFriends = function() {
 	var friends = ["Bubba", "Lieutenant Dan"];
 	var friendsCount = function() {
 		return friends.length;
-	}
+	};
 	var joinFriends = function() {
 		return firstName + " has " + friendsCount() + " friends: " + friends.join(", ");
-	}
+	};
 	return joinFriends();
-}
+};
 
 alert(forrestFriends());</code></pre>
 								<ul>
@@ -1561,12 +1565,12 @@ var forrestFriends = function() {
 	var friends = ["Bubba", "Lieutenant Dan"];
 	var friendsCount = function() {
 		return friends.length;
-	}
+	};
 	var joinFriends = function() {
 		return firstName + " has " + friendsCount() + " friends: " + friends.join(", ");
-	}
+	};
 	return joinFriends();
-}
+};
 
 alert(forrestFriends());</code></pre>
 								<ul>
@@ -1594,12 +1598,12 @@ var forrestFriends = function() {
 	var friends = ["Bubba", "Lieutenant Dan"];
 	var friendsCount = function() {
 		return friends.length;
-	}
+	};
 	var joinFriends = function() {
 		return firstName + " has " + friendsCount() + " friends: " + friends.join(", ");
-	}
+	};
 	return joinFriends();
-}
+};
 
 alert(forrestFriends());</code></pre>
 								<ul>
@@ -1648,13 +1652,13 @@ var forrestFriends = function() {
 	var friends = ["Bubba", "Lieutenant Dan"];
 	var friendsCount = function() {
 		return friends.length;
-	}
+	};
 	var joinFriends = function() {
 		return firstName + " has " + friendsCount() + " friends: " + friends.join(", ");
-	}
+	};
 	friends.unshift("Jenny"); // Change friends, after the function was created
 	return joinFriends();
-}
+};
 
 alert(forrestFriends());</code></pre>
 							</li>
@@ -1672,12 +1676,12 @@ var forrestFriends = function() {
 	var friends = ["Bubba", "Lieutenant Dan"];
 	var friendsCount = function() {
 		return friends.length;
-	}
+	};
 	var joinFriends = function() {
 		return firstName + " has " + friendsCount() + " friends: " + friends.join(", ");
-	}
+	};
 	return joinFriends;
-}
+};
 
 var ff = forrestFriends();
 // at this moment, the outer function has ended
@@ -1715,7 +1719,7 @@ alert(ff());</code></pre>
 								Say you have a function that should work given any number of parameters
 								<pre class="bigger"><code contenteditable class="language-js">var sum = function(a, b, c, d, e) {
 	return a + b + c + d + e
-}
+};
 alert(sum(1,2)); // NaN (!)
 alert(sum(1,2,3,4,5)); // 15
 alert(sum(1,2,3,4,5,6)); // What now?</code></pre>
@@ -1735,7 +1739,7 @@ alert(sum(1,2,3,4,5,6)); // What now?</code></pre>
 	alert(typeof arguments);
 	alert(arguments instanceof Object);
 	alert(arguments instanceof Array);
-}
+};
 sum(1,2);</code></pre>
 								<ul>
 									<li class="fragment">But beware, that <code>arguments</code> variable is an <code>Object</code>, and not an <code>Array</code>, as you can see!</li>
@@ -1756,7 +1760,7 @@ sum(1,2);</code></pre>
 		sum += parseInt(arguments[i]);
 	}
 	return sum;
-}
+};
 alert(sum(1,2));
 alert(sum(1,2,3,4,5));
 alert(sum(1,2,3,4,5,6));</code></pre>
@@ -1771,12 +1775,12 @@ alert(sum(1,2,3,4,5,6));</code></pre>
 								What if you'd want to pass the <code>arguments</code> to an other function?
 								<pre class="bigger"><code contenteditable class="language-js">var otherFunc=function() {
 	alert("otherFunc : " + arguments.length);
-}
+};
 
 var myFunc = function() {
 	alert("myFunc : " + arguments.length);
 	otherFunc(arguments);
-}
+};
 myFunc(1,2,3,4,5,6,7,8,9,10);</code></pre>
 							</li>
 							<li class="fragment">
@@ -1796,12 +1800,12 @@ myFunc(1,2,3,4,5,6,7,8,9,10);</code></pre>
 								Updated example
 								<pre class="bigger"><code contenteditable class="language-js">var otherFunc = function() {
 	alert("otherFunc : " + arguments.length);
-}
+};
 
 var myFunc = function() {
 	alert("myFunc : " + arguments.length);
 	otherFunc.apply(this, arguments);
-}
+};
 myFunc(1,2,3,4,5,6,7,8,9,10);</code></pre>
 								<ul>
 									<li class="fragment">More on the meaning of <code>this</code> later</li>
@@ -1842,7 +1846,7 @@ myFunc(1,2,3,4,5,6,7,8,9,10);</code></pre>
 	    sentence = arguments[1];
 	
 	return firstName + " says '" + sentence + "'";
-}
+};
 
 alert(says("Forrest","Stupid is as stupid does"));</code></pre>
 							</li>
@@ -1866,14 +1870,14 @@ alert(says("Forrest","Stupid is as stupid does"));</code></pre>
 								... and we can! By using an <code>Object</code>
 								<pre class="bigger"><code contenteditable class="language-js">var says = function(person) {
 	return person.firstName + " says '" + person.sentence + "'";
-}
+};
 
 var forrest = {
 	firstName : "Forrest",
 	lastName : "Gump",
 	sentence : "Stupid is as stupid does",
 	birthYear : 1945
-}
+};
 
 alert(says(forrest));</code></pre>
 							</li>
@@ -1945,7 +1949,7 @@ forrest.firstName = "Forrest";
 forrest.lastName = "Gump";
 forrest.says = function() {
 	return "Stupid is as stupid does";
-}
+};
 
 alert(forrest.says());
 
@@ -1956,7 +1960,7 @@ var forrest = {
     says : function() {
         return "Stupid is as stupid does";
     } // no trailing comma (!)
-}
+};
 
 alert(forrest.says());</code></pre>
 							</li>
@@ -1975,7 +1979,7 @@ var forrest = {
     says : function() {
         return this.firstName + " says 'Stupid is as stupid does'";
     }
-}
+};
 
 alert(forrest.says());</code></pre>
 							</li>
@@ -2010,7 +2014,7 @@ alert(forrest.says());</code></pre>
     says : function() {
         return this.firstName + " says 'Stupid is as stupid does'";
     }
-}
+};
 
 var dan = { // Lieutenant Dan 
 	firstName : "Dan",
@@ -2018,7 +2022,7 @@ var dan = { // Lieutenant Dan
 	says : function() {
 		return this.firstName + " says 'I'm here to try out my sea legs'";
 	}
-}
+};
 
 // Jenny
 // ...
@@ -2043,8 +2047,8 @@ var dan = { // Lieutenant Dan
 	
     this.says = function() {
     	return this.firstName + " says '" + this.sentence + "'";
-    }
-}
+    };
+};
 
 var forrest = new Person("Forrest","Gump","Stupid is as stupid does");
 var dan = new Person("Dan","Taylor","I'm here to try out my sea legs");
@@ -2088,19 +2092,19 @@ alert(dan.says());
 								<pre class="bigger"><code contenteditable class="language-js">var Person = function(firstName, lastName) {
     this.firstName = firstName;
 	this.lastName = lastName;
-}
+};
 
 Person.prototype.isRunning = false;
-Person.prototype.run = function() { this.isRunning = true; }
+Person.prototype.run = function() {
+	this.isRunning = true; 
+};
 
 var forrest = new Person("Forrest","Gump");
 var dan = new Person("Dan","Taylor");
 
 alert(forrest.isRunning ? "Forrest is running" : "Forrest is not running");
 alert(dan.isRunning ? "Dan is running" : "Dan is not running");
-
 forrest.run();
-
 alert(forrest.isRunning ? "Forrest is running" : "Forrest is not running");
 alert(dan.isRunning ? "Dan is running" : "Dan is not running");</code></pre>
 							</li>
@@ -2113,11 +2117,11 @@ alert(dan.isRunning ? "Dan is running" : "Dan is not running");</code></pre>
 							<li class="fragment">
 								You can also add new functionality to the global objects by this
 								<pre class="bigger"><code contenteditable class="language-js">Number.prototype.fahrenheitToCelcius = function() {
-	return (parseInt(this,10) - 32) / 1.8;
-}
+	return (parseInt(this, 10) - 32) / 1.8;
+};
 Number.prototype.celciusToFahrenheit = function() {
-	return (parseInt(this,10) * 1.8) + 32;
-}
+	return (parseInt(this, 10) * 1.8) + 32;
+};
 
 var c = 40;
 var f = 104;
@@ -2140,16 +2144,16 @@ alert(f.fahrenheitToCelcius());
 								<pre class="bigger"><code contenteditable class="language-js">var Person = function(firstName, lastName) {
     this.firstName = firstName;
 	this.lastName = lastName;
-}
+};
 
 Person.prototype.fullName = function() {
 	return this.firstName + " " + this.lastName;
-}
+};
 
 var Actor = function(firstName, lastName) {
 	this.firstName = firstName;
 	this.lastName = lastName;
-}
+};
 Actor.prototype = new Person; // Inheritance
 
 var forrest = new Person("Forrest","Gump");
@@ -2169,15 +2173,15 @@ alert(tomhanks.fullName());</code></pre>
 								<pre class="bigger"><code contenteditable class="language-js">var Person = function(firstName, lastName) {
     this.firstName = firstName;
 	this.lastName = lastName;
-}
+};
 
 Person.prototype.fullName = function() {
 	return this.firstName + " " + this.lastName;
-}
+};
 
 var Actor = function(firstName, lastName) {
 	Person.call(this, firstName, lastName);
-}
+};
 Actor.prototype = new Person;
 
 var forrest = new Person("Forrest","Gump");
@@ -2200,17 +2204,17 @@ alert(tomhanks.fullName());</code></pre>
 								<pre class="bigger"><code contenteditable class="language-js">var Person = function(firstName, lastName) {
     this.firstName = firstName;
 	this.lastName = lastName;
-}
+};
 
 var Actor = function(firstName, lastName) {
 	Person.call(this, firstName, lastName);
-}
+};
 Actor.prototype = new Person;
 
 Person.prototype.isHuman = true;
 
-var forrest = new Person("Forrest","Gump");
-var tomhanks = new Actor("Tom","Hanks");
+var forrest = new Person("Forrest", "Gump");
+var tomhanks = new Actor("Tom", "Hanks");
 
 alert(forrest.isHuman ? "Human" : "Not Human");
 alert(tomhanks.isHuman ? "Human" : "Not Human");</code></pre>
@@ -2223,12 +2227,12 @@ alert(tomhanks.isHuman ? "Human" : "Not Human");</code></pre>
 						<ul>
 							<li class="fragment">
 								The <strong><em>module pattern</em></strong>, <a href="http://ejohn.org/blog/simple-javascript-inheritance/">popularized by Douglas Crockford</a>, allows having private datamembers
-								<pre class="bigger"><code contenteditable class="language-js">var forrest = function() {
+								<pre class="bigger"><code contenteditable class="language-js">var forrest = (function() {
 
 	var firstName = "Forrest"; // Private var
 	var says = function() { // Private function
 		return "Stupid is as stupid does";
-	}
+	};
 	
 	return {
 		lastName : "Gump", // Public var
@@ -2239,7 +2243,7 @@ alert(tomhanks.isHuman ? "Human" : "Not Human");</code></pre>
 			return firstName; // no this when accessing private vars!
 		}
 	};
-}(); // IIFE
+})(); // IIFE
 
 alert(forrest.getFirstName() + " " + forrest.getLastName());</code></pre>
 							</li>
@@ -2251,26 +2255,26 @@ alert(forrest.getFirstName() + " " + forrest.getLastName());</code></pre>
 						<ul>
 							<li class="fragment">
 								Variant of the <strong><em>module pattern</em></strong>: make everything private and provide pointers to them in the public part
-								<pre class="bigger"><code contenteditable class="language-js">var forrest = function() {
+								<pre class="bigger"><code contenteditable class="language-js">var forrest = (function() {
 
 	var firstName = "Forrest";
 	var lastName = "Gump";
 	var says = function() {
 		return "Stupid is as stupid does";
-	}
+	};
 	var getLastName = function() {
 		return lastName;
-	}
+	};
 	var getFirstName = function () {
 		return firstName;
-	}
+	};
 
 	return {
 		getFirstName: getFirstName,
 		getLastName: getLastName,
 		whatDoesHeSay: says
 	};
-}(); // IIFE
+})(); // IIFE
 
 alert(forrest.whatDoesHeSay());</code></pre>
 							</li>
@@ -2588,19 +2592,19 @@ for (var i = 0, len = allSpans.length; i < len; i++) {
 								The old way: <code>#on<em>Eventname</em></code>
 								<pre class="bigger"><code contenteditable class="language-js runonce">var p = document.querySelector("#onevent-demo p");
 									
-p.onclick = function() { alert('You clicked me!'); }
-p.onmouseover = function() { this.style.backgroundColor = "#333"; }
-p.onmouseout = function() { this.style.backgroundColor = ""; }</code></pre>
+p.onclick = function() { alert('You clicked me!'); };
+p.onmouseover = function() { this.style.backgroundColor = "#333"; };
+p.onmouseout = function() { this.style.backgroundColor = ""; };</code></pre>
 								<p style="text-align: center; cursor: pointer;">I am the demo</p>
 							</li>
 							<li class="fragment" id="oneventtwice-demo">
 								Note that when you hook an event twice, it will be overwritten
 								<pre class="bigger"><code contenteditable class="language-js runonce">var p = document.querySelector("#oneventtwice-demo p");
 
-p.onclick = function() { alert('You clicked me (1)!'); }
-p.onclick = function() { alert('You clicked me (2)!'); }
-p.onmouseover = function() { this.style.backgroundColor = "#333"; }
-p.onmouseout = function() { this.style.backgroundColor = ""; }</code></pre>
+p.onclick = function() { alert('You clicked me (1)!'); };
+p.onclick = function() { alert('You clicked me (2)!'); };
+p.onmouseover = function() { this.style.backgroundColor = "#333"; };
+p.onmouseout = function() { this.style.backgroundColor = ""; };</code></pre>
 								<p style="text-align: center; cursor: pointer;">I am the 2nd demo</p>
 							</li>
 						</ul>
@@ -2661,7 +2665,9 @@ p.addEventListener('mouseout', function() {
 								Possible by <code>#removeEventListener</code>, but only if you've attached a named function
 								<pre class="bigger"><code contenteditable class="language-js runonce">var p = document.querySelector("#removeeventlistener-demo p");
 
-var clickHandler = function() { alert('You clicked me!'); }
+var clickHandler = function() {
+	alert('You clicked me!'); 
+};
 
 p.addEventListener('click', clickHandler);
 p.removeEventListener('click', clickHandler);
@@ -3059,7 +3065,7 @@ for (var i = 6; i < 9; i++) { // add three links
 		};
     }(i);
 	target.appendChild(link);
-};</code></pre>
+}</code></pre>
 																<div class="result" style="text-align: center;"><em>(Run the code example to see the result appear here)</em></div>
 							</li>
 						</ul>
@@ -3194,7 +3200,7 @@ for (var i = 6; i < 9; i++) { // add three links
 &lt;/html&gt;</code></pre>
 								<pre class="bigger"><code class="language-js dontrun">window.onload = function() {
 	// ... your code here
-}</code></pre>
+};</code></pre>
 								<ul>
 									<li class="fragment">Old syntax + Only allows for one function to be executed when the document (including images!) has finished loading</li>
 								</ul>
