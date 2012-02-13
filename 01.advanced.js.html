@@ -431,9 +431,9 @@ var isRunning = false; // Boolean Literal
 var hasR = new RegExp("r", "i"); // RegExp Constructor
 var hasR = /r/i; // RegExp Literal
 
-var says = new Function("what", "alert(what)"); // Function Constructor
-var says = function(what) { alert(what); }; // Function Literal
-function says(what) { alert(what); }; // The function statement</code></pre>
+var says = new Function("sentence", "alert(sentence)"); // Function Constructor
+var says = function(sentence) { alert(sentence); }; // Function Literal
+function says(sentence) { alert(sentence); }; // The function statement</code></pre>
 							</li>
 						
 						</ul>
@@ -1096,13 +1096,13 @@ forrest && forrest.says && forrest.says();
 							<li class="fragment">
 								Functions can be defined in three ways
 								<pre class="bigger"><code contenteditable class="language-js">// Function Constructor
-var says = new Function("what", "alert(what)");
+var says = new Function("sentence", "alert(sentence)");
 
 // function statement or function declaration
-function says(what) { alert(what); };
+function says(sentence) { alert(sentence); };
 
 // function expression or function operator
-var says = function(what) { alert(what); };</code></pre>
+var says = function(sentence) { alert(sentence); };</code></pre>
 							</li>
 							<li class="fragment">
 								Preferred way is via the function expression
@@ -1115,16 +1115,16 @@ var says = function(what) { alert(what); };</code></pre>
 						<ul>
 							<li class="fragment">
 								Basic usage
-								<pre class="bigger"><code contenteditable class="language-js">var says = function(what) {
-	alert(what);
+								<pre class="bigger"><code contenteditable class="language-js">var says = function(sentence) {
+	alert(sentence);
 };
 
 says("Stupid is as stupid does");</code></pre>
 							</li>
 							<li class="fragment">
 								Arguments can be passed on
-								<pre class="bigger"><code contenteditable class="language-js">var says = function(what) {
-	alert(what);
+								<pre class="bigger"><code contenteditable class="language-js">var says = function(sentence) {
+	alert(sentence);
 };
 
 var forrestSays = function(whatForrestSays) {
@@ -1141,18 +1141,18 @@ forrestSays("Stupid is as stupid does");</code></pre>
 						<ul>
 							<li class="fragment">
 								Non-primitives are passed by Reference
-								<pre class="bigger"><code contenteditable class="language-js">var change = function(who) {
-	who.says = "My name is Forrest, Forrest Gump";
+								<pre class="bigger"><code contenteditable class="language-js">var change = function(obj) {
+	obj.sentence = "My name is Forrest, Forrest Gump";
 };
 
 // Object Literal => Object Returned
 var forrest = { 
-	says : "Stupid is as stupid does"
+	sentence : "Stupid is as stupid does"
 };
 
-alert(forrest.says);
+alert(forrest.sentence);
 change(forrest);
-alert(forrest.says);</code></pre>
+alert(forrest.sentence);</code></pre>
 								<pre class="bigger"><code contenteditable class="language-js">var change = function(arr) {
 	arr.unshift("Jenny");
 };
@@ -1172,25 +1172,25 @@ alert(forrestFriends.length);</code></pre>
 						<ul>
 							<li class="fragment">
 								Primitives are passed by value
-								<pre class="bigger"><code contenteditable class="language-js">var change = function(what) {
-	what = "My name is Forrest, Forrest Gump";
+								<pre class="bigger"><code contenteditable class="language-js">var change = function(sentence) {
+	sentence = "My name is Forrest, Forrest Gump";
 };
 
-var what = "Stupid is as stupid does"; // String literal (string)
-alert(what);
-change(what);
-alert(what);</code></pre>
+var sentence = "Stupid is as stupid does"; // String literal (string)
+alert(sentence);
+change(sentence);
+alert(sentence);</code></pre>
 							</li>
 							<li class="fragment">
 								Beware: if <em>a primitive variant</em> of the non-primitive argument exists, it's also passed by value!
-								<pre class="bigger"><code contenteditable class="language-js">var change = function(what) {
-	what = "My name is Forrest, Forrest Gump";
+								<pre class="bigger"><code contenteditable class="language-js">var change = function(sentence) {
+	sentence = "My name is Forrest, Forrest Gump";
 };
 
-var what = new String("Stupid is as stupid does"); // String Instance (Object)
-alert(what);
-change(what);
-alert(what);</code></pre>
+var sentence = new String("Stupid is as stupid does"); // String Instance (Object)
+alert(sentence);
+change(sentence);
+alert(sentence);</code></pre>
 							</li>
 						</ul>
 					</section>
@@ -1200,20 +1200,20 @@ alert(what);</code></pre>
 						<ul>
 							<li class="fragment">
 								Function arguments can be anything, even other functions!
-								<pre class="bigger"><code contenteditable class="language-js">var log = function(what) {
-	console.log(what);
+								<pre class="bigger"><code contenteditable class="language-js">var logs = function(sentence) {
+	console.log(sentence);
 };
 
-var say = function(what) {
-	alert(what);
+var says = function(sentence) {
+	alert(sentence);
 };
 
-var forrestDoes = function(fn, whatForrestSays) {
-	fn(whatForrestSays);
+var forrestDoes = function(fn, sentence) {
+	fn(sentence);
 };
 
-forrestDoes(say, "Stupid is as stupid does");
-forrestDoes(log, "Stupid is as stupid does");</code></pre>
+forrestDoes(says, "Stupid is as stupid does");
+forrestDoes(logs, "Stupid is as stupid does");</code></pre>
 							</li>
 						</ul>
 					</section>
@@ -1226,21 +1226,21 @@ forrestDoes(log, "Stupid is as stupid does");</code></pre>
 							</li>
 							<li class="fragment">
 								Can be checked by calling <code>Function#toString</code>
-								<pre class="bigger"><code contenteditable class="language-js">var log = function(what) {
-	console.log(what);
+								<pre class="bigger"><code contenteditable class="language-js">var logs = function(sentence) {
+	console.log(sentence);
 };
 
-var say = function(what) {
-	alert(what);
+var says = function(sentence) {
+	alert(sentence);
 };
 
-var forrestDoes = function(fn, whatForrestSays) {
+var forrestDoes = function(fn, sentence) {
 	alert(fn.toString());
-	fn(whatForrestSays);
+	fn(sentence);
 };
 
-forrestDoes(say, "Stupid is as stupid does");
-forrestDoes(log, "Stupid is as stupid does");</code></pre>
+forrestDoes(says, "Stupid is as stupid does");
+forrestDoes(logs, "Stupid is as stupid does");</code></pre>
 							</li>
 						</ul>
 					</section>
@@ -1250,16 +1250,16 @@ forrestDoes(log, "Stupid is as stupid does");</code></pre>
 						<ul>
 							<li class="fragment">
 								You can even directly pass in a function on the fly, without needing to declare it first
-								<pre class="bigger"><code contenteditable class="language-js">var forrestDoes = function(fn, whatForrestSays) {
-	fn(whatForrestSays);
+								<pre class="bigger"><code contenteditable class="language-js">var forrestDoes = function(fn, sentence) {
+	fn(sentence);
 };
 
-forrestDoes(function(what) { // say from the previous example
-	alert(what);
+forrestDoes(function(sentence) { // says from the previous example
+	alert(sentence);
 }, "Stupid is as stupid does");
 
-forrestDoes(function(what) { // log from the previous example
-	console.log(what);
+forrestDoes(function(sentence) { // logs from the previous example
+	console.log(sentence);
 }, "Stupid is as stupid does");</code></pre>
 							</li>
 							<li class="fragment">
@@ -1357,8 +1357,8 @@ run();</code></pre>
 						<ul>
 							<li class="fragment">
 								IIFE's work with function parameters too
-								<pre class="bigger"><code contenteditable class="language-js">(function(what) {
-	alert(what);
+								<pre class="bigger"><code contenteditable class="language-js">(function(sentence) {
+	alert(sentence);
 })("Run Forrest, Run");</code></pre>
 								<ul>
 									<li class="fragment">
@@ -1370,8 +1370,8 @@ run();</code></pre>
 							<li class="fragment">
 								Alternative example
 								<pre class="bigger"><code contenteditable class="language-js">var toSay = "Run Forrest, Run";
-(function(what) {
-	alert(what);
+(function(sentence) {
+	alert(sentence);
 })(toSay);</code></pre>
 							</li>
 						</ul>
@@ -1383,8 +1383,8 @@ run();</code></pre>
 							<li class="fragment">
 								It's possible to nest functions
 								<pre class="bigger"><code contenteditable class="language-js">var forrestSays = function(whatForrestSays) {
-	var says = function(what) {
-		alert(what);
+	var says = function(sentence) {
+		alert(sentence);
 	};
 	
 	says(whatForrestSays);
@@ -1395,8 +1395,8 @@ forrestSays("Stupid is as stupid does");</code></pre>
 							<li class="fragment">
 								Keep the scope in mind!
 								<pre class="bigger"><code contenteditable class="language-js">var forrestSays = function(whatForrestSays) {
-	var says = function(what) {
-		alert(what);
+	var says = function(sentence) {
+		alert(sentence);
 	};
 
 	says(whatForrestSays);
@@ -1413,13 +1413,13 @@ says("Stupid is as stupid does"); // will fail, not in scope!</code></pre>
 						<ul>
 							<li class="fragment">
 								Scope also allows you to re-use names
-								<pre class="bigger"><code contenteditable class="language-js">var says = function(what) {
-	alert("Outer says, says '" + what + "'");
+								<pre class="bigger"><code contenteditable class="language-js">var says = function(sentence) {
+	alert("Outer says, says '" + sentence + "'");
 };
 
 var forrestSays = function(whatForrestSays) {
-	var says = function(what) {
-		alert("Inner says, says '" + what + "'");
+	var says = function(sentence) {
+		alert("Inner says, says '" + sentence + "'");
 	};
 	says(whatForrestSays);
 };
@@ -1941,9 +1941,9 @@ alert(says(forrest));</code></pre>
 
 					<section>
 						<h2>Advanced JavaScript: Objects</h2>
-						<p><img src="assets/01/army.jpg" alt="To do whatever you tell me, drill sergeant!" title="To do whatever you tell me, drill sergeant!" width="467" height="316" /></p>
+						<p><img src="assets/01/army.jpg" alt="To do IKDOEICT you tell me, drill sergeant!" title="To do IKDOEICT you tell me, drill sergeant!" width="467" height="316" /></p>
 						<q>Gump! What's your sole purpose in this army?</q><br /> 
-						<q>To do whatever you tell me, drill sergeant!</q>
+						<q>To do IKDOEICT you tell me, drill sergeant!</q>
 					</section>
 
 					<section>
@@ -3045,8 +3045,8 @@ for (var i = 3; i < 6; i++) { // add three links
 										Remember this?
 										<pre class="bigger"><code contenteditable class="language-js">var toSay = "Run Forrest, Run";
 
-(function(what) {
-	console.log(what);
+(function(sentence) {
+	console.log(sentence);
 })(toSay);</code></pre>
 									</li>
 									<li class="fragment">
@@ -3275,7 +3275,7 @@ document.addEventListener('DOMContentLoaded', function(event) {
 						<ul>
 							<li class="fragment">
 								The simplest way is to make use of the Object Literal. Just think of a name and you're good to go
-								<pre class="bigger"><code contenteditable class="language-js">var WHATEVER = {
+								<pre class="bigger"><code contenteditable class="language-js">var IKDOEICT = {
 	foo : {
 		bar : function(x) { return x; },
 		baz : function(x) { return x; }
@@ -3287,7 +3287,7 @@ document.addEventListener('DOMContentLoaded', function(event) {
 	}
 };
 
-alert(WHATEVER.foobar.foo("test"));</code></pre>
+alert(IKDOEICT.foobar.foo("test"));</code></pre>
 							</li>
 						</ul>
 					</section>
@@ -3298,24 +3298,24 @@ alert(WHATEVER.foobar.foo("test"));</code></pre>
 							<li class="fragment">
 								If your code spans over multiple files, then you still can use this
 								<pre class="bigger"><code contenteditable class="language-js">// file 1
-var WHATEVER = WHATEVER || {}; // use existing WHATEVER, or create a new Object
+var IKDOEICT = IKDOEICT || {}; // use existing IKDOEICT, or create a new Object
 
-WHATEVER.foo = {
+IKDOEICT.foo = {
 	bar : function(x) { return x; },
 	baz : function(x) { return x; }
 };
 
 // file 2
-var WHATEVER = WHATEVER || {}; // use existing WHATEVER, or create a new Object
+var IKDOEICT = IKDOEICT || {}; // use existing IKDOEICT, or create a new Object
 
-WHATEVER.foobar = {
+IKDOEICT.foobar = {
 	foo : function(x) { return x; },
 	bar : function(x) { return x; },
 	baz : function(x) { return x; }
 };
 
 // test
-alert(WHATEVER.foo.baz("test"));</code></pre>
+alert(IKDOEICT.foo.baz("test"));</code></pre>
 							</li>
 						</ul>
 					</section>
@@ -3325,7 +3325,7 @@ alert(WHATEVER.foo.baz("test"));</code></pre>
 						<ul>
 							<li class="fragment">
 								Using an IIFE is also possible
-								<pre class="bigger"><code contenteditable class="language-js">var WHATEVER = WHATEVER || {};
+								<pre class="bigger"><code contenteditable class="language-js">var IKDOEICT = IKDOEICT || {};
 
 (function(o){
 
@@ -3340,10 +3340,10 @@ alert(WHATEVER.foo.baz("test"));</code></pre>
 		baz : function(x) { return x; }
 	}
 
-})(WHATEVER);
+})(IKDOEICT);
 
 // test
-alert(WHATEVER.foo.baz("test"));</code></pre>
+alert(IKDOEICT.foo.baz("test"));</code></pre>
 							</li>
 						</ul>
 					</section>
@@ -3353,7 +3353,7 @@ alert(WHATEVER.foo.baz("test"));</code></pre>
 						<ul>
 							<li class="fragment">
 								The Module Pattern can also be used. Allows you to have private functions/datamembers.
-								<pre class="bigger"><code contenteditable class="language-js">var WHATEVER = (function(){
+								<pre class="bigger"><code contenteditable class="language-js">var IKDOEICT = (function(){
 
 	var privateFunction = function() { return; }
 
@@ -3372,7 +3372,7 @@ alert(WHATEVER.foo.baz("test"));</code></pre>
 })();
 
 // test
-alert(WHATEVER.foo.baz("test"));</code></pre>
+alert(IKDOEICT.foo.baz("test"));</code></pre>
 							</li>
 						</ul>
 					</section>
