@@ -1183,9 +1183,36 @@ forrestDoes(log, "Stupid is as stupid does");</code></pre>
 							</li>
 						</ul>
 					</section>
-
+					
 					<section>
 						<h2>Function arguments (4)</h2>
+						<ul>
+							<li class="fragment">
+								Internally, JavaScript will replace fn with the actual passed in function
+							</li>
+							<li class="fragment">
+								Can be checked by calling <code>Function#toString</code>
+								<pre class="bigger"><code contenteditable class="language-js">var log = function(what) {
+	console.log(what);
+}
+
+var say = function(what) {
+	alert(what);
+}
+
+var forrestDoes = function(fn, whatForrestSays) {
+	alert(fn.toString());
+	fn(whatForrestSays);
+}
+
+forrestDoes(say, "Stupid is as stupid does");
+forrestDoes(log, "Stupid is as stupid does");</code></pre>
+							</li>
+						</ul>
+					</section>
+
+					<section>
+						<h2>Function arguments (5)</h2>
 						<ul>
 							<li class="fragment">
 								You can even directly pass in a function on the fly, without needing to declare it first
@@ -1214,24 +1241,20 @@ forrestDoes(function(what) { // log from the previous example
 						<h2>Self Invoking Functions (1)</h2>
 						<ul>
 							<li class="fragment">Consider this function
-								<pre class="bigger"><code contenteditable class="language-js">function run() {
+								<pre class="bigger"><code contenteditable class="language-js">var run = function() {
 	alert("Run Forrest, Run");
 }
 run();</code></pre>
 							</li>
-							<li class="fragment">This works fine too
-								<pre class="bigger"><code contenteditable class="language-js">(function run() {
+							<li class="fragment">
+								No harm in adding some extra brackets
+								<pre class="bigger"><code contenteditable class="language-js">var run = (function() {
 	alert("Run Forrest, Run");
-})(); // function has become self-invoking</code></pre>
+});
+run();</code></pre>
 							</li>
 							<li class="fragment">
-								Best practice is to make the function <em>anonymous</em>
-								<pre class="bigger"><code contenteditable class="language-js">(function() {
-	alert("Run Forrest, Run");
-})(); // better</code></pre>
-								<ul>
-									<li class="fragment">If you really want to know: the named function <a href="http://kangax.github.com/nfe/">can give problems</a></li>
-								</ul>
+								When calling <code>run();</code>, JavaScript will replace the <code>run</code> part of that statement with the actual contents of the variable <code>run</code>
 							</li>
 						</ul>
 					</section>
@@ -1240,18 +1263,23 @@ run();</code></pre>
 						<h2>Self Invoking Functions (2)</h2>
 						<ul>
 							<li class="fragment">
-								So we came up with this
+								So eventually, you'll end up with this
 								<pre class="bigger"><code contenteditable class="language-js">(function() {
-	console.log("Run Forrest, Run");
+	alert("Run Forrest, Run");
 })();</code></pre>
 							</li>
 							<li class="fragment">
-								We call this syntax an <em>Immediately-Invoked Function Expression</em> (IIFE, pronounced <em>iffy</em>) 
+								As you can see, the function is now invoked immediately
+								<ul>
+									<li>
+										We call this an <em>Immediately-Invoked Function Expression</em> (IIFE, pronounced <em>iffy</em>)
+									</li>
+								</ul>
 							</li>
 							<li class="fragment">
 								This is also possible
 								<pre class="bigger"><code contenteditable class="language-js">(function() {
-	console.log("Run Forrest, Run");
+	alert("Run Forrest, Run");
 }()); // The Crockford Way</code></pre>
 							</li>
 						</ul>
@@ -1265,11 +1293,16 @@ run();</code></pre>
 								<pre class="bigger"><code contenteditable class="language-js">(function(what) {
 	console.log(what);
 })("Run Forrest, Run");</code></pre>
+								<ul>
+									<li class="fragment">
+										Which is comparable to calling
+										<pre class="bigger"><code contenteditable class="language-js dontrun">run("Run Forrest, Run");</code></pre>
+									</li>
+								</ul>
 							</li>
 							<li class="fragment">
 								Or, if you want
 								<pre class="bigger"><code contenteditable class="language-js">var toSay = "Run Forrest, Run";
-
 (function(what) {
 	console.log(what);
 })(toSay);</code></pre>
@@ -1327,7 +1360,12 @@ var forrestSays = function(whatForrestSays) {
 forrestSays("Stupid is as stupid does");
 says("Stupid is as stupid does"); // won't fail</code></pre>
 							</li>
-							<li class="fragment">But that's not a best practice, as things can (and will) get complicated.</li>
+							<li class="fragment">
+								But that's not a best practice, as things can (and will) get complicated.
+								<ul>
+									<li class="fragment">Above that, what if you want to run the outer <code>says</code> from within <code>forrestSays</code>?</li>
+								</ul>
+							</li>
 						</ul>
 					</section>
 
