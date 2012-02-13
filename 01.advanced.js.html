@@ -1510,7 +1510,7 @@ var forrestFriends = function() {
 alert(forrestFriends());</code></pre>
 								<ul>
 									<li class="fragment">
-										The scope of <code>joinFriends</code> is everything on the same level of it, thus everything inside the curly brackets of <code>forrestFriends</code>
+										The scope of <code>joinFriends</code> is everything &ldquo;on the same level of it&rdquo;, thus everything inside the curly brackets of <code>forrestFriends</code>
 										<ul>
 											<li class="fragment">
 												So the <code>LexicalEnvironment</code> of the created closure holds the variables<br /> <code>friends</code>, <code>friendsCount</code> and <code>joinFriends</code>
@@ -1546,10 +1546,10 @@ alert(forrestFriends());</code></pre>
 										What about <code>firstName</code>? That wasn't part of the current scope?
 										<ul>
 											<li class="fragment">
-												When a function can't find a variable inside the <code>LexicalEnvironment</code>, it will try the outer <code>LexicalEnvironment</code> (viz. go up one level) to (hope to) find it there
+												When a function can't find a variable inside the current <code>LexicalEnvironment</code>, it will try the outer <code>LexicalEnvironment</code> (go up one level) to (hope to) find it there
 											</li>
 											<li class="fragment">
-												Here in this case, it goes up to the <code>LexicalEnvironment</code> of the closure created when <code>forrestFriends</code> was created; and that one has access to the global scope
+												So it goes up to the <code>LexicalEnvironment</code> of the closure created when <code>forrestFriends</code> was created; which has access to the vars in the global scope
 											</li>
 										</ul>
 									</li>
