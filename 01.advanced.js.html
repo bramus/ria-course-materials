@@ -428,7 +428,7 @@ var birthYear = 1945; // Number Literal
 var isRunning = new Boolean("false"); // Boolean Constructor
 var isRunning = false; // Boolean Literal
 
-var hasR = new RegExp("r","i"); // RegExp Constructor
+var hasR = new RegExp("r", "i"); // RegExp Constructor
 var hasR = /r/i; // RegExp Literal
 
 var says = new Function("what", "alert(what)"); // Function Constructor
@@ -445,7 +445,7 @@ function says(what) { alert(what); }; // The function statement</code></pre>
 							<li class="fragment">
 								Example (2)
 								<pre class="bigger"><code contenteditable class="language-js">var forrestFriends = new Array("Bubba", "Lieutenant Dan");
-var forrestFriends = ["Bubba","Lieutenant Dan"]; // Array Literal
+var forrestFriends = ["Bubba", "Lieutenant Dan"]; // Array Literal
 
 var forrest = new Object();
 forrest.firstName = "Forrest";
@@ -491,7 +491,7 @@ alert(typeof forrestFriends);
 alert(forrestFriends instanceof Array);
 
 // Array Literal
-var forrestFriends = ["Bubba","Lieutenant Dan"];
+var forrestFriends = ["Bubba", "Lieutenant Dan"];
 alert(typeof forrestFriends);
 alert(forrestFriends instanceof Array);</code></pre>
 							</li>
@@ -567,16 +567,17 @@ alert(says instanceof Object);</code></pre>
 var forrest = {
 	firstName : "Forrest",
 	lastName : "Gump",
+	sentence : "Stupid is as stupid does",
 	says : function() {
-		return "Stupid is as stupid does";
+		return this.sentence;
 	}
 };
 
 // test
 console.log(forrest);
-console.log(forrest.firstName);
-console.log(forrest["firstName"]);
-console.log(forrest.says());</code></pre>
+alert(forrest.firstName);
+alert(forrest["firstName"]);
+alert(forrest.says());</code></pre>
 								<ul>
 									<li class="fragment">The <em>keys</em> of the Object Literal may be placed between quotes. When using spaces/special chars in the keys <em>(not recommended though)</em>, quotes must be used</li>
 									<li class="fragment">The dot notation to accessing properties is the preferred way. Square brackets mandatory when properties have spaces in their name</li>
@@ -632,28 +633,28 @@ alert(parseInt("5", 10) + 6 + 7);</code></pre>
 						<ul>
 							<li class="fragment">Global or Local
 								<pre class="bigger"><code contenteditable class="language-js">// Global
-var quote = "I had run for 3 years, 2 months, 14 days, and 16 hours."
+var quote = "I had run for 3 years, 2 months, 14 days, and 16 hours.";
 
 var foo = function() {
 	var saying = "My name is Forrest, Forrest Gump"; // Local
-	console.log(saying);
+	alert(saying);
 
-	console.log(quote); // Access to Global
+	alert(quote); // Access to Global
 	
     question = "Why don't you love me, Jenny?"; // Local ?
-	console.log(question);
+	alert(question);
 };
 
 foo();
-console.log(quote);
-// console.log(saying); // disabled, will fail
-console.log(question); // Nope, Chuck Testa! Erm, I mean global!</code></pre>
+alert(quote);
+// alert(saying); // disabled, will fail
+alert(question); // Nope, Chuck Testa! Erm, I mean global!</code></pre>
 								<ul>
 									<li class="fragment">
 										The scope is also known as the <em>environment</em> in which a variable lives
 									</li>
 									<li class="fragment">
-										Note: the code above will fail when using <a href="https://developer.mozilla.org/en/JavaScript/Strict_mode">Strict Mode</a>, the <code>var</code> keyword is mandatory in it.
+										Note: In <a href="https://developer.mozilla.org/en/JavaScript/Strict_mode">Strict Mode</a>, the <code>var</code> keyword is mandatory.
 									</li>
 								</ul>
 							</li>
@@ -718,7 +719,7 @@ alert(firstName.toUpperCase());
 
 // Look ma, no var
 alert("Forrest".toUpperCase());
-alert(["Bubba","Lieutenant Dan"].length);</code></pre>
+alert(["Bubba", "Lieutenant Dan"].length);</code></pre>
 							</li>
 					</section>
 
@@ -915,12 +916,13 @@ try {
 }
 </code></pre>
 						</div>
+						<p class="fragment"><small>Not a real control structure, but found it fitting here</small></p>
 					</section>
 
 					<section>
 						<h2>Break (1)</h2>
 						<ul>
-							<li class="fragment">Jumps to the end of the statement &amp; aborts the current task</li>
+							<li class="fragment">Jumps to the end of the statement &amp; aborts current task</li>
 							<li class="fragment">
 								Valid inside <code>switch</code>, <code>for</code>, <code>for-in</code>, <code>while</code>, and <code>do-while</code>
 							</li>
@@ -987,6 +989,7 @@ for (var x = 1; x <= 5; x++) {
 }</code></pre>	
 							</li>
 						</ul>
+						<p class="fragment"><small>In this example you get the same result as the first <code>break</code> example</small></p>
 					</section>
 					
 				</section>
@@ -1005,22 +1008,22 @@ for (var x = 1; x <= 5; x++) {
 					<section>
 						<h2>Ternary Operator</h2>
 						<pre class="bigger fragment"><code contenteditable class="language-js">// A var we'll need
-var looking = false;
+var looking = true;
 
 // How you'd probably write it at first
 var forrestSays;
 if (looking) {
-	forrestSays = "I gotta find Bubba!"
+	forrestSays = "I gotta find Bubba!";
 } else {
 	forrestSays = "It's OK";
 }
 alert(forrestSays);</code></pre>
 						<pre class="bigger fragment"><code contenteditable class="language-js">// A var we'll need
-var looking = false;
+var looking = true;
 
 // Better: Ternary operators
-var forrestSays2 = looking ? "I gotta find Bubba!" : "It's OK";
-alert(forrestSays2);</code></pre>
+var forrestSays = looking ? "I gotta find Bubba!" : "It's OK";
+alert(forrestSays);</code></pre>
 					</section>
 
 					<section>
@@ -1112,8 +1115,7 @@ var says = function(what) { alert(what); };</code></pre>
 						<ul>
 							<li class="fragment">
 								Basic usage
-								<pre class="bigger"><code contenteditable class="language-js">// function expression, one argument (string preferably)
-var says = function(what) {
+								<pre class="bigger"><code contenteditable class="language-js">var says = function(what) {
 	alert(what);
 };
 
@@ -1124,6 +1126,7 @@ says("Stupid is as stupid does");</code></pre>
 								<pre class="bigger"><code contenteditable class="language-js">var says = function(what) {
 	alert(what);
 };
+
 var forrestSays = function(whatForrestSays) {
 	says("Forrest Says '" + whatForrestSays + "'");
 };
@@ -1155,7 +1158,7 @@ alert(forrest.says);</code></pre>
 };
 
 // Array Literal => Array (esentially Object) Returned
-var forrestFriends = ["Bubba","Lieutenant Dan"];
+var forrestFriends = ["Bubba", "Lieutenant Dan"];
 
 alert(forrestFriends.length);
 change(forrestFriends);
@@ -1355,7 +1358,7 @@ run();</code></pre>
 							<li class="fragment">
 								IIFE's work with function parameters too
 								<pre class="bigger"><code contenteditable class="language-js">(function(what) {
-	console.log(what);
+	alert(what);
 })("Run Forrest, Run");</code></pre>
 								<ul>
 									<li class="fragment">
@@ -1368,7 +1371,7 @@ run();</code></pre>
 								Alternative example
 								<pre class="bigger"><code contenteditable class="language-js">var toSay = "Run Forrest, Run";
 (function(what) {
-	console.log(what);
+	alert(what);
 })(toSay);</code></pre>
 							</li>
 						</ul>
@@ -1413,6 +1416,7 @@ says("Stupid is as stupid does"); // will fail, not in scope!</code></pre>
 								<pre class="bigger"><code contenteditable class="language-js">var says = function(what) {
 	alert("Outer says, says '" + what + "'");
 };
+
 var forrestSays = function(whatForrestSays) {
 	var says = function(what) {
 		alert("Inner says, says '" + what + "'");
@@ -1438,25 +1442,25 @@ says("Stupid is as stupid does"); // won't fail</code></pre>
 							<li class="fragment">Functions can return values if they want</li>
 							<li class="fragment">
 								Use the <code>return</code> statement
-								<pre class="bigger"><code contenteditable class="language-js">var say = function(what, verb) {
+								<pre class="bigger"><code contenteditable class="language-js">var says = function(what, verb) {
 	return what + " " + verb;
 };
 
-var shitHappens = say("Shit","happens");
+var shitHappens = says("Shit", "happens");
 alert(shitHappens);</code></pre>
 							</li>
 							<li class="fragment">
 								Return values can be anything, even functions!
-								<pre class="bigger"><code contenteditable class="language-js">var say = function(what) {
+								<pre class="bigger"><code contenteditable class="language-js">var says = function(what) {
     return function(verb) {
         return what + " " + verb;
     };
 };
-var shit = say("Shit");
+var shit = says("Shit");
 alert(shit("happens"));
 
 // also possible
-alert(say("Shit")("happens"));</code></pre>
+alert(says("Shit")("happens"));</code></pre>
 							</li>
 						</ul>
 					</section>
@@ -1471,10 +1475,12 @@ alert(say("Shit")("happens"));</code></pre>
 		return x + y; 
 	};
 };
-var add5 = add(5);
-var add6 = add(6);
-var eleven = add5(6); alert(eleven);
-var twelve = add6(6); alert(twelve);
+var add5 = add(5),
+    add6 = add(6);
+var eleven = add5(6),
+    twelve = add6(6);
+alert(eleven);
+alert(twelve)
 </code></pre>
 							</li>
 							<li class="fragment">
@@ -1781,6 +1787,7 @@ var myFunc = function() {
 	alert("myFunc : " + arguments.length);
 	otherFunc(arguments);
 };
+
 myFunc(1,2,3,4,5,6,7,8,9,10);</code></pre>
 							</li>
 							<li class="fragment">
@@ -1806,6 +1813,7 @@ var myFunc = function() {
 	alert("myFunc : " + arguments.length);
 	otherFunc.apply(this, arguments);
 };
+
 myFunc(1,2,3,4,5,6,7,8,9,10);</code></pre>
 								<ul>
 									<li class="fragment">More on the meaning of <code>this</code> later</li>
@@ -1848,7 +1856,7 @@ myFunc(1,2,3,4,5,6,7,8,9,10);</code></pre>
 	return firstName + " says '" + sentence + "'";
 };
 
-alert(says("Forrest","Stupid is as stupid does"));</code></pre>
+alert(says("Forrest", "Stupid is as stupid does"));</code></pre>
 							</li>
 							<li class="fragment">
 								Not so difficult to remember that index <code>0</code> is <code>who</code> and index <code>1</code> is <code>what</code> in this example
@@ -2050,8 +2058,8 @@ var dan = { // Lieutenant Dan
     };
 };
 
-var forrest = new Person("Forrest","Gump","Stupid is as stupid does");
-var dan = new Person("Dan","Taylor","I'm here to try out my sea legs");
+var forrest = new Person("Forrest", "Gump", "Stupid is as stupid does");
+var dan = new Person("Dan", "Taylor", "I'm here to try out my sea legs");
 
 alert(forrest.says());
 alert(dan.says());
@@ -2099,8 +2107,8 @@ Person.prototype.run = function() {
 	this.isRunning = true; 
 };
 
-var forrest = new Person("Forrest","Gump");
-var dan = new Person("Dan","Taylor");
+var forrest = new Person("Forrest", "Gump");
+var dan = new Person("Dan", "Taylor");
 
 alert(forrest.isRunning ? "Forrest is running" : "Forrest is not running");
 alert(dan.isRunning ? "Dan is running" : "Dan is not running");
@@ -2156,8 +2164,8 @@ var Actor = function(firstName, lastName) {
 };
 Actor.prototype = new Person; // Inheritance
 
-var forrest = new Person("Forrest","Gump");
-var tomhanks = new Actor("Tom","Hanks");
+var forrest = new Person("Forrest", "Gump");
+var tomhanks = new Actor("Tom", "Hanks");
 
 alert(forrest.fullName());
 alert(tomhanks.fullName());</code></pre>
@@ -2184,8 +2192,8 @@ var Actor = function(firstName, lastName) {
 };
 Actor.prototype = new Person;
 
-var forrest = new Person("Forrest","Gump");
-var tomhanks = new Actor("Tom","Hanks");
+var forrest = new Person("Forrest", "Gump");
+var tomhanks = new Actor("Tom", "Hanks");
 
 alert(forrest.fullName());
 alert(tomhanks.fullName());</code></pre>
@@ -2230,6 +2238,7 @@ alert(tomhanks.isHuman ? "Human" : "Not Human");</code></pre>
 								<pre class="bigger"><code contenteditable class="language-js">var forrest = (function() {
 
 	var firstName = "Forrest"; // Private var
+	
 	var says = function() { // Private function
 		return "Stupid is as stupid does";
 	};
@@ -2243,6 +2252,7 @@ alert(tomhanks.isHuman ? "Human" : "Not Human");</code></pre>
 			return firstName; // no this when accessing private vars!
 		}
 	};
+	
 })(); // IIFE
 
 alert(forrest.getFirstName() + " " + forrest.getLastName());</code></pre>
@@ -2274,6 +2284,7 @@ alert(forrest.getFirstName() + " " + forrest.getLastName());</code></pre>
 		getLastName: getLastName,
 		whatDoesHeSay: says
 	};
+	
 })(); // IIFE
 
 alert(forrest.whatDoesHeSay());</code></pre>
@@ -2628,9 +2639,6 @@ p.addEventListener('mouseout', function() {
 });</code></pre>
 								<p style="text-align: center; cursor: pointer;">I am the demo</p>
 							</li>
-							<li class="fragment">
-								It's also possible to used a named function
-							</li>
 						</ul>
 					</section>
 
@@ -2737,6 +2745,7 @@ p.addEventListener('mouseout', function() {
 							<li class="fragment" id="bubbling-demo">
 								Run the JS code and then click the center box to see bubbling in action
 								<pre class="bigger"><code contenteditable class="language-js runonce">var divs = document.querySelectorAll("#bubbling-demo div");
+
 for (var i = 0, len = divs.length; i < len; i++) {
 	divs[i].addEventListener("click", function(event) {
 		this.style.backgroundColor = 'yellow';
@@ -2761,6 +2770,7 @@ for (var i = 0, len = divs.length; i < len; i++) {
 							<li class="fragment" id="stoppropagation-demo">
 								Possible with <code>Event#stopPropagation</code>
 								<pre class="bigger"><code contenteditable class="language-js runonce">var divs = document.querySelectorAll("#stoppropagation-demo div");
+
 for (var i = 0, len = divs.length; i < len; i++) {
 	divs[i].addEventListener("click", function(event) {
 		this.style.backgroundColor = 'yellow';
@@ -2786,6 +2796,7 @@ for (var i = 0, len = divs.length; i < len; i++) {
 							<li class="fragment" id="stoppropagation-demo">
 								Possible with <code>Event#preventDefault</code>
 								<pre class="bigger"><code contenteditable class="language-js runonce">var link = document.querySelector("#stoppropagation-demo a");
+
 link.addEventListener("click", function(event) {
 	alert("Link is linked to " + this.href + " but won't be followed");
 	event.preventDefault(); // prevent the default action from happening
@@ -2805,6 +2816,7 @@ link.addEventListener("click", function(event) {
 							<li class="fragment" id="bubblingtarget-demo">
 								It's possible to know which was the original element that was clicked during the bubbling
 								<pre class="bigger"><code contenteditable class="language-js runonce">var divs = document.querySelectorAll("#bubblingtarget-demo div");
+
 for (var i = 0, len = divs.length; i < len; i++) {
 	divs[i].addEventListener("click", function(event) {
 		this.style.backgroundColor = 'yellow';
@@ -2835,6 +2847,7 @@ for (var i = 0, len = divs.length; i < len; i++) {
 							<li class="fragment" id="bubbling-advantage-demo">
 								By taking advantage of bubbling and <code>event.target</code> it's possible to bind the handler on the <code>&lt;table&gt;</code> itself.
 								<pre class="bigger"><code contenteditable class="language-js runonce">var table = document.querySelector("#bubbling-advantage-demo table");
+
 table.addEventListener("click", function(event) {
 	alert("Table click event (click was on " + event.target.innerHTML + ")");
 });
@@ -2910,6 +2923,7 @@ table.addEventListener("click", function(event) {
 							<li class="fragment" id="capturing-demo">
 								Of course, it's possible to make it so that the events are fired during the capturing phase, and not the bubbling phase.
 								<pre class="bigger"><code contenteditable class="language-js runonce">var divs = document.querySelectorAll("#capturing-demo div");
+
 for (var i = 0, len = divs.length; i < len; i++) {
 	divs[i].addEventListener("click", function(event) {
 		this.style.backgroundColor = 'cyan';
@@ -2934,6 +2948,7 @@ for (var i = 0, len = divs.length; i < len; i++) {
 							<li class="fragment" id="capturing-and-bubbling-demo">
 								FYI: To combine them both, hook two handlers
 								<pre class="bigger"><code contenteditable class="language-js runonce">var divs = document.querySelectorAll("#capturing-and-bubbling-demo div");
+
 for (var i = 0, len = divs.length; i < len; i++) {
 	divs[i].addEventListener("click", function(event) {
 		this.style.backgroundColor = 'cyan';
@@ -3339,7 +3354,9 @@ alert(WHATEVER.foo.baz("test"));</code></pre>
 							<li class="fragment">
 								The Module Pattern can also be used. Allows you to have private functions/datamembers.
 								<pre class="bigger"><code contenteditable class="language-js">var WHATEVER = (function(){
+
 	var privateFunction = function() { return; }
+
 	return {
 		foo : {
 			bar : function(x) { return x; },
@@ -3351,6 +3368,7 @@ alert(WHATEVER.foo.baz("test"));</code></pre>
 			baz : function(x) { return x; }
 		}
 	};
+
 })();
 
 // test
