@@ -1134,35 +1134,54 @@ forrestSays("Stupid is as stupid does");</code></pre>
 					</section>
 
 					<section>
-						<h2>Function arguments (2)</h2>
+						<h2>Function arguments: Primitives</h2>
 						<ul>
 							<li class="fragment">
-								Arguments are passed by value
+								If it's a primitive type, it'll passed by value
 								<pre class="bigger"><code contenteditable class="language-js">// function expression, one argument (string preferably)
-var says = function(what) {
+var change = function(what) {
 	what = "My name is Forrest, Forrest Gump";
 }
-var what = "Stupid is as stupid does";
+var what = "Stupid is as stupid does"; // String literal (string)
 alert(what);
-says(what);
+change(what);
 alert(what);</code></pre>
 							</li>
 							<li class="fragment">
-								More obvious if you write it like this
-								<pre class="bigger"><code contenteditable class="language-js">
-var says = function(otherWhat) {
-	otherWhat = "My name is Forrest, Forrest Gump";
+								Even stronger: if <em>a primitive variant</em> of the argument exists, it'll passed by value
+								<pre class="bigger"><code contenteditable class="language-js">// function expression, one argument (string preferably)
+var change = function(what) {
+	what = "My name is Forrest, Forrest Gump";
 }
-var what = "Stupid is as stupid does";
+var what = new String("Stupid is as stupid does"); // String Instance (Object)
 alert(what);
-says(what);
+change(what);
 alert(what);</code></pre>
 							</li>
 						</ul>
 					</section>
 
 					<section>
-						<h2>Function arguments (3)</h2>
+						<h2>Function arguments: Non-Primitives</h2>
+						<ul>
+							<li class="fragment">
+								If it's a non-primitive type, it'll passed by reference
+								<pre class="bigger"><code contenteditable class="language-js">// function expression, one argument (string preferably)
+var change = function(who) {
+	who.says = "My name is Forrest, Forrest Gump";
+}
+var forrest = {
+	says : "Stupid is as stupid does"
+}
+alert(forrest.says);
+change(forrest);
+alert(forrest.says);</code></pre>
+							</li>
+						</ul>
+					</section>
+
+					<section>
+						<h2>Function arguments: Functions (1)</h2>
 						<ul>
 							<li class="fragment">
 								Function arguments can be anything, even other functions!
@@ -1185,10 +1204,10 @@ forrestDoes(log, "Stupid is as stupid does");</code></pre>
 					</section>
 					
 					<section>
-						<h2>Function arguments (4)</h2>
+						<h2>Function arguments: Functions (2)</h2>
 						<ul>
 							<li class="fragment">
-								Internally, JavaScript will replace fn with the actual passed in function
+								Internally, JavaScript will replace <code>fn</code> with the actual passed in function
 							</li>
 							<li class="fragment">
 								Can be checked by calling <code>Function#toString</code>
@@ -1212,7 +1231,7 @@ forrestDoes(log, "Stupid is as stupid does");</code></pre>
 					</section>
 
 					<section>
-						<h2>Function arguments (5)</h2>
+						<h2>Function arguments: Functions (3)</h2>
 						<ul>
 							<li class="fragment">
 								You can even directly pass in a function on the fly, without needing to declare it first
@@ -1269,12 +1288,14 @@ run();</code></pre>
 })();</code></pre>
 							</li>
 							<li class="fragment">
-								As you can see, the function is now invoked immediately
+								As you can see, the function is now
 								<ul>
-									<li>
-										We call this an <em>Immediately-Invoked Function Expression</em> (IIFE, pronounced <em>iffy</em>)
-									</li>
+									<li class="fragment">anonymous</li>
+									<li class="fragment">invoked immediately</li>
 								</ul>
+							</li>
+							<li class="fragment">
+								We call this an <em>Immediately-Invoked Function Expression</em> (IIFE, pronounced <em>iffy</em>)
 							</li>
 							<li class="fragment">
 								This is also possible
@@ -1301,7 +1322,7 @@ run();</code></pre>
 								</ul>
 							</li>
 							<li class="fragment">
-								Or, if you want
+								Alternative example
 								<pre class="bigger"><code contenteditable class="language-js">var toSay = "Run Forrest, Run";
 (function(what) {
 	console.log(what);
