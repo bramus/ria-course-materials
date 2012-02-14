@@ -61,7 +61,7 @@
 						<p>
 							<figure class="fragment">
 								<img src="assets/01/hamster.png" alt="JavaScript is to Java as Ham is to Hamster" title="JavaScript is to Java as Ham is to Hamster" width="500" height="284" style="border-color: #FFF; border-width: 12px;" />
-								<figcaption>Dixit <a href="http://adactio.com/">Jeremy Keith</a>, Cartoon by <a href="<strong>http://www.flickr.com/photos/manssandstrom/4132454413/in/photostream/</strong>">Brad Colbow</a></figcaption>
+								<figcaption>Dixit <a href="http://adactio.com/">Jeremy Keith</a>, Cartoon by <a href="http://www.flickr.com/photos/manssandstrom/4132454413/in/photostream/">Brad Colbow</a></figcaption>
 							</figure>
 						</p>
 					</section>
@@ -526,7 +526,7 @@ alert(forrestFriends instanceof Object);
 
 // Function literal
 var says = function() { alert('Stupid is as stupid does'); };
-alert(typeof says); // <-- the odd one out
+alert(typeof says); // &lt;-- the odd one out
 alert(says instanceof Function);
 alert(says instanceof Object);</code></pre>
 							</li>
@@ -583,6 +583,7 @@ alert(forrest.says());</code></pre>
 									<li class="fragment">The dot notation to accessing properties is the preferred way. Square brackets mandatory when properties have spaces in their name</li>
 								</ul>
 							</li>
+						</ul>
 					</section>
 
 					<section>
@@ -721,6 +722,7 @@ alert(firstName.toUpperCase());
 alert('Forrest'.toUpperCase());
 alert(['Bubba', 'Lieutenant Dan'].length);</code></pre>
 							</li>
+						</ul>
 					</section>
 
 					<section>
@@ -803,7 +805,7 @@ alert(lifeState);</code></pre>
 var forrestFriends = ['Bubba', 'Lieutenant Dan'];
 
 // For
-for (var i = 0; i < forrestFriends.length; i++) {
+for (var i = 0; i &lt; forrestFriends.length; i++) {
 	alert(forrestFriends[i]);
 }</code></pre>
 						</div>
@@ -817,7 +819,7 @@ for (var i = 0; i < forrestFriends.length; i++) {
 var forrestFriends = ['Bubba', 'Lieutenant Dan'];
 
 // For
-for (var i = 0, len = forrestFriends.length; i < len; i++) {
+for (var i = 0, len = forrestFriends.length; i &lt; len; i++) {
 	alert(forrestFriends[i]);
 }</code></pre>
 						</div>
@@ -928,9 +930,9 @@ try {
 							</li>
 							<li class="fragment">
 								Example
-								<pre class="bigger"><code contenteditable class="language-js">for (var x = 1; x <= 5; x++) {
+								<pre class="bigger"><code contenteditable class="language-js">for (var x = 1; x &lt;= 5; x++) {
 	var y = 1;
-	while (y <= 7) {
+	while (y &lt;= 7) {
 		if (y == 5) { break; }
 		console.log(x + '-' + y);
 		y++;
@@ -946,9 +948,9 @@ try {
 							<li class="fragment">
 								To break the outer loop, one can make use of a <em>label</em>
 								<pre class="bigger"><code contenteditable class="language-js">myForLoop:
-for (var x = 1; x <= 5; x++) {
+for (var x = 1; x &lt;= 5; x++) {
 	var y = 1;
-	while (y <= 7) {
+	while (y &lt;= 7) {
 		if (y == 5) { break myForLoop; }
 		console.log(x + '-' + y);
 		y++;
@@ -965,8 +967,8 @@ for (var x = 1; x <= 5; x++) {
 							<li class="fragment">Valid inside <code>for</code>, <code>for-in</code>, <code>while</code>, and <code>do-while</code>
 							<li class="fragment">
 								Example
-								<pre class="bigger"><code contenteditable class="language-js">for (var x = 1; x <= 5; x++) {
-	for (var y = 1; y <= 7; y++) {
+								<pre class="bigger"><code contenteditable class="language-js">for (var x = 1; x &lt;= 5; x++) {
+	for (var y = 1; y &lt;= 7; y++) {
 		if (y == 5) continue;
 		console.log(x + '-' + y);
 	}
@@ -981,8 +983,8 @@ for (var x = 1; x <= 5; x++) {
 							<li class="fragment">
 								Using a <em>label</em> is also possible
 								<pre class="bigger"><code contenteditable class="language-js">myForLoop:
-for (var x = 1; x <= 5; x++) {
-	for (var y = 1; y <= 7; y++) {
+for (var x = 1; x &lt;= 5; x++) {
+	for (var y = 1; y &lt;= 7; y++) {
 		if (y == 5) { continue myForLoop; }
 		console.log(x + '-' + y);
 	}
@@ -1762,7 +1764,7 @@ sum(1,2);</code></pre>
 								Working example
 								<pre class="bigger"><code contenteditable class="language-js">var sum = function() {
 	var sum = 0;
-	for (var i = 0, len = arguments.length; i < len; i++) {
+	for (var i = 0, len = arguments.length; i &lt; len; i++) {
 		sum += parseInt(arguments[i]);
 	}
 	return sum;
@@ -2002,7 +2004,7 @@ alert(forrest.says());</code></pre>
 								<ol>
 									<li class="fragment">If the function is invoked using <code>Function#call</code> or <code>Function#apply</code>, this will be set to the first argument passed to <code>call</code>/<code>apply</code>. If the first argument passed to <code>call</code>/<code>apply</code> is <code>null</code> or <code>undefined</code>, this will refer to the global object.</li>
 									<li class="fragment">If the function being invoked was created using <code>Function#bind</code>, this will be the first argument that was passed to bind at the time the function was created.</li>
-									<li class="fragment">If the function is being invoked as a method of an object, <code>this</code> will refer to that object.</code>
+									<li class="fragment">If the function is being invoked as a method of an object, <code>this</code> will refer to that object.</li>
 									<li class="fragment">Otherwise, the function is being invoked as a standalone function not attached to any object, and this will refer to the global object.</li>
 								</ol>
 							</li>
@@ -2491,7 +2493,7 @@ alert('The element #' + el.id + ' was changed');</code></pre>
 								Here's another unoptimized example
 <pre class="bigger"><code contenteditable class="language-js">var allSpans = document.querySelectorAll('#manipulating-unoptimized span');
 
-for (var i = 0; i < allSpans.length; i++) {
+for (var i = 0; i &lt; allSpans.length; i++) {
 	allSpans[i].className = 'test';
 	allSpans[i].style.border = '1px solid #FFF';
 	allSpans[i].style.padding = '5px';
@@ -2509,7 +2511,7 @@ for (var i = 0; i < allSpans.length; i++) {
 								Optimized version
 <pre class="bigger"><code contenteditable class="language-js">var allSpans = document.querySelectorAll('#manipulating-optimized span');
 
-for (var i = 0, len = allSpans.length; i < len; i++) {
+for (var i = 0, len = allSpans.length; i &lt; len; i++) {
 	var curSpan = allSpans[i];
 	curSpan.className = 'test';
 	curSpan.style.border = '1px solid #FFF';
@@ -2749,7 +2751,7 @@ p.addEventListener('mouseout', function() {
 								Run the JS code and then click the center box to see bubbling in action
 								<pre class="bigger"><code contenteditable class="language-js runonce">var divs = document.querySelectorAll('#bubbling-demo div');
 
-for (var i = 0, len = divs.length; i < len; i++) {
+for (var i = 0, len = divs.length; i &lt; len; i++) {
 	divs[i].addEventListener('click', function(event) {
 		this.style.backgroundColor = 'yellow';
 		alert(this.className);
@@ -2773,7 +2775,7 @@ for (var i = 0, len = divs.length; i < len; i++) {
 								Possible with <code>Event#stopPropagation</code>
 								<pre class="bigger"><code contenteditable class="language-js runonce">var divs = document.querySelectorAll('#stoppropagation-demo div');
 
-for (var i = 0, len = divs.length; i < len; i++) {
+for (var i = 0, len = divs.length; i &lt; len; i++) {
 	divs[i].addEventListener('click', function(event) {
 		this.style.backgroundColor = 'yellow';
 		alert(this.className);
@@ -2797,12 +2799,12 @@ for (var i = 0, len = divs.length; i < len; i++) {
 							<li class="fragment">
 								In case you want to block the following of a link, submitting of a forms, etc.
 							</li>
-							<li class="fragment" id="stoppropagation-demo">
+							<li class="fragment" id="stopdefault-demo">
 								Possible with <code>Event#preventDefault</code>
-								<pre class="bigger"><code contenteditable class="language-js runonce">var link = document.querySelector('#stoppropagation-demo a');
+								<pre class="bigger"><code contenteditable class="language-js runonce">var link = document.querySelector('#stopdefault-demo a');
 
 link.addEventListener('click', function(event) {
-	alert('Link is linked to ' + this.href + ' but won't be followed');
+	alert('Link is linked to ' + this.href + ' but won\'t be followed');
 	event.preventDefault(); // prevent the default action from happening
 });</code></pre>
 								<p style="text-align: center;"><a href="http://www.ikdoeict.be/">Link to ikdoeict.be</a></p>
@@ -2820,7 +2822,7 @@ link.addEventListener('click', function(event) {
 								It's possible to know which was the original element that was clicked during the bubbling
 								<pre class="bigger"><code contenteditable class="language-js runonce">var divs = document.querySelectorAll('#bubblingtarget-demo div');
 
-for (var i = 0, len = divs.length; i < len; i++) {
+for (var i = 0, len = divs.length; i &lt; len; i++) {
 	divs[i].addEventListener('click', function(event) {
 		this.style.backgroundColor = 'yellow';
 		alert(this.className + ' (click was on ' + event.target.className + ')');
@@ -2925,7 +2927,7 @@ table.addEventListener('click', function(event) {
 								Of course, it's possible to make the event handlers fire during the capturing phase, and not the bubbling phase.
 								<pre class="bigger"><code contenteditable class="language-js runonce">var divs = document.querySelectorAll('#capturing-demo div');
 
-for (var i = 0, len = divs.length; i < len; i++) {
+for (var i = 0, len = divs.length; i &lt; len; i++) {
 	divs[i].addEventListener('click', function(event) {
 		this.style.backgroundColor = 'cyan';
 		alert(this.className);
@@ -2949,7 +2951,7 @@ for (var i = 0, len = divs.length; i < len; i++) {
 								FYI: To combine them both, hook two handlers
 								<pre class="bigger"><code contenteditable class="language-js runonce">var divs = document.querySelectorAll('#capturing-and-bubbling-demo div');
 
-for (var i = 0, len = divs.length; i < len; i++) {
+for (var i = 0, len = divs.length; i &lt; len; i++) {
 	divs[i].addEventListener('click', function(event) {
 		this.style.backgroundColor = 'cyan';
 		alert(this.className);
@@ -2981,7 +2983,7 @@ for (var i = 0, len = divs.length; i < len; i++) {
 
 target.innerHTML = ''; // clear the target
 
-for (var i = 0; i < 3; i++) { // add three links
+for (var i = 0; i &lt; 3; i++) { // add three links
     link = document.createElement('a');
 	link.style.marginRight = '10px';
     link.innerHTML = 'Link ' + i;
@@ -3014,7 +3016,7 @@ for (var i = 0; i < 3; i++) { // add three links
 
 target.innerHTML = ''; // clear the target
 
-for (var i = 3; i < 6; i++) { // add three links
+for (var i = 3; i &lt; 6; i++) { // add three links
     link = document.createElement('a');
 	link.style.marginRight = '10px';
     link.innerHTML = 'Link ' + i;
@@ -3070,7 +3072,7 @@ for (var i = 3; i < 6; i++) { // add three links
 
 target.innerHTML = ''; // clear the target
 
-for (var i = 6; i < 9; i++) { // add three links
+for (var i = 6; i &lt; 9; i++) { // add three links
     link = document.createElement('a');
 	link.style.marginRight = '10px';
     link.innerHTML = 'Link ' + i;
