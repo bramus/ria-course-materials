@@ -31,7 +31,7 @@ window.addEventListener('load', function() {
 	});
 
 
-	// Syntax Highlighting + play nice contenteditable
+	// Syntax Highlighting (all code blocks: JS, CSS, HTML, PHP, etc.) + play nice contenteditable
 	var codeBlocks = document.querySelectorAll('pre code');
 	for (var i = 0, len = codeBlocks.length; i < len ; i++) {
 
@@ -49,13 +49,17 @@ window.addEventListener('load', function() {
 			
 			// Disable on focus
 			codeBlock.addEventListener('focus', function() {
-				this.innerHTML = stripHTML(this.innerHTML);
+				if (this.className.match(new RegExp('(\\s|^)language-html(\\s|$)'))) {
+					this.innerHTML = htmlentities(stripHTML(this.innerHTML));
+				} else {
+					this.innerHTML = stripHTML(this.innerHTML);
+				}
 			});
 		
 			// Re-enable on blur
 			codeBlock.addEventListener('blur', function() {
 				// @note <div> is needed for Chrome which inserts one when ENTER is pressed.
-				this.innerHTML = this.innerHTML.replace(/<br>/gm, "\r\n").replace(/<br\/>/gm, "\r\n").replace(/<br \/>/gm, "\r\n").replace(/<div>/gm, "\r\n").replace(/<\/div>/gm, ""); 
+				this.innerHTML = this.innerHTML.replace(/<br>/gm, '\r\n').replace(/<br\/>/gm, '\r\n').replace(/<br \/>/gm, '\r\n').replace(/<div>/gm, '\r\n').replace(/<\/div>/gm, ''); 
 				hljs.highlightBlock(this, '    ');
 			});
 			
@@ -67,21 +71,24 @@ window.addEventListener('load', function() {
 	var jsBlocks = document.querySelectorAll('code.language-js');
 	for (var i = 0, len = jsBlocks.length; i < len ; i++) {
 
+		// Local reference
+		var jsBlock = jsBlocks[i];
+
 		// may we add the run button to it?
-		if (jsBlocks[i].className.match(new RegExp('(\\s|^)dontrun(\\s|$)'))) continue;
+		if (jsBlock.className.match(new RegExp('(\\s|^)dontrun(\\s|$)'))) continue;
 
 		// Add Run button
 		var button = document.createElement('input');
-		button.type = "submit";
-		button.value = "Run";
-		button.className = "run";
+		button.type = 'submit';
+		button.value = 'Run';
+		button.className = 'run';
 		button.addEventListener('click', function() {
 			eval(stripHTML(this.parentNode.querySelector('code').innerHTML)); // Yeah, that's effin' dangerous!
 		});
-		jsBlocks[i].parentNode.appendChild(button);
+		jsBlock.parentNode.appendChild(button);
 
 		// Hook ctrl+enter to run the code
-		jsBlocks[i].addEventListener('keypress', function(evt) {
+		jsBlock.addEventListener('keypress', function(evt) {
 			if(evt.ctrlKey && (evt.keyCode == 13)) {
 				evt.preventDefault();
 				evt.stopPropagation();
@@ -90,28 +97,45 @@ window.addEventListener('load', function() {
 		}, false);
 
 		// Make Incrementable
-		new Incrementable(jsBlocks[i]);
+		new Incrementable(jsBlock);
 
 	}
 
 	// Helper Function to strip HTML from a string
 	function stripHTML(html) {
-		
 		var tmp = document.createElement('div');
 		tmp.innerHTML = html;
-		return tmp.textContent||tmp.innerText;
-		
+		toReturn = tmp.textContent || tmp.innerText;
+		tmp = null;
+		return toReturn;
+	}
+	
+	function htmlentities(str) {
+        var div = document.createElement('div');
+        div.appendChild(document.createTextNode(str));
+        return div.innerHTML.replace(/"/g, '"').replace(/'/g, '\'');
+	}
+	
+	function html_entity_decode(str) {
+		var tmp = document.createElement('textarea');
+		tmp.innerHTML = str.replace(/</g,"&lt;").replace(/>/g,"&gt;");
+		toReturn = tmp.value;
+		tmp = null;
+		return toReturn;
 	}
 
 	// Make CSS Blocks update referenced elements + Make Incrementable
 	var cssBlocks = document.querySelectorAll('code.language-css');
 	for(var i = 0, len = cssBlocks.length; i < len; i++) {
 
+		// Local reference
+		var cssBlock = cssBlocks[i];
+
 		// Apply style to referenced element(s)
-		new CSSSnippet(cssBlocks[i]);
+		new CSSSnippet(cssBlock);
 
 		// Make Incrementable
-		new Incrementable(cssBlocks[i]);
+		new Incrementable(cssBlock);
 		
 	}
 	
@@ -119,7 +143,7 @@ window.addEventListener('load', function() {
 	window.addEventListener('beforeprint', function(e) {
 		var els = document.querySelectorAll('#reveal .slides > section');
 		for(var i = 0, len = els.length; i < len; i++) {
-			els[i].style.display = "block";
+			els[i].style.display = 'block';
 		}
 	});
 	
