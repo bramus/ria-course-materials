@@ -49,7 +49,7 @@ window.addEventListener('load', function() {
 			
 			// Disable on focus
 			codeBlock.addEventListener('focus', function() {
-				if (this.className.match(new RegExp('(\\s|^)language-html(\\s|$)'))) {
+				if (this.className.match(new RegExp('(\\s|^)language-html(\\s|$)')) || this.className.match(new RegExp('(\\s|^)language-php(\\s|$)'))) {
 					this.innerHTML = htmlentities(stripHTML(this.innerHTML));
 				} else {
 					this.innerHTML = stripHTML(this.innerHTML);
@@ -62,6 +62,21 @@ window.addEventListener('load', function() {
 				this.innerHTML = this.innerHTML.replace(/<br>/gm, '\r\n').replace(/<br\/>/gm, '\r\n').replace(/<br \/>/gm, '\r\n').replace(/<div>/gm, '\r\n').replace(/<\/div>/gm, ''); 
 				hljs.highlightBlock(this, '    ');
 			});
+			
+		}
+		
+		// linked examples
+		if (codeBlock.hasAttribute('data-overlay-example')) {
+
+			// Add Show Example button
+			var button = document.createElement('input');
+			button.type = 'submit';
+			button.value = 'Show Example';
+			button.className = 'run';
+			button.addEventListener('click', function() {
+				showInOverlay(codeBlock, null, this.parentNode.querySelector('code').getAttribute('data-overlay-example'));
+			});
+			codeBlock.parentNode.appendChild(button);
 			
 		}
 		
@@ -172,12 +187,13 @@ window.addEventListener('load', function() {
 	}
 	
 	// show a blob of HTML inside an overlay
-	var showInOverlay = function(codeBlock, html, width, height) {
+	var showInOverlay = function(codeBlock, html, url) {
 		
 		codeBlock.blur();
 		
-		var height = parseInt(height || 460, 10);
-		var width = parseInt(width || 680, 10);
+		var height = parseInt(codeBlock.getAttribute('data-overlay-height') || 460, 10);
+		var width = parseInt(codeBlock.getAttribute('data-overlay-width') || 680, 10);
+		var url = url || 'assets/blank.html';
 		
 		// Make sure overlay UI elements are present
 		if (!document.getElementById('overlayBack')) {
@@ -187,10 +203,7 @@ window.addEventListener('load', function() {
 				e.stopPropagation();
 				
 				// erase contents (to prevent movies from playing int he back for example)
-				var oIframe = document.getElementById('daframe');
-				var oDoc = (oIframe.contentWindow || oIframe.contentDocument);
-				if (oDoc.document) oDoc = oDoc.document;
-				oDoc.write('');
+				document.getElementById('daframe').src= 'assets/blank.html';
 				
 				// hide
 				document.getElementById('overlayBack').style.display = 'none';
@@ -216,13 +229,15 @@ window.addEventListener('load', function() {
 		oc.style.marginLeft = '-' + (width/2) + 'px';
 		
 		// inject iframe
-		oc.innerHTML = '<iframe src="assets/blank.html" height=""' + height + '" width="' + width + '" border="0" id="daframe"></iframe>';
+		oc.innerHTML = '<iframe src="' + url + '" height=""' + height + '" width="' + width + '" border="0" id="daframe"></iframe>';
 		
 		// inject HTML
-		var oIframe = document.getElementById('daframe');
-		var oDoc = (oIframe.contentWindow || oIframe.contentDocument);
-		if (oDoc.document) oDoc = oDoc.document;
-		oDoc.write(html_entity_decode(html));
+		if (html) {
+			var oIframe = document.getElementById('daframe');
+			var oDoc = (oIframe.contentWindow || oIframe.contentDocument);
+			if (oDoc.document) oDoc = oDoc.document;
+			oDoc.write(html_entity_decode(html));
+		}
 		
 		// Show me the money!
 		ob.style.display = 'block';
