@@ -2716,25 +2716,28 @@ p.addEventListener('mouseout', function() {
 					</section>
 
 					<section>
-						<h2>Event Handling: Bubbling</h2>
+						<h2>Event Handling: Bubbling (1)</h2>
 						<ul>
 							<li class="fragment">
 								What will happen is that the browser will fire all the events, one after the other
 							</li>
 							<li class="fragment">
 								The order in which they are fired is from the most inner element outwards. We call this <em><strong>bubbling</strong></em>
+							</li>
+						</ul>
+					</section>
+
+					<section>
+						<h2>Event Handling: Bubbling (2)</h2>
+						<ul>
+							<li class="fragment">
+								Graphical <em>(example where you'd click a cell of a table)</em>
 								<div style="text-align: center; margin-top: 25px">
 									<figure>
-										<img style="background: #FFF;" src="assets/01/event-order-bubbling.gif" alt="" title="" height="202" width="392" />
-										<figcaption>Figure by <a href="http://javascript.info/tutorial/bubbling-and-capturing">JavaScript.info</a></figcaption>
+										<img style="background: #FFF;" src="assets/01/bubbling.png" alt="" title="" height="415" width="385" />
+										<figcaption>Adjusted figure, based upon a figure by <a href="http://www.w3.org/TR/DOM-Level-3-Events/">W3C</a></figcaption>
 									</figure>
 								</div>
-								<ul>
-									<li class="fragment">In other words: the event will bubble up the DOM tree</li>
-								</ul>
-							</li>
-							<li class="fragment">
-								So the order of the events in our example will be 3 - 2 - 1
 							</li>
 						</ul>
 					</section>
@@ -2791,8 +2794,11 @@ for (var i = 0, len = divs.length; i < len; i++) {
 					</section>
 
 					<section>
-						<h2>Event Handling: Stop default</h2>
+						<h2>Event Handling: Stop default action</h2>
 						<ul>
+							<li class="fragment">
+								In case you want to block the following of a link, submitting of a forms, etc.
+							</li>
 							<li class="fragment" id="stoppropagation-demo">
 								Possible with <code>Event#preventDefault</code>
 								<pre class="bigger"><code contenteditable class="language-js runonce">var link = document.querySelector("#stoppropagation-demo a");
@@ -2875,29 +2881,29 @@ table.addEventListener("click", function(event) {
 								So we now know this thing named bubbling which happens when an event is handled: the event bubbles up the DOM tree
 							</li>
 							<li class="fragment">
-								But actually, the event handling consists out of two phases:
+								But actually, event handling consists out of three phases:
 								<ol>
 									<li class="fragment">
 										Capturing of the event
 										<ul>
-											<li class="fragment">Goes from the outer most element inwards</li>
-											<li class="fragment">No event handlers are invoked</li>
+											<li class="fragment">Goes from the outer most element inwards <em>(down the DOM tree)</em></li>
+											<li class="fragment">By default, no event handlers are invoked</li>
+										</ul>
+									</li>
+									<li class="fragment">
+										Defining of the target
+										<ul>
+											<li class="fragment">viz. What was clicked?</li>
 										</ul>
 									</li>
 									<li class="fragment">
 										The bubbling of the event
 										<ul>
-											<li class="fragment">Goes inside out</li>
-											<li class="fragment">Event handlers will be invoked</li>
+											<li class="fragment">Goes inside out <em>(up the DOM tree)</em></li>
+											<li class="fragment">By default, event handlers will be invoked</li>
 										</ul>
 									</li>
 								</ol>
-							</li>
-							<li class="fragment">
-								So in our example the event 
-								<ul>
-									<li class="fragment">First captures down through 1 - 2 - 3</li>
-									<li class="fragment">Then bubbles up through 3 - 2 - 1</li>
 							</li>
 						</ul>
 					</section>
@@ -2906,7 +2912,7 @@ table.addEventListener("click", function(event) {
 						<h2>Event Handling: Capturing &amp; Bubbling</h2>
 						<ul>
 							<li class="fragment">
-								Here's an image to make things clear
+								Graphical <em>(example where you'd click a cell of a table)</em>
 								<div style="text-align: center; margin-top: 25px">
 									<figure>
 										<img style="background: #FFF;" src="assets/01/eventflow.png" alt="" title="" height="415" width="385" />
@@ -2921,7 +2927,7 @@ table.addEventListener("click", function(event) {
 						<h2>Event Handling: Capturing</h2>
 						<ul>
 							<li class="fragment" id="capturing-demo">
-								Of course, it's possible to make it so that the events are fired during the capturing phase, and not the bubbling phase.
+								Of course, it's possible to make the event handlers fire during the capturing phase, and not the bubbling phase.
 								<pre class="bigger"><code contenteditable class="language-js runonce">var divs = document.querySelectorAll("#capturing-demo div");
 
 for (var i = 0, len = divs.length; i < len; i++) {
