@@ -1078,6 +1078,20 @@ var forrest = {
 forrest && forrest.says && forrest.says();
 </code></pre>
 					</section>
+
+					<section>
+						<h2>Chaining</h2>
+						<ul>
+							<li class="fragment">
+								It's possible to <em>chain</em> methods, as long as a &mdash; for the next method &mdash; usable value is returned
+								<pre class="bigger"><code contenteditable class="language-js">var example = 'Forrest'.substr(0,5).split('').join('-').toUpperCase();
+alert(example);</code></pre>
+							</li>
+							<li class="fragment">
+								Interpreted from left to right
+							</li>
+						</ul>
+					</section>
 					
 				</section>
 
@@ -1088,7 +1102,7 @@ forrest && forrest.says && forrest.says();
 
 					<section>
 						<h2>Advanced JavaScript: Functions</h2>
-						<p><img src="assets/01/runforrestrun.jpg" alt='Run Forrest, Run' title='Run Forrest, Run' width="467" height="350" /></p>
+						<p><img src="assets/01/runforrestrun.jpg" alt="Run Forrest, Run" title="Run Forrest, Run" width="467" height="350" /></p>
 						<q>Run Forrest, <code>Run()</code></q>
 					</section>
 
@@ -2303,7 +2317,7 @@ alert(forrest.whatDoesHeSay());</code></pre>
 
 					<section>
 						<h2>JavaScript in the browser</h2>
-						<p><img src="assets/01/browserwars.jpg" alt='Stupid is as stupid does' title='Stupid is as stupid does' width="467" height="350" /></p>
+						<p><img src="assets/01/browserwars.jpg" alt="Stupid is as stupid does" title="Stupid is as stupid does" width="467" height="350" /></p>
 						<q>Stupid is as stupid does</q>
 					</section>
 
