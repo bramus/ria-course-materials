@@ -45,8 +45,8 @@
 				</section>
 
 
-				
-				<!-- 1 : Teaser -->
+
+				<!-- 1 : Broken JS -->
 				<section>
 
 					<section>
@@ -54,13 +54,6 @@
 						<p><img src="assets/02/goodnewseveryone.jpg" alt="Good News Everyone!" title="Good News Everyone!" width="470" height="330" /></p>
 						<q>The bad news: JavaScript is broken.<br />The good news: It can be fixed with more JavaScript!</q>
 					</section>
-					
-				</section>
-
-
-
-				<!-- 2 : The need for ... -->
-				<section>
 
 					<section>
 						<h2>Is JS really broken?</h2>
@@ -70,7 +63,7 @@
 								<ul>
 									<li class="fragment">Not all browsers/versions include the same JavaScript version</li>
 									<li class="fragment">Not all browsers/versions have implemented the DOM Spec in the same manner <em>(back in the day the DOM wasn't even formalized)</em></li>
-									<li class="fragment">Some browsers/versions have implemented the spec wrongly</li>
+									<li class="fragment">Some browsers/versions have implemented the DOM/JS spec wrongly</li>
 									<li class="fragment">Some browsers/versions have added their own proprietary features</li>
 								</ul>
 							</li>
@@ -86,6 +79,7 @@
 					<section>
 						<h2>Graded Browser Support (1)</h2>
 						<ul>
+							<li class="fragment">So which browsers do we need to support then?</li>
 							<li class="fragment">You don't need to support all versions of all browsers</li>
 							<li class="fragment">You need to support the <em>A-Grade Browsers</em>
 								<ul>
@@ -118,11 +112,27 @@
 					</section>
 
 					<section>
-						<h2>Raw JavaScript</h2>
+						<h2>Graded Browser Support (3)</h2>
 						<ul>
-							<li class="fragment">If we were to write our scripts, we'll have to make them work in at least IE8, Firefox 4, Latest Chrome, &amp; Safari 5</li>
 							<li class="fragment">
-								Writing JavaScript for these browsers <strong>will</strong> be painful
+								Our A-Grade Browsers List
+								<ul>
+									<li>Internet Explorer 8+</li>
+									<li>Firefox 4+</li>
+									<li>Safari 5+</li>
+									<li>Chrome (Latest)</li>
+								</ul>
+							</li>
+						</ul>
+						<footer class="fragment">Chrome latest version only, as it pushes updates automatically</footer>
+					</section>
+
+					<section>
+						<h2>Writing JavaScript</h2>
+						<ul>
+							<li class="fragment">If we were to write a script, we'll have to make it work in the A-Grade Browsers</li>
+							<li class="fragment">
+								Supporting all these browsers <strong>will</strong> be painful
 								<ul>
 									<li class="fragment">Simple example: IE8 has no <code>Element#addEventListener</code> support but uses its own proprietary <code>Element#attachEvent</code> to handle events</li>
 								</ul>
@@ -133,10 +143,32 @@
 									<li class="fragment">IE6 is over 10 years old, and only partially implements DOM Level 0</li>
 								</ul>
 							</li>
-							<li class="fragment">In the end, we want to write JavaScript, not fix browser inconsistencies</li>
+							<li class="fragment">
+								In the end, we want to write JavaScript, not fix browser inconsistencies
+								<ul>
+									<li class="fragment">Luckily for us, some smart people have already pondered these inconsistencies</li>
+							</li>
 						</ul>
 					</section>
 
+					<section>
+						<h2>Sidenote</h2>
+						<p class="fragment"><a href="http://dowebsitesneedtolookexactlythesameineverybrowser.com/">dowebsitesneedtolookexactlythesameineverybrowser.com</a></p>
+						<figure class="fragment">
+							<img src="assets/02/dowebsitesneedtolookexactlythesameineverybrowser.png" alt="Do websites need to look exactly the same in every browser?" title="Do websites need to look exactly the same in every browser?" height="350" width="427" style="background: transparent; border: 0; -webkit-box-shadow: none; -moz-box-shadow: none; -ms-box-shadow: none; -o-box-shadow: none; box-shadow: none;" />
+						</figure>
+						<p class="fragment">But your site does need to <em>work</em> in every browser<br /><small>Even in the non A-Grade Browsers</small></p>
+					</section>
+
+				</section>
+
+
+
+				<!-- 2 : Libaries -->
+				<section>
+					<section>
+						<h2>Libraries</h2>
+					</section>
 				</section>
 
 
