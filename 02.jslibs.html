@@ -46,13 +46,97 @@
 
 
 				
-				<!-- 1 :  -->
+				<!-- 1 : Teaser -->
 				<section>
 
 					<section>
-						<h2>...</h2>
+						<h2>Good News Everyone!</h2>
+						<p><img src="assets/02/goodnewseveryone.jpg" alt="Good News Everyone!" title="Good News Everyone!" width="470" height="330" /></p>
+						<q>The bad news: JavaScript is broken.<br />The good news: It can be fixed with more JavaScript!</q>
 					</section>
 					
+				</section>
+
+
+
+				<!-- 2 : The need for ... -->
+				<section>
+
+					<section>
+						<h2>Is JS really broken?</h2>
+						<ul>
+							<li class="fragment">No, but it looks like it</li>
+							<li class="fragment">Culprit: the JS &amp; DOM implementations in the browsers
+								<ul>
+									<li class="fragment">Not all browsers/versions include the same JavaScript version</li>
+									<li class="fragment">Not all browsers/versions have implemented the DOM Spec in the same manner <em>(back in the day the DOM wasn't even formalized)</em></li>
+									<li class="fragment">Some browsers/versions have implemented the spec wrongly</li>
+									<li class="fragment">Some browsers/versions have added their own proprietary features</li>
+								</ul>
+							</li>
+							<li class="fragment">
+								Also: some browsers have memory leaks
+							</li>
+							<li class="fragment">
+								Things have gotten better by now, yet we sometimes are forced to support an old/faulty version/syntax
+							</li>
+						</ul>
+					</section>
+
+					<section>
+						<h2>Graded Browser Support (1)</h2>
+						<ul>
+							<li class="fragment">You don't need to support all versions of all browsers</li>
+							<li class="fragment">You need to support the <em>A-Grade Browsers</em>
+								<ul>
+									<li class="fragment">List of browsers in which your website must work</li>
+									<li class="fragment">Compiled by Yahoo!</li>
+									<li class="fragment">Based upon visitor statistics</li>
+									<li class="fragment">Last updated 07/2011 <em>(ages ago in webdev!)</em></li>
+								</ul>
+							</li>
+						</ul>
+						<figure class="fragment">
+							<img src="assets/02/agrade-07-2011.png" alt="A-Grade Browsers (07/2011)" title="A-Grade Browsers (07/2011)" width="425" height="144" />
+							<figcaption><a href="http://yuilibrary.com/yui/docs/tutorials/gbs/">A-Grade Browsers (07/2011)</a>, by Yahoo!</figcaption>
+						</figure>
+					</section>
+
+					<section>
+						<h2>Graded Browser Support (2)</h2>
+						<ul>
+							<li class="fragment">Let's take a look at the current statistics though</li>
+						</ul>
+						<figure class="fragment">
+							<img src="assets/02/iestats.png" alt="Internet Explorer Statistics (Jan 2009 - Jan 2012)" title="Internet Explorer Statistics (Jan 2009 - Jan 2012)" width="543" height="280" />
+							<figcaption>Internet Explorer Statistics (Jan 2009 - Jan 2012), by <a href="http://gs.statcounter.com/">StatCounter</a></figcaption>
+						</figure>
+						<ul>
+							<li class="fragment">IE6 &amp; IE7 are nearly dead; IE8 still quite popular</li>
+							<li class="fragment">For our own sake, we'll omit IE6 &amp; IE7 from our own <em>A-Grade Browsers</em> list</li>
+						</ul>
+					</section>
+
+					<section>
+						<h2>Raw JavaScript</h2>
+						<ul>
+							<li class="fragment">If we were to write our scripts, we'll have to make them work in at least IE8, Firefox 4, Latest Chrome, &amp; Safari 5</li>
+							<li class="fragment">
+								Writing JavaScript for these browsers <strong>will</strong> be painful
+								<ul>
+									<li class="fragment">Simple example: IE8 has no <code>Element#addEventListener</code> support but uses its own proprietary <code>Element#attachEvent</code> to handle events</li>
+								</ul>
+							</li>
+							<li class="fragment">
+								And what if our client <strong>does</strong> require IE6 support?
+								<ul>
+									<li class="fragment">IE6 is over 10 years old, and only partially implements DOM Level 0</li>
+								</ul>
+							</li>
+							<li class="fragment">In the end, we want to write JavaScript, not fix browser inconsistencies</li>
+						</ul>
+					</section>
+
 				</section>
 
 
@@ -74,7 +158,8 @@
 					<section>
 						<h2>Sources</h2>
 						<ul>
-							<li>...</li>
+							<li>JS is broken Quote: <a href="http://www.slideshare.net/simon/javascript-libraries-the-big-picture">Simon Willison</a></li>
+							<li>Graded Browser Support: <a href="http://yuilibrary.com/yui/docs/tutorials/gbs/">Yahoo!</a></li>
 						</ul>
 					</section>
 				</section>
