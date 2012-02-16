@@ -1303,8 +1303,7 @@ var says = function() {
 
 says();
 change(says);
-says();
-</code></pre>
+says();</code></pre>
 							</li>
 							<li class="fragment">
 								Functions are passed by value!
@@ -1312,8 +1311,73 @@ says();
 							<li class="fragment">
 								Rather logical, if we remember this
 								<pre class="bigger"><code contenteditable class="language-js">var says = function() { };
-alert(typeof says); // Not an object!
-</code></pre>
+alert(typeof says); // Not an object!</code></pre>
+							</li>
+						</ul>
+					</section>
+
+					<section>
+						<h2>Functions Passed by Value (1)</h2>
+						<ul>
+							<li class="fragment">
+								Functions being passed by value has consequences!
+								<pre class="bigger"><code contenteditable class="language-js">var forrest = {
+	sentence : 'Stupid is as stupid does',
+	say : function() {
+		return this.sentence;
+	}
+};
+
+var show = function(fn) {
+	alert(fn());
+};
+
+show(forrest.say);</code></pre>
+								<ul>
+									<li class="fragment">Meaning of <code>this</code> has hanged!</li>
+								</ul>
+							</li>
+						</ul>
+					</section>
+
+					<section>
+						<h2>Functions Passed by Value (2)</h2>
+						<ul>
+							<li class="fragment">
+								If you know the function: fixable by passing the object
+								<pre class="bigger"><code contenteditable class="language-js">var forrest = {
+	sentence : 'Stupid is as stupid does',
+	say : function() {
+		return this.sentence;
+	}
+};
+
+var show = function(obj) {
+	alert(obj.say());
+};
+
+show(forrest);</code></pre>
+							</li>
+						</ul>
+					</section>
+
+					<section>
+						<h2>Functions Passed by Value (3)</h2>
+						<ul>
+							<li class="fragment">
+								If you don't know the function: fixable by passing both the object and the function and then using <code>Function#call</code>
+								<pre class="bigger"><code contenteditable class="language-js">var forrest = {
+	sentence : 'Stupid is as stupid does',
+	say : function() {
+		return this.sentence;
+	}
+};
+
+var show = function(obj, fn) {
+	alert(fn.call(obj));
+};
+
+show(forrest);</code></pre>
 							</li>
 						</ul>
 					</section>
@@ -3458,7 +3522,7 @@ alert(IKDOEICT.foo.baz('test'));</code></pre>
 							<li>Not Sure If: <a href="http://knowyourmeme.com/memes/futurama-fry-not-sure-if-x">Know your meme</a></li>
 							<li>Control Structures: <a href="http://www.howtocreate.co.uk/tutorials/javascript/controls">HowToCreate.co.uk</a></li>
 							<li>Advanced JS:<a href="https://kkaefer.com/files/2008/10/AdvJS-BarCamp.pdf">KKaefer.com</a></li>
-							<li>Functions: <a href="http://www.hunlock.com/blogs/Functional_Javascript">Hunlock.com</a></li>
+							<li>Functions: <a href="http://www.hunlock.com/blogs/Functional_Javascript">Hunlock.com</a> &amp; <a href="http://snook.ca/archives/javascript/javascript_pass">Snook.ca</a></li>
 							<li>Closures: <a href="http://www.javascriptkit.com/javatutors/closures.shtml">JavasScriptKit.com</a> &amp; <a href="http://javascript.info/tutorial/closures">JavaScript.info</a> &amp; <a href="http://javascriptweblog.wordpress.com/2010/10/25/understanding-javascript-closures/">JavaScript Weblog</a> &amp; <a href="http://jibbering.com/faq/notes/closures/">Jibbering.com</a> &amp; <a href="https://developer.mozilla.org/en/JavaScript/Guide/Closures">Mozilla Developer Network</a></li>
 							<li>First Class Objects: <a href="http://en.wikipedia.org/wiki/First-class_object">Wikipedia</a></li>
 							<li>Call and Apply: <a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Function/apply">Mozilla Developer Network</a> &amp; <a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Function/call">Mozilla Developer Network</a> &amp; <a href="http://javascript.info/tutorial/this#fourth-explicit-this">JavaScript.info</a></li>
