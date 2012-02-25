@@ -1,0 +1,810 @@
+<!doctype html>  
+<html lang="en">
+	
+	<head>
+		<meta charset="utf-8">
+		
+		<title>Rich Internet Applications &mdash; 02.JavaScript.Libraries</title>
+
+		<meta name="description" content="Rich Internet Applications &mdash; 01.Advanced.JS">
+		<meta name="author" content="Bram(us) Van Damme - ikdoeict.be">
+		
+		<link href='http://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+		
+		<link rel="stylesheet" href="css/reset.css">
+		<link rel="stylesheet" href="css/main.css" media="screen">
+		<link rel="stylesheet" href="css/print.css" media="print">
+		<link rel="stylesheet" href="assets/02/examples.css">
+
+		<link rel="stylesheet" href="lib/zenburn.css">
+	</head>
+	
+	<body>
+		
+		<div id="reveal">
+			
+			<!-- Any section element inside of this container is displayed as a slide -->
+			<div class="slides">
+
+
+				
+				<!-- 0 : Title -->
+				<section>
+					<section>
+						<h3 class="inverted">Rich Internet Applications</h3>
+						<h1>02.JS.Libraries</h1>
+					
+						<footer>
+							<em><a href="http://www.ikdoeict.be/">ikdoeict.be</a> &mdash; <a href="mailto:bramus.vandamme@kahosl.be">bramus.vandamme@kahosl.be</a></em>
+						</footer>
+						<script>
+							// Delicously hacky. Look away.
+							if(navigator.userAgent.match(/(iPhone|iPad|iPod|Android)/i))
+							document.write('<p style="color: rgba(0,0,0,0.3); text-shadow: none;">('+'Tap to navigate'+')</p>');
+						</script>
+					</section>
+				</section>
+
+
+
+				<!-- 1 : Broken JS -->
+				<section>
+
+					<section>
+						<h2>Good News Everyone!</h2>
+						<p><img src="assets/02/goodnewseveryone.jpg" alt="Good News Everyone!" title="Good News Everyone!" width="470" height="330" /></p>
+						<q>The bad news: JavaScript is broken.<br />The good news: It can be fixed with more JavaScript!</q>
+					</section>
+
+					<section>
+						<h2>Is JS really broken?</h2>
+						<ul>
+							<li class="fragment">No, but it looks like it</li>
+							<li class="fragment">Culprit: the JS &amp; DOM implementations in the browsers
+								<ul>
+									<li class="fragment">Not all browsers/versions include the same JavaScript version</li>
+									<li class="fragment">Not all browsers/versions have implemented the DOM Spec in the same manner <em>(back in the day the DOM wasn't even formalized)</em></li>
+									<li class="fragment">Some browsers/versions have implemented the DOM/JS spec wrongly</li>
+									<li class="fragment">Some browsers/versions have added their own proprietary features</li>
+								</ul>
+							</li>
+							<li class="fragment">
+								Also: some browsers have memory leaks
+							</li>
+							<li class="fragment">
+								Things have gotten better by now, yet we sometimes are forced to support an old/faulty version/syntax
+							</li>
+						</ul>
+					</section>
+
+				</section>
+
+
+
+				<!-- 2 : Grade Browser Support -->
+				<section>
+					
+					<section>
+						<h2>Browser Support</h2>
+						<p><img src="assets/02/futurama_door.jpg" alt="" title="" width="446" height="309" /></p>
+						<q>Cool, just like in Star Tre--!</q>
+					</section>
+
+					<section>
+						<h2>Graded Browser Support (1)</h2>
+						<ul>
+							<li class="fragment">
+								So which browsers do we need to support then?
+								<ul>
+									<li class="fragment">You don't need to support all versions of all browsers</li>
+									<li class="fragment">You need to support the browsers your visitors use</li>
+								</ul>
+							</li>
+							<li class="fragment">The Yahoo! <em>A-Grade Browsers</em> list
+								<ul>
+									<li class="fragment">List of browsers in which your website must work</li>
+									<li class="fragment">Based upon visitor statistics</li>
+									<li class="fragment">Last updated 07/2011 <em>(ages ago in webdev!)</em></li>
+								</ul>
+							</li>
+						</ul>
+						<figure class="fragment">
+							<img src="assets/02/agrade-07-2011.png" alt="A-Grade Browsers (07/2011)" title="A-Grade Browsers (07/2011)" width="425" height="144" />
+							<figcaption><a href="http://yuilibrary.com/yui/docs/tutorials/gbs/">A-Grade Browsers (07/2011)</a>, by Yahoo!</figcaption>
+						</figure>
+					</section>
+
+					<section>
+						<h2>Graded Browser Support (2)</h2>
+						<ul>
+							<li class="fragment">Wow, IE6? Seriously?</li>
+							<li class="fragment">Let's take a look at the current IE statistics</li>
+						</ul>
+						<figure class="fragment">
+							<img src="assets/02/iestats.png" alt="Internet Explorer Statistics (Jan 2009 - Jan 2012)" title="Internet Explorer Statistics (Jan 2009 - Jan 2012)" width="543" height="280" />
+							<figcaption>Internet Explorer Statistics (Jan 2009 - Jan 2012), by <a href="http://gs.statcounter.com/">StatCounter</a></figcaption>
+						</figure>
+						<ul>
+							<li class="fragment">IE6 &amp; IE7 nearly dead by now</li>
+							<li class="fragment">IE8 still quite popular even though IE9 is out</li>
+						</ul>
+					</section>
+
+					<section>
+						<h2>Graded Browser Support (3)</h2>
+						<ul>
+							<li class="fragment">What about Firefox? It mentioned Firefox 3</li>
+						</ul>
+						<figure class="fragment">
+							<img src="assets/02/ffstats.png" alt="Firefox Statistics (Jan 2009 - Jan 2012)" title="Firefox Statistics (Jan 2009 - Jan 2012)" width="543" height="280" />
+							<figcaption>Firefox Statistics (Jan 2009 - Jan 2012), by <a href="http://gs.statcounter.com/">StatCounter</a></figcaption>
+						</figure>
+						<ul>
+							<li class="fragment">Firefox 3.6 usage dropped when 4 was released</li>
+							<li class="fragment">Quite good adoption rate (1/2 year)</li>
+						</ul>
+					</section>
+
+					<section>
+						<h2>Browser Adoption Rates</h2>
+						<ul>
+							<li class="fragment">The faster a new version gets adopted by the users, the faster you can drop support for an older version
+							</li>
+						</ul>
+						<div id="browseradptionrates" class="fragment">
+							<figure>
+								<img src="assets/02/chrome_absolute_statowl.png" alt="Chrome Adoption Rates" title="Chrome Adoption Rates" width="177" height="120" />
+								<figcaption>Chrome Adoption Rates</figcaption>
+							</figure>
+							<figure>
+								<img src="assets/02/firefox_absolute_statowl.png" alt="Firefox Adoption Rates" title="Firefox Adoption Rates" width="177" height="120" />
+								<figcaption>Firefox Adoption Rates</figcaption>
+							</figure>
+							<br />
+							<figure>
+								<img src="assets/02/safari_absolute_statowl.png" alt="Safari Adoption Rates" title="Safari Adoption Rates" width="177" height="120" />
+								<figcaption>Safari Adoption Rates</figcaption>
+							</figure>
+							<figure>
+								<img src="assets/02/ie_absolute_statowl.png" alt="Internet Explorer Adoption Rates" title="Internet Explorer Adoption Rates" width="177" height="120" />
+								<figcaption>Internet Explorer Adoption Rates</figcaption>
+							</figure>
+						</div>
+						<footer class="fragment"><small>Hover over graph to show bigger version | Graphs by <a href="http://www.netmagazine.com/features/developers-guide-browser-adoption-rates">.net Magazine</a></small></footer>
+					</section>
+
+					<section>
+						<h2>A-Grade Browsers (updated)</h2>
+						<ul>
+							<li class="fragment">
+								With the information we have, we can compile our own A-Grade Browsers list
+								<ul>
+									<li class="fragment">Internet Explorer 8+</li>
+									<li class="fragment">Chrome (Latest)</li>
+									<li class="fragment">Firefox (Latest)</li>
+									<li class="fragment">Safari 5+</li>
+								</ul>
+							</li>
+						</ul>
+					</section>
+
+					<section>
+						<h2>Writing JavaScript</h2>
+						<ul>
+							<li class="fragment">If we were to write a script, we'll have to make it work in the A-Grade Browsers</li>
+							<li class="fragment">
+								Supporting all these browsers <strong>will</strong> be painful
+								<ul>
+									<li class="fragment">Simple example: IE8 has no <code>Element#addEventListener</code> support but uses its own proprietary <code>Element#attachEvent</code> to handle events</li>
+								</ul>
+							</li>
+							<li class="fragment">
+								And what if our client <strong>does</strong> require IE6 support?
+								<ul>
+									<li class="fragment">IE6 is over 10 years old, and only partially implements DOM Level 0</li>
+								</ul>
+							</li>
+							<li class="fragment">
+								In the end, we want to write JavaScript, not fix browser inconsistencies
+								<ul>
+									<li class="fragment">Luckily for us, some smart people have already pondered these inconsistencies</li>
+							</li>
+						</ul>
+					</section>
+
+					<section>
+						<h2>Sidenote</h2>
+						<p class="fragment"><a href="http://dowebsitesneedtolookexactlythesameineverybrowser.com/">dowebsitesneedtolookexactlythesameineverybrowser.com</a></p>
+						<figure class="fragment">
+							<img src="assets/02/dowebsitesneedtolookexactlythesameineverybrowser.png" alt="Do websites need to look exactly the same in every browser?" title="Do websites need to look exactly the same in every browser?" height="350" width="427" style="background: transparent; border: 0; -webkit-box-shadow: none; -moz-box-shadow: none; -ms-box-shadow: none; -o-box-shadow: none; box-shadow: none;" />
+						</figure>
+						<p class="fragment">But your site does need to <em>work</em> in every browser</p>
+					</section>
+
+				</section>
+
+
+
+				<!-- 3 : Libaries -->
+				<section>
+					<section>
+						<h2>JavaScript Libraries</h2>
+						<p><img src="assets/02/futurama_library.jpg" alt="" title="" width="446" height="309" /></p>
+						<q>Welcome to the Head Museum. I'm Leonard Nimoy.</q>
+					</section>
+
+					<section>
+						<h2>JavaScript Library?</h2>
+						<ul>
+							<li class="fragment">
+								Pre-written JavaScript which allows for easier development of JavaScript-based applications.
+							</li>
+							<li class="fragment">
+								Three kinds of JavaScript libraries
+								<ul>
+									<li class="fragment">Specific Libraries</li>
+									<li class="fragment">Interfaces &amp; Widgets/Components</li>
+									<li class="fragment">General Purpose Libraries</li>
+								</ul>
+							</li>
+						</ul>
+					</section>
+
+				</section>
+
+
+
+				<!-- 4 : Specific Libaries -->
+				<section>
+					
+					<section>
+						<h2>Specific Libraries</h2>
+						<p><img src="assets/02/futurama_unbendable.jpg" alt="" title="" width="446" height="309" /></p>
+						<q>I am Bender. Please insert girder.</q>
+					</section>
+
+					<section>
+						<h2>Specific Libraries</h2>
+						<ul>
+							<li class="fragment">Provide in one, specific functionality</li>
+							<li class="fragment">Mostly offer some syntactic sugar</li>
+						</ul>
+					</section>
+
+					<section>
+						<h2>Specific Libraries: Examples (1)</h2>
+						<div class="fragment">
+							<figure>
+								<img src="assets/02/lib_datejs.png" alt="" title="" height="480" width="431" />
+							</figure>
+							<p><a href="http://www.datejs.com/">DateJS</a> &mdash; open-source JavaScript Date Library.</p>
+						</div>
+					</section>
+
+					<section>
+						<h2>Specific Libraries: Examples (2)</h2>
+						<div class="fragment">
+							<figure>
+								<img src="assets/02/lib_moneyjs.png" alt="" title="" height="480" width="493" />
+							</figure>
+							<p><a href="http://josscrowcroft.github.com/money.js/">money.js</a> &mdash; JavaScript currency conversion</p>
+						</div>
+					</section>
+					
+					<section>
+						<h2>Specific Libraries: Examples (3)</h2>
+						<div class="fragment">
+							<figure>
+								<img src="assets/02/lib_swfobject.gif" alt="" title="" height="106" width="418" />
+							</figure>
+							<p><a href="http://code.google.com/p/swfobject/">SWFObject</a> &mdash; Embed Flash Files</p>
+							<pre class="bigger"><code class="language-js dontrun">var flashvars = false;
+								
+var params = {
+  menu: 'false',
+  flashvars: 'name1=hello&amp;name2=world&amp;name3=foobar'
+};
+
+var attributes = {
+  id: 'myDynamicContent',
+  name: 'myDynamicContent'
+};
+
+swfobject.embedSWF('myContent.swf', 'myContent', '300', '120', '9.0.0','expressInstall.swf', flashvars, params, attributes);</code></pre>
+						</div>
+					</section>
+
+					<section>
+						<h2>Specific Libraries: Examples (4)</h2>
+						<div class="fragment">
+							<figure>
+								<img src="assets/02/lib_highlightjs.png" alt="" title="" height="300" width="300" />
+							</figure>
+							<p><a href="http://softwaremaniacs.org/soft/highlight/en/">highlight.js</a> &mdash; Syntax Higlighting</p>
+						</div>
+					</section>
+
+				</section>
+
+
+
+				<!-- 5 : Interfaces &amp; Widgets/Components -->
+				<section>
+					
+					<section>
+						<h2>Interfaces &amp; Widgets/Components</h2>
+						<p><img src="assets/02/futurama_benderama.jpg" alt="" title="" width="446" height="309" /></p>
+						<q>They're 60% scale replicas of me! ... Bender!</q>
+					</section>
+					
+					<section>
+						<h2>Interfaces &amp; Widgets/Components</h2>
+						<ul>
+							<li class="fragment">Special types of &ldquo;Specific Library&rdquo;</li>
+							<li class="fragment">Can provide an entire UI, or some specific UI parts.</li>
+							<li class="fragment">Re-usable</li>
+						</ul>
+					</section>
+
+					<section>
+						<h2>Interfaces: Example (1)</h2>
+						<div class="fragment">
+							<figure>
+								<img src="assets/02/lib_lightbox.png" alt="" title="" height="480" width="544" style="background: transparent; border: 0; -webkit-box-shadow: none; -moz-box-shadow: none; -ms-box-shadow: none; -o-box-shadow: none; box-shadow: none;" />
+							</figure>
+							<p><a href="http://lokeshdhakar.com/projects/lightbox2/">Lightbox</a> &mdash; Overlay images on the current page.</p>
+						</div>
+					</section>
+
+					<section>
+						<h2>Interfaces: Example (2)</h2>
+						<div class="fragment">
+							<figure>
+								<img src="assets/02/lib_revealjs.jpg" alt="" title="" height="234" width="560" />
+							</figure>
+							<p><a href="http://lab.hakim.se/reveal-js/">reveal.js</a> &mdash; An easy to use CSS 3D slideshow tool for quickly creating good looking HTML presentations.</p>
+						</div>
+					</section>
+
+					<section>
+						<h2>Widgets/Components: Example (1)</h2>
+						<div class="fragment">
+							<figure>
+								<img src="assets/02/lib_tinymce.jpg" alt="" title="" height="177" width="506" />
+							</figure>
+							<p><a href="http://www.tinymce.com/">TinyMCE</a> &mdash; Rich Text Editor</p>
+						</div>
+					</section>
+
+					<section>
+						<h2>Widgets/Components: Example (2)</h2>
+						<div class="fragment">
+							<figure>
+								<img src="assets/02/lib_googlemaps.png" alt="" title="" height="480" width="696" style="background: transparent; border: 0; -webkit-box-shadow: none; -moz-box-shadow: none; -ms-box-shadow: none; -o-box-shadow: none; box-shadow: none;" />
+							</figure>
+							<p><a href="http://code.google.com/apis/maps/documentation/javascript/">Google Maps JS API</a> &mdash; Maps &amp; Streetview integration.</p>
+						</div>
+					</section>
+
+					<section>
+						<h2>Widgets/Components: Example (3)</h2>
+						<div class="fragment">
+							<figure>
+								<img src="assets/02/lib_datepicker.jpg" alt="" title="" height="298" width="465" />
+							</figure>
+							<p>JavaScript DatePicker</p>
+						</div>
+					</section>
+
+					<section>
+						<h2>Widgets/Components: Example (4)</h2>
+						<div class="fragment">
+							<figure>
+								<img src="assets/02/lib_datagrid.jpg" alt="" title="" height="317" width="902" />
+							</figure>
+							<p>JavaScript Data Grid &amp; other UI Components such as a slider control, tabs, etc.</p>
+						</div>
+					</section>
+
+				</section>
+
+
+
+				<!-- 6 : General Purpose Libraries -->
+				<section>
+					
+					<section>
+						<h2>General Purpose Libraries</h2>
+						<p><img src="assets/02/futurama_helmet.jpg" alt="" title="" width="446" height="309" /></p>
+						<q>To the flying machine!</q>
+					</section>
+					
+					<section>
+						<h2>General Purpose Libraries (1)</h2>
+						<ul>
+							<li class="fragment">
+								Sprung up in the mid-2000's
+								<ul>
+									<li class="fragment">Browser Landscape: IE6, Firefox1, Safari2, Chrome didn't even exist</li>
+									<li class="fragment">Goal: Simplify cross-browser scripting &amp; make writing JS bearable</li>
+								</ul>
+							</li>
+							<li class="fragment">
+								Basic Components
+								<ul>
+									<li class="fragment">DOM Access <em>(Selecting, Traversing, Manipulating)</em></li>
+									<li class="fragment">Event Handling <em>(Simple Event Binding, Custom Events)</em></li>
+									<li class="fragment">Ajax</li>
+									<li class="fragment">Animations <em>(Simple Animations, Transitions)</em></li>
+								</ul>
+							</li>
+							<li class="fragment">
+								Specific libraries can use or extend a global purpose library
+								<ul>
+									<li class="fragment">Use: they needn't worry about cross-browser issues</li>
+									<li class="fragment">Extend: provide an accompanying interface/components library</li>
+								</ul>
+							</li>
+						</ul>
+					</section>
+					
+					<section>
+						<h2>General Purpose Libraries (2)</h2>
+						<ul>
+							<li class="fragment">
+								We'll take a look at these 3
+								<div style="text-align: center; margin: 25px 0;">
+									<figure>
+										<img src="assets/02/logo_prototype.png" alt="" title="" width="246" height="142" />
+										<figcaption><a href="http://prototypejs.org/">Protoype</a></figcaption>
+									</figure>
+									<figure>
+										<img src="assets/02/logo_yui.png" alt="" title="" width="246" height="142" />
+										<figcaption><a href="http://yuilibrary.com/">YUI</a></figcaption>
+									</figure>
+									<figure>
+										<img src="assets/02/logo_jquery.png" alt="" title="" width="246" height="142" />
+										<figcaption><a href="http://jquery.com/">jQuery</a></figcaption>
+									</figure>
+								</div>
+							</li>
+						</ul>
+						<footer class="fragment">Others, not looked into: Dojo, MooTools, Ext.js, etc.</footer>
+					</section>
+
+					<section>
+						<h2>Prototype</h2>
+						<ul>
+							<li class="fragment">N&eacute;e 2005, by Sam Stephenson</li>
+							<li class="fragment">
+								Focus
+								<ul>
+									<li class="fragment">Improve usability of the JS language</li>
+									<li class="fragment">Add missing JS features by extending the DOM</li>
+									<li class="fragment">Working with Classes (in a non <code>.prototype</code>'d way)</li>
+								</ul>
+							</li>
+							<li class="fragment">
+								Core
+								<ul>
+									<li class="fragment">DOM</li>
+									<li class="fragment">Ajax</li>
+									<li class="fragment">DOM Extensions <small style="vertical-align: baseline;">(eg. <code>String#strip</code>, <code>Array#reverse</code>, <code>Array#first</code>, <code>Element#hide</code>, ...)</small></li>
+									<li class="fragment">Helper Functions (<code>$</code>, <code>$$</code>, <code>$F</code>, <code>$A</code>, ...)</code>
+								</ul>
+							</li>
+							<li class="fragment">Animations &amp; Components provided by accompanying library Script.aculo.us</script>
+						</ul>
+					</section>
+					
+					<section>
+						<h2>Prototype: Example: DOM &amp; Events</h2>
+						<ul>
+							<li class="fragment">
+								Add class name to element <code>#message</code> and update its <code>innerHTML</code>
+								<pre class="bigger"><code class="language-js dontrun">$('message').addClassName('read').update('I read this message!');</code></pre>
+							</li>
+							<li class="fragment">
+								Hook click event on some <code>li</code>'s
+								<pre class="bigger"><code class="language-js dontrun">$$('#bmarks li').each(function(li){
+	Event.observe(li, 'click', function(e) {
+		this.style.backgroundColor = 'yellow';
+	}.bindAsEventListener(li));
+});</code></pre>
+							</li>
+							<li class="fragment">
+								slideDown effect (via script.aculo.us)
+								<pre class="bigger"><code class="language-js dontrun">Effect.SlideDown('id_of_element', { duration: 3.0 });</code></pre>
+							</li>
+						</ul>
+					</section>
+					
+					<section>
+						<h2>Prototype: Example: Classes</h2>
+						<div class="fragment">
+							<pre class="bigger"><code class="language-js dontrun">// properties are directly passed to `create` method
+var Person = Class.create({
+	initialize: function(name) {
+		this.name = name;
+	},
+	say: function(message) {
+		return this.name + ': ' + message;
+	}
+});
+
+// when subclassing, specify the class you want to inherit from
+var Pirate = Class.create(Person, {
+	// redefine the speak method
+	say: function($super, message) {
+		return $super(message) + ', yarr!';
+	}
+});
+
+var john = new Pirate('Long John');
+john.say('ahoy matey');
+// -> "Long John: ahoy matey, yarr!"</code></pre>
+						</div>
+					</section>
+
+					<section>
+						<h2>Prototype: Problems</h2>
+						<div class="fragment">
+							<ul>
+								<li class="fragment">
+									Extending the DOM was a very (very!) bad idea
+									<ul>
+										<li class="fragment">Cross browser: host objects have no rules, IE DOM is a mess, etc</li>
+										<li class="fragment">Chance of collisions</li>
+										<li class="fragment">Performance Overhead</li>
+									</ul>
+								</li>
+								<li class="fragment">
+									Not updated since 2010
+									<ul>
+										<li class="fragment">Version 2 &mdash; which didn't extend the DOM &mdash; never released</li>
+										<li class="fragment">jQuery's popularity blasted Prototype away</li>
+									</ul>
+								</li>
+							</ul>
+						</div>
+					</section>
+
+					<section>
+						<h2>Yahoo! UI (YUI)</h2>
+						<ul>
+							<li class="fragment">N&eacute;e 2005 (first public release 2006), by Yahoo!</li>
+							<li class="fragment">
+								More a framework than a library, as it offers quite a few Components/Controls and CSS Resources
+								<ul>
+									<li class="fragment">Core: DOM &amp; Events</li>
+									<li class="fragment">Utilites: Animation, History Manager, Connection Manager (Ajax), Cookie, Element, JSON, Resize, etc.</li>
+									<li class="fragment">Controls: Autocomplete, Button, Calendar, ImageCropper, Menu, Slider, Tab View, etc.</li>
+									<li class="fragment">CSS Resources: Base, Grids, Fonts, Reset, etc.</li>
+									<li class="fragment">Dev Tools: Logging, Profiling, etc.</li>
+								</ul>
+							</li>
+							<li class="fragment">Namespaced in the <code>YAHOO</code> namespace</li>
+						</ul>
+					</section>
+
+					<section>
+						<h2>YUI: Example: DOM &amp; Events</h2>
+						<div class="fragment">
+							<pre class="bigger"><code class="language-js dontrun">YAHOO.util.Event.on(window, 'load', function() {
+									
+	var div = YAHOO.util.Dom.get('messages');
+	
+	if (!div) {
+		return; 
+	}
+	
+	setTimeout(function() {
+		
+		var anim = new YAHOO.util.Anim(div, {
+			height: {to: 0},
+			opacity: {to: 0}
+		}, 0.4);
+		
+		anim.animate();
+		
+		anim.onComplete.subscribe(function() {
+			div.parentNode.removeChild(div);
+		});
+		
+	}, 2000);
+	
+});</code></pre>
+						</div>
+					</section>
+
+					<section>
+						<h2>YUI: Components</h2>
+						<figure class="fragment">
+							<img src="assets/02/yui_menu.gif" alt="" title="" width="190" height="99" />
+							<figcaption>Menu</figcaption>
+						</figure>
+						<figure class="fragment">
+							<img src="assets/02/yui_calendar.gif" alt="" title="" width="107" height="112" />
+							<figcaption>Calendar / Date Picker</figcaption>
+						</figure>
+						<figure class="fragment">
+							<img src="assets/02/yui_treeview.gif" alt="" title="" width="145" height="192" />
+							<figcaption>Tree</figcaption>
+						</figure><br />
+						<figure class="fragment">
+							<img src="assets/02/yui_layout.png" alt="" title="" width="280" height="192" />
+							<figcaption>Layout Manager</figcaption>
+						</figure>
+						<figure class="fragment">
+							<img src="assets/02/yui_colorpicker.jpg" alt="" title="" width="372" height="192" />
+							<figcaption>Color Picker</figcaption>
+						</figure>
+					</section>
+
+					<section>
+						<h2>YUI: Version 3</h2>
+						<ul>
+							<li class="fragment">
+								Syntax changed under jQuery influence
+								<pre class="bigger"><code class="language-js dontrun">YUI().use('node', function(Y) {
+
+    var onClick = function(e) {
+        var type = e.type,
+            currentTarget = e.currentTarget, // #demo
+            target = e.target; // #demo or a descendant
+
+        Y.one('#event-result').setContent('&lt;dl&gt;' +
+            '&lt;dt&gt;type&lt;/dt&gt;&lt;dd&gt;' + e.type + '&lt;/dd&gt;' +
+            '&lt;dt&gt;target&lt;/dt&gt;&lt;dd&gt;' + target.get('tagName') + '&lt;/dd&gt;' +
+            '&lt;dt&gt;currentTarget&lt;/dt&gt;&lt;dd&gt;' + currentTarget.get('tagName') +
+                '#' + currentTarget.get('id') + '&lt;/dd&gt;&lt;/dl&gt;');
+    };
+
+    Y.one('#demo').on('click', onClick);
+
+});</code></pre>
+							</li>
+							<li class="fragment">Many (All?) of the components got sacked</li>
+						</ul>
+					</section>
+
+					<section>
+						<h2>jQuery</h2>
+						<ul>
+							<li class="fragment">N&eacute;e 2006, by John Resig</li>
+							<li class="fragment">
+								Focus
+								<ul>
+									<li class="fragment">Improve interaction between JS &amp; HTML</li>
+									<li class="fragment">Finding elements and then performing actions</li>
+									<li class="fragment">Short code</li>
+								</ul>
+							</li>
+							<li class="fragment">
+								Core
+								<ul>
+									<li class="fragment">DOM <em>(Selecting, Traversing, etc.)</em></li>
+									<li class="fragment">Events</li>
+									<li class="fragment">Effects <em>(Basic Animations)</em></li>
+									<li class="fragment">Ajax</li>
+								</ul>
+							</li>
+							<li class="fragment">
+								Components available via jQuery UI
+							</li>
+							<li class="fragment">Extensible with plugins</li>
+						</ul>
+					</section>
+
+					<section>
+						<h2>Prototype: Example: DOM &amp; Events</h2>
+						<ul>
+							<li class="fragment">
+								Add class name to element <code>#message</code> and update its <code>innerHTML</code>
+								<pre class="bigger"><code class="language-js dontrun">$('#message').addClass('read').html('I read this message!');</code></pre>
+							</li>
+							<li class="fragment">
+								Hook click event on some <code>li</code>'s
+								<pre class="bigger"><code class="language-js dontrun">$('#bmarks li').on('click', function(e) {
+	$(this).css('backgroundColor', 'yellow');
+});</code></pre>
+							</li>
+							<li class="fragment">
+								slideDown effect
+								<pre class="bigger"><code class="language-js dontrun">$('#id_of_element').slideDown(3);</code></pre>
+							</li>
+						</ul>
+					</section>
+
+					<section>
+						<h2>On Library Architecture</h2>
+						<ul>
+							<li class="fragment">
+								Two architectural trends in the libraries: top-down and bottom-up
+								<ul>
+									<li class="fragment">Top-Down: Create an event listener which is linked to an element</li>
+									<li class="fragment">Bottom-up: Select an element and hook an event listener to it</li>
+								</ul>
+							</li>
+							<li class="fragment">
+								Bottom-up takes some adjustment if you're a die-hard programmer, but it's quite fun actually
+								<ul>
+									<li class="fragment">And it opens up a whole new world: chaining!</li>
+								</ul>
+							</li>
+						</ul>
+					</section>
+
+					<section>
+						<h2>On Library Documentation</h2>
+						<ul>
+							<li class="fragment">Documentation is as an important part of the library as the functionalities of the library itself!</li>
+							<li class="fragment">The three mentioned here provide extensive documentation (tutorials, API reference, etc.)</li>
+						</ul>
+					</section>
+					
+				</section>
+
+
+
+				<!-- The END -->
+				<section>
+					<section>
+						<h2>Questions?</h2>
+						<footer>
+							<em><a href="http://www.ikdoeict.be/">ikdoeict.be</a> &mdash; <a href="mailto:bramus.vandamme@kahosl.be">bramus.vandamme@kahosl.be</a></em>
+						</footer>
+					</section>
+				</section>
+
+
+
+				<!-- Sources -->
+				<section id="sources">
+					<section>
+						<h2>Sources</h2>
+						<ul>
+							<li>JS is broken Quote: <a href="http://www.slideshare.net/simon/javascript-libraries-the-big-picture">Simon Willison</a></li>
+							<li>Graded Browser Support: <a href="http://yuilibrary.com/yui/docs/tutorials/gbs/">Yahoo!</a></li>
+							<li>Browser Adoption Rates: <a hre="http://www.netmagazine.com/features/developers-guide-browser-adoption-rates">NetMagazine.com</a></li>
+							<li>IE8 attachEvents Problems: <a href="http://robertnyman.com/2008/11/04/internet-explorer-8-fix-event-handling-or-dont-release-it/">RobertNyman.com</a></li>
+							<li>Prototype &amp; YUI code examples: <a href="http://www.slideshare.net/simon/javascript-libraries-the-big-picture">slideshare/simon</a></li>
+							<li>JS Libraries Statistic: <a href="http://community.infragistics.com/blogs/taz_abdeali/archive/2012/02/16/what-is-jquery-and-how-big-is-it.aspx">infragistics.com</a></li>
+						</ul>
+					</section>
+				</section>
+				
+			</div>
+
+			<!-- The navigational controls UI -->
+			<aside class="controls">
+				<a class="left" href="#">&#x25C4;</a>
+				<a class="right" href="#">&#x25BA;</a>
+				<a class="up" href="#">&#x25B2;</a>
+				<a class="down" href="#">&#x25BC;</a>
+				<span id="revealIndex">/</span>
+			</aside>
+
+			<!-- Index Link -->
+			<aside class="back">
+				<a href="index.html">&larr; Back to index</a>
+			</aside>
+			
+			<!-- ikdoeict.be Link -->
+			<a href="http://www.ikdoeict.be/" title="ikdoeict.be" id="ikdoeict">ikdoeict.be</a>
+
+			<!-- Displays presentation progress, max value changes via JS to reflect # of slides -->
+			<div class="progress"><span></span></div>
+			
+		</div>
+		
+		<script src="js/reveal.js"></script>
+		<script src="lib/highlight.js"></script>
+		<script src="lib/prefixfree.js"></script>
+		<script src="lib/css-snippets.js"></script>
+		<script src="lib/css-edit.js"></script>
+		<script src="lib/incrementable.js"></script>
+		<script src="js/main.js"></script>
+
+	</body>
+</html>
