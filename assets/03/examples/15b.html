@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<title>jQuery</title>
+</head>
+<body>
+	
+	<h1>Events</h1>
+
+	<ul>
+		<li>list item 1</li>
+		<li>list item 2</li>
+		<li>list item 3</li>
+		<li>list item 4</li>
+		<li>list item 5</li>
+	</ul>
+
+	<script src="jquery-1.7.1.min.js"></script>
+	<script>
+		$(document).ready(function() {
+			
+			// Bind events, using delegate
+			$('ul').delegate('li', 'mouseover', function(e) {
+				$(this).css('color', 'blue');
+			}).delegate('li', 'mouseout', function(e) {
+				$(this).css('color', 'black');
+			}).delegate('li', 'click', function(e) {
+				$(this).css('color', 'red');
+			}).css('cursor','pointer');
+			
+			// Append new list item
+			$('ul').append('<li>new list item, injected after the event binding</li>');
+			
+		});
+	</script>
+</body>
+</html>
