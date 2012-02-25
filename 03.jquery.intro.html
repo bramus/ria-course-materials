@@ -14,7 +14,7 @@
 		<link rel="stylesheet" href="css/reset.css">
 		<link rel="stylesheet" href="css/main.css" media="screen">
 		<link rel="stylesheet" href="css/print.css" media="print">
-		<link rel="stylesheet" href="assets/02/examples.css">
+		<link rel="stylesheet" href="assets/03/examples.css">
 
 		<link rel="stylesheet" href="lib/zenburn.css">
 	</head>
@@ -50,9 +50,9 @@
 				<section>
 
 					<section>
-						<h2>jQuery 101</h2>
-						<p><img src="assets/02/jquery_logo.png" alt="jQuery Logo" title="jQuery Logo" height="192" width="523" style="margin-bottom: 120px;" /></p>
-						<p><em>An introduction to jQuery</em></p>
+						<h2>Why jQuery?</h2>
+						<p><img src="assets/03/jquery_logo.png" alt="jQuery Logo" title="jQuery Logo" height="192" width="523" style="margin-bottom: 120px;" /></p>
+						<q>New Wave JavaScript</q>
 					</section>
 
 					<section>
@@ -87,10 +87,10 @@
 						<h2>How popular is jQuery Exactly?</h2>
 						<p class="fragment">1 in every 2 of the top 10K websites is using jQuery</p>
 						<figure class="fragment">
-							<img src="assets/02/jslibs_stat_jquery.png" alt="" title="" width="400" height="320" />
+							<img src="assets/03/jslibs_stat_jquery.png" alt="" title="" width="400" height="320" />
 						</figure>
 						<figure class="fragment">
-							<img src="assets/02/jslibs_stat.png" alt="" title="" width="355" height="320" />
+							<img src="assets/03/jslibs_stat.png" alt="" title="" width="355" height="320" />
 						</figure>
 						<p class="fragment">jQuery is used by 44.1% of all top 10K websites <br /><small>(JS market share 84.7%)</small></p>
 					</section>
@@ -133,9 +133,9 @@
 				<section>
 
 					<section>
-						<h2>jQuery 101</h2>
-						<p><img src="assets/02/jquery_logo.png" alt="jQuery Logo" title="jQuery Logo" height="192" width="523" style="margin-bottom: 120px;" /></p>
-						<p><em>An introduction to jQuery</em></p>
+						<h2>Obtaining &amp; Including jQuery</h2>
+						<p><img src="assets/03/futurama_window.jpg" alt="" title="" height="309" width="446" /></p>
+						<q>Welcome to the world of tomorrow!</q>
 					</section>
 
 					<section>
@@ -171,14 +171,14 @@
 							</li>
 							<li class="fragment">
 								Basic page structure
-								<pre class="bigger"><code class="language-html dontrun" data-overlay-example="assets/02/examples/01.html">&lt;!doctype html&gt;
+								<pre class="bigger"><code class="language-html dontrun" data-overlay-example="assets/03/examples/01.html">&lt;!doctype html&gt;
 &lt;html lang=&quot;en&quot;&gt;
 &lt;head&gt;
 	&lt;title&gt;Including jQuery<&lt;/title&gt;
 &lt;/head&gt;
 &lt;body&gt;
 	&lt;h1&gt;Including jQuery<&lt;/h1&gt;
-	&lt;script src=&quot;assets/02/examples/jquery-1.7.1.min.js&quot;&gt;&lt;/script&gt;
+	&lt;script src=&quot;assets/03/examples/jquery-1.7.1.min.js&quot;&gt;&lt;/script&gt;
 	&lt;script&gt;
 		$(document).ready(function() {
 			alert('loaded');
@@ -195,8 +195,8 @@
 						<ul>
 							<li class="fragment">
 								Also possible
-								<pre class="bigger"><code class="language-html dontrun" data-overlay-example="assets/02/examples/01a.html">...
-	&lt;script src=&quot;assets/02/examples/jquery-1.7.1.min.js&quot;&gt;&lt;/script&gt;
+								<pre class="bigger"><code class="language-html dontrun" data-overlay-example="assets/03/examples/01a.html">...
+	&lt;script src=&quot;assets/03/examples/jquery-1.7.1.min.js&quot;&gt;&lt;/script&gt;
 	&lt;script&gt;
 		$(function() {
 			alert('loaded');
@@ -212,9 +212,15 @@
 
 				<!-- 3 : Selecting Elements -->
 				<section>
+
+					<section>
+						<h2>Selecting Elements</h2>
+						<p><img src="assets/03/futurama_benderpointing.jpg" alt="" title="" height="309" width="446" /></p>
+						<q>Everybody's a jerk. You, me, this jerk.</q>
+					</section>
 					
 					<section>
-						<h2>Selecting Elements (1)</h2>
+						<h2>Selecting Elements</h2>
 						<ul>
 							<li class"fragment">jQuery is built around the <code>jQuery</code> function which is mapped to <code>$</code></li>
 							<li class="fragment">
@@ -229,17 +235,14 @@
 									</li>
 								</ul>
 							</li>
-							<li class="fragment">
-								Full list of possible selectors on <a href="http://api.jquery.com/category/selectors/">jQuery API</a>
-							</li>
 						</ul>
 					</section>
 
 					<section>
-						<h2>Selecting Elements (2)</h2>
+						<h2>Examples (1)</h2>
 						<ul>
 							<li class="fragment">
-								Examples
+								Basic Selectors
 								<pre class="bigger"><code class="language-js dontrun">// Selecting elements by ID
 $('#myId');
 
@@ -259,7 +262,7 @@ $('ul li:nth-child(2)');</code></pre>
 					</section>
 
 					<section>
-						<h2>Selecting Elements (3)</h2>
+						<h2>Examples (2)</h2>
 						<ul>
 							<li class="fragment">
 								jQuery has augmented the selector possibilities by adding their own extras such as
@@ -286,11 +289,26 @@ $('td:parent');</code></pre>
 						</ul>
 					</section>
 					
+					<section>
+						<h2>Selectors Reference</h2>
+						<ul>
+							<li class="fragment">
+								Full list of possible selectors on <a href="http://api.jquery.com/category/selectors/">jQuery API</a>
+							</li>
+						</ul>
+					</section>
+					
 				</section>
 
 
 				<!-- 4: Manipulating Elements -->
 				<section>
+
+					<section>
+						<h2>Manipulating Elements</h2>
+						<p><img src="assets/03/futurama_hypnotoad.jpg" alt="" title="" height="309" width="446" /></p>
+						<q>Everybody loves Hypnotoad!</q>
+					</section>
 
 					<section>
 						<h2>Manipulating Elements</h2>
@@ -301,6 +319,11 @@ $('td:parent');</code></pre>
 
 				<!-- 5 : Traversing -->
 				<section>
+
+					<section>
+						<h2>Traversing</h2>
+						<p><img src="assets/03/futurama_bodies.jpg" alt="" title="" height="309" width="446" /></p>
+					</section>
 
 					<section>
 						<h2>Traversing</h2>
@@ -315,6 +338,11 @@ $('td:parent');</code></pre>
 
 					<section>
 						<h2>Events</h2>
+						<p><img src="assets/03/futurama_bendergun.jpg" alt="" title="" height="309" width="446" /></p>
+					</section>
+
+					<section>
+						<h2>Events</h2>
 
 					</section>
 
@@ -323,6 +351,11 @@ $('td:parent');</code></pre>
 
 				<!-- 7 : Chaining -->
 				<section>
+
+					<section>
+						<h2>Chaining</h2>
+						<p><img src="assets/03/futurama_tentacle.jpg" alt="" title="" height="309" width="446" /></p>
+					</section>
 
 					<section>
 						<h2>Chaining</h2>
@@ -337,6 +370,11 @@ $('td:parent');</code></pre>
 
 					<section>
 						<h2>Effects/Animation</h2>
+						<p><img src="assets/03/futurama_opening.jpg" alt="" title="" height="309" width="446" /></p>
+					</section>
+
+					<section>
+						<h2>Effects/Animation</h2>
 
 					</section>
 
@@ -345,6 +383,11 @@ $('td:parent');</code></pre>
 
 				<!-- 9 : Core Functions -->
 				<section>
+
+					<section>
+						<h2>jQuery Core Functions</h2>
+						<p><img src="assets/03/futurama_lightning.jpg" alt="" title="" height="309" width="446" /></p>
+					</section>
 
 					<section>
 						<h2>jQuery Core Functions</h2>
@@ -371,7 +414,11 @@ $('td:parent');</code></pre>
 				<section id="sources">
 					<section>
 						<h2>Sources</h2>
-						
+						<ul>
+							<li>Most Futurama Screengrabs: <a href="http://www.ign.com/images/dvd/futurama-benders-big-score-954394/2205639">IGN.com</a></li>
+							<li>jQuery History: <a href="http://jquery.org/history/">jquery.com</a></li>
+							<li>jQuery Basics: <a href="http://jqfundamentals.com/">jqfundamentals.com</a> &amp; <a href="http://stage.learn.jquery.com/">learn.jquery.com</a></li>
+						</ul>
 					</section>
 				</section>
 				
