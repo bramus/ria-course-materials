@@ -229,7 +229,7 @@ window.addEventListener('load', function() {
 		oc.style.marginLeft = '-' + (width/2) + 'px';
 		
 		// inject iframe
-		oc.innerHTML = '<iframe src="' + url + '" height=""' + height + '" width="' + width + '" border="0" id="daframe"></iframe>';
+		oc.innerHTML = '<iframe src="' + url + '" height="' + height + '" width="' + width + '" border="0" id="daframe"></iframe>';
 		
 		// inject HTML
 		if (html) {
