@@ -1,0 +1,411 @@
+<!doctype html>  
+<html lang="en">
+	
+	<head>
+		<meta charset="utf-8">
+		
+		<title>Rich Internet Applications &mdash; 03.jQuery.Introduction</title>
+
+		<meta name="description" content="Rich Internet Applications &mdash; 03.jQuery.Introduction">
+		<meta name="author" content="Bram(us) Van Damme - ikdoeict.be">
+		
+		<link href='http://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+		
+		<link rel="stylesheet" href="css/reset.css">
+		<link rel="stylesheet" href="css/main.css" media="screen">
+		<link rel="stylesheet" href="css/print.css" media="print">
+		<link rel="stylesheet" href="assets/02/examples.css">
+
+		<link rel="stylesheet" href="lib/zenburn.css">
+	</head>
+	
+	<body>
+		
+		<div id="reveal">
+			
+			<!-- Any section element inside of this container is displayed as a slide -->
+			<div class="slides">
+
+
+				
+				<!-- 0 : Title -->
+				<section>
+					<section>
+						<h3 class="inverted">Rich Internet Applications</h3>
+						<h1>03.jQuery.intro</h1>
+					
+						<footer>
+							<em><a href="http://www.ikdoeict.be/">ikdoeict.be</a> &mdash; <a href="mailto:bramus.vandamme@kahosl.be">bramus.vandamme@kahosl.be</a></em>
+						</footer>
+						<script>
+							// Delicously hacky. Look away.
+							if(navigator.userAgent.match(/(iPhone|iPad|iPod|Android)/i))
+							document.write('<p style="color: rgba(0,0,0,0.3); text-shadow: none;">('+'Tap to navigate'+')</p>');
+						</script>
+					</section>
+				</section>
+
+
+				<!-- 1 : Intro -->
+				<section>
+
+					<section>
+						<h2>jQuery 101</h2>
+						<p><img src="assets/02/jquery_logo.png" alt="jQuery Logo" title="jQuery Logo" height="192" width="523" style="margin-bottom: 120px;" /></p>
+						<p><em>An introduction to jQuery</em></p>
+					</section>
+
+					<section>
+						<h2>Why jQuery?</h2>
+						<ul>
+							<li class="fragment">
+								Popular library, used by big companies
+								<ul>
+									<li>Google, Amazon, Microsoft, Dell, EA, Mozilla, Wordpress, ...</li>
+								</ul>
+							</li>
+							<li class="fragment">
+								Works in all A-Grade Browsers
+								<ul>
+									<li>... and also supports IE6 and the like</li>
+								</ul>
+							</li>
+							<li class="fragment">
+								Easy to use
+								<ul>
+									<li>Built around CSS Selectors ... which we already use (in CSS)</li>
+								</ul>
+							</li>
+							<li class="fragment">Can be used with other libraries</li>
+							<li class="fragment">Does not extend the DOM</li>
+							<li class="fragment">Lots of plugins available</li>
+							<li class="fragment">Lots of documentation/information available</li>
+						</ul>
+					</section>
+
+					<section>
+						<h2>How popular is jQuery Exactly?</h2>
+						<p class="fragment">1 in every 2 of the top 10K websites is using jQuery</p>
+						<figure class="fragment">
+							<img src="assets/02/jslibs_stat_jquery.png" alt="" title="" width="400" height="320" />
+						</figure>
+						<figure class="fragment">
+							<img src="assets/02/jslibs_stat.png" alt="" title="" width="355" height="320" />
+						</figure>
+						<p class="fragment">jQuery is used by 44.1% of all top 10K websites <br /><small>(JS market share 84.7%)</small></p>
+					</section>
+
+					<section>
+						<h2>History</h2>
+						<ul>
+							<li class="fragment">
+								June 2005:
+								<ul>
+									<li>Ben Nolan released <a href="http://bennolan.com/behaviour/">Behaviour</a> which <a href="http://scrap.dasgenie.com/articles/2006/09/14/applying-behaviour-without-behaviour-js">allowed</a> to bind events on elements based on (basic) CSS selectors</li>
+									<li>Worked well with Prototype</li>
+									<li>Allowed to remove those pesky <code>onclick=...</code> attr from your HTML</li>
+								</ul>
+							</li>
+							<li class="fragment">
+								August 2005:
+								<ul>
+									<li>John Resig digs the idea of Behaviour but dislikes the syntax and notes a few shortcomings. He <a href="http://ejohn.org/blog/selectors-in-javascript/">proposes something that eventually will become jQuery</a> on his blog</li>
+								</ul>
+							</li>
+							<li class="fragment">
+								January 2006:
+								<ul>
+									<li>John Resig attended Barcamp NYC and announced jQuery</li>
+								</ul>
+							</li>
+							<li class="fragment">
+								August 2006:
+								<ul>
+									<li>jQuery 1.0 released</li>
+								</ul>
+							</li>
+						</ul>
+					</section>
+				</section>
+
+
+				<!-- 2 : jQuery 101 -->
+				<section>
+
+					<section>
+						<h2>jQuery 101</h2>
+						<p><img src="assets/02/jquery_logo.png" alt="jQuery Logo" title="jQuery Logo" height="192" width="523" style="margin-bottom: 120px;" /></p>
+						<p><em>An introduction to jQuery</em></p>
+					</section>
+
+					<section>
+						<h2>Up Front: jQuery Documentation</h2>
+						<ul>
+							<li class="fragment">
+								Meet your new homes:
+								<ul>
+									<li class="fragment"><a href="http://api.jquery.com/">jQuery API</a> &mdash; Look up functions</li>
+									<li class="fragment"><a href="http://oscarotero.com/jquery/">jQuery Cheatsheet</a> &mdash; Quick overview with access to the API</li>
+								</ul>
+							</li>
+							<li class="fragment">
+								Also worth checking
+								<ul>
+									<li class="fragment"><a href="http://woorkup.com/wp-content/uploads/2011/12/jQuery-17-Visual-Cheat-Sheet1.pdf">jQuery Visual Cheatsheet</a> &mdash; Extensive cheatsheet (PDF)</li>
+									<li class="fragment"><a href="http://docs.jquery.com/Main_Page">jQuery Docs</a> &mdash; Official jQuery Wiki</li>
+									<li class="fragment"><a href="http://stage.learn.jquery.com/">learn.jquery.com</a> &mdash; jQuery introduction and tutorials (new)</li>
+								</ul>
+							</li>
+						</ul>
+					</section>
+					
+					<section>
+						<h2>Including jQuery (1)</h2>
+						<ul>
+							<li class="fragment">
+								Download jQuery from <a href="http://www.jquery.com/">jQuery.com</a>
+								<ul>
+									<li>Production: minified version for live sites</li>
+									<li>Development: raw version for testing/debugging</li>
+								</ul>
+							</li>
+							<li class="fragment">
+								Basic page structure
+								<pre class="bigger"><code class="language-html dontrun" data-overlay-example="assets/02/examples/01.html">&lt;!doctype html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+	&lt;title&gt;Including jQuery<&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+	&lt;h1&gt;Including jQuery<&lt;/h1&gt;
+	&lt;script src=&quot;assets/02/examples/jquery-1.7.1.min.js&quot;&gt;&lt;/script&gt;
+	&lt;script&gt;
+		$(document).ready(function() {
+			alert('loaded');
+		});
+	&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+							</li>
+						</ul>
+					</section>
+
+					<section>
+						<h2>Including jQuery (2)</h2>
+						<ul>
+							<li class="fragment">
+								Also possible
+								<pre class="bigger"><code class="language-html dontrun" data-overlay-example="assets/02/examples/01a.html">...
+	&lt;script src=&quot;assets/02/examples/jquery-1.7.1.min.js&quot;&gt;&lt;/script&gt;
+	&lt;script&gt;
+		$(function() {
+			alert('loaded');
+		});
+	&lt;/script&gt;
+...</code></pre>
+							</li> 	
+						</ul>
+					</section>
+					
+				</section>
+
+
+				<!-- 3 : Selecting Elements -->
+				<section>
+					
+					<section>
+						<h2>Selecting Elements (1)</h2>
+						<ul>
+							<li class"fragment">jQuery is built around the <code>jQuery</code> function which is mapped to <code>$</code></li>
+							<li class="fragment">
+								Via the function you can select elements
+								<ul>
+									<li class="fragment">Just pass in a CSS3 selector to select the elements you want<br /><em>(cfr. <code>document.querySelectorAll</code>)</em></li>
+									<li class="fragment">
+										What you get returned is a jQuery wrapped Object, not the elements themselves
+										<ul>
+											<li class="fragment">eg. You can't call <code>.innerHTML</code> on it, as it's no DOM Node!</li>
+										</ul>
+									</li>
+								</ul>
+							</li>
+							<li class="fragment">
+								Full list of possible selectors on <a href="http://api.jquery.com/category/selectors/">jQuery API</a>
+							</li>
+						</ul>
+					</section>
+
+					<section>
+						<h2>Selecting Elements (2)</h2>
+						<ul>
+							<li class="fragment">
+								Examples
+								<pre class="bigger"><code class="language-js dontrun">// Selecting elements by ID
+$('#myId');
+
+// Selecting elements by class name
+$('div.myClass');
+
+// Selecting elements by attribute
+$('input[name=first_name]');
+
+// Selecting elements by compound CSS selector
+$('#contents &gt; ul.people li');
+
+// Selecting elements using a pseudo selector
+$('ul li:nth-child(2)');</code></pre>
+							</li>
+						</ul>
+					</section>
+
+					<section>
+						<h2>Selecting Elements (3)</h2>
+						<ul>
+							<li class="fragment">
+								jQuery has augmented the selector possibilities by adding their own extras such as
+								<pre class="bigger"><code class="language-js dontrun">// Select all elements that are in the progress of an animation at the time the selector is run
+$(':animated');
+
+// Selects all button elements and elements of type button.
+$(':button');
+
+// Select all elements that have no children (including text nodes).
+$(':empty');
+
+// Selects elements which contain at least one element that matches the specified selector.
+$('div:has(p)');
+
+// Parent selector
+$('td:parent');</code></pre>
+								<ul>
+									<li class="fragment">
+										Note: These selectors are slow, as they cannot be passed directly into the native &mdash; thus fast &mdash; <code>document.querySelector(All)</code>
+									</li>
+								</ul>
+							</li>
+						</ul>
+					</section>
+					
+				</section>
+
+
+				<!-- 4: Manipulating Elements -->
+				<section>
+
+					<section>
+						<h2>Manipulating Elements</h2>
+					</section>
+					
+				</section>
+
+
+				<!-- 5 : Traversing -->
+				<section>
+
+					<section>
+						<h2>Traversing</h2>
+
+					</section>
+
+				</section>
+
+
+				<!-- 6 : Events -->
+				<section>
+
+					<section>
+						<h2>Events</h2>
+
+					</section>
+
+				</section>
+
+
+				<!-- 7 : Chaining -->
+				<section>
+
+					<section>
+						<h2>Chaining</h2>
+
+					</section>
+
+				</section>
+
+
+				<!-- 8 : Effects/Animation -->
+				<section>
+
+					<section>
+						<h2>Effects/Animation</h2>
+
+					</section>
+
+				</section>
+
+
+				<!-- 9 : Core Functions -->
+				<section>
+
+					<section>
+						<h2>jQuery Core Functions</h2>
+
+					</section>
+
+				</section>
+
+
+
+				<!-- The END -->
+				<section>
+					<section>
+						<h2>Questions?</h2>
+						<footer>
+							<em><a href="http://www.ikdoeict.be/">ikdoeict.be</a> &mdash; <a href="mailto:bramus.vandamme@kahosl.be">bramus.vandamme@kahosl.be</a></em>
+						</footer>
+					</section>
+				</section>
+
+
+
+				<!-- Sources -->
+				<section id="sources">
+					<section>
+						<h2>Sources</h2>
+						
+					</section>
+				</section>
+				
+			</div>
+
+			<!-- The navigational controls UI -->
+			<aside class="controls">
+				<a class="left" href="#">&#x25C4;</a>
+				<a class="right" href="#">&#x25BA;</a>
+				<a class="up" href="#">&#x25B2;</a>
+				<a class="down" href="#">&#x25BC;</a>
+				<span id="revealIndex">/</span>
+			</aside>
+
+			<!-- Index Link -->
+			<aside class="back">
+				<a href="index.html">&larr; Back to index</a>
+			</aside>
+			
+			<!-- ikdoeict.be Link -->
+			<a href="http://www.ikdoeict.be/" title="ikdoeict.be" id="ikdoeict">ikdoeict.be</a>
+
+			<!-- Displays presentation progress, max value changes via JS to reflect # of slides -->
+			<div class="progress"><span></span></div>
+			
+		</div>
+		
+		<script src="js/reveal.js"></script>
+		<script src="lib/highlight.js"></script>
+		<script src="lib/prefixfree.js"></script>
+		<script src="lib/css-snippets.js"></script>
+		<script src="lib/css-edit.js"></script>
+		<script src="lib/incrementable.js"></script>
+		<script src="js/main.js"></script>
+
+	</body>
+</html>
