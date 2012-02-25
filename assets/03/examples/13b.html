@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<title>jQuery</title>
+</head>
+<body>
+	
+	<h1>Traversing</h1>
+
+	<ul>
+		<li>list item 1</li>
+		<li>list item 2</li>
+		<li id="third-item">list item 3</li>
+		<li>list item 4</li>
+		<li>list item 5</li>
+	</ul>
+
+	<script src="jquery-1.7.1.min.js"></script>
+	<script>
+		$(document).ready(function() {
+			$('#third-item')
+				.next().css('border', '1px solid red')
+				.end()
+				.prev().css('border', '1px solid blue');
+		});
+	</script>
+</body>
+</html>
