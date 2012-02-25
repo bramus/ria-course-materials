@@ -957,8 +957,45 @@ var a = $('&lt;a/&gt;', {
 					</section>
 
 					<section>
-						<h2>Effects/Animation</h2>
+						<h2>Animation Core Function</h2>
+						<ul>
+							<li class="fragment">
+								jQuery lets you animate elements (viz. adjust CSS properties in an animated manner) via its core <a href="http://api.jquery.com/animate/">.animate()</a> function.
+								<pre class="bigger"><code class="language-html dontrun" data-overlay-example="assets/03/examples/2DO.html">TODO...</code></pre>
+							</li>
+						</ul>
+					</section>
 
+					<section>
+						<h2>Animation Shorthands</h2>
+						<ul>
+							<li class="fragment">
+								jQuery also provides <a href="http://api.jquery.com/category/effects/">quite a few shorthands</a> for some basic effects, including:
+								<ul>
+									<li><a href="http://api.jquery.com/fadeIn/">.fadeIn()</a>: Display the matched elements by fading them to opaque.</li>
+									<li><a href="http://api.jquery.com/fadeOut/">.fadeOut()</a>: Hide the matched elements by fading them to transparent.</li>
+									<li><a href="http://api.jquery.com/hide/">.hide()</a>: Hide the matched elements.</li>
+									<li><a href="http://api.jquery.com/show/">.show()</a>: Display the matched elements.</li>
+									<li><a href="http://api.jquery.com/slideDown/">.slideDown()</a>: Display the matched elements with a sliding motion.</li>
+									<li><a href="http://api.jquery.com/slideUp/">.slideUp()</a>: Hide the matched elements with a sliding motion.</li>
+								</ul>
+							</li>
+						</ul>
+					</section>
+
+					<section>
+						<h2>Animation Stuff you should know</h2>
+						<ul>
+							<li class="fragment">
+								Animations are queued one after the other. Possible to interfere with
+								<ul>
+									<li><a href="http://api.jquery.com/queue/">.queue()</a>: Show the queue of functions to be executed on the matched elements.</li>
+									<li><a href="http://api.jquery.com/dequeue/">.dequeue()</a>: Execute the next function on the queue for the matched elements.</li>
+									<li><a href="http://api.jquery.com/clearQueue/">.clearQueue()</a>: Remove from the queue all items that have not yet been run.</li>
+								</ul>
+							</li>
+							<li class="fragment">Possible to stop and delay animations using <a href="http://api.jquery.com/stop/">.stop()</a> and <a href="http://api.jquery.com/delay/">.delay()</a></li>
+						</ul>
 					</section>
 
 				</section>
