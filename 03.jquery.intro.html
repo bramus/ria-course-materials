@@ -231,6 +231,7 @@
 										What you get returned is a jQuery wrapped Object, not the elements themselves
 										<ul>
 											<li class="fragment">eg. You can't call <code>.innerHTML</code> on it, as it's no DOM Node!</li>
+											<li class="fragment">You can only call functions provided by jQuery (or one of its plugins) on it</li>
 										</ul>
 									</li>
 								</ul>
@@ -312,6 +313,385 @@ $('td:parent');</code></pre>
 
 					<section>
 						<h2>Manipulating Elements</h2>
+						<ul>
+							<li class="fragment">
+								Once you have an element / a group of elements selected, you can manipulate them
+								<ul>
+									<li class="fragment">CSS properties</li>
+									<li class="fragment">Assigned Classes</li>
+									<li class="fragment">Values &amp; Attributes</li>
+									<li class="fragment">Add, Move, Copy &amp; Remove Elements</li>
+								</ul>
+							</li>
+						</ul>
+					</section>
+
+					<section>
+						<h2>CSS (1)</h2>
+						<ul>
+							<li class="fragment">
+								To adjust the css, make use of <a href="http://api.jquery.com/css/">.css()</a>
+								<pre class="bigger"><code class="language-html dontrun" data-overlay-example="assets/03/examples/02.html">&lt;h1&gt;CSS&lt;/h1&gt;
+&lt;ul&gt;
+	&lt;li&gt;Ham&lt;/li&gt;
+	&lt;li&gt;Bread&lt;/li&gt;
+	&lt;li&gt;Banana&lt;/li&gt;
+&lt;/ul&gt;
+&lt;script src=&quot;jquery-1.7.1.min.js&quot;&gt;&lt;/script&gt;
+&lt;script&gt;
+	$(document).ready(function() {
+
+		// Adjust properties one by one
+		$('li').css('border', '1px solid red');
+		$('li').css('width', '200px');
+
+		// Adjust multiple properties
+		$('ul li:nth-child(1)').css({
+			'font-weight': 700,
+			'background-color': 'lime',
+			'width': '250px'
+		});
+	});
+&lt;/script&gt;</code></pre>
+							</li>
+						</ul>
+					</section>
+
+					<section>
+						<h2>CSS (2)</h2>
+						<ul>
+							<li class="fragment">
+								jQuery allows chaining, you should make use of that
+								<pre class="bigger"><code class="language-html dontrun" data-overlay-example="assets/03/examples/02b.html">$(document).ready(function() {
+
+	// Adjust properties one by one
+	$('li').css('border', '1px solid red').css('width', '200px');
+
+	// Adjust multiple properties
+	$('ul li:nth-child(1)').css({
+		'font-weight': 700,
+		'background-color': 'lime',
+		'width': '250px'
+	});
+});</code></pre>
+							</li>
+							<li class="fragment">Code is shorter, and you've saved one DOM lookup</li>
+						</ul>
+					</section>
+
+					<section>
+						<h2>CSS (3)</h2>
+						<ul>
+							<li class="fragment">
+								To read a value, omit the 2nd parameter
+								<pre class="bigger"><code class="language-js dontrun" data-overlay-example="assets/03/examples/02c.html">$(document).ready(function() {
+
+	// Adjust properties one by one
+	$('li').css('border', '1px solid red');
+	$('li').css('width', '200px');
+
+	// Adjust multiple properties
+	$('ul li:nth-child(1)').css({
+		'font-weight': 700,
+		'background-color': 'lime',
+		'width': '250px'
+	});
+	
+	alert($('ul li:nth-child(1)').css('width'));
+});</code></pre>
+							</li>
+							<li class="fragment">This is true for most of the manipulation functions</li>
+						</ul>
+					</section>
+
+					<section>
+						<h2>CSS (4)</h2>
+						<ul>
+							<li class="fragment">
+								jQuery provides shortcuts to working with <a href="http://api.jquery.com/category/dimensions/">dimensions</a>
+								<ul>
+									<li><a href="http://api.jquery.com/width/">.width()</a></li>
+									<li><a href="http://api.jquery.com/height/">.height()</a></li>
+								</ul>
+							</li>
+							<li class="fragment">No vendor prefixed needed when setting &ldquo;new-ish&rdquo; properties. jQuery will handle it.</li>
+						</ul>
+					</section>
+
+					<section>
+						<h2>Classes (1)</h2>
+						<ul>
+							<li class="fragment">
+								Basic manipulation: <a href="http://api.jquery.com/addClass/">.addClass()</a> and <a href="http://api.jquery.com/removeClass/">.removeClass()</a>
+								<pre class="bigger"><code class="language-html dontrun" data-overlay-example="assets/03/examples/03.html">&lt;!doctype html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+    &lt;title&gt;jQuery&lt;/title&gt;
+	&lt;style&gt;
+		p { margin: 8px; font-size:16px; }
+		.selected { color:blue; }
+		.highlight { background:yellow; }
+	&lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;h1&gt;Classes&lt;/h1&gt;
+	&lt;ul&gt;
+		&lt;li class=&quot;selected&quot;&gt;Ham&lt;/li&gt;
+		&lt;li&gt;Bread&lt;/li&gt;
+		&lt;li class=&quot;selected&quot;&gt;Banana&lt;/li&gt;
+	&lt;/ul&gt;
+    &lt;script src=&quot;jquery-1.7.1.min.js&quot;&gt;&lt;/script&gt;
+    &lt;script&gt;
+	    $(document).ready(function() {
+			$('li:last').addClass('highlight').removeClass('selected');
+	    });
+    &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+							</li>
+						</ul>
+					</section>
+
+					<section>
+						<h2>Classes (2)</h2>
+						<ul>
+							<li class="fragment">
+								Other Functions: <a href="http://api.jquery.com/toggleClass/">.toggleClass()</a> and <a href="http://api.jquery.com/hasClass/">.hasClass()</a>
+								<pre class="bigger"><code class="language-js dontrun" data-overlay-example="assets/03/examples/03b.html">$(document).ready(function() {
+	$('li:last').toggleClass('highlight');
+	if ($('li:last').hasClass('selected')) {
+		alert('last li has the class &quot;selected&quot;');
+	}
+});</code></pre>
+							</li>
+						</ul>
+					</section>
+
+					<section>
+						<h2>HTML, Attributes &amp; Values (1)</h2>
+						<ul>
+							<li class="fragment">
+								Basics: <a href="http://api.jquery.com/html/">.html()</a> (to get/set the <code>innerHTML</code>) and <a href="http://api.jquery.com/val/">.val()</a> (to get/set the value of a form element)
+								<pre class="bigger"><code class="language-html dontrun" data-overlay-example="assets/03/examples/04.html">&lt;select&gt;
+    &lt;option&gt;Single&lt;/option&gt;
+    &lt;option selected=&quot;selected&quot;&gt;Single2&lt;/option&gt;
+&lt;/select&gt;
+&lt;input type=&quot;password&quot; id=&quot;pass&quot; value=&quot;P4SSW0RD&quot; /&gt;
+
+&lt;p&gt;(loading...)&lt;/p&gt;
+
+&lt;script src=&quot;jquery-1.7.1.min.js&quot;&gt;&lt;/script&gt;
+&lt;script&gt;
+	$(document).ready(function() {
+		$('#pass').val('NEWP4SSWORD');
+		$('p').html(
+			'Form choices : ' + $('select').val() + ' - ' + $('#pass').val()
+		);
+	});
+&lt;/script&gt;</code></pre>
+								<ul>
+									<li class="fragment">
+										<code>.val()</code> works with all types of inputs (and textareas!)
+									</li>
+									<li class="fragment">
+										Again: omission of a value to set results in getting the value
+									</li>
+								</ul>
+							</li>
+						</ul>
+					</section>
+
+					<section>
+						<h2>HTML, Attributes &amp; Values (2)</h2>
+						<ul>
+							<li class="fragment">
+								Getting/setting atrributes possible with <a href="http://api.jquery.com/attr/">.attr()</a>
+								<pre class="bigger"><code class="language-html dontrun" data-overlay-example="assets/03/examples/04b.html">&lt;p&gt;Once there was a &lt;em title=&quot;huge, gigantic&quot;&gt;large&lt;/em&gt; dinosaur...&lt;/p&gt;
+
+&lt;p id=&quot;output&quot;&gt;(loading...)&lt;/p&gt;
+
+&lt;script src=&quot;jquery-1.7.1.min.js&quot;&gt;&lt;/script&gt;
+&lt;script&gt;
+	$(document).ready(function() {
+		$('#output').html('The emphasis is ' + $('em').attr('title'));
+	});
+&lt;/script&gt;</code></pre>
+								<ul>
+									<li class="fragment">
+										When working with <code>data-*</code> attributes, one should use <a href="http://api.jquery.com/data/">.data()</a>
+									</li>
+								</ul>
+							</li>
+						</ul>
+					</section>
+
+					<section>
+						<h2>Add, Move, Copy &amp; Remove Elements</h2>
+						<ul>
+							<li class="fragment">
+								Sidenote: Creating elements
+								<pre class="bigger"><code class="language-js dontrun">// Creating new elements from an HTML string
+var p = $('&lt;p&gt;This is a new paragraph&lt;/p&gt;');
+var li = $('&lt;li class=&quot;new&quot;&gt;new list item&lt;/li&gt;');
+
+// Creating a new element with an attribute object
+var a = $('&lt;a/&gt;', {
+    html : 'This is a &lt;strong&gt;new&lt;/strong&gt; link',
+    'class' : 'new',
+    href : 'foo.html'
+});</code></pre>
+							</li>
+						</ul>
+					</section>
+
+					<section>
+						<h2>Adding Elements (1)</h2>
+						<ul>
+							<li class="fragment">
+								Inject content outside targeted element with <a href="http://api.jquery.com/after/">.after()</a> and <a href="http://api.jquery.com/before/">.before()</a>
+								<pre class="bigger"><code class="language-html dontrun" data-overlay-example="assets/03/examples/05.html">&lt;div class=&quot;container&quot;&gt;
+	&lt;h2&gt;Greetings&lt;/h2&gt;
+	&lt;p&gt;Hello&lt;/p&gt;
+	&lt;p&gt;Goodbye&lt;/p&gt;
+&lt;/div&gt;
+
+&lt;script src=&quot;jquery-1.7.1.min.js&quot;&gt;&lt;/script&gt;
+&lt;script&gt;
+	$(document).ready(function() {
+		$('p').after('&lt;p&gt;Injected After&lt;/p&gt;');
+	});
+&lt;/script&gt;</code></pre>
+								<pre class="bigger"><code class="language-js dontrun" data-overlay-example="assets/03/examples/05b.html">$(document).ready(function() {
+	$('p').before('&lt;p&gt;Injected Before&lt;/p&gt;');
+});</code></pre>
+							</li>
+						</ul>
+					</section>
+
+					<section>
+						<h2>Adding Elements (2)</h2>
+						<ul>
+							<li class="fragment">
+								Alternative Syntax: <a href="http://api.jquery.com/insertAfter/">.insertAfter()</a> and <a href="http://api.jquery.com/insertBefore/">.insertBefore()</a>
+								<pre class="bigger"><code class="language-html dontrun" data-overlay-example="assets/03/examples/05c.html">&lt;div class=&quot;container&quot;&gt;
+	&lt;h2&gt;Greetings&lt;/h2&gt;
+	&lt;p&gt;Hello&lt;/p&gt;
+	&lt;p&gt;Goodbye&lt;/p&gt;
+&lt;/div&gt;
+
+&lt;script src=&quot;jquery-1.7.1.min.js&quot;&gt;&lt;/script&gt;
+&lt;script&gt;
+	$(document).ready(function() {
+		$('&lt;p&gt;Injected After&lt;/p&gt;').insertAfter('p');
+	});
+&lt;/script&gt;</code></pre>
+								<pre class="bigger"><code class="language-js dontrun" data-overlay-example="assets/03/examples/05d.html">$(document).ready(function() {
+	$('&lt;p&gt;Injected Before&lt;/p&gt;').insertBefore('p');
+});</code></pre>
+								<ul>
+									<li>Difference with previous: target and content parameters swapped</li>
+								</ul>
+							</li>
+						</ul>
+					</section>
+
+					<section>
+						<h2>Adding Elements (3)</h2>
+						<ul>
+							<li class="fragment">
+								Also possible
+								<ul>
+									<li><a href="http://api.jquery.com/append/">.append()</a> / <a href="http://api.jquery.com/appendTo/">.appendTo()</a></li>
+									<li><a href="http://api.jquery.com/prepend/">.prepend()</a> / <a href="http://api.jquery.com/prependTo/">.prependTo()</a></li>
+								</ul>
+							</li>
+							<li class="fragment">Important difference with previous
+								<ul>
+									<li>Content gets injected <strong>inside</strong> the targeted element</li>
+								</ul>
+							</li>
+							<li class="fragment">
+								Example
+								<pre class="bigger"><code class="language-html dontrun" data-overlay-example="assets/03/examples/05e.html">&lt;ul&gt;
+	&lt;li&gt;Ham&lt;/li&gt;
+	&lt;li&gt;Bread&lt;/li&gt;
+	&lt;li&gt;Banana&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;script src=&quot;jquery-1.7.1.min.js&quot;&gt;&lt;/script&gt;
+&lt;script&gt;
+	$(document).ready(function() {
+		$('ul').prepend('&lt;li&gt;Apple&lt;/li&gt;').append('&lt;li&gt;Pear&lt;/li&gt;');
+	});
+&lt;/script&gt;</code></pre>
+							</li>
+						</ul>
+					</section>
+
+					<section>
+						<h2>Moving Elements</h2>
+						<ul>
+							<li class="fragment">
+								Example: Move last element to being the first
+								<pre class="bigger"><code class="language-html dontrun" data-overlay-example="assets/03/examples/06.html">&lt;ul&gt;
+	&lt;li&gt;Ham&lt;/li&gt;
+	&lt;li&gt;Bread&lt;/li&gt;
+	&lt;li&gt;Banana&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;script src=&quot;jquery-1.7.1.min.js&quot;&gt;&lt;/script&gt;
+&lt;script&gt;
+	$(document).ready(function() {
+		$('li:last').prependTo('ul');
+	});
+&lt;/script&gt;</code></pre>
+							</li>
+						</ul>
+					</section>
+
+					<section>
+						<h2>Copying Elements</h2>
+						<ul>
+							<li class="fragment">
+								Use <a href="http://api.jquery.com/clone/">.clone()</a> to duplicate, and insert it into the HTML
+								<pre class="bigger"><code class="language-html dontrun" data-overlay-example="assets/03/examples/07.html">&lt;ul&gt;
+	&lt;li&gt;Ham&lt;/li&gt;
+	&lt;li&gt;Bread&lt;/li&gt;
+	&lt;li&gt;Banana&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;script src=&quot;jquery-1.7.1.min.js&quot;&gt;&lt;/script&gt;
+&lt;script&gt;
+	$(document).ready(function() {
+		$('li:last').clone().appendTo('ul');
+	});
+&lt;/script&gt;</code></pre>
+							</li>
+						</ul>
+					</section>
+
+					<section>
+						<h2>Removing Elements</h2>
+						<ul>
+							<li class="fragment">
+								Use <a href="http://api.jquery.com/remove/">.remove()</a> or <a href="http://api.jquery.com/empty/">.empty</a>
+								<pre class="bigger"><code class="language-html dontrun" data-overlay-example="assets/03/examples/08.html">&lt;ul&gt;
+	&lt;li&gt;Ham&lt;/li&gt;
+	&lt;li&gt;Bread&lt;/li&gt;
+	&lt;li&gt;Banana&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;A paragraph&lt;/p&gt;
+
+&lt;script src=&quot;jquery-1.7.1.min.js&quot;&gt;&lt;/script&gt;
+&lt;script&gt;
+	$(document).ready(function() {
+		$('p').remove();
+		$('ul').empty().append('&lt;li&gt;Apple&lt;/li&gt;');
+	});
+&lt;/script&gt;</code></pre>
+							</li>
+						</ul>
 					</section>
 					
 				</section>
@@ -323,11 +703,19 @@ $('td:parent');</code></pre>
 					<section>
 						<h2>Traversing</h2>
 						<p><img src="assets/03/futurama_bodies.jpg" alt="" title="" height="309" width="446" /></p>
+						<q>All right, which one of you sea dogs has the guts and know-how to harpoon a whale?</q>
 					</section>
 
 					<section>
 						<h2>Traversing</h2>
-
+						<ul>
+							<li class="fragment">
+								Same analogy as regular DOM tree walking: parents, children and siblings
+							</li>
+							<li class="fragment">
+								jQuery provides <a href="http://api.jquery.com/category/traversing/tree-traversal/">a truckload of functions</a> to walking the DOM tree
+							</li>
+						</ul>
 					</section>
 
 				</section>
@@ -349,23 +737,7 @@ $('td:parent');</code></pre>
 				</section>
 
 
-				<!-- 7 : Chaining -->
-				<section>
-
-					<section>
-						<h2>Chaining</h2>
-						<p><img src="assets/03/futurama_tentacle.jpg" alt="" title="" height="309" width="446" /></p>
-					</section>
-
-					<section>
-						<h2>Chaining</h2>
-
-					</section>
-
-				</section>
-
-
-				<!-- 8 : Effects/Animation -->
+				<!-- 7 : Effects/Animation -->
 				<section>
 
 					<section>
@@ -381,7 +753,7 @@ $('td:parent');</code></pre>
 				</section>
 
 
-				<!-- 9 : Core Functions -->
+				<!-- 8 : Core Functions -->
 				<section>
 
 					<section>
