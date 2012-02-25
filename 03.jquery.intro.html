@@ -961,7 +961,23 @@ var a = $('&lt;a/&gt;', {
 						<ul>
 							<li class="fragment">
 								jQuery lets you animate elements (viz. adjust CSS properties in an animated manner) via its core <a href="http://api.jquery.com/animate/">.animate()</a> function.
-								<pre class="bigger"><code class="language-html dontrun" data-overlay-example="assets/03/examples/2DO.html">TODO...</code></pre>
+								<pre class="bigger"><code class="language-html dontrun" data-overlay-example="assets/03/examples/19.html">&lt;button id=&quot;go&quot;&gt;Run&lt;/button&gt;
+&lt;div id=&quot;block&quot; style=&quot;background-color:#bca; width:100px; border:1px solid green;&quot;&gt;Hello!&lt;/div&gt;
+
+&lt;script src=&quot;jquery-1.7.1.min.js&quot;&gt;&lt;/script&gt;
+&lt;script&gt;
+	$(document).ready(function() {
+		$('#go').on('click', function() {
+			$('#block').animate({
+				width: '70%',
+				opacity: 0.4,
+				marginLeft: '40px',
+				fontSize: '3em',
+				borderWidth: '10px'
+			}, 1500 );
+		});
+	});
+&lt;/script&gt;</code></pre>
 							</li>
 						</ul>
 					</section>
@@ -1011,7 +1027,87 @@ var a = $('&lt;a/&gt;', {
 
 					<section>
 						<h2>jQuery Core Functions</h2>
+						<ul>
+							<li class="fragment">
+								jQuery also provides <a href="http://api.jquery.com/category/utilities/">a few utility functions</a>, including
+								<ul>
+									<li>
+										<a href="http://api.jquery.com/jQuery.trim/">$.trim</a>: Remove whitespace from a String
+										<pre class="bigger"><code class="language-js dontrun">$.trim('    lots of extra whitespace    ');</code></pre>
+									</li>
+									<li>
+										<a href="http://api.jquery.com/jQuery.each/">$.each</a>: Iterate over Arrays and Objects
+										<pre class="bigger"><code class="language-js dontrun">$.each([ 'foo', 'bar', 'baz' ], function(idx, val) {
+	console.log('element ' + idx + 'is ' + val);
+});
+$.each({ foo : 'bar', baz : 'bim' }, function(k, v) {
+	console.log(k + ' : ' + v);
+});</code></pre>
+									</li>
+									<li>
+										<a href="http://api.jquery.com/jQuery.inArray/">$.inArray</a>: Get index for element inside an Array
+										<pre class="bigger"><code class="language-js dontrun">$.inArray(4, [ 1, 2, 3, 4, 5 ]); // 3</code></pre>
+									</li>
+									<li>
+										<a href="http://api.jquery.com/jQuery.extend/">$.extend</a>: Merge the contents of two or more objects together into the first object
+										<pre class="bigger"><code class="language-js dontrun">$.extend({}, object1, object2);</code></pre>
+									</li>
+								</ul>
+							</li>
+						</ul>
+					</section>
 
+					<section>
+						<h2>$.extend use case</h2>
+						<ul>
+							<li class="fragment">
+								Commonly use, mostly to provide defaults
+								<pre class="bigger"><code class="language-html dontrun" data-overlay-example="assets/03/examples/20.html">&lt;p&gt;(loading...)&lt;/p&gt;
+
+&lt;script src=&quot;jquery-1.7.1.min.js&quot;&gt;&lt;/script&gt;
+&lt;script&gt;
+	$(document).ready(function() {
+		var defaults = {
+			'color' : 'lime',
+			'font-size' : '15px',
+			'font-weight' : '700',
+			'font-family' : 'verdana'
+		}
+
+		var write = function(what, options) {
+			var cssSettings = $.extend({}, defaults, options);
+			$('p').css(cssSettings).html(what);
+		}
+
+		write('This will not be lime', {'color':'blue'});
+
+	});
+&lt;/script&gt;</code></pre>
+							</li>
+						</ul>
+					</section>
+
+					<section>
+						<h2>Other Utility Functions/Objects</h2>
+						<ul>
+							<li class="fragment">
+								Basic checking functions such as 
+								<ul>
+									<li><a href="http://api.jquery.com/jQuery.isArray/">$.isArray</a></li>
+									<li><a href="http://api.jquery.com/jQuery.isFunction/">$.isFunction</a></li>
+									<li><a href="http://api.jquery.com/jQuery.isNumeric/">$.isNumeric</a></li>
+									<li><a href="http://api.jquery.com/jQuery.isPlainObject/">$.isPlainObject</a></li>
+								</ul>
+							</li>
+							<li class="fragment">
+								<a href="http://api.jquery.com/jQuery.browser/">$.browser</a> provides information about the browser
+								<ul>
+									<li class="fragment">Deprecated</li>
+									<li class="fragment">Based on user agent sniffing</li>
+									<li class="fragment">Better to use feature detection, as provided by <a href="http://api.jquery.com/jQuery.support/">$.support</a> or an external library (such as <a href="http://www.modernizr.com/">Modernizr</a>)</li>
+								</ul>
+							</li>
+						</ul>
 					</section>
 
 				</section>
