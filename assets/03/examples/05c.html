@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>jQuery</title>
+</head>
+<body>
+	
+	<h1>Add, Move, Copy &amp; Remove Elements</h1>
+
+	<div>
+		<h2>Greetings</h2>
+		<p>Hello</p>
+		<p>Goodbye</p>
+	</div>
+
+    <script src="jquery-1.7.1.min.js"></script>
+    <script>
+	    $(document).ready(function() {
+			$('<p>Injected After</p>').insertAfter('p');
+	    });
+    </script>
+</body>
+</html>

@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>jQuery</title>
+</head>
+<body>
+    <h1>CSS</h1>
+	<ul>
+		<li>Ham</li>
+		<li>Bread</li>
+		<li>Banana</li>
+	</ul>
+    <script src="jquery-1.7.1.min.js"></script>
+    <script>
+	    $(document).ready(function() {
+		
+			// Adjust properties one by one
+	        $('li').css('border', '1px solid red').css('width', '200px');
+		
+			// Adjust multiple properties
+			$('ul li:nth-child(1)').css({
+				'font-weight': 700,
+				'background-color': 'lime',
+				'width': '250px'
+			});
+			
+			alert($('ul li:nth-child(1)').css('width'));
+	    });
+    </script>
+</body>
+</html>

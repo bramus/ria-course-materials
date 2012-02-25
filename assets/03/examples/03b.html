@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>jQuery</title>
+	<style>
+		p { margin: 8px; font-size:16px; }
+		.selected { color:blue; }
+		.highlight { background:yellow; }
+	</style>
+</head>
+<body>
+    <h1>Classes</h1>
+	<ul>
+		<li class="selected">Ham</li>
+		<li>Bread</li>
+		<li class="selected">Banana</li>
+	</ul>
+    <script src="jquery-1.7.1.min.js"></script>
+    <script>
+	    $(document).ready(function() {
+			$('li:last').toggleClass('highlight');
+			if ($('li:last').hasClass('selected')) {
+				alert('last li has the class "selected"');
+			}
+	    });
+    </script>
+</body>
+</html>
