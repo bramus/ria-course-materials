@@ -298,6 +298,24 @@ $('td:parent');</code></pre>
 							</li>
 						</ul>
 					</section>
+
+					<section>
+						<h2>Iterating a selection</h2>
+						<ul>
+							<li class="fragment">
+								Sometimes, you'll want to iterate over a selection
+								<pre class="bigger"><code class="language-js dontrun">$('li').each(function() {
+	console.log($(this));			
+});</code></pre>
+							</li>
+							<li class="fragment">
+								Possible to use <code>this</code>, referencing the current node, inside a loop
+								<ul>
+									<li>Wrapp it inside <code>$()</code> again, to get a jQuery Object</li>
+								</ul>
+							</li>
+						</ul>
+					</section>
 					
 				</section>
 
@@ -354,6 +372,7 @@ $('td:parent');</code></pre>
 	});
 &lt;/script&gt;</code></pre>
 							</li>
+							<li class="fragment">No need to loop over the selection, jQuery is written so that it'll apply the changes to all selected elements</li>
 						</ul>
 					</section>
 
@@ -938,11 +957,215 @@ var a = $('&lt;a/&gt;', {
 					<section>
 						<h2>Events</h2>
 						<p><img src="assets/03/futurama_bendergun.jpg" alt="" title="" height="309" width="446" /></p>
+						<q>001100010010011110100001101101110011</q>
 					</section>
 
 					<section>
 						<h2>Events</h2>
+						<ul>
+							<li class="fragment">
+								Add event listeners with <a href="http://api.jquery.com/on/">.on()</a> and remove them with <a href="http://api.jquery.com/off/">.off()</a>
+								<ul>
+									<li class="fragment">
+										Most common events supported
+										<ul>
+											<li>blur</li>
+											<li>click</li>
+											<li>dblclick</li>
+											<li>focus</li>
+											<li>keyup</li>
+											<li>mouseclick</li>
+											<li>...</li>
+										</ul>
+									</li>
+									<li class="fragment">An <code>eventObject</code> is passed into the handling function</li>
+									<li class="fragment">Possible to reference <code>this</code> from within the function</li>
+								</ul>
+							</li>
+							<li class="fragment">Hook one-time events with <a href="http://api.jquery.com/one/">.one()</a></li>
+						</ul>
+					</section>
 
+					<section>
+						<h2>Binding Events</h2>
+						<ul>
+							<li class="fragment">
+								Basic usage
+								<pre class="bigger"><code class="language-html dontrun" data-overlay-example="assets/03/examples/14.html">&lt;ul&gt;
+	&lt;li&gt;list item 1&lt;/li&gt;
+	&lt;li&gt;list item 2&lt;/li&gt;
+	&lt;li&gt;list item 3&lt;/li&gt;
+	&lt;li&gt;list item 4&lt;/li&gt;
+	&lt;li&gt;list item 5&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;script src=&quot;jquery-1.7.1.min.js&quot;&gt;&lt;/script&gt;
+&lt;script&gt;
+	$(document).ready(function() {
+		$('li').css('cursor','pointer').on('mouseover', function(e) {
+			$(this).css('color', 'blue');
+		}).on('mouseout', function(e) {
+			$(this).css('color', 'black');
+		}).on('click', function(e) {
+			$(this).css('color', 'red');
+		});
+	});
+&lt;/script&gt;</code></pre>
+							</li>
+							<li class="fragment">Even possible to inject extra data into an event handler, see the <a href="http://api.jquery.com/on/">.on()</a> API reference</li>
+						</ul>
+					</section>
+
+					<section>
+						<h2>Binding Events: Shorthands</h2>
+						<ul>
+							<li class="fragment">
+								jQuery offers shorthand methods to binding events
+								<pre class="bigger"><code class="language-js dontrun" data-overlay-example="assets/03/examples/14b.html">$(document).ready(function() {
+	$('li').css('cursor','pointer').hover(
+		function(e) {
+			$(this).css('color', 'blue');
+		}, 
+		function(e) {
+			$(this).css('color', 'black');
+		}
+	).click(function(e) {
+		$(this).css('color', 'red');
+	});
+});</code></pre>
+							</li>
+							<li class="fragment">We will use <a href="http://api.jquery.com/on/">.on()</a> and <a href="http://api.jquery.com/off/">.off()</a> though</li>
+						</ul>
+					</section>
+
+					<section>
+						<h2>Binding Events: Alternate Syntax</h2>
+						<ul>
+							<li class="fragment">
+								In older jQuery versions <a href="http://api.jquery.com/bind/">.bind()</a> and <a href="http://api.jquery.com/unbind/">.unbind()</a> were used
+								<pre class="bigger"><code class="language-js dontrun" data-overlay-example="assets/03/examples/14c.html">$(document).ready(function() {
+	$('li').css('cursor','pointer').bind('mouseover', function(e) {
+		$(this).css('color', 'blue');
+	}).bind('mouseout', function(e) {
+		$(this).css('color', 'black');
+	}).bind('click', function(e) {
+		$(this).css('color', 'red');
+	});
+});
+&lt;/script&gt;</code></pre>
+							</li>
+							<li class="fragment">Again, we will use <a href="http://api.jquery.com/on/">.on()</a> and <a href="http://api.jquery.com/off/">.off()</a></li>
+						</ul>
+					</section>
+
+					<section>
+						<h2>The eventObject</h2>
+						<ul>
+							<li class="fragment">
+								The <a href="http://api.jquery.com/category/events/event-object/">jQuery eventObject</a> is a normalized event object according to W3C Specifications through all browsers
+							</li>
+							<li class="fragment">
+								It works in the same manner as the W3C Event Object
+								<ul>
+									<li class="fragment">Call <code>event#target</code> to get to know what was clicked</li>
+									<li class="fragment">Call <code>event#preventDefault</code> to prevent the default action</li>
+									<li class="fragment">Call <code>event#stopPropagation</code> to stop bubbling of the event</li>
+								</ul>
+							</li>
+						</ul>
+					</section>
+
+					<section>
+						<h2>Binding events on future nodes (1)</h2>
+						<ul>
+							<li class="fragment">
+								When binding event handlers with <a href="http://api.jquery.com/on/">.on()</a> or <a href="http://api.jquery.com/bind/">.bind()</a> they'll only be hooked to the currently existing elements
+								<pre class="bigger"><code class="language-js dontrun" data-overlay-example="assets/03/examples/15.html">$(document).ready(function() {
+
+	// Bind Events
+	$('li').css('cursor','pointer').on('mouseover', function(e) {
+		$(this).css('color', 'blue');
+	}).on('mouseout', function(e) {
+		$(this).css('color', 'black');
+	}).on('click', function(e) {
+		$(this).css('color', 'red');
+	});
+	
+	// Append new list item
+	$('ul').append('&lt;li&gt;new list item, injected after the event binding&lt;/li&gt;');
+	
+});</code></pre>
+							</li>
+							<li class="fragment">Can be fixed by using <a href="http://api.jquery.com/delegate/">.delegate()</a></li>
+						</ul>
+					</section>
+
+					<section>
+						<h2>.delegate</h2>
+						<ul>
+							<li class="fragment">
+								Example
+								<pre class="bigger"><code class="language-js dontrun" data-overlay-example="assets/03/examples/15b.html">$(document).ready(function() {
+
+	// Bind Events, using delegate
+	$('ul').delegate('li', 'mouseover', function(e) {
+		$(this).css('color', 'blue');
+	}).delegate('li', 'mouseout', function(e) {
+		$(this).css('color', 'black');
+	}).delegate('li', 'click', function(e) {
+		$(this).css('color', 'red');
+	}).css('cursor','pointer');
+
+	// Append new list item
+	$('ul').append('&lt;li&gt;new list item, injected after the event binding&lt;/li&gt;');
+
+});</code></pre>
+							</li>
+						</ul>
+					</section>
+
+					<section>
+						<h2>.delegate alternative (deprecated)</h2>
+						<ul>
+							<li class="fragment">
+								Older versions of jQuery used <a href="http://api.jquery.com/live/">.live()</a> instead of <a href="http://api.jquery.com/delegate/">.delegate()</a>
+								<pre class="bigger"><code class="language-js dontrun" data-overlay-example="assets/03/examples/15c.html">$(document).ready(function() {
+
+	// Bind events, using live (not recommended!)
+	$('ul li').live('mouseover', function(e) {
+		$(this).css('color', 'blue');
+	}).live('mouseout', function(e) {
+		$(this).css('color', 'black');
+	}).live('click', function(e) {
+		$(this).css('color', 'red');
+	}).css('cursor','pointer');
+
+	// Append new list item
+	$('ul').append('&lt;li&gt;new list item, injected after the event binding&lt;/li&gt;');
+
+});</code></pre>
+								<ul>
+										<li class="fragment">Works, but performance <a href="http://forum.jquery.com/topic/jquery-live-jquery-fn-live-discussion">is slow</a> and <a href="http://stage.learn.jquery.com/events/using_delegate_and_undelegate/">doesn't play nice when traversing</a></li>
+										<li class="fragment">Recommended read: <a href="http://jupiterjs.com/news/why-you-should-never-use-jquery-live">Why You Should Never Use jQuery Live</a></li>
+										<li class="fragment">We will use <a href="http://api.jquery.com/delegate/">.delegate()</a></li>
+								</ul>
+							</li>
+						</ul>
+					</section>
+
+					<section>
+						<h2>Events Summary</h2>
+						<ul>
+							<li class="fragment">
+								Use <a href="http://api.jquery.com/one/">.on()</a> and <a href="http://api.jquery.com/off/">.off()</a> to bind event handlers
+							</li>
+							<li class="fragment">
+								Use <a href="http://api.jquery.com/delegate/">.delegate()</a> to bind event handlers if you know the DOM will change
+							</li>
+							<li class="fragment">
+								All other syntaxes work, but we won't be writing them ourselves
+							</li>
+						</ul>
 					</section>
 
 				</section>
