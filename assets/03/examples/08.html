@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>jQuery</title>
+</head>
+<body>
+	
+	<h1>Add, Move, Copy &amp; Remove Elements</h1>
+
+	<ul>
+		<li>Ham</li>
+		<li>Bread</li>
+		<li>Banana</li>
+	</ul>
+	
+	<p>A paragraph</p>
+
+    <script src="jquery-1.7.1.min.js"></script>
+    <script>
+	    $(document).ready(function() {
+			$('p').remove();
+			$('ul').empty().append('<li>Apple</li>');
+	    });
+    </script>
+</body>
+</html>

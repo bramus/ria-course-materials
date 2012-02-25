@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>jQuery</title>
+</head>
+<body>
+	
+	<h1>HTML, Attributes &amp; Values</h1>
+
+	<select>
+	    <option>Single</option>
+	    <option selected="selected">Single2</option>
+	</select>
+	<input type="password" id="pass" value="P4SSW0RD" />
+	
+	<p>(loading...)</p>
+	
+    <script src="jquery-1.7.1.min.js"></script>
+    <script>
+	    $(document).ready(function() {
+			$('#pass').val('NEWP4SSWORD');
+			$('p').html('Form choices : ' + $('select').val() + ' - ' + $('#pass').val());
+	    });
+    </script>
+</body>
+</html>

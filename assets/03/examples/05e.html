@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>jQuery</title>
+</head>
+<body>
+	
+	<h1>Add, Move, Copy &amp; Remove Elements</h1>
+
+	<ul>
+		<li>Ham</li>
+		<li>Bread</li>
+		<li>Banana</li>
+	</ul>
+
+    <script src="jquery-1.7.1.min.js"></script>
+    <script>
+	    $(document).ready(function() {
+			$('ul').prepend('<li>Apple</li>').append('<li>Pear</li>');
+	    });
+    </script>
+</body>
+</html>
