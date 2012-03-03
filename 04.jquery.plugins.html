@@ -246,7 +246,7 @@ var p1 = $('p'),
 }</code></pre>
 							</li>
 							<li class="fragment">
-								jQuery version
+								jQuery version:
 								<pre class="bigger"><code class="language-js dontrun">$.extend({
 	randomColor : function() {
 		return '#' + Math.floor(Math.random() * 16777215).toString(16);
@@ -254,14 +254,7 @@ var p1 = $('p'),
 })</code></pre>
 							</li>
 							<li class="fragment">
-								Use an IIFE to make sure <code>$</code> refers to <code>jQuery</code>
-								<pre class="bigger"><code class="language-js dontrun">(function($) {
-	$.extend({
-		randomColor : function() {
-			return '#' + Math.floor(Math.random() * 16777215).toString(16);
-		}
-	})
-})(jQuery);</code></pre>
+								Possible to pass in multiple functions at once
 							</li>
 						</ul>
 					</section>
@@ -297,8 +290,102 @@ var p1 = $('p'),
 						</ul>
 					</section>
 
+					<section>
+						<h2>Code Improvement</h2>
+						<ul>
+							<li class="fragment">
+								Use an IIFE to make sure <code>$</code> refers to <code>jQuery</code>
+								<pre class="bigger"><code class="language-js dontrun">(function($) {
+	$.extend({
+		randomColor : function() {
+			return '#' + Math.floor(Math.random() * 16777215).toString(16);
+		}
+	})
+})(jQuery);</code></pre>
+								<ul>
+									<li>Always use the IIFE</li>
+								</ul>
+							</li>
+						</ul>
+					</section>
+
 				</section>
 
+
+				<!-- 4 : Writing Plugins : Writing Custom Expressions -->
+				<section>
+
+					<section>
+						<h2>Writing Custom Expressions</h2>
+						<p><img src="assets/04/futurama_sb.jpg" alt="" title="" height="309" width="446" /></p>
+					</section>
+
+					<section>
+						<h2>Writing Custom Expressions</h2>
+						<ul>
+							<li class="fragment">
+								Custom expressions are stored in <code>jQuery.expr[':']</code>
+							</li>
+							<li class="fragment">
+								Use jQuery.extend() to extend <code>jQuery.expr[':']</code> with a new function
+								<pre class="bigger"><code class="language-js dontrun">jQuery.extend(jQuery.expr[':'], {
+	example : function(elem, index, meta, stack) {
+		// elem - is a current DOM element
+		// index - the current loop index in stack
+		// meta - meta data about your selector
+		// stack - stack of all elements to loop
+
+		// Return true to include current element
+		// Return false to explude current element
+	}
+});</code></pre>
+								<ul>
+									<li class="fragment">
+										Most of the time you'll only need the <code>elem</code> parameter
+										<ul>
+											<li class="fragment"><code>elem</code> is not a jQuery Instance!</li>
+										</ul>
+									</li>
+									<li class="fragment">The <code>meta</code> param is an array with info about your selector, <a href="http://jquery-howto.blogspot.com/2009/06/jquery-custom-selectors-with-parameters.html">allows you to use parameters</a> with your selector</li>
+								</ul>
+							</li>
+						</ul>
+					</section>
+
+					<section>
+						<h2>Example</h2>
+						<ul>
+							<li class="fragment">
+								Select all possible lists
+								<pre class="bigger"><code class="language-js dontrun">(function($) {
+	$.extend($.expr[':'], {
+		lists : function(elem, index, match, stack) {
+			var els = ['ul','ol','dl'];
+		    return ($.inArray(elem.nodeName.toLowerCase(), els) &gt; -1);
+		}
+	});
+})(jQuery);</code></pre>
+							</li>
+							<li class="fragment">
+								Usage
+								<pre class="bigger"><code class="language-js dontrun" data-overlay-example="assets/04/examples/03.html">$(':lists').css('border', '1px solid red');</code></pre>
+							</li>
+							<li class="fragment">
+								Notes
+								<ul>
+									<li class="fragment">
+										These selectors perform badly (slow), as they loop all elements
+										<ul>
+											<li>Best to only use to refine a selection: <code>$('#somediv').find(':lists');</code></li>
+										</ul>
+									</li>
+									<li class="fragment">This performs better (and does the same): <code>$('ul,ol,dl');</code></li>
+								</ul>
+							</li>
+						</ul>
+					</section>
+
+				</section>
 
 				<!-- The END -->
 				<section>
