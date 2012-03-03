@@ -50,6 +50,12 @@
 				<section>
 
 					<section>
+						<h2>Plugins</h2>
+						<p><img src="assets/04/futurama_eyephone.jpg" alt="" title="" height="309" width="446" /></p>
+						<q>With the new eyePhone, you can watch, listen, ignore your friends, stalk your ex, download porno on a crowded bus, even check your email while getting hit by a train.</q>
+					</section>
+
+					<section>
 						<h2>Extensibility</h2>
 						<ul>
 							<li class="fragment">
@@ -58,7 +64,12 @@
 							<li class="fragment">
 								Extensions are released as plugins
 								<ul>
-									<li class="fragment">Overview available at <a href="http://plugins.jquery.com/">http://plugins.jquery.com/</a></li>
+									<li class="fragment">
+										(Cluttered) Overview available at <a href="http://plugins.jquery.com/">http://plugins.jquery.com/</a>
+										<ul>
+											<li class="fragment">Most of the time you're better off with <a href="http://www.flickr.com/photos/bramus/2998573943/">A Google Search Coupon</a></li>
+										</ul>
+									</li>
 									<li class="fragment">Some bigger extensions are released as projects
 										<ul>
 											<li class="fragment"><a href="http://jqueryui.com/">jQuery UI</a> &mdash; abstractions for low-level interaction and animation, advanced effects and high-level, themeable widgets</li>
@@ -69,45 +80,77 @@
 							</li>
 						</ul>
 					</section>
-					
-					
+
 					<section>
-						<h2>Extensibility Sidenote</h2>
+						<h2>Using Plugins</h2>
 						<ul>
 							<li class="fragment">
-								The jQuery you download actually is a jQuery Object bundled with some common extensions
-								<ul>
-									<li class="fragment">
-										Some of the jQuery functionality originally was a plugin <em>(e.g. <code>Ajax</code> &amp; <code>Dimensions</code>)</em> and were later on moved into jQuery itself
-									</li>
-									<li class="fragment">
-										<a href="http://www.keyframesandcode.com/resources/javascript/deconstructed/jquery/">jQuery Deconstructed</a> gives a nice view on how the jQuery is organized
-									</li>
-								</ul>
+								Include it in your HTML page after you've included jQuery and the new functionality becomes available
+								<pre class="bigger"><code class="language-html dontrun" data-overlay-example="assets/04/examples/01.html">&lt;!doctype html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+	&lt;title&gt;jQuery Plugins - 01&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+
+	&lt;h1&gt;jQuery.reverseText&lt;/h1&gt;
+
+	&lt;p&gt;Hi, I will be reversed!&lt;/p&gt;
+
+	&lt;script src=&quot;js/jquery-1.7.1.min.js&quot;&gt;&lt;/script&gt;
+	&lt;script src=&quot;js/jquery.reversetext.js&quot;&gt;&lt;/script&gt;
+	&lt;script&gt;
+		$(document).ready(function() {
+			$('p').reverseText();
+		});
+	&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
 							</li>
 						</ul>
 					</section>
 					
 					<section>
-						<h2>Extensibility Options</h2>
+						<h2>Plugin Types</h2>
 						<ul>
 							<li class="fragment">
-								Extend the core/utility functions
+								Plugins can extend the core/utility functions
 								<ul>
 									<li class="fragment">viz. helper functions like <code>$.trim()</code></li>
+									<li class="fragment">viz. a function <code>$.randomColor()</code> to get a random color returned.</li>
 								</ul>
 							</li>
 							<li class="fragment">
-								Extend the supported selectors/expressions
+								Plugins can extend the supported selectors/expressions
 								<ul>
 									<li class="fragment">viz. <code>$(':lists')</code> to select all <code>&lt;ul&gt;</code>, <code>&lt;ol&gt;</code> and <code>&lt;dl&gt;</code> elements</li>
+									<li class="fragment">viz. <code>$(':inview')</code> to select all elements inside the current viewport</li>
+									<li class="fragment">viz. <code>$(':external')</code> to select all links that link to external websites</li>
 								</ul>
 							</li>
 							<li class="fragment">
-								Extend the jQuery object functions
+								Plugins can extend the jQuery object functions
 								<ul>
 									<li class="fragment">viz. roll out your own effects such as <code>$(els).slideAndRemove();</code></li>
+									<li class="fragment">viz. reverse the text of an element <code>$(els).reverseText();</code></li>
 									<li class="fragment">viz. inject descriptions next to images based on their <code>alt</code> attribute with <code>$('img[alt]').addDescription();</code></li>
+								</ul>
+							</li>
+						</ul>
+					</section>
+
+					<section>
+						<h2>Extensibility Side note</h2>
+						<ul>
+							<li class="fragment">
+								The jQuery you download actually is a jQuery Object bundled with some common plugins
+								<ul>
+									<li class="fragment">
+										Some of the jQuery functionality originally were external plugins <em>(e.g. <code>Ajax</code> &amp; <code>Dimensions</code>)</em> and were later on moved into jQuery itself
+									</li>
+									<li class="fragment">
+										<a href="http://www.keyframesandcode.com/resources/javascript/deconstructed/jquery/">jQuery Deconstructed</a> gives a nice view on how the jQuery is organized
+									</li>
 								</ul>
 							</li>
 						</ul>
