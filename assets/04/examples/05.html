@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<title>jQuery Plugins - 05</title>
+</head>
+<body>
+	
+	<h1>jQuery <code>.hilight()</code></h1>
+	
+	<p>These are links to <a href="http://www.google.com/">Google</a> and a to <a href="http://www.yahoo.com/">Yahoo</a>. And here's <a href="https://github.com/bramus/ria-course-materials/">some link to someplace else</a>. And here's an <em>em element</em></p>
+
+	<script src="js/jquery-1.7.1.min.js"></script>
+	<script src="js/jquery.hilight.js"></script>
+	<script>
+		$(document).ready(function() {
+			$('em').hilight();
+			$('a').hilight({foreground: '#00F'});
+		});
+	</script>
+</body>
+</html>
