@@ -159,6 +159,146 @@
 				</section>
 
 
+				<!-- 2 : Writing Plugins -->
+				<section>
+
+					<section>
+						<h2>Writing Plugins</h2>
+						<p><img src="assets/04/futurama_benderpointing.jpg" alt="" title="" height="309" width="446" /></p>
+						<q>Yeah, well... I'm gonna go build my own theme park, with blackjack and hookers. In fact, forget the park!</q>
+					</section>
+
+					<section>
+						<h2>Stuff you should know about jQuery</h2>
+						<ul>
+							<li class="fragment">
+								The core object of jQuery is named <code>jQuery</code>
+								<ul>
+									<li>
+										It is mapped to <code>$</code> for convenience
+										<pre class="bigger"><code class="language-js dontrun">// These two have the same result
+var p1 = $('p'),
+    p2 = jQuery('p');</code></pre>
+									</li>
+								</ul>
+							</li>
+							<li class="fragment">
+								jQuery Object functions like <code>.slideUp()</code> are defined in <code>jQuery.prototype</code>
+								<ul>
+									<li class="fragment">
+										It is mapped to <code>jQuery.fn</code> (or <code>$.fn</code>) for convenience
+									</li>
+								</ul>
+							</li>
+						</ul>
+					</section>
+
+					<section>
+						<h2>Writing Plugins</h2>
+						<ul>
+							<li class="fragment">
+								Three types of plugins ...
+								<ol>
+									<li>Plugins can extend the core/utility functions</li>
+									<li>Plugins can extend the supported selectors/expressions</li>
+									<li>Plugins can extend the jQuery object functions</li>
+								</ol>
+							</li>
+							<li class="fragment">
+								... equals three ways to writing plugins
+								<ol>
+									<li>Extending the jQuery Object (<code>$</code>)</li>
+									<li>Extending <code>$.expr</code></li>
+									<li>Extending jQuery's <code>.prototype</code> (<code>$.fn</code>)</li>
+								</ol>
+							</li>
+						</ul>
+					</section>
+					
+				</section>
+
+
+				<!-- 3 : Writing Plugins : Utility Functions -->
+				<section>
+
+					<section>
+						<h2>Writing Utility Functions</h2>
+						<p><img src="assets/04/futurama_basic.jpg" alt="" title="" height="309" width="446" /></p>
+					</section>
+
+					<section>
+						<h2>Writing Utility Functions</h2>
+						<ul>
+							<li class="fragment">
+								Use jQuery's built-in <a href="http://api.jquery.com/jQuery.extend/">.extend()</a> to extend itself
+								<blockquote style="margin-top: 20px;">If only one argument is supplied to <code>$.extend()</code>, this means the target argument was omitted. In this case, the jQuery object itself is assumed to be the target. By doing this, we can add new functions to the jQuery namespace. This can be useful for plugin authors wishing to add new methods to jQuery.</blockquote>
+							</li>
+						</ul>
+					</section>
+
+					<section>
+						<h2>Example</h2>
+						<ul>
+							<li class="fragment">
+								Method to get a random color
+								<pre class="bigger"><code class="language-js dontrun">var randomColor = function() {
+	return '#' + Math.floor(Math.random() * 16777215).toString(16);
+}</code></pre>
+							</li>
+							<li class="fragment">
+								jQuery version
+								<pre class="bigger"><code class="language-js dontrun">$.extend({
+	randomColor : function() {
+		return '#' + Math.floor(Math.random() * 16777215).toString(16);
+	}
+})</code></pre>
+							</li>
+							<li class="fragment">
+								Use an IIFE to make sure <code>$</code> refers to <code>jQuery</code>
+								<pre class="bigger"><code class="language-js dontrun">(function($) {
+	$.extend({
+		randomColor : function() {
+			return '#' + Math.floor(Math.random() * 16777215).toString(16);
+		}
+	})
+})(jQuery);</code></pre>
+							</li>
+						</ul>
+					</section>
+
+					<section>
+						<h2>Usage</h2>
+						<ul>
+							<li class="fragment">
+								The name of the function has become available on <code>$</code>
+								<pre class="bigger"><code class="language-html dontrun" data-overlay-example="assets/04/examples/02.html">&lt;!doctype html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+	&lt;title&gt;jQuery Plugins - 02&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+
+	&lt;h1&gt;jQuery.randomColor&lt;/h1&gt;
+
+	&lt;p&gt;Click me to change backgroundColor&lt;/p&gt;
+
+	&lt;script src=&quot;js/jquery-1.7.1.min.js&quot;&gt;&lt;/script&gt;
+	&lt;script src=&quot;js/jquery.randomcolor.js&quot;&gt;&lt;/script&gt;
+	&lt;script&gt;
+		$(document).ready(function() {
+			$('p').css('cursor','pointer').on('click', function(e) {
+				$(this).css('background', $.randomColor());
+			});
+		});
+	&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+							</li>
+						</ul>
+					</section>
+
+				</section>
+
 
 				<!-- The END -->
 				<section>

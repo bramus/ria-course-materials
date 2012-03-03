@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<title>jQuery Plugins - 02</title>
+</head>
+<body>
+	
+	<h1>jQuery.randomColor</h1>
+	
+	<p>Click me to change backgroundColor</p>
+
+	<script src="js/jquery-1.7.1.min.js"></script>
+	<script src="js/jquery.randomcolor.js"></script>
+	<script>
+		$(document).ready(function() {
+			$('p').css('cursor','pointer').on('click', function(e) {
+				$(this).css('background', $.randomColor());
+			});
+		});
+	</script>
+</body>
+</html>
