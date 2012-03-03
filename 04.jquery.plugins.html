@@ -1,0 +1,833 @@
+<!doctype html>  
+<html lang="en">
+	
+	<head>
+		<meta charset="utf-8">
+		
+		<title>Rich Internet Applications &mdash; 04.jQuery.Plugins</title>
+
+		<meta name="description" content="Rich Internet Applications &mdash; 04.jQuery.Plugins">
+		<meta name="author" content="Bram(us) Van Damme - ikdoeict.be">
+		
+		<link href='http://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+		
+		<link rel="stylesheet" href="css/reset.css">
+		<link rel="stylesheet" href="css/main.css" media="screen">
+		<link rel="stylesheet" href="css/print.css" media="print">
+		<!-- <link rel="stylesheet" href="assets/04/examples.css"> -->
+
+		<link rel="stylesheet" href="lib/zenburn.css">
+	</head>
+	
+	<body>
+		
+		<div id="reveal">
+			
+			<!-- Any section element inside of this container is displayed as a slide -->
+			<div class="slides">
+
+
+				
+				<!-- 0 : Title -->
+				<section>
+					<section>
+						<h3 class="inverted">Rich Internet Applications</h3>
+						<h1>04.jQuery.plugins</h1>
+					
+						<footer>
+							<em><a href="http://www.ikdoeict.be/">ikdoeict.be</a> &mdash; <a href="mailto:bramus.vandamme@kahosl.be">bramus.vandamme@kahosl.be</a></em>
+						</footer>
+						<script>
+							// Delicously hacky. Look away.
+							if(navigator.userAgent.match(/(iPhone|iPad|iPod|Android)/i))
+							document.write('<p style="color: rgba(0,0,0,0.3); text-shadow: none;">('+'Tap to navigate'+')</p>');
+						</script>
+					</section>
+				</section>
+
+
+				<!-- 1 : Intro -->
+				<section>
+
+					<section>
+						<h2>Plugins</h2>
+						<p><img src="assets/04/futurama_eyephone.jpg" alt="" title="" height="309" width="446" /></p>
+						<q>With the new eyePhone, you can watch, listen, ignore your friends, stalk your ex, download porno on a crowded bus, even check your email while getting hit by a train.</q>
+					</section>
+
+					<section>
+						<h2>Extensibility</h2>
+						<ul>
+							<li class="fragment">
+								jQuery is built in such a way that it is very extensible
+							</li>
+							<li class="fragment">
+								Extensions are released as plugins
+								<ul>
+									<li class="fragment">
+										(Cluttered) Overview available at <a href="http://plugins.jquery.com/">http://plugins.jquery.com/</a>
+										<ul>
+											<li class="fragment">Most of the time you're better off with <a href="http://www.flickr.com/photos/bramus/2998573943/">A Google Search Coupon</a></li>
+										</ul>
+									</li>
+									<li class="fragment">Some bigger extensions are released as projects
+										<ul>
+											<li class="fragment"><a href="http://jqueryui.com/">jQuery UI</a> &mdash; abstractions for low-level interaction and animation, advanced effects and high-level, themeable widgets</li>
+											<li class="fragment"><a href="http://jquerymobile.com/">jQuery Mobile</a> &mdash; Touch-Optimized Web Framework for Smartphones &amp; Tablets</li>
+										</ul>
+									</li>
+								</ul>
+							</li>
+						</ul>
+					</section>
+
+					<section>
+						<h2>Using Plugins</h2>
+						<ul>
+							<li class="fragment">
+								Include it in your HTML page after you've included jQuery and the new functionality becomes available
+								<pre class="bigger"><code class="language-html dontrun" data-overlay-example="assets/04/examples/01.html">&lt;!doctype html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+	&lt;title&gt;jQuery Plugins - 01&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+
+	&lt;h1&gt;jQuery.reverseText&lt;/h1&gt;
+
+	&lt;p&gt;Hi, I will be reversed!&lt;/p&gt;
+
+	&lt;script src=&quot;js/jquery-1.7.1.min.js&quot;&gt;&lt;/script&gt;
+	&lt;script src=&quot;js/jquery.reversetext.js&quot;&gt;&lt;/script&gt;
+	&lt;script&gt;
+		$(document).ready(function() {
+			$('p').reverseText();
+		});
+	&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+							</li>
+						</ul>
+					</section>
+					
+					<section>
+						<h2>Plugin Types</h2>
+						<ul>
+							<li class="fragment">
+								Plugins can extend the core/utility functions
+								<ul>
+									<li class="fragment">Not performed on elements</li>
+									<li class="fragment">viz. helper functions like <code>$.trim()</code></li>
+									<li class="fragment">viz. a function <code>$.randomColor()</code> to get a random color returned.</li>
+								</ul>
+							</li>
+							<li class="fragment">
+								Plugins can extend the supported selectors/expressions
+								<ul>
+									<li class="fragment">viz. <code>$(':lists')</code> to select all <code>&lt;ul&gt;</code>, <code>&lt;ol&gt;</code> and <code>&lt;dl&gt;</code> elements</li>
+									<li class="fragment">viz. <code>$(':inview')</code> to select all elements inside the current viewport</li>
+									<li class="fragment">viz. <code>$(':external')</code> to select all links that link to external websites</li>
+								</ul>
+							</li>
+							<li class="fragment">
+								Plugins can extend jQuery instance functions
+								<ul>
+									<li class="fragment">viz. roll out your own effects such as <code>$(els).slideAndRemove();</code></li>
+									<li class="fragment">viz. reverse the text of an element <code>$(els).reverseText();</code></li>
+									<li class="fragment">viz. inject descriptions next to images based on their <code>alt</code> attribute with <code>$('img[alt]').addDescription();</code></li>
+								</ul>
+							</li>
+						</ul>
+					</section>
+
+					<section>
+						<h2>Extensibility Side note</h2>
+						<ul>
+							<li class="fragment">
+								The jQuery you download actually is a jQuery Object bundled with some common plugins
+								<ul>
+									<li class="fragment">
+										Some of the jQuery functionality originally were external plugins <em>(e.g. <code>Ajax</code> &amp; <code>Dimensions</code>)</em> and were later on moved into jQuery itself
+									</li>
+									<li class="fragment">
+										<a href="http://www.keyframesandcode.com/resources/javascript/deconstructed/jquery/">jQuery Deconstructed</a> gives a nice view on how the jQuery is organized
+									</li>
+								</ul>
+							</li>
+						</ul>
+					</section>
+
+				</section>
+
+
+				<!-- 2 : Writing Plugins -->
+				<section>
+
+					<section>
+						<h2>Writing Plugins</h2>
+						<p><img src="assets/04/futurama_benderpointing.jpg" alt="" title="" height="309" width="446" /></p>
+						<q>Yeah, well... I'm gonna go build my own theme park, with blackjack and hookers. In fact, forget the park!</q>
+					</section>
+
+					<section>
+						<h2>Stuff you should know about jQuery</h2>
+						<ul>
+							<li class="fragment">
+								The core object of jQuery is named <code>jQuery</code>
+								<ul>
+									<li>
+										It is mapped to <code>$</code> for convenience
+										<pre class="bigger"><code class="language-js dontrun">// These two have the same result
+var p1 = $('p'),
+    p2 = jQuery('p');</code></pre>
+									</li>
+								</ul>
+							</li>
+							<li class="fragment">
+								jQuery Object functions like <code>.slideUp()</code> are defined in <code>jQuery.prototype</code>
+								<ul>
+									<li class="fragment">
+										It is mapped to <code>jQuery.fn</code> (or <code>$.fn</code>) for convenience
+									</li>
+								</ul>
+							</li>
+						</ul>
+					</section>
+
+					<section>
+						<h2>Writing Plugins</h2>
+						<ul>
+							<li class="fragment">
+								Three types of plugins ...
+								<ol>
+									<li>Plugins can extend the core/utility functions</li>
+									<li>Plugins can extend the supported selectors/expressions</li>
+									<li>Plugins can extend jQuery instance functions</li>
+								</ol>
+							</li>
+							<li class="fragment">
+								... equals three ways to writing plugins
+								<ol>
+									<li>Extending the jQuery Object (<code>$</code>)</li>
+									<li>Extending <code>$.expr</code></li>
+									<li>Extending jQuery's <code>.prototype</code> (<code>$.fn</code>)</li>
+								</ol>
+							</li>
+						</ul>
+					</section>
+					
+				</section>
+
+
+				<!-- 3 : Writing Plugins : Utility Functions -->
+				<section>
+
+					<section>
+						<h2>Writing Utility Functions</h2>
+						<p><img src="assets/04/futurama_basic.jpg" alt="" title="" height="309" width="446" /></p>
+					</section>
+
+					<section>
+						<h2>Writing Utility Functions</h2>
+						<ul>
+							<li class="fragment">
+								Use jQuery's built-in <a href="http://api.jquery.com/jQuery.extend/">.extend()</a> to extend itself
+								<blockquote style="margin-top: 20px;">If only one argument is supplied to <code>$.extend()</code>, this means the target argument was omitted. In this case, the jQuery object itself is assumed to be the target. By doing this, we can add new functions to the jQuery namespace. This can be useful for plugin authors wishing to add new methods to jQuery.</blockquote>
+							</li>
+						</ul>
+					</section>
+
+					<section>
+						<h2>Example</h2>
+						<ul>
+							<li class="fragment">
+								Method to get a random color
+								<pre class="bigger"><code class="language-js dontrun">var randomColor = function() {
+	return '#' + Math.floor(Math.random() * 16777215).toString(16);
+}</code></pre>
+							</li>
+							<li class="fragment">
+								jQuery version:
+								<pre class="bigger"><code class="language-js dontrun">$.extend({
+	randomColor : function() {
+		return '#' + Math.floor(Math.random() * 16777215).toString(16);
+	}
+})</code></pre>
+							</li>
+							<li class="fragment">
+								Possible to pass in multiple functions at once
+							</li>
+						</ul>
+					</section>
+
+					<section>
+						<h2>Usage</h2>
+						<ul>
+							<li class="fragment">
+								The name of the function has become available on <code>$</code>
+								<pre class="bigger"><code class="language-html dontrun" data-overlay-example="assets/04/examples/02.html">&lt;!doctype html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+	&lt;title&gt;jQuery Plugins - 02&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+
+	&lt;h1&gt;jQuery.randomColor&lt;/h1&gt;
+
+	&lt;p&gt;Click me to change backgroundColor&lt;/p&gt;
+
+	&lt;script src=&quot;js/jquery-1.7.1.min.js&quot;&gt;&lt;/script&gt;
+	&lt;script src=&quot;js/jquery.randomcolor.js&quot;&gt;&lt;/script&gt;
+	&lt;script&gt;
+		$(document).ready(function() {
+			$('p').css('cursor','pointer').on('click', function(e) {
+				$(this).css('background', $.randomColor());
+			});
+		});
+	&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+							</li>
+						</ul>
+					</section>
+
+					<section>
+						<h2>Code Improvement</h2>
+						<ul>
+							<li class="fragment">
+								Use an IIFE to make sure <code>$</code> refers to <code>jQuery</code>
+								<pre class="bigger"><code class="language-js dontrun">(function($) {
+	$.extend({
+		randomColor : function() {
+			return '#' + Math.floor(Math.random() * 16777215).toString(16);
+		}
+	})
+})(jQuery);</code></pre>
+								<ul>
+									<li>Always use the IIFE</li>
+								</ul>
+							</li>
+						</ul>
+					</section>
+
+				</section>
+
+
+				<!-- 4 : Writing Plugins : Writing Custom Expressions -->
+				<section>
+
+					<section>
+						<h2>Writing Custom Expressions</h2>
+						<p><img src="assets/04/futurama_sb.jpg" alt="" title="" height="309" width="446" /></p>
+					</section>
+
+					<section>
+						<h2>Writing Custom Expressions</h2>
+						<ul>
+							<li class="fragment">
+								Custom expressions are stored in <code>jQuery.expr[':']</code>
+							</li>
+							<li class="fragment">
+								Use jQuery.extend() to extend <code>jQuery.expr[':']</code> with a new function
+								<pre class="bigger"><code class="language-js dontrun">jQuery.extend(jQuery.expr[':'], {
+	example : function(elem, index, meta, stack) {
+		// elem - is a current DOM element
+		// index - the current loop index in stack
+		// meta - meta data about your selector
+		// stack - stack of all elements to loop
+
+		// Return true to include current element
+		// Return false to explude current element
+	}
+});</code></pre>
+								<ul>
+									<li class="fragment">
+										Most of the time you'll only need the <code>elem</code> parameter
+										<ul>
+											<li class="fragment"><code>elem</code> is not a jQuery Instance!</li>
+										</ul>
+									</li>
+									<li class="fragment">The <code>meta</code> param is an array with info about your selector, <a href="http://jquery-howto.blogspot.com/2009/06/jquery-custom-selectors-with-parameters.html">allows you to use parameters</a> with your selector</li>
+								</ul>
+							</li>
+						</ul>
+					</section>
+
+					<section>
+						<h2>Example</h2>
+						<ul>
+							<li class="fragment">
+								Select all possible lists
+								<pre class="bigger"><code class="language-js dontrun">(function($) {
+	$.extend($.expr[':'], {
+		lists : function(elem, index, match, stack) {
+			var els = ['ul','ol','dl'];
+		    return ($.inArray(elem.nodeName.toLowerCase(), els) &gt; -1);
+		}
+	});
+})(jQuery);</code></pre>
+							</li>
+							<li class="fragment">
+								Usage
+								<pre class="bigger"><code class="language-js dontrun" data-overlay-example="assets/04/examples/03.html">$(':lists').css('border', '1px solid red');</code></pre>
+							</li>
+							<li class="fragment">
+								Notes
+								<ul>
+									<li class="fragment">
+										These selectors perform badly (slow), as they loop all elements
+										<ul>
+											<li>Best to only use to refine a selection: <code>$('#somediv').find(':lists');</code></li>
+										</ul>
+									</li>
+									<li class="fragment">This performs better (and does the same): <code>$('ul,ol,dl');</code></li>
+								</ul>
+							</li>
+						</ul>
+					</section>
+
+				</section>
+
+
+				<!-- 4 : Writing Plugins : Writing jQuery Instance Functions -->
+				<section>
+
+					<section>
+						<h2>Writing Instance Functions</h2>
+						<p><img src="assets/04/futurama_brains.jpg" alt="" title="" height="309" width="446" /></p>
+					</section>
+
+					<section>
+						<h2>Writing Instance Functions</h2>
+						<ul>
+							<li class="fragment">
+								Extend <code>jQuery.prototype</code>/<code>$.fn</code> as you'd extend a regular <code>.prototype</code>
+								<pre class="bigger"><code class="language-js dontrun">(function($) {
+	$.fn.myPlugin = function() {
+		// ... plugin code here
+	}
+})(jQuery);</code></pre>
+							</li>
+							<li class="fragment">
+								Also possible
+								<pre class="bigger"><code class="language-js dontrun">(function($) {
+	$.fn.extend({
+		myPlugin : function() {
+			// ... plugin code here
+		}
+	});
+})(jQuery);</code></pre>
+							</li>
+							<li class="fragment">
+								Usage
+								<pre class="bigger"><code class="language-js dontrun">$('...').myPlugin();</code></pre>
+							</li>
+						</ul>
+					</section>
+
+					<section>
+						<h2>What is <code>this</code>?</h2>
+						<ul>
+							<li class="fragment">
+								The <code>this</code> inside your plugin is a jQuery instance (in contrast to other situations where it's a DOM element)
+								<pre class="bigger"><code class="language-js dontrun">(function($) {
+	$.fn.slideUpAndRemove = function() {
+		this.slideUp("slow", function() { // &lt;-- jQuery Instance
+	        $(this).remove(); 
+	    });
+	}
+})(jQuery);</code></pre>
+							</li>
+						</ul>
+					</section>
+
+					<section>
+						<h2>Chainability</h2>
+						<ul>
+							<li class="fragment">
+								To not break chainability one <strong>must</strong> return the instance
+								<pre class="bigger"><code class="language-js dontrun">(function($) {
+	$.fn.slideUpAndRemove = function() {
+		return this.slideUp("slow", function() {
+	        $(this).remove(); 
+	    });
+	}
+})(jQuery);</code></pre>
+							</li>
+							<li class="fragment">
+								Mostly you'll loop all selected
+								<pre class="bigger"><code class="language-js dontrun">(function($) {
+	$.fn.myPlugin = function() {
+		return this.each(function() {
+	        // ... plugin code here
+	    });
+	}
+})(jQuery);</code></pre>
+							</li>
+							<li class="fragment">
+								In short: always return <code>this</code>
+							</li>
+						</ul>
+					</section>
+
+					<section>
+						<h2>Example</h2>
+						<ul>
+							<li class="fragment">
+								Inject the link locations after each link
+								<pre class="bigger"><code class="language-js dontrun">(function($) {
+	$.fn.showLinkLocation = function() {
+		return this.filter('a').each(function() {
+			$(this).append( ' <em>(' + $(this).attr('href') + ')</em>');
+		});
+	};
+}(jQuery));</code></pre>
+							</li>
+							<li class="fragment">
+								Usage
+								<pre class="bigger"><code class="language-js dontrun" data-overlay-example="assets/04/examples/04.html">$('a').showLinkLocation().css('text-decoration','none');</code></pre>
+							</li>
+						</ul>
+					</section>
+
+					<section>
+						<h2>Working with parameters (1)</h2>
+						<ul>
+							<li class="fragment">
+								Possible, best to work with an object and with defaults
+								<pre class="bigger"><code class="language-js dontrun">(function($) {
+
+	$.fn.hilight = function(options) {
+		
+		var defaults = {
+			foreground: 'red',
+			background: 'yellow'
+		};
+		
+		// Extend our default options with those provided.
+		var o = $.extend(defaults, options);
+		
+		return this.each(function() {
+			// ... plugin code here
+		});
+		
+	};
+
+}(jQuery));</code></pre>
+							</li>
+						</ul>
+					</section>
+
+					<section>
+						<h2>Working with parameters (2)</h2>
+						<ul>
+							<li class="fragment">
+								Best to put <code>defaults</code> outside the plugin definition, so they can be adjusted by the user
+								<pre class="bigger"><code class="language-js dontrun">(function($) {
+
+	$.fn.hilight = function(options) {
+
+		// Extend our default options with those provided.
+		var o = $.extend($.fn.hilight.defaults, options);
+
+		return this.each(function() {
+			// ... plugin code here
+		});
+
+	};
+	
+	$.fn.hilight.defaults = {
+		foreground: 'red',
+		background: 'yellow'
+	};
+
+}(jQuery));</code></pre>
+							</li>
+						</ul>
+					</section>
+
+					<section>
+						<h2>Putting it together</h2>
+						<ul>
+							<li class="fragment">
+								Plugin code
+								<pre class="bigger"><code class="language-js dontrun">(function($) {
+	$.fn.hilight = function(options) {
+		var o = $.extend($.fn.hilight.defaults, options);
+		return this.each(function() {
+			var $this = $(this);
+			$this.css({
+				'color': o.foreground,
+				'background-color': o.background
+			});
+			$this.html('<strong>' + $this.html() + '</strong>');
+		});
+	};
+	$.fn.hilight.defaults = {
+		foreground: 'red',
+		background: 'yellow'
+	};
+}(jQuery));</code></pre>
+							</li>
+							<li class="fragment">
+								Usage
+								<pre class="bigger"><code class="language-js dontrun" data-overlay-example="assets/04/examples/05.html">$('em').hilight();
+$('a').hilight({foreground: '#00F'});</code></pre>
+							</li>
+						</ul>
+					</section>
+
+				</section>
+
+
+				<!-- 2 : Writing Plugins : Advanced jQuery Instance Functions -->
+				<section>
+
+					<section>
+						<h2>Advanced Instance Functions</h2>
+						<p><img src="assets/04/futurama_infosphere.jpg" alt="" title="" height="309" width="446" /></p>
+					</section>
+
+					<section>
+						<h2>Advanced Instance Functions (1)</h2>
+						<ul>
+							<li class="fragment">
+								When allowing one to remove hilight, we could do this
+								<pre class="bigger"><code class="language-js dontrun">(function($) {
+	$.fn.hilight = function(options) {
+		// ... plugin code here
+	};
+	$.fn.hilightRemove = function() {
+		// ... plugin code here
+	};
+	$.fn.hilight.defaults = {
+		foreground: 'red',
+		background: 'yellow'
+	};
+}(jQuery));</code></pre>
+								<ul>
+									<li class="fragment">
+										This is bad idea, things will become cluttered when offering lots of functionality
+									</li>
+									<li class="fragment">
+										We've had this problem before, and then namespaced our code
+									</li>
+								</ul>
+							</li>
+						</ul>
+					</section>
+
+					<section>
+						<h2>Advanced Instance Functions (2)</h2>
+						<ul>
+							<li class="fragment">
+								What if we could do this?
+								<pre class="bigger"><code class="language-js dontrun">$('em').hilight();
+$('em').on('click', function() {
+	$(this).hilight('remove');
+});</code></pre>
+								<ul>
+									<li class="fragment">
+										Code much cleaner
+									</li>
+									<li class="fragment">
+										No function loitering
+									</li>
+								</ul>
+							</li>
+						</ul>
+					</section>
+
+					<section>
+						<h2>A Design Pattern</h2>
+						<ul>
+							<li class="fragment">
+								jQuery has a design pattern for this
+								<pre class="bigger"><code class="language-js dontrun">(function($) {
+	var methods = {
+		init : function(options) { 
+			// ... plugin code here
+		},
+		otherfunction : function() {
+			// ... plugin code here
+		}
+	};
+	$.fn.pluginName = function(method) {
+		if (methods[method]) {
+			return methods[method].apply(
+				this, Array.prototype.slice.call(arguments, 1));
+		} else if (typeof method === 'object' || ! method) {
+			return methods.init.apply(this, arguments);
+		} else { 
+			$.error('Method ' +  method + ' does not exist on jQuery.pluginName');
+		}    
+	};
+})(jQuery);</code></pre>
+							</li>
+						</ul>
+					</section>
+
+					<section>
+						<h2>Putting it together (1)</h2>
+						<div class="fragment"><pre class="bigger"><code class="language-js dontrun">(function($) {
+	var methods = {
+		init : function(options) { 
+			var o = $.extend($.fn.hilight.defaults, options);
+			return this.each(function() {
+				var $this = $(this);
+				$this.css({
+					'color': o.foreground,
+					'background-color': o.background
+				});
+				$this.html('<strong>' + $this.html() + '</strong>');
+			});
+		},
+		remove : function() {
+			return this.each(function(){
+				var $this = $(this);
+				$this.css({
+					'color': 'inherit',
+					'background-color': 'transparent'
+				});
+				$this.html($this.find('strong').html());
+			});
+		}
+	};
+
+// ...</code></pre>
+						</div>
+					</section>
+
+					<section>
+						<h2>Putting it together (2)</h2>
+						<div class="fragment"><pre class="bigger"><code class="language-js dontrun">// ...
+
+	$.fn.hilight = function(method) {
+		if (methods[method]) {
+			return methods[method].apply(
+				this, Array.prototype.slice.call(arguments, 1));
+		} else if (typeof method === 'object' || ! method) {
+			return methods.init.apply(this, arguments);
+		} else { 
+			$.error('Method ' +  method + ' does not exist on jQuery.hilight');
+		}    
+	};
+	
+	$.fn.hilight.defaults = {
+		foreground: 'red',
+		background: 'yellow'
+	};
+	
+})(jQuery);</code></pre>
+						</div>
+					</section>
+
+					<section>
+						<h2>Putting it together (3)</h2>
+						<div>
+							Usage
+							<pre class="bigger"><code class="language-js dontrun" data-overlay-example="assets/04/examples/06.html">// Add highlights
+$('em').hilight();
+$('a').hilight({foreground: '#00F'});
+
+// remove highlight after 1 second
+setTimeout(function() {
+	$('em').hilight('remove').css('border', '1px solid red');
+}, 1000);</code></pre>
+						</div>
+					</section>
+
+					<section>
+						<h2>One more thing</h2>
+						<ul>
+							<li class="fragment">
+								jQuery plugins are stateless
+								<ul>
+									<li class="fragment">e.g. No way to now the original color when calling <code>$('...').hilight('remove')</code></li>
+									<li class="fragment">Some shortcomings can be circumvented by storing data on the elements via <code>$.data</code></li>
+								</ul>
+							</li>
+							<li class="fragment">
+								Stateful plugins possible with jQuery UI's Widget Factory
+								<ul>
+									<li class="fragment">A more robust/advanced way to creating plugins</li>
+									<li class="fragment">
+										References <em>(outside the scope of this course)</em>
+										<ul>
+											<li><a href="http://stage.learn.jquery.com/plugins/stateful-plugins-with-widget-factory/">Writing Stateful Plugins with the jQuery UI Widget Factory</a></li>
+											<li><a href="http://wiki.jqueryui.com/w/page/12138135/Widget%20factory">Widget Factory</a></li>
+											<li><a href="http://ajpiano.com/widgetfactory/">The jQuery UI Widget Factory: Wat? <em>(Slides)</em></a></li>
+											<li><a href="http://www.erichynds.com/jquery/tips-for-developing-jquery-ui-widgets/">Tips for Developing jQuery UI 1.8 Widgets</a></li>
+										</ul>
+									</li>
+								</ul>
+							</li>
+						</ul>
+					</section>
+					
+				</section>
+				
+				<!-- The END -->
+				<section>
+					<section>
+						<h2>Questions?</h2>
+						<footer>
+							<em><a href="http://www.ikdoeict.be/">ikdoeict.be</a> &mdash; <a href="mailto:bramus.vandamme@kahosl.be">bramus.vandamme@kahosl.be</a></em>
+						</footer>
+					</section>
+				</section>
+
+
+
+				<!-- Sources -->
+				<section id="sources">
+					<section>
+						<h2>Sources</h2>
+						<ul>
+							<li><a href="http://www.keyframesandcode.com/resources/javascript/deconstructed/jquery/">jQuery Deconstructed</a></li>
+							<li><a href="http://docs.jquery.com/Plugins/Authoring">jQuery Docs: Plugins Authoring</a></li>
+							<li><a href="http://stage.learn.jquery.com/plugins/a_plugin_development_pattern/">learn.jquery.com: A Plugin Development Pattern</a></li>
+							<li><a href="http://stage.learn.jquery.com/plugins/basic-plugin-creation/">learn.jquery.com: Basic Plugin Creation</a></li>
+							<li><a href="http://stage.learn.jquery.com/plugins/stateful-plugins-with-widget-factory/">learn.jQuery.com: Stateful Plugins with Widget Factory</a></li>
+							<li><a href="http://asimilia.wordpress.com/2008/12/17/jquery-extend-confusion/"><code>$.extend</code> vs. <code>$.fn.extend</code></a></li>
+							<li><a href="http://ejohn.org/apps/workshop/intro/#35">Custom Effect Example</a></li>
+							<li><a href="http://ejohn.org/apps/workshop/intro/#36">Custom Expression Example</a></li>
+							<li><a href="http://www.sitepoint.com/how-to-develop-a-jquery-plugin/">Reverse Text Plugin</a></li>
+						</ul>
+					</section>
+				</section>
+				
+			</div>
+
+			<!-- The navigational controls UI -->
+			<aside class="controls">
+				<a class="left" href="#">&#x25C4;</a>
+				<a class="right" href="#">&#x25BA;</a>
+				<a class="up" href="#">&#x25B2;</a>
+				<a class="down" href="#">&#x25BC;</a>
+				<span id="revealIndex">/</span>
+			</aside>
+
+			<!-- Index Link -->
+			<aside class="back">
+				<a href="index.html">&larr; Back to index</a>
+			</aside>
+			
+			<!-- ikdoeict.be Link -->
+			<a href="http://www.ikdoeict.be/" title="ikdoeict.be" id="ikdoeict">ikdoeict.be</a>
+
+			<!-- Displays presentation progress, max value changes via JS to reflect # of slides -->
+			<div class="progress"><span></span></div>
+			
+		</div>
+		
+		<script src="js/reveal.js"></script>
+		<script src="lib/highlight.js"></script>
+		<script src="lib/prefixfree.js"></script>
+		<script src="lib/css-snippets.js"></script>
+		<script src="lib/css-edit.js"></script>
+		<script src="lib/incrementable.js"></script>
+		<script src="js/main.js"></script>
+
+	</body>
+</html>
