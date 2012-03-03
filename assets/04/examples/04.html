@@ -1,0 +1,20 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<title>jQuery Plugins - 04</title>
+</head>
+<body>
+	
+	<h1>jQuery <code>.showLinkLocation()</code></h1>
+	
+	<p>These are links to <a href="http://www.google.com/">Google</a> and a to <a href="http://www.yahoo.com/">Yahoo</a>. And here's <a href="https://github.com/bramus/ria-course-materials/">some link to someplace else</a>.</p>
+
+	<script src="js/jquery-1.7.1.min.js"></script>
+	<script src="js/jquery.showlinklocation.js"></script>
+	<script>
+		$(document).ready(function() {
+			$('a').showLinkLocation().css('text-decoration','none');
+		});
+	</script>
+</body>
+</html>
