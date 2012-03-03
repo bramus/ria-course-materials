@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<title>jQuery Plugins - 03</title>
+</head>
+<body>
+	
+	<h1>jQuery Custom Expression: <code>:lists</code></h1>
+	
+	<p>A Paragraph</p>
+	
+	<ul>
+		<li>Unordered List</li>
+		<li>Unordered List</li>
+	</ul>
+	
+	<div>A div</div>
+	
+	<ol>
+		<li>Ordered List</li>
+		<li>Ordered List</li>
+	</ol>
+
+	<dl>
+		<dt>Definition Term</dt>
+		<dd>Definition Description</dd>
+	</dl>
+
+	<p>A Paragraph</p>
+
+	<script src="js/jquery-1.7.1.min.js"></script>
+	<script src="js/jquery.customexpression.js"></script>
+	<script>
+		$(document).ready(function() {
+			$(':lists').css('border', '1px solid red');
+		});
+	</script>
+</body>
+</html>
