@@ -150,7 +150,7 @@
 										Some of the jQuery functionality originally were external plugins <em>(e.g. <code>Ajax</code> &amp; <code>Dimensions</code>)</em> and were later on moved into jQuery itself
 									</li>
 									<li class="fragment">
-										<a href="http://www.keyframesandcode.com/resources/javascript/deconstructed/jquery/">jQuery Deconstructed</a> gives a nice view on how the jQuery is organized
+										<a href="http://www.keyframesandcode.com/resources/javascript/deconstructed/jquery/">jQuery Deconstructed</a> gives a nice view on how jQuery is organized
 									</li>
 								</ul>
 							</li>
@@ -187,7 +187,7 @@ var p1 = $('p'),
 								jQuery Object functions like <code>.slideUp()</code> are defined in <code>jQuery.prototype</code>
 								<ul>
 									<li class="fragment">
-										It is mapped to <code>jQuery.fn</code> (or <code>$.fn</code>) for convenience
+										<code>jQuery.prototype</code> is mapped to <code>jQuery.fn</code> (or <code>$.fn</code>) for convenience
 									</li>
 								</ul>
 							</li>
@@ -255,7 +255,7 @@ var p1 = $('p'),
 })</code></pre>
 							</li>
 							<li class="fragment">
-								Possible to pass in multiple functions at once
+								As you're passing an object into <code>$.extend</code>, it's possible to pass in/define multiple functions at once
 							</li>
 						</ul>
 					</section>
@@ -328,7 +328,7 @@ var p1 = $('p'),
 								Custom expressions are stored in <code>jQuery.expr[':']</code>
 							</li>
 							<li class="fragment">
-								Use jQuery.extend() to extend <code>jQuery.expr[':']</code> with a new function
+								Use <code>jQuery.extend()</code> to extend <code>jQuery.expr[':']</code> with a new function
 								<pre class="bigger"><code class="language-js dontrun">jQuery.extend(jQuery.expr[':'], {
 	example : function(elem, index, meta, stack) {
 		// elem - is a current DOM element
@@ -455,7 +455,7 @@ var p1 = $('p'),
 })(jQuery);</code></pre>
 							</li>
 							<li class="fragment">
-								Mostly you'll loop all selected
+								Mostly you'll loop all selected elements and still must return the instance
 								<pre class="bigger"><code class="language-js dontrun">(function($) {
 	$.fn.myPlugin = function() {
 		return this.each(function() {
@@ -610,7 +610,7 @@ $('a').hilight({foreground: '#00F'});</code></pre>
 										This is bad idea, things will become cluttered when offering lots of functionality
 									</li>
 									<li class="fragment">
-										We've had this problem before, and then namespaced our code
+										We've had this problem before, and then solved it by namespacing our code
 									</li>
 								</ul>
 							</li>
@@ -659,10 +659,13 @@ $('em').on('click', function() {
 		} else if (typeof method === 'object' || ! method) {
 			return methods.init.apply(this, arguments);
 		} else { 
-			$.error('Method ' +  method + ' does not exist on jQuery.pluginName');
+			$.error('Method ' + method + ' does not exist on jQuery.plugin');
 		}    
 	};
 })(jQuery);</code></pre>
+								<ul>
+									<li class="fragment">Call plugin without a function name and <code>init</code> will be called.</li>
+								</ul>
 							</li>
 						</ul>
 					</section>
@@ -743,7 +746,7 @@ setTimeout(function() {
 							<li class="fragment">
 								jQuery plugins are stateless
 								<ul>
-									<li class="fragment">e.g. No way to now the original color when calling <code>$('...').hilight('remove')</code></li>
+									<li class="fragment">e.g. No way to know the original color when calling <code>$('...').hilight('remove')</code></li>
 									<li class="fragment">Some shortcomings can be circumvented by storing data on the elements via <code>$.data</code></li>
 								</ul>
 							</li>
