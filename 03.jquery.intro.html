@@ -1130,7 +1130,34 @@ var a = $('&lt;a/&gt;', {
 					</section>
 
 					<section>
-						<h2>.delegate alternative (deprecated)</h2>
+						<h2>.delegate alternative #1</h2>
+						<ul>
+							<li class="fragment">
+								Possible to use <a href="http://api.jquery.com/on/">.on()</a> with extra selector string to filter the descendants of the selected elements that trigger the event
+								<pre class="bigger"><code class="language-js dontrun" data-overlay-example="assets/03/examples/15b2.html">$(document).ready(function() {
+
+	// Bind Events, using delegate
+	$('ul').on('mouseover', 'li', function(e) {
+		$(this).css('color', 'blue');
+	}).on('mouseout', 'li', function(e) {
+		$(this).css('color', 'black');
+	}).on('click', 'li', function(e) {
+		$(this).css('color', 'red');
+	}).css('cursor','pointer');
+
+	// Append new list item
+	$('ul').append('&lt;li&gt;new list item, injected after the event binding&lt;/li&gt;');
+
+});</code></pre>
+							</li>
+							<li class="fragment">
+								Internally, <a href="http://api.jquery.com/delegate/">.delegate()</a> is mapped to <a href="http://api.jquery.com/on/">.on()</a>, so no performance difference between the two
+							</li>
+						</ul>
+					</section>
+
+					<section>
+						<h2>.delegate alternative #2</h2>
 						<ul>
 							<li class="fragment">
 								Older versions of jQuery used <a href="http://api.jquery.com/live/">.live()</a> instead of <a href="http://api.jquery.com/delegate/">.delegate()</a>
@@ -1152,8 +1179,23 @@ var a = $('&lt;a/&gt;', {
 								<ul>
 										<li class="fragment">Works, but performance <a href="http://forum.jquery.com/topic/jquery-live-jquery-fn-live-discussion">is slow</a> and <a href="http://stage.learn.jquery.com/events/using_delegate_and_undelegate/">doesn't play nice when traversing</a></li>
 										<li class="fragment">Recommended read: <a href="http://jupiterjs.com/news/why-you-should-never-use-jquery-live">Why You Should Never Use jQuery Live</a></li>
-										<li class="fragment">We will use <a href="http://api.jquery.com/delegate/">.delegate()</a></li>
+										<li class="fragment">We will use <a href="http://api.jquery.com/delegate/">.delegate()</a> or <a href="http://api.jquery.com/on/">.on()</a> with extra selector string</li>
 								</ul>
+							</li>
+						</ul>
+					</section>
+
+					<section>
+						<h2>More .delegate</h2>
+						<ul>
+							<li class="fragment">
+								Use case: Don't bind <em>x</em> event listeners on <em>x</em> cells in a table, but bind 1 event listener on the table and catch the clicks on the cells
+								<pre class="bigger"><code class="language-js dontrun" data-overlay-example="assets/03/examples/15d.html">$(document).ready(function() {
+	// One delegate to rule them all
+	$('table').delegate('td', 'click', function(e) {
+		$(this).css('background', 'gray');
+	});
+});</code></pre>
 							</li>
 						</ul>
 					</section>
@@ -1165,7 +1207,7 @@ var a = $('&lt;a/&gt;', {
 								Use <a href="http://api.jquery.com/one/">.on()</a> and <a href="http://api.jquery.com/off/">.off()</a> to bind event handlers
 							</li>
 							<li class="fragment">
-								Use <a href="http://api.jquery.com/delegate/">.delegate()</a> to bind event handlers if you know the DOM will change
+								Use <a href="http://api.jquery.com/delegate/">.delegate()</a> or <a href="http://api.jquery.com/on/">.on()</a> with extra selector string to bind event handlers if you know the DOM will change or if you want to optimize your event handling code
 							</li>
 							<li class="fragment">
 								All other syntaxes work, but we won't be writing them ourselves
