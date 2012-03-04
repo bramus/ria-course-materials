@@ -1,0 +1,359 @@
+<!doctype html>  
+<html lang="en">
+	
+	<head>
+		<meta charset="utf-8">
+		
+		<title>Rich Internet Applications &mdash; 05.JS.Optimization</title>
+
+		<meta name="description" content="Rich Internet Applications &mdash; 05.JS.Optimization">
+		<meta name="author" content="Bram(us) Van Damme - ikdoeict.be">
+		
+		<link href='http://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+		
+		<link rel="stylesheet" href="css/reset.css">
+		<link rel="stylesheet" href="css/main.css" media="screen">
+		<link rel="stylesheet" href="css/print.css" media="print">
+		<!-- <link rel="stylesheet" href="assets/05/examples.css"> -->
+
+		<link rel="stylesheet" href="lib/zenburn.css">
+	</head>
+	
+	<body>
+		
+		<div id="reveal">
+			
+			<!-- Any section element inside of this container is displayed as a slide -->
+			<div class="slides">
+
+
+				
+				<!-- 0 : Title -->
+				<section>
+					<section>
+						<h3 class="inverted">Rich Internet Applications</h3>
+						<h1>05.JS.Optimization</h1>
+					
+						<footer>
+							<em><a href="http://www.ikdoeict.be/">ikdoeict.be</a> &mdash; <a href="mailto:bramus.vandamme@kahosl.be">bramus.vandamme@kahosl.be</a></em>
+						</footer>
+						<script>
+							// Delicously hacky. Look away.
+							if(navigator.userAgent.match(/(iPhone|iPad|iPod|Android)/i))
+							document.write('<p style="color: rgba(0,0,0,0.3); text-shadow: none;">('+'Tap to navigate'+')</p>');
+						</script>
+					</section>
+				</section>
+
+
+				<!-- 1 : Intro -->
+				<section>
+
+					<section>
+						<h2>Optimization</h2>
+						<p><img src="assets/05/futurama_zapp.jpg" alt="" title="" height="309" width="446" /></p>
+						<q>If we hit that bullseye, the rest of the dominoes should fall like a house of cards. Checkmate.</q>
+					</section>
+
+					<section>
+						<h2>Optimization</h2>
+						<ul>
+							<li class="fragment">
+								A collection of tips and tricks to writing better JS
+							</li>
+						</ul>
+					</section>
+
+					<section>
+						<h2>Put scripts at the bottom</h2>
+						<blockquote>The problem caused by scripts is that they block parallel downloads. The <a href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec8.html#sec8.1.4">HTTP/1.1 specification</a> suggests that browsers download no more than two components in parallel per hostname. If you serve your images from multiple hostnames, you can get more than two downloads to occur in parallel. While a script is downloading, however, the browser won't start any other downloads, even on different hostnames.</blockquote>
+						<p>Including External Scripts <small><a href="01.advanced.js.html#/8/38">&#9873;</a></small></p>
+					</section>
+
+					<section>
+						<h2>Make it understandable</h2>
+						<ul>
+							<li class="fragment">
+								Give your variables a short and easy to understand name
+								<ul>
+									<li class="fragment">Good: <code>age</code>, <code>firstName</code></li>
+									<li class="fragment">Bad: <code>createNewMemberIfAgeOverEighteenAndMoonIsFull</code></li>
+									<li class="fragment">Exceptions: counters in loops such <code>x</code> and <code>y</code></li>
+								</ul>
+							</li>
+							<li class="fragment">
+								Don't limit yourself in naming your variables
+								<ul>
+									<li class="fragment">Better to use <code>isLegalAge(18, age)</code> than <code>isOverEighteen()</code> as it gives your more <em>wiggle room</em></li>
+								</ul>
+							</li>
+						</ul>
+					</section>
+
+					<section>
+						<h2>No global loitering</h2>
+						<ul>
+							<li class="fragment">Always use the <code>var</code> keyword when declaring variables <small><a href="01.advanced.js.html#/3/23">&#9873;</a></small></li>
+							<li class="fragment">Use namespaces (Object Literal)<small><a href="01.advanced.js.html#/8/43">&#9873;</a></small></li>
+							<li class="fragment">Use (revealing) module pattern <small><a href="01.advanced.js.html#/7/13">&#9873;</a></small></li>
+						</ul>
+					</section>
+
+					<section>
+						<h2>Annotate your code</h2>
+						<ul>
+							<li class="fragment">
+								Clean &ldquo;good&rdquo; code is good but not enough.
+							</li>
+							<li class="fragment">
+								Code needs comments
+								<ul>
+									<li class="fragment">The right kind of comments</li>
+								</ul>
+							</li>
+							<li class="fragment">
+								Comment the <em>why</em>, not the <em>what</em>
+								<ul>
+									<li class="fragment">The code is the <em>what</em>.</li>
+								</ul>
+							</li>
+						</ul>
+					</section>
+
+					<section>
+						<h2>Don't overmanipulate CSS Properties</h2>
+						<ul>
+							<li class="fragment">
+								Keep style definitions in your CSS
+								<ul>
+									<li class="fragment">Why add a <code>border</code> of <code>1px solid red</code> and change the <code>color</code> to <code>red</code> and make the text <code>bold</code> and set the <code>background</code> to something <code>red</code>-ish if you can just add the class <code>.error</code> to an element?</li>
+								</ul>
+							</li>
+							<li class="fragment">Easier to change when needed</li>
+						</ul>
+					</section>
+
+					<section>
+						<h2>Optimize scripts download speed</h2>
+						<ul>
+							<li class="fragment">
+								Use shorthands where possible
+								<ul>
+									<li class="fragment">A character saved is a character less to download</li>
+								</ul>
+							</li>
+							<li class="fragment">
+								Collate &amp; Minify
+								<ul>
+									<li class="fragment">Collate: combine scripts to get fewer files</li>
+									<li class="fragment">Minify: strip all whitespace, comments, etc. to get smaller files</li>
+								</ul>
+							</li>
+						</ul>
+					</section>
+
+					<section>
+						<h2>Allow for configuration</h2>
+						<ul>
+							<li class="fragment">
+								Users of your scripts will want to customize the output
+								<ul>
+									<li class="fragment">Very easy with jQuery's <code>.extend</code> <small><a href="03.jquery.intro.html#/8/2">&#9873;</a></small></li>
+								</ul>
+							</li>						
+						</ul>
+					</section>
+
+					<section>
+						<h2>Keep lookups to a minimum</h2>
+						<ul>
+							<li class="fragment">
+								Optimize Loops <small><a href="01.advanced.js.html#/4/3">&#9873;</a></small>
+							</li>
+							<li class="fragment">
+								Cache DOM lookups <small><a href="01.advanced.js.html#/8/8">&#9873;</a></small> and/or make use of chaining <small><a href="01.advanced.js.html#/5/4">&#9873;</a></small>
+							</li>
+						</ul>
+					</section>
+
+					<section>
+						<h2>Don't trust user data</h2>
+						<ul>
+							<li class="fragment">
+								Can easily be manipulated with Firebug
+							</li>
+							<li class="fragment">
+								Cast vars where possible
+								<ul>
+									<li class="fragment">Always provide a <code>radix</code> when using <code>parseInt</code></li>
+								</ul>
+							</li>
+						</ul>
+					</section>
+
+					<section>
+						<h2>When using jQuery, always use the latest version</h2>
+						<ul>
+							<li class="fragment">
+								New versions not only contain new features but also
+								<ul>
+									<li class="fragment">Improvements</li>
+									<li class="fragment">Bug Fixes</li>
+								</ul>
+							</li>
+							<li class="fragment">
+								jQuery Version Speed Comparison: <a href="http://jsperf.com/jquery-1-4-2-vs-1-6-2-comparisons/5">jsPerf Test</a>
+							</li>
+						</ul>
+					</section>
+
+					<section>
+						<h2>Make good use of bubbling</h2>
+						<ul>
+							<li class="fragment">
+								Don't bind event handlers on 1000 table cells, but bind 1 event handler on the table and let the event bubble up
+							</li>
+							<li class="fragment">In jQuery
+								<ul>
+									<li class="fragment">
+										Use <code>.delegate()</code>
+										<pre class="bigger"><code class="language-js dontrun">$('table').delegate('td', 'click', function(e) { ... });</code></pre>
+									</li>
+									<li class="fragment">
+										Use <code>.on()</code> with extra selector string to filter the descendants of the selected elements that trigger the event
+										<pre class="bigger"><code class="language-js dontrun">$('table').on('click', 'td', function(e) { ... });</code></pre>
+									</li>
+									<li class="fragment">
+										Never use <code>.live()</code>
+										<ul>
+											<li><a href="http://jupiterjs.com/news/why-you-should-never-use-jquery-live">Never, ever</a></li>
+										</ul>
+									</li>
+								</ul>
+							</li>
+						</ul>
+					</section>
+
+					<section>
+						<h2>Know your selectors</h2>
+						<ul>
+							<li>
+								The need for speed
+								<ul>
+									<li class="fragment">
+										Fast: <code>#id</code>, <code>element</code>
+										<ul>
+											<li>Can be passed directly into native versions</li>
+										</ul>
+									</li>
+									<li class="fragment">
+										Slower: <code>.class</code>
+										<ul>
+											<li>No <code>Document#getElementsByClassName</code> in IE5-8!</li>
+										</ul>
+									</li>
+									<li class="fragment">
+										Slowest: pseudo (viz. <code>:visible</code>) &amp; attribute (<code>[title=&quot;foo&quot;]</code>)
+										<ul>
+											<li>Only modern browsers will benefit</li>
+											<li>In jQuery: Try to split those off into sub-selections with <code>.find()</code></li>
+										</ul>
+									</li>
+								</ul>
+							</li>
+							<li class="fragment">
+								Don't overcomplicate selectors
+							</li>
+							<li class="fragment">
+								Be specific at the end (engines work right-to-left)
+							</li>
+							<li class="fragment">
+								Not all selectors are created equal: <a href="http://jsperf.com/jquery-selectors-context/2">jsPerf Test</a>
+								<ul>
+									<li>Use context param or use <code>.find()</code></li>
+								</ul>
+							</li>
+						</ul>
+					</section>
+
+					<section>
+						<h2>Don't use jQuery unless absolutely necessary</h2>
+						<ul>
+							<li class="fragment">
+								Bad
+								<pre class="bigger"><code class="language-js dontrun">$('a').on('click', function(e) {
+	alert($(this).attr('href'));
+});</code></pre>
+							</li>
+							<li class="fragment">
+								Good
+								<pre class="bigger"><code class="language-js dontrun">$('a').on('click', function(e) {
+	alert(this.href);
+});</code></pre>
+							</li>
+							<li class="fragment">
+								In modern browsers: <a href="http://sharedfil.es/js-48hIfQE4XK.html">Vanilla JS FTW</a>
+							</li>
+						</ul>
+					</section>
+						
+				</section>
+				
+				<!-- The END -->
+				<section>
+					<section>
+						<h2>Questions?</h2>
+						<footer>
+							<em><a href="http://www.ikdoeict.be/">ikdoeict.be</a> &mdash; <a href="mailto:bramus.vandamme@kahosl.be">bramus.vandamme@kahosl.be</a></em>
+						</footer>
+					</section>
+				</section>
+
+
+
+				<!-- Sources -->
+				<section id="sources">
+					<section>
+						<h2>Sources</h2>
+						<ul>
+							<li><a href="http://developer.yahoo.com/performance/rules.html#js_bottom">Put scripts at the bottom</a></li>
+							<li><a href="http://www.slideshare.net/cheilmann/javascript-best-practices-1041724">JavaScript Best Practices</a></li>
+							<li><a href="http://addyosmani.com/jqprovenperformance/">jQuery Proven Performance</a></li>
+						</ul>
+					</section>
+				</section>
+				
+			</div>
+
+			<!-- The navigational controls UI -->
+			<aside class="controls">
+				<a class="left" href="#">&#x25C4;</a>
+				<a class="right" href="#">&#x25BA;</a>
+				<a class="up" href="#">&#x25B2;</a>
+				<a class="down" href="#">&#x25BC;</a>
+				<span id="revealIndex">/</span>
+			</aside>
+
+			<!-- Index Link -->
+			<aside class="back">
+				<a href="index.html">&larr; Back to index</a>
+			</aside>
+			
+			<!-- ikdoeict.be Link -->
+			<a href="http://www.ikdoeict.be/" title="ikdoeict.be" id="ikdoeict">ikdoeict.be</a>
+
+			<!-- Displays presentation progress, max value changes via JS to reflect # of slides -->
+			<div class="progress"><span></span></div>
+			
+		</div>
+		
+		<script src="js/reveal.js"></script>
+		<script src="lib/highlight.js"></script>
+		<script src="lib/prefixfree.js"></script>
+		<script src="lib/css-snippets.js"></script>
+		<script src="lib/css-edit.js"></script>
+		<script src="lib/incrementable.js"></script>
+		<script src="js/main.js"></script>
+
+	</body>
+</html>
