@@ -226,7 +226,12 @@
 							<li class="fragment">
 								Via the function you can select elements
 								<ul>
-									<li class="fragment">Just pass in a CSS3 selector to select the elements you want<br /><em>(cfr. <code>document.querySelectorAll</code>)</em></li>
+									<li class="fragment">
+										Just pass in a CSS3 selector to select the elements you want<br /><em>(cfr. <code>document.querySelectorAll</code>)</em>
+										<ul>
+											<li class="fragment">Some <a href="http://ejohn.org/blog/selectors-that-people-actually-use/">uncommonly used CSS3 selectors not supported</a> though.</li>
+										</ul>
+									</li>
 									<li class="fragment">
 										What you get returned is a jQuery wrapped Object, not the elements themselves
 										<ul>
@@ -251,7 +256,7 @@ $('#myId');
 $('div.myClass');
 
 // Selecting elements by attribute
-$('input[name=first_name]');
+$('input[name=&quot;first_name&quot;event.target]');
 
 // Selecting elements by compound CSS selector
 $('#contents &gt; ul.people li');
@@ -1067,7 +1072,7 @@ var a = $('&lt;a/&gt;', {
 							<li class="fragment">
 								It works in the same manner as the W3C Event Object
 								<ul>
-									<li class="fragment">Call <code>event#target</code> to get to know what was clicked</li>
+									<li class="fragment">The property <code>event.target</code> holds the element that was clicked</li>
 									<li class="fragment">Call <code>event#preventDefault</code> to prevent the default action</li>
 									<li class="fragment">Call <code>event#stopPropagation</code> to stop bubbling of the event</li>
 								</ul>
