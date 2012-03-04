@@ -149,6 +149,12 @@
 									<li class="fragment">Minify: strip all whitespace, comments, etc. to get smaller files</li>
 								</ul>
 							</li>
+							<li class="fragment">
+								Load libraries from a Content Delivery Network
+								<ul>
+									<li class="fragment"><a href="http://docs.jquery.com/Downloading_jQuery#CDN_Hosted_jQuery">CDN Hosted jQuery</a></li>
+								</ul>
+							</li>
 						</ul>
 					</section>
 
@@ -172,6 +178,30 @@
 							</li>
 							<li class="fragment">
 								Cache DOM lookups <small><a href="01.advanced.js.html#/8/8">&#9873;</a></small> and/or make use of chaining <small><a href="01.advanced.js.html#/5/4">&#9873;</a></small>
+							</li>
+						</ul>
+					</section>
+
+					<section>
+						<h2>Keep DOM Manipulations to a minimum</h2>
+						<ul>
+							<li class="fragment">
+								Bad
+								<pre class="bigger"><code class="language-js dontrun">var myList = $('#myList');
+for (var i = 0; i &lt; 1000; i++){
+	myList.append('&lt;li&gt;This is list item ' + i + '&lt;/li&gt;');
+}</code></pre>
+							</li>
+							<li class="fragment">
+								Good
+								<pre class="bigger"><code class="language-js dontrun">var myList = $('#myList');
+var myListItems = '';
+
+for (var i = 0; i &lt; 1000; i++) {
+	myListItems += '&lt;li&gt;This is list item ' + i + '&lt;/li&gt;';
+}
+
+myList.html(myListItems);</code></pre>
 							</li>
 						</ul>
 					</section>
@@ -319,6 +349,7 @@
 							<li><a href="http://developer.yahoo.com/performance/rules.html#js_bottom">Put scripts at the bottom</a></li>
 							<li><a href="http://www.slideshare.net/cheilmann/javascript-best-practices-1041724">JavaScript Best Practices</a></li>
 							<li><a href="http://addyosmani.com/jqprovenperformance/">jQuery Proven Performance</a></li>
+							<li><a href="http://www.tvidesign.co.uk/blog/improve-your-jquery-25-excellent-tips.aspx">Improve your jQuery &mdash; 25 Excellent Tips</a></li>
 						</ul>
 					</section>
 				</section>
