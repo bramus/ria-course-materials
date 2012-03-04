@@ -244,14 +244,14 @@ var p1 = $('p'),
 							<li class="fragment">
 								Method to get a random color
 								<pre class="bigger"><code class="language-js dontrun">var randomColor = function() {
-	return '#' + Math.floor(Math.random() * 16777215).toString(16);
+	return '#' + Math.floor(Math.random() * 16777216).toString(16);
 }</code></pre>
 							</li>
 							<li class="fragment">
 								jQuery version:
 								<pre class="bigger"><code class="language-js dontrun">$.extend({
 	randomColor : function() {
-		return '#' + Math.floor(Math.random() * 16777215).toString(16);
+		return '#' + Math.floor(Math.random() * 16777216).toString(16);
 	}
 })</code></pre>
 							</li>
@@ -300,7 +300,7 @@ var p1 = $('p'),
 								<pre class="bigger"><code class="language-js dontrun">(function($) {
 	$.extend({
 		randomColor : function() {
-			return '#' + Math.floor(Math.random() * 16777215).toString(16);
+			return '#' + Math.floor(Math.random() * 16777216).toString(16);
 		}
 	})
 })(jQuery);</code></pre>
@@ -481,7 +481,7 @@ var p1 = $('p'),
 								<pre class="bigger"><code class="language-js dontrun">(function($) {
 	$.fn.showLinkLocation = function() {
 		return this.filter('a').each(function() {
-			$(this).append( ' <em>(' + $(this).attr('href') + ')</em>');
+			$(this).append( ' <em>(' + this.href + ')</em>');
 		});
 	};
 }(jQuery));</code></pre>
