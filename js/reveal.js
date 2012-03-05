@@ -555,7 +555,7 @@ var Reveal = (function(){
 			
 			window.location.hash = url;
 			
-			if (_gaq) _gaq.push(['_trackPageview', url]);
+			if (_gaq) _gaq.push(['_trackPageview', window.location.href]);
 		}
 	}
 
