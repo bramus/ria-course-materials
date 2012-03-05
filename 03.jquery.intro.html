@@ -233,7 +233,7 @@
 										</ul>
 									</li>
 									<li class="fragment">
-										What you get returned is a jQuery wrapped Object, not the elements themselves
+										What you get returned is a jQuery instance, not the elements themselves
 										<ul>
 											<li class="fragment">eg. You can't call <code>.innerHTML</code> on it, as it's no DOM Node!</li>
 											<li class="fragment">You can only call functions provided by jQuery (or one of its plugins) on it</li>
@@ -314,9 +314,9 @@ $('td:parent');</code></pre>
 });</code></pre>
 							</li>
 							<li class="fragment">
-								Possible to use <code>this</code>, referencing the current node, inside a loop
+								Possible to use <code>this</code>, referencing the current node (<code>HTMLElement</code>), inside a loop
 								<ul>
-									<li>Wrapp it inside <code>$()</code> again, to get a jQuery Object</li>
+									<li>Wrap it inside <code>$()</code> again, to get a jQuery Object</li>
 								</ul>
 							</li>
 						</ul>
@@ -346,6 +346,15 @@ $('td:parent');</code></pre>
 									<li class="fragment">Add, Move, Copy &amp; Remove Elements</li>
 								</ul>
 							</li>
+							
+							<li class="fragment">
+								jQuery provides functions to do these manipulations
+								<ul>
+									<li class="fragment">The functions can only be called on jQuery instances</li>
+									<li class="fragment">The functions are defined on <code>jQuery.prototype</code> (cfr. working with objects/instances)</li>
+									<li class="fragment"><code>jQuery.prototype</code> is mapped to <code>$.fn</code> for convenience</li>
+								</ul>
+							</li>
 						</ul>
 					</section>
 
@@ -353,7 +362,7 @@ $('td:parent');</code></pre>
 						<h2>CSS (1)</h2>
 						<ul>
 							<li class="fragment">
-								To adjust the css, make use of <a href="http://api.jquery.com/css/">.css()</a>
+								To adjust the css, make use of <a href="http://api.jquery.com/css/">$.fn.css()</a>
 								<pre class="bigger"><code class="language-html dontrun" data-overlay-example="assets/03/examples/02.html">&lt;h1&gt;CSS&lt;/h1&gt;
 &lt;ul&gt;
 	&lt;li&gt;Ham&lt;/li&gt;
@@ -434,8 +443,8 @@ $('td:parent');</code></pre>
 							<li class="fragment">
 								jQuery provides shortcuts to working with <a href="http://api.jquery.com/category/dimensions/">dimensions</a>
 								<ul>
-									<li><a href="http://api.jquery.com/width/">.width()</a></li>
-									<li><a href="http://api.jquery.com/height/">.height()</a></li>
+									<li><a href="http://api.jquery.com/width/">$.fn.width()</a></li>
+									<li><a href="http://api.jquery.com/height/">$.fn.height()</a></li>
 								</ul>
 							</li>
 							<li class="fragment">No vendor prefixed needed when setting &ldquo;new-ish&rdquo; properties. jQuery will handle it.</li>
@@ -446,7 +455,7 @@ $('td:parent');</code></pre>
 						<h2>Classes (1)</h2>
 						<ul>
 							<li class="fragment">
-								Basic manipulation: <a href="http://api.jquery.com/addClass/">.addClass()</a> and <a href="http://api.jquery.com/removeClass/">.removeClass()</a>
+								Basic manipulation: <a href="http://api.jquery.com/addClass/">$.fn.addClass()</a> and <a href="http://api.jquery.com/removeClass/">$.fn.removeClass()</a>
 								<pre class="bigger"><code class="language-html dontrun" data-overlay-example="assets/03/examples/03.html">&lt;!doctype html&gt;
 &lt;html lang=&quot;en&quot;&gt;
 &lt;head&gt;
@@ -480,7 +489,7 @@ $('td:parent');</code></pre>
 						<h2>Classes (2)</h2>
 						<ul>
 							<li class="fragment">
-								Other Functions: <a href="http://api.jquery.com/toggleClass/">.toggleClass()</a> and <a href="http://api.jquery.com/hasClass/">.hasClass()</a>
+								Other Functions: <a href="http://api.jquery.com/toggleClass/">$.fn.toggleClass()</a> and <a href="http://api.jquery.com/hasClass/">$.fn.hasClass()</a>
 								<pre class="bigger"><code class="language-js dontrun" data-overlay-example="assets/03/examples/03b.html">$(document).ready(function() {
 	$('li:last').toggleClass('highlight');
 	if ($('li:last').hasClass('selected')) {
@@ -495,7 +504,7 @@ $('td:parent');</code></pre>
 						<h2>HTML, Attributes &amp; Values (1)</h2>
 						<ul>
 							<li class="fragment">
-								Basics: <a href="http://api.jquery.com/html/">.html()</a> (to get/set the <code>innerHTML</code>) and <a href="http://api.jquery.com/val/">.val()</a> (to get/set the value of a form element)
+								Basics: <a href="http://api.jquery.com/html/">$.fn.html()</a> (to get/set the <code>innerHTML</code>) and <a href="http://api.jquery.com/val/">$.fn.val()</a> (to get/set the value of a form element)
 								<pre class="bigger"><code class="language-html dontrun" data-overlay-example="assets/03/examples/04.html">&lt;select&gt;
     &lt;option&gt;Single&lt;/option&gt;
     &lt;option selected=&quot;selected&quot;&gt;Single2&lt;/option&gt;
@@ -515,7 +524,7 @@ $('td:parent');</code></pre>
 &lt;/script&gt;</code></pre>
 								<ul>
 									<li class="fragment">
-										<code>.val()</code> works with all types of inputs (and textareas!)
+										<code>$.fn.val()</code> works with all types of inputs (and textareas!)
 									</li>
 									<li class="fragment">
 										Again: omission of a value to set results in getting the value
@@ -529,7 +538,7 @@ $('td:parent');</code></pre>
 						<h2>HTML, Attributes &amp; Values (2)</h2>
 						<ul>
 							<li class="fragment">
-								Getting/setting atrributes possible with <a href="http://api.jquery.com/attr/">.attr()</a>
+								Getting/setting atrributes possible with <a href="http://api.jquery.com/attr/">$.fn.attr()</a>
 								<pre class="bigger"><code class="language-html dontrun" data-overlay-example="assets/03/examples/04b.html">&lt;p&gt;Once there was a &lt;em title=&quot;huge, gigantic&quot;&gt;large&lt;/em&gt; dinosaur...&lt;/p&gt;
 
 &lt;p id=&quot;output&quot;&gt;(loading...)&lt;/p&gt;
@@ -542,7 +551,7 @@ $('td:parent');</code></pre>
 &lt;/script&gt;</code></pre>
 								<ul>
 									<li class="fragment">
-										When working with <code>data-*</code> attributes, one should use <a href="http://api.jquery.com/data/">.data()</a>
+										When working with <code>data-*</code> attributes, one should use <a href="http://api.jquery.com/data/">$.fn.data()</a>
 									</li>
 								</ul>
 							</li>
@@ -572,7 +581,7 @@ var a = $('&lt;a/&gt;', {
 						<h2>Adding Elements (1)</h2>
 						<ul>
 							<li class="fragment">
-								Inject content outside targeted element with <a href="http://api.jquery.com/after/">.after()</a> and <a href="http://api.jquery.com/before/">.before()</a>
+								Inject content outside targeted element with <a href="http://api.jquery.com/after/">$.fn.after()</a> and <a href="http://api.jquery.com/before/">$.fn.before()</a>
 								<pre class="bigger"><code class="language-html dontrun" data-overlay-example="assets/03/examples/05.html">&lt;div class=&quot;container&quot;&gt;
 	&lt;h2&gt;Greetings&lt;/h2&gt;
 	&lt;p&gt;Hello&lt;/p&gt;
@@ -596,7 +605,7 @@ var a = $('&lt;a/&gt;', {
 						<h2>Adding Elements (2)</h2>
 						<ul>
 							<li class="fragment">
-								Alternative Syntax: <a href="http://api.jquery.com/insertAfter/">.insertAfter()</a> and <a href="http://api.jquery.com/insertBefore/">.insertBefore()</a>
+								Alternative Syntax: <a href="http://api.jquery.com/insertAfter/">$.fn.insertAfter()</a> and <a href="http://api.jquery.com/insertBefore/">$.fn.insertBefore()</a>
 								<pre class="bigger"><code class="language-html dontrun" data-overlay-example="assets/03/examples/05c.html">&lt;div class=&quot;container&quot;&gt;
 	&lt;h2&gt;Greetings&lt;/h2&gt;
 	&lt;p&gt;Hello&lt;/p&gt;
@@ -625,8 +634,8 @@ var a = $('&lt;a/&gt;', {
 							<li class="fragment">
 								Also possible
 								<ul>
-									<li><a href="http://api.jquery.com/append/">.append()</a> / <a href="http://api.jquery.com/appendTo/">.appendTo()</a></li>
-									<li><a href="http://api.jquery.com/prepend/">.prepend()</a> / <a href="http://api.jquery.com/prependTo/">.prependTo()</a></li>
+									<li><a href="http://api.jquery.com/append/">$.fn.append()</a> / <a href="http://api.jquery.com/appendTo/">$.fn.appendTo()</a></li>
+									<li><a href="http://api.jquery.com/prepend/">$.fn.prepend()</a> / <a href="http://api.jquery.com/prependTo/">$.fn.prependTo()</a></li>
 								</ul>
 							</li>
 							<li class="fragment">Important difference with previous
@@ -677,7 +686,7 @@ var a = $('&lt;a/&gt;', {
 						<h2>Copying Elements</h2>
 						<ul>
 							<li class="fragment">
-								Use <a href="http://api.jquery.com/clone/">.clone()</a> to duplicate, and insert it into the HTML
+								Use <a href="http://api.jquery.com/clone/">$.fn.clone()</a> to duplicate, and insert it into the HTML
 								<pre class="bigger"><code class="language-html dontrun" data-overlay-example="assets/03/examples/07.html">&lt;ul&gt;
 	&lt;li&gt;Ham&lt;/li&gt;
 	&lt;li&gt;Bread&lt;/li&gt;
@@ -698,7 +707,7 @@ var a = $('&lt;a/&gt;', {
 						<h2>Removing Elements</h2>
 						<ul>
 							<li class="fragment">
-								Use <a href="http://api.jquery.com/remove/">.remove()</a> or <a href="http://api.jquery.com/empty/">.empty</a>
+								Use <a href="http://api.jquery.com/remove/">$.fn.remove()</a> or <a href="http://api.jquery.com/empty/">$.fn.empty</a>
 								<pre class="bigger"><code class="language-html dontrun" data-overlay-example="assets/03/examples/08.html">&lt;ul&gt;
 	&lt;li&gt;Ham&lt;/li&gt;
 	&lt;li&gt;Bread&lt;/li&gt;
@@ -754,7 +763,7 @@ var a = $('&lt;a/&gt;', {
 						<h2>Selecting Children (1)</h2>
 						<ul>
 							<li class="fragment">
-								<a href="http://api.jquery.com/children/">.children()</a>: Get the children, optionally filtered by a selector.
+								<a href="http://api.jquery.com/children/">$.fn.children()</a>: Get the children, optionally filtered by a selector.
 								<pre class="bigger"><code class="language-html dontrun" data-overlay-example="assets/03/examples/09.html">&lt;ul class=&quot;level-1&quot;&gt;
 	&lt;li class=&quot;item-i&quot;&gt;I&lt;/li&gt;
 	&lt;li class=&quot;item-ii&quot;&gt;II
@@ -785,7 +794,7 @@ var a = $('&lt;a/&gt;', {
 						<h2>Selecting Children (2)</h2>
 						<ul>
 							<li class="fragment">
-								<a href="http://api.jquery.com/find/">.find()</a>: Get the descendants, filtered by a selector
+								<a href="http://api.jquery.com/find/">$.fn.find()</a>: Get the descendants, filtered by a selector
 								<pre class="bigger"><code class="language-html dontrun" data-overlay-example="assets/03/examples/10.html">&lt;ul class=&quot;level-1&quot;&gt;
 	&lt;li class=&quot;item-i&quot;&gt;I&lt;/li&gt;
 	&lt;li class=&quot;item-ii&quot;&gt;II
@@ -816,7 +825,7 @@ var a = $('&lt;a/&gt;', {
 						<h2>Selecting Parents (1)</h2>
 						<ul>
 							<li class="fragment">
-								<a href="http://api.jquery.com/parent/">.parent()</a>: Get the parent, optionally filtered by a selector.
+								<a href="http://api.jquery.com/parent/">$.fn.parent()</a>: Get the parent, optionally filtered by a selector.
 								<pre class="bigger"><code class="language-html dontrun" data-overlay-example="assets/03/examples/11.html">&lt;ul class=&quot;level-1&quot;&gt;
 	&lt;li class=&quot;item-i&quot;&gt;I&lt;/li&gt;
 	&lt;li class=&quot;item-ii&quot;&gt;II
@@ -847,7 +856,7 @@ var a = $('&lt;a/&gt;', {
 						<h2>Selecting Parents (2)</h2>
 						<ul>
 							<li class="fragment">
-								<a href="http://api.jquery.com/parents/">.parents()</a>: Get the ancestors, optionally filtered by a selector.
+								<a href="http://api.jquery.com/parents/">$.fn.parents()</a>: Get the ancestors, optionally filtered by a selector.
 								<pre class="bigger"><code class="language-html dontrun" data-overlay-example="assets/03/examples/11b.html">&lt;ul class=&quot;level-1&quot;&gt;
 	&lt;li class=&quot;item-i&quot;&gt;I&lt;/li&gt;
 	&lt;li class=&quot;item-ii&quot;&gt;II
@@ -878,7 +887,7 @@ var a = $('&lt;a/&gt;', {
 						<h2>Selecting Siblings (1)</h2>
 						<ul>
 							<li class="fragment">
-								Select all siblings with <a href="http://api.jquery.com/siblings/">.siblings()</a>
+								Select all siblings with <a href="http://api.jquery.com/siblings/">$.fn.siblings()</a>
 								<pre class="bigger"><code class="language-html dontrun" data-overlay-example="assets/03/examples/12.html">&lt;ul&gt;
 	&lt;li&gt;list item 1&lt;/li&gt;
 	&lt;li&gt;list item 2&lt;/li&gt;
@@ -901,10 +910,10 @@ var a = $('&lt;a/&gt;', {
 						<h2>Selecting Siblings (2)</h2>
 						<ul>
 							<li class="fragment">
-								<a href="http://api.jquery.com/next/">.next()</a>: Get the immediately following sibling, optionally filtered by a selector.
+								<a href="http://api.jquery.com/next/">$.fn.next()</a>: Get the immediately following sibling, optionally filtered by a selector.
 							</li>
 							<li class="fragment">
-								<a href="http://api.jquery.com/prev/">.prev()</a>: Get the immediately preceding sibling, optionally filtered by a selector.
+								<a href="http://api.jquery.com/prev/">$.fn.prev()</a>: Get the immediately preceding sibling, optionally filtered by a selector.
 							</li>
 							<li class="fragment">
 								Example
@@ -931,7 +940,7 @@ var a = $('&lt;a/&gt;', {
 						<h2>Selecting Siblings (3)</h2>
 						<ul>
 							<li class="fragment">
-								Chaining possible by using <a href="http://api.jquery.com/end/">.end()</a>
+								Chaining possible by using <a href="http://api.jquery.com/end/">$.fn.end()</a>
 								<pre class="bigger"><code class="language-html dontrun" data-overlay-example="assets/03/examples/13b.html">&lt;ul&gt;
 	&lt;li&gt;list item 1&lt;/li&gt;
 	&lt;li&gt;list item 2&lt;/li&gt;
@@ -969,7 +978,7 @@ var a = $('&lt;a/&gt;', {
 						<h2>Events</h2>
 						<ul>
 							<li class="fragment">
-								Add event listeners with <a href="http://api.jquery.com/on/">.on()</a> and remove them with <a href="http://api.jquery.com/off/">.off()</a>
+								Add event listeners with <a href="http://api.jquery.com/on/">$.fn.on()</a> and remove them with <a href="http://api.jquery.com/off/">$.fn.off()</a>
 								<ul>
 									<li class="fragment">
 										Most common events supported
@@ -987,7 +996,7 @@ var a = $('&lt;a/&gt;', {
 									<li class="fragment">Possible to reference <code>this</code> from within the function</li>
 								</ul>
 							</li>
-							<li class="fragment">Hook one-time events with <a href="http://api.jquery.com/one/">.one()</a></li>
+							<li class="fragment">Hook one-time events with <a href="http://api.jquery.com/one/">$.fn.one()</a></li>
 						</ul>
 					</section>
 
@@ -1017,7 +1026,7 @@ var a = $('&lt;a/&gt;', {
 	});
 &lt;/script&gt;</code></pre>
 							</li>
-							<li class="fragment">Even possible to inject extra data into an event handler, see the <a href="http://api.jquery.com/on/">.on()</a> API reference</li>
+							<li class="fragment">Even possible to inject extra data into an event handler, see the <a href="http://api.jquery.com/on/">$.fn.on()</a> API reference</li>
 						</ul>
 					</section>
 
@@ -1039,7 +1048,7 @@ var a = $('&lt;a/&gt;', {
 	});
 });</code></pre>
 							</li>
-							<li class="fragment">We will use <a href="http://api.jquery.com/on/">.on()</a> and <a href="http://api.jquery.com/off/">.off()</a> though</li>
+							<li class="fragment">We will use <a href="http://api.jquery.com/on/">$.fn.on()</a> and <a href="http://api.jquery.com/off/">$.fn.off()</a> though</li>
 						</ul>
 					</section>
 
@@ -1047,7 +1056,7 @@ var a = $('&lt;a/&gt;', {
 						<h2>Binding Events: Alternate Syntax</h2>
 						<ul>
 							<li class="fragment">
-								In older jQuery versions <a href="http://api.jquery.com/bind/">.bind()</a> and <a href="http://api.jquery.com/unbind/">.unbind()</a> were used
+								In older jQuery versions <a href="http://api.jquery.com/bind/">$.fn.bind()</a> and <a href="http://api.jquery.com/unbind/">$.fn.unbind()</a> were used
 								<pre class="bigger"><code class="language-js dontrun" data-overlay-example="assets/03/examples/14c.html">$(document).ready(function() {
 	$('li').css('cursor','pointer').bind('mouseover', function(e) {
 		$(this).css('color', 'blue');
@@ -1059,7 +1068,7 @@ var a = $('&lt;a/&gt;', {
 });
 &lt;/script&gt;</code></pre>
 							</li>
-							<li class="fragment">Again, we will use <a href="http://api.jquery.com/on/">.on()</a> and <a href="http://api.jquery.com/off/">.off()</a></li>
+							<li class="fragment">Again, we will use <a href="http://api.jquery.com/on/">$.fn.on()</a> and <a href="http://api.jquery.com/off/">$.fn.off()</a></li>
 						</ul>
 					</section>
 
@@ -1084,7 +1093,7 @@ var a = $('&lt;a/&gt;', {
 						<h2>Binding events on future nodes (1)</h2>
 						<ul>
 							<li class="fragment">
-								When binding event handlers with <a href="http://api.jquery.com/on/">.on()</a> or <a href="http://api.jquery.com/bind/">.bind()</a> they'll only be hooked to the currently existing elements
+								When binding event handlers with <a href="http://api.jquery.com/on/">$.fn.on()</a> or <a href="http://api.jquery.com/bind/">$.fn.bind()</a> they'll only be hooked to the currently existing elements
 								<pre class="bigger"><code class="language-js dontrun" data-overlay-example="assets/03/examples/15.html">$(document).ready(function() {
 
 	// Bind Events
@@ -1101,7 +1110,7 @@ var a = $('&lt;a/&gt;', {
 	
 });</code></pre>
 							</li>
-							<li class="fragment">Can be fixed by using <a href="http://api.jquery.com/delegate/">.delegate()</a></li>
+							<li class="fragment">Can be fixed by using <a href="http://api.jquery.com/delegate/">$.fn.delegate()</a></li>
 						</ul>
 					</section>
 
@@ -1133,7 +1142,7 @@ var a = $('&lt;a/&gt;', {
 						<h2>.delegate alternative #1</h2>
 						<ul>
 							<li class="fragment">
-								Possible to use <a href="http://api.jquery.com/on/">.on()</a> with extra selector string to filter the descendants of the selected elements that trigger the event
+								Possible to use <a href="http://api.jquery.com/on/">$.fn.on()</a> with extra selector string to filter the descendants of the selected elements that trigger the event
 								<pre class="bigger"><code class="language-js dontrun" data-overlay-example="assets/03/examples/15b2.html">$(document).ready(function() {
 
 	// Bind Events, using delegate
@@ -1151,7 +1160,7 @@ var a = $('&lt;a/&gt;', {
 });</code></pre>
 							</li>
 							<li class="fragment">
-								Internally, <a href="http://api.jquery.com/delegate/">.delegate()</a> is mapped to <a href="http://api.jquery.com/on/">.on()</a>, so no performance difference between the two
+								Internally, <a href="http://api.jquery.com/delegate/">$.fn.delegate()</a> is mapped to <a href="http://api.jquery.com/on/">$.fn.on()</a>, so no performance difference between the two
 							</li>
 						</ul>
 					</section>
@@ -1160,7 +1169,7 @@ var a = $('&lt;a/&gt;', {
 						<h2>.delegate alternative #2</h2>
 						<ul>
 							<li class="fragment">
-								Older versions of jQuery used <a href="http://api.jquery.com/live/">.live()</a> instead of <a href="http://api.jquery.com/delegate/">.delegate()</a>
+								Older versions of jQuery used <a href="http://api.jquery.com/live/">$.fn.live()</a> instead of <a href="http://api.jquery.com/delegate/">$.fn.delegate()</a>
 								<pre class="bigger"><code class="language-js dontrun" data-overlay-example="assets/03/examples/15c.html">$(document).ready(function() {
 
 	// Bind events, using live (not recommended!)
@@ -1179,7 +1188,7 @@ var a = $('&lt;a/&gt;', {
 								<ul>
 										<li class="fragment">Works, but performance <a href="http://forum.jquery.com/topic/jquery-live-jquery-fn-live-discussion">is slow</a> and <a href="http://stage.learn.jquery.com/events/using_delegate_and_undelegate/">doesn't play nice when traversing</a></li>
 										<li class="fragment">Recommended read: <a href="http://jupiterjs.com/news/why-you-should-never-use-jquery-live">Why You Should Never Use jQuery Live</a></li>
-										<li class="fragment">We will use <a href="http://api.jquery.com/delegate/">.delegate()</a> or <a href="http://api.jquery.com/on/">.on()</a> with extra selector string</li>
+										<li class="fragment">We will use <a href="http://api.jquery.com/delegate/">$.fn.delegate()</a> or <a href="http://api.jquery.com/on/">$.fn.on()</a> with extra selector string</li>
 								</ul>
 							</li>
 						</ul>
@@ -1204,10 +1213,10 @@ var a = $('&lt;a/&gt;', {
 						<h2>Events Summary</h2>
 						<ul>
 							<li class="fragment">
-								Use <a href="http://api.jquery.com/one/">.on()</a> and <a href="http://api.jquery.com/off/">.off()</a> to bind event handlers
+								Use <a href="http://api.jquery.com/one/">$.fn.on()</a> and <a href="http://api.jquery.com/off/">$.fn.off()</a> to bind/unbind event handlers
 							</li>
 							<li class="fragment">
-								Use <a href="http://api.jquery.com/delegate/">.delegate()</a> or <a href="http://api.jquery.com/on/">.on()</a> with extra selector string to bind event handlers if you know the DOM will change or if you want to optimize your event handling code
+								Use <a href="http://api.jquery.com/delegate/">$.fn.delegate()</a> or <a href="http://api.jquery.com/on/">$.fn.on()</a> with extra selector string to bind event handlers if you know the DOM will change or if you want to optimize your event handling code
 							</li>
 							<li class="fragment">
 								All other syntaxes work, but we won't be writing them ourselves
@@ -1230,7 +1239,7 @@ var a = $('&lt;a/&gt;', {
 						<h2>Animation Core Function</h2>
 						<ul>
 							<li class="fragment">
-								jQuery lets you animate elements (viz. adjust CSS properties in an animated manner) via its core <a href="http://api.jquery.com/animate/">.animate()</a> function.
+								jQuery lets you animate elements (viz. adjust CSS properties in an animated manner) via its core <a href="http://api.jquery.com/animate/">$.fn.animate()</a> function.
 								<pre class="bigger"><code class="language-html dontrun" data-overlay-example="assets/03/examples/19.html">&lt;button id=&quot;go&quot;&gt;Run&lt;/button&gt;
 &lt;div id=&quot;block&quot; style=&quot;background-color:#bca; width:100px; border:1px solid green;&quot;&gt;Hello!&lt;/div&gt;
 
@@ -1258,12 +1267,12 @@ var a = $('&lt;a/&gt;', {
 							<li class="fragment">
 								jQuery also provides <a href="http://api.jquery.com/category/effects/">quite a few shorthands</a> for some basic effects, including:
 								<ul>
-									<li><a href="http://api.jquery.com/fadeIn/">.fadeIn()</a>: Display the matched elements by fading them to opaque.</li>
-									<li><a href="http://api.jquery.com/fadeOut/">.fadeOut()</a>: Hide the matched elements by fading them to transparent.</li>
-									<li><a href="http://api.jquery.com/hide/">.hide()</a>: Hide the matched elements.</li>
-									<li><a href="http://api.jquery.com/show/">.show()</a>: Display the matched elements.</li>
-									<li><a href="http://api.jquery.com/slideDown/">.slideDown()</a>: Display the matched elements with a sliding motion.</li>
-									<li><a href="http://api.jquery.com/slideUp/">.slideUp()</a>: Hide the matched elements with a sliding motion.</li>
+									<li><a href="http://api.jquery.com/fadeIn/">$.fn.fadeIn()</a>: Display the matched elements by fading them to opaque.</li>
+									<li><a href="http://api.jquery.com/fadeOut/">$.fn.fadeOut()</a>: Hide the matched elements by fading them to transparent.</li>
+									<li><a href="http://api.jquery.com/hide/">$.fn.hide()</a>: Hide the matched elements.</li>
+									<li><a href="http://api.jquery.com/show/">$.fn.show()</a>: Display the matched elements.</li>
+									<li><a href="http://api.jquery.com/slideDown/">$.fn.slideDown()</a>: Display the matched elements with a sliding motion.</li>
+									<li><a href="http://api.jquery.com/slideUp/">$.fn.slideUp()</a>: Hide the matched elements with a sliding motion.</li>
 								</ul>
 							</li>
 						</ul>
@@ -1275,12 +1284,12 @@ var a = $('&lt;a/&gt;', {
 							<li class="fragment">
 								Animations are queued one after the other. Possible to interfere with
 								<ul>
-									<li><a href="http://api.jquery.com/queue/">.queue()</a>: Show the queue of functions to be executed on the matched elements.</li>
-									<li><a href="http://api.jquery.com/dequeue/">.dequeue()</a>: Execute the next function on the queue for the matched elements.</li>
-									<li><a href="http://api.jquery.com/clearQueue/">.clearQueue()</a>: Remove from the queue all items that have not yet been run.</li>
+									<li><a href="http://api.jquery.com/queue/">$.fn.queue()</a>: Show the queue of functions to be executed on the matched elements.</li>
+									<li><a href="http://api.jquery.com/dequeue/">$.fn.dequeue()</a>: Execute the next function on the queue for the matched elements.</li>
+									<li><a href="http://api.jquery.com/clearQueue/">$.fn.clearQueue()</a>: Remove from the queue all items that have not yet been run.</li>
 								</ul>
 							</li>
-							<li class="fragment">Possible to stop and delay animations using <a href="http://api.jquery.com/stop/">.stop()</a> and <a href="http://api.jquery.com/delay/">.delay()</a></li>
+							<li class="fragment">Possible to stop and delay animations using <a href="http://api.jquery.com/stop/">$.fn.stop()</a> and <a href="http://api.jquery.com/delay/">$.fn.delay()</a></li>
 						</ul>
 					</section>
 
