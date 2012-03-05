@@ -2,7 +2,7 @@
 	
 	$.fn.hilight = function(options) {
 		
-		var o = $.extend($.fn.hilight.defaults, options);
+		var o = $.extend({}, $.fn.hilight.defaults, options);
 
 		return this.each(function() {
 			var $this = $(this);

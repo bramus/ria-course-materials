@@ -508,7 +508,7 @@ var p1 = $('p'),
 		};
 		
 		// Extend our default options with those provided.
-		var o = $.extend(defaults, options);
+		var o = $.extend({}, defaults, options);
 		
 		return this.each(function() {
 			// ... plugin code here
@@ -531,7 +531,7 @@ var p1 = $('p'),
 	$.fn.hilight = function(options) {
 
 		// Extend our default options with those provided.
-		var o = $.extend($.fn.hilight.defaults, options);
+		var o = $.extend({}, $.fn.hilight.defaults, options);
 
 		return this.each(function() {
 			// ... plugin code here
@@ -556,7 +556,7 @@ var p1 = $('p'),
 								Plugin code
 								<pre class="bigger"><code class="language-js dontrun">(function($) {
 	$.fn.hilight = function(options) {
-		var o = $.extend($.fn.hilight.defaults, options);
+		var o = $.extend({}, $.fn.hilight.defaults, options);
 		return this.each(function() {
 			var $this = $(this);
 			$this.css({
@@ -679,7 +679,7 @@ $('em').on('click', function() {
 						<div class="fragment"><pre class="bigger"><code class="language-js dontrun">(function($) {
 	var methods = {
 		init : function(options) { 
-			var o = $.extend($.fn.hilight.defaults, options);
+			var o = $.extend({}, $.fn.hilight.defaults, options);
 			return this.each(function() {
 				var $this = $(this);
 				$this.css({
