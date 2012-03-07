@@ -555,7 +555,7 @@ var Reveal = (function(){
 			
 			window.location.hash = url;
 			
-			if (_gaq) _gaq.push(['_trackPageview', window.location.href.replace('http://bramus.github.com/ria-course-materials/','')]);
+			if (_gaq) _gaq.push(['_trackPageview', window.location.href.replace(window.location.protocol + '//' + window.location.host + '/','')]);
 		}
 	}
 
