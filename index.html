@@ -48,7 +48,7 @@
 			
 			/* intro */
 			#reveal .intro {
-				width: 1200px;
+				max-width: 1200px;
 				padding: 20px 0px;
 				text-align: center;
 				margin: 0 auto 0;
@@ -56,19 +56,21 @@
 			
 			#reveal .intro > section {
 				width: 100%;
-				min-height: 600px;
+				/* min-height: 600px; */
 			}
 			
 			#reveal .intro ul.thumbs {
+				width: 100%;
 				padding: 0;
 				margin: 0 auto 50px;
 				list-style: none;
 			}
 			
 			#reveal .intro ul.thumbs li {
-				width: 150px;
+				width: 20%;
 				float: left;
-				margin: 0 25px 25px 25px;
+				text-align: center;
+				margin: 0;
 			}
 			
 			#reveal .intro ul.thumbs li img {
@@ -83,12 +85,6 @@
 				overflow: hidden;
 				width: 30px;
 				padding: 15px 0 0 20px;
-				
-				-webkit-transition: all .2s ease;
-				   -moz-transition: all .2s ease;
-				    -ms-transition: all .2s ease;
-				     -o-transition: all .2s ease;
-				        transition: all .2s ease;
 				
 				-webkit-box-shadow: -10px 0px 25px #1c1e20;
 				-moz-box-shadow:    -10px 0px 25px #1c1e20;
@@ -111,6 +107,152 @@
 				opacity: 0.8;
 				width: 230px;
 			}
+
+			#reveal h1, #reveal h3, #reveal #about {
+				-webkit-transition: all .2s ease;
+				   -moz-transition: all .2s ease;
+				    -ms-transition: all .2s ease;
+				     -o-transition: all .2s ease;
+				        transition: all .2s ease;
+			}
+			
+			@media (max-width: 1330px) {
+				
+				#reveal h1 {
+					font-size: 100px;
+				}
+				
+				#reveal h3 {
+					font-size: 40px;
+				}
+				
+			}
+			
+			@media (max-width: 1200px) {
+				
+				#reveal #about {
+					height: auto;
+					position: static;
+					width: 90%;
+					margin: 25px auto 25px;
+					padding: 15px;
+				} 
+				
+				#reveal #about:hover {
+					width: 90%;
+				}
+				
+				#reveal #about p {
+					width: 100%;
+					margin-bottom: 12px;
+				}
+				
+				#reveal .intro ul.thumbs li {
+					width: 25%;
+				}
+				
+			}
+
+			@media (max-width: 1100px) {
+
+				#reveal h1 {
+					font-size: 80px;
+				}
+
+				#reveal h3 {
+					font-size: 30px;
+				}
+
+			}
+
+			@media (max-width: 960px) {
+			
+				#reveal .intro ul.thumbs li {
+					width: 33%;
+				}
+
+			}
+
+			@media (max-width: 870px) {
+
+				#reveal h1 {
+					font-size: 100px;
+				}
+
+				#reveal h3 {
+					font-size: 40px;
+				}
+
+			}
+
+			@media (max-width: 750px) {
+
+				#reveal .intro ul.thumbs li {
+					width: 50%;
+				}
+
+			}
+
+			@media (max-width: 650px) {
+
+				#reveal h1 {
+					margin-top: 50px;
+				}
+
+			}
+
+			@media (max-width: 480px) {
+
+				#reveal h1 {
+					font-size: 80px;
+				}
+				
+				#reveal h3 {
+					font-size: 30px;
+				}
+
+			}
+
+			@media (max-width: 460px) {
+
+				#reveal .intro ul.thumbs li {
+					width: 100%;
+				}
+				
+				#reveal .intro section footer {
+					font-size: 50%;
+				}
+				
+				#reveal #about p {
+					font-size: 13px;
+				}
+
+			}
+
+			@media (max-width: 380px) {
+
+				#reveal h1 {
+					font-size: 60px;
+				}
+				
+				#reveal h3 {
+					font-size: 20px;
+				}
+
+				#reveal .intro section footer {
+					font-size: 40%;
+				}
+
+				#reveal #about {
+					width: 80%;
+				}
+
+				#reveal #about p {
+					font-size: 13px;
+				}
+
+			}
+			
 		</style>
 	</head>
 	
