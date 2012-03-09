@@ -57,52 +57,148 @@
 						<h2>Ajax?</h2>
 						<ul>
 							<li class="fragment">
-								...
+								Acronym: Asynchronous JavaScript and XML
+								<ul>
+									<li>Term <a href="http://www.adaptivepath.com/ideas/ajax-new-approach-web-applications">coined in 2005</a> by Jesse James Garret</li>
+									<li>Technology pre-dated 2005 though</li>
+								</ul>
+							</li>
+							<li class="fragment">
+								In Short
+								<ul>
+									<li>Ajax allows you to do requests to a web server without ever leaving the webpage</li>
+								</ul>
+							</li>
+							<li class="fragment">
+								Example
+								<ul>
+									<li>Click a link in the navigation of a webpage and see the content get updated dynamically</li>
+								</ul>
 							</li>
 						</ul>
 					</section>
-
+					
 					<section>
 						<h2>XMLHttpRequest</h2>
 						<ul>
 							<li class="fragment">
-								...
+								At the core of Ajax sits a JavaScript API named <code>XMLHttpRequest</code> (XHR)
+								<ul>
+									<li class="fragment">It allows you to do a request to a web server</li>
+									<li class="fragment">Calls can be made synchronously and asynchronously</li>
+								</ul>
+							</li>
+							<li class="fragment">
+								Other parts of Ajax are DOM Manipulations and XML
+								<ul>
+									<li class="fragment">The data (text) returned by the server is XML-formatted (*)</li>
+								</ul>
+							</li>
+						</ul>
+						<footer class="fragment"><em>(* by now other formats are more popular)</em></footer>
+					</section>
+					
+					<section>
+						<h2>Example</h2>
+						<ul>
+							<li class="fragment">
+								Synchronous example
+								<pre class="bigger"><code class="language-js">xhr = new XMLHttpRequest();
+xhr.open('GET', 'assets/06/examples/xml.php', false);
+xhr.send(null);
+alert('I am outputted once the call has finished loading (5s delay)');
+alert(xhr.responseText);</code></pre>
+							</li>
+							<li class="fragment">
+								Asynchronous example
+								<pre class="bigger"><code class="language-js">xhr = new XMLHttpRequest();
+xhr.onreadystatechange = function() {
+	if (xhr.readyState == 4) {
+		alert(xhr.responseText);
+	}
+};
+xhr.open('GET', 'assets/06/examples/xml.php', true);
+xhr.send(null);
+alert('I am outputted immediately (no delay)');</code></pre>
+							</li>
+						</ul>
+						<footer class="fragment">The asynchronous way is preferred</footer>
+					</section>
+
+					<section>
+						<h2>Advantages &amp; Disadvantages</h2>
+						<ul>
+							<li class="fragment">
+								Advantages
+								<ul>
+									<li class="fragment">No reloads</li>
+									<li class="fragment">Less bandwidth used</li>
+									<li class="fragment">Perceived speed by user</li>
+								</ul>
+							</li>
+							<li class="fragment">
+								Disadvantages
+								<ul>
+									<li class="fragment">
+										URLs &ldquo;broken&rdquo;
+										<ul>
+											<li>No browser history</li>
+											<li>No back/forward</li>
+											<li>No proper bookmarking</li>
+										</ul>
+									</li>
+									<li class="fragment">
+										Search Engines don't index content injected afterwards
+									</li>
+								</ul>
 							</li>
 						</ul>
 					</section>
 
 					<section>
-						<h2>Advantages</h2>
+						<h2>XHR History</h2>
 						<ul>
 							<li class="fragment">
-								...
+								XHR's predecessor <code>IXMLHTTPRequest</code> invented by Microsoft
+								<ul>
+									<li>Shipped with IE5 (1999!), as part of the <code>MSXML</code> Library</li>
+									<li>Available in JS via ActiveX</li>
+								</ul>
+							</li>
+							<li class="fragment">By 2002 Mozilla had a fully working clone named <code>XMLHttpRequest</code> in Gecko</li>
+							<li class="fragment">
+								Other browsers also followed
+								<ul>
+									<li>Safari (2004)</li>
+									<li>Opera (2005)</li>
+									<li>IE7 (2006)</li>
+								</ul>
+							</li>
+							<li class="fragment">
+								W3C started working on a standard in 2008
 							</li>
 						</ul>
 					</section>
 
 					<section>
-						<h2>Disadvantages</h2>
+						<h2>XHR in IE5/IE6</h2>
 						<ul>
 							<li class="fragment">
-								...
-							</li>
-						</ul>
-					</section>
+								Define your own <code>XMLHttpRequest</code> Object and return the ActiveX Object
+								<pre class="bigger"><code class="language-js">if (typeof XMLHttpRequest == "undefined")
+	XMLHttpRequest = function() {
+		try { return new ActiveXObject("Msxml2.XMLHTTP.6.0"); }
+			catch (e) {}
+		try { return new ActiveXObject("Msxml2.XMLHTTP.3.0"); }
+			catch (e) {}
+		try { return new ActiveXObject("Microsoft.XMLHTTP"); }
+			catch (e) {}
+		throw new Error("This browser does not support XMLHttpRequest");
+	};
 
-					<section>
-						<h2>Sidenote: XHR History</h2>
-						<ul>
-							<li class="fragment">
-								...
-							</li>
-						</ul>
-					</section>
+xhr = new XMLHttpRequest();
 
-					<section>
-						<h2>Sidenote: Oldskool XHR</h2>
-						<ul>
-							<li class="fragment">
-								...
+// rest of your code ....</code></pre>
 							</li>
 						</ul>
 					</section>
