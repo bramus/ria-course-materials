@@ -1,6 +1,5 @@
 <?php
 	header('Content-Type:text/xml');
-	sleep(5);
 	echo '<?xml version="1.0" encoding="UTF-8"?>
 <sample>
 	<course>RIA</course>
