@@ -202,6 +202,21 @@ xhr = new XMLHttpRequest();
 							</li>
 						</ul>
 					</section>
+
+					<section>
+						<h2>Same Origin Policy</h2>
+						<ul>
+							<li class="fragment">
+								For security reasons, it's only possible to make requests to the same url that serves the page making the request
+								<ul>
+									<li class="fragment">It's not possible to call <code>http://api.ikdoeict.be/</code> from <code>http://www.ikdoeict.be/</code></li>
+								</ul>
+							</li>
+							<li class="fragment">
+								There are ways to circumvent this though <em>(see further)</em>
+							</li>
+						</ul>
+					</section>
 													
 				</section>
 
@@ -568,6 +583,10 @@ var queryString = values.join('&amp;');</code></pre>
 								Automatic version: <code>$.fn.serialize()</code>
 								<pre class="bigger"><code class="language-js dontrun">var queryString = $('#signupform').serialize();</code></pre>
 							</li>
+							<li class="fragment">
+								Also possible: an Object
+								<pre class="bigger"><code class="language-js dontrun">{key : &quot;value&quot;}</code></pre>
+							</li>
 						</ul>
 					</section>
 					
@@ -602,8 +621,14 @@ var queryString = values.join('&amp;');</code></pre>
 						<h2>Basic Shorthands</h2>
 						<ul>
 							<li class="fragment">
-								...
+								jQuery offers shorthands to make <code>GET</code> and <code>POST</code> requests
+								<ul>
+									<li class="fragment"><a href="http://api.jquery.com/jQuery.get/">$.get()</a></li>
+									<li class="fragment"><a href="http://api.jquery.com/jQuery.post/">$.post()</a></li>
+								</ul>
 							</li>
+							<li class="fragment">Internally these calls are routed to <code>$.ajax()</code></li>
+							<li class="fragment">Code is more concise, yet allows less configuration</li>
 						</ul>
 					</section>
 
@@ -611,7 +636,24 @@ var queryString = values.join('&amp;');</code></pre>
 						<h2>Basic Shorthands: $.get()</h2>
 						<ul>
 							<li class="fragment">
-								...
+								Example
+								<pre class="bigger"><code class="language-js dontrun" data-overlay-example="assets/06/examples/jquery.get.html">jQuery(document).ready(function($) {
+	$.get('json.php', function(data, textStatus, jqXHR) {
+		var lecturers = [];
+		for (var i = 0, len = data.lecturers.length; i < len; i++) {
+			lecturers.push(data.lecturers[i].name);
+		}
+		$('#output').html('&lt;p&gt;' + data.course + ' is taught by ' + lecturers.join(' &amp; ') + '&lt;/p&gt;');
+	}, 'json');
+});</code></pre>
+							</li>
+							<li class="fragment">
+								Possible to pass in extra data
+								<pre class="bigger"><code class="language-js dontrun">jQuery(document).ready(function($) {
+	$.get('json.php', { key: &quot;value&quot; }, function(data, textStatus, jqXHR) {
+		// ...
+	}, 'json');
+});</code></pre>
 							</li>
 						</ul>
 					</section>
@@ -620,7 +662,12 @@ var queryString = values.join('&amp;');</code></pre>
 						<h2>Basic Shorthands: $.post()</h2>
 						<ul>
 							<li class="fragment">
-								...
+								Same syntax as <code>$.get()</code>
+								<pre class="bigger"><code class="language-js dontrun">jQuery(document).ready(function($) {
+	$.post('json.php', { key: &quot;value&quot; }, function(data, textStatus, jqXHR) {
+		// ...
+	}, 'json');
+});</code></pre>
 							</li>
 						</ul>
 					</section>
@@ -629,8 +676,14 @@ var queryString = values.join('&amp;');</code></pre>
 						<h2>Specific Shorthands</h2>
 						<ul>
 							<li class="fragment">
-								...
+								jQuery also sports other shorthands for commonly used actions
+								<ul>
+									<li class="fragment"><a href="http://api.jquery.com/load/">$.fn.load()</a> &mdash; Load a piece of HTML into an element</li>
+									<li class="fragment"><a href="http://api.jquery.com/jQuery.getScript/">$.getScript()</a> &mdash; Load a piece of JS and run it</li>
+									<li class="fragment"><a href="http://api.jquery.com/jQuery.getJSON/">$.getJSON()</a> &mdash; Load in a piece of JSON</li>
+								</ul>
 							</li>
+							<li class="fragment">These functions only work using <code>GET</code></li>
 						</ul>
 					</section>
 
@@ -638,7 +691,13 @@ var queryString = values.join('&amp;');</code></pre>
 						<h2>Specific Shorthands: $.fn.load()</h2>
 						<ul>
 							<li class="fragment">
-								...
+								Example
+								<pre class="bigger"><code class="language-js dontrun" data-overlay-example="assets/06/examples/jquery.fn.load.html">jQuery(document).ready(function($) {
+	$('#output').load('html.php');
+});</code></pre>
+							</li>
+							<li class="fragment">
+								Also possible to send extra data and hook a success function <em>(see jQuery API)</em>
 							</li>
 						</ul>
 					</section>
@@ -647,7 +706,13 @@ var queryString = values.join('&amp;');</code></pre>
 						<h2>Specific Shorthands: $.getScript()</h2>
 						<ul>
 							<li class="fragment">
-								...
+								Example
+								<pre class="bigger"><code class="language-js dontrun" data-overlay-example="assets/06/examples/jquery.getscript.html">jQuery(document).ready(function($) {
+	$.getScript('js.php');
+});</code></pre>
+							</li>
+							<li class="fragment">
+								Also possible to send extra data and hook a success function <em>(see jQuery API)</em>
 							</li>
 						</ul>
 					</section>
@@ -656,16 +721,28 @@ var queryString = values.join('&amp;');</code></pre>
 						<h2>Specific Shorthands: $.getJSON()</h2>
 						<ul>
 							<li class="fragment">
-								...
+								Example
+								<pre class="bigger"><code class="language-js dontrun" data-overlay-example="assets/06/examples/jquery.getjson.html">jQuery(document).ready(function($) {
+	$.getJSON('json.php', function(data, textStatus, jqXHR) {
+		var lecturers = [];
+		for (var i = 0, len = data.lecturers.length; i < len; i++) {
+			lecturers.push(data.lecturers[i].name);
+		}
+		$('#output').html('&lt;p&gt;' + data.course + ' is taught by ' + lecturers.join(' &amp; ') + '&lt;/p&gt;');
+	});
+});</code></pre>
+							</li>
+							<li class="fragment">
+								Also possible to send extra data <em>(see jQuery API)</em>
 							</li>
 						</ul>
 					</section>
 
 					<section>
-						<h2>Helper Functions</h2>
+						<h2>What to use?</h2>
 						<ul>
 							<li class="fragment">
-								...
+								Shorthands allowed, yet if you want to have full control use <code>$.ajax()</code>
 							</li>
 						</ul>
 					</section>
