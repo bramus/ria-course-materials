@@ -472,16 +472,128 @@ xhr.send(null);</code></pre>
 						<h2>$.ajax()</h2>
 						<ul>
 							<li class="fragment">
-								...
+								The core function jQuery to make Ajax calls is <code>$.ajax()</code>
+								<ul>
+									<li class="fragment">Pass in an object to tell jQuery what to call and how</li>
+								</ul>
+							</li>
+							<li class="fragment">
+								Example
+								<pre class="bigger"><code class="language-js dontrun" data-overlay-example="assets/06/examples/jquery.ajax.html">jQuery(document).ready(function($) {
+	$.ajax({
+		url: 'json.php',
+		type: 'get',
+		dataType: 'json',
+		success: function(data, textStatus, jqXHR) {
+			var lecturers = [];
+			for (var i = 0, len = data.lecturers.length; i < len; i++) {
+				lecturers.push(data.lecturers[i].name);
+			}
+			$('#output').html('&lt;p&gt;' + data.course + ' is taught by ' + lecturers.join(' &amp; ') + '&lt;/p&gt;');
+		},
+		error : function(jqXHR, textStatus, errorThrown) {
+			console.log(errorThrown);
+		}
+	});
+});</code></pre>
 							</li>
 						</ul>
 					</section>
 
 					<section>
-						<h2>Sidenote: $('form').serialize()</h2>
+						<h2>$.ajax() Parameters (1)</h2>
 						<ul>
 							<li class="fragment">
-								...
+								Five basic parameters
+								<ul>
+									<li class="fragment"><code>url</code>: A string containing the URL to which the request is sent.</li>
+									<li class="fragment"><code>success</code>: A function to be called if the request succeeds.</li>
+									<li class="fragment"><code>error</code>: A function to be called if the request fails.</li>
+									<li class="fragment"><code>type</code>: Type of request to make (<code>POST</code> or <code>GET</code>). Defaults to <code>GET</code></li>
+									<li class="fragment"><code>dataType</code>: Type of data you're expecting back from the server.
+										<ul>
+											<li><code>xml</code></li>
+											<li><code>html</code></li>
+											<li><code>script</code> &mdash; Will be interpreted automatically. Only via <code>GET</code>.</li>
+											<li><code>json</code> &mdash; Will be parsed automatically.</li>
+											<li><code>jsonp</code></li>
+											<li><code>text</code></li>
+											<li>(empty &rarr; jQuery will guess the type)</li>
+										</ul>
+									</li>
+								</ul>
+							</li>
+						</ul>
+					</section>
+
+					<section>
+						<h2>$.ajax() Parameters (1)</h2>
+						<ul>
+							<li class="fragment">
+								Other interesting parameters
+								<ul>
+									<li class="fragment"><code>async</code>: Set to <code>false</code> if you need synchronous requests</li>
+									<li class="fragment"><code>data</code>: Extra data to be sent to the server (eg. form data)</li>
+									<li class="fragment"><code>headers</code>: Extra headers to be sent along with the request</li>
+									<li class="fragment"><code>username</code> &amp; <code>password</code>: HTTP Authentication</li>
+								</ul>
+							</li>
+							<li class="fragment">
+								Full list of parameters to be found in the <a href="http://api.jquery.com/jQuery.ajax/">jQuery API</a>
+							</li>
+						</ul>
+					</section>
+
+					<section>
+						<h2>Sending data</h2>
+						<ul>
+							<li class="fragment">
+								Possible via <code>data</code> parameter
+								<ul>
+									<li class="fragment">
+										Format is a querystring: <code>key=value&amp;key=value&amp;key=value</code>
+									</li>
+								</ul>
+							</li>
+							<li class="fragment">
+								Manually building a querystring
+								<pre class="bigger"><code class="language-js dontrun">var values = [
+	'firstname=' + encodeURIComponent($('#firstname').val()),
+	'lastname=' + encodeURIComponent($('#lastname').val())
+];
+
+var queryString = values.join('&amp;');</code></pre>
+							</li>
+							<li class="fragment">
+								Automatic version: <code>$.fn.serialize()</code>
+								<pre class="bigger"><code class="language-js dontrun">var queryString = $('#signupform').serialize();</code></pre>
+							</li>
+						</ul>
+					</section>
+					
+					<section>
+						<h2>$.ajax() alternative syntax</h2>
+						<ul>
+							<li class="fragment">
+								jQuery1.5 introduced <a href="http://api.jquery.com/category/deferred-object/">deferreds</a> which allow this:
+								<pre class="bigger"><code class="language-js dontrun" data-overlay-example="assets/06/examples/jquery.ajax2.html">jQuery(document).ready(function($) {
+	$.ajax({
+		url: 'json.php',
+		type: 'get',
+		dataType: 'json'
+	}).success(function(data, textStatus, jqXHR) {
+		var lecturers = [];
+		for (var i = 0, len = data.lecturers.length; i < len; i++) {
+			lecturers.push(data.lecturers[i].name);
+		}
+		$('#output').html('&lt;p&gt;' + data.course + ' is taught by ' + lecturers.join(' &amp; ') + '&lt;/p&gt;');
+	}).error(function(jqXHR, textStatus, errorThrown) {
+		console.log(errorThrown);
+	});
+});</code></pre>
+								<ul>
+									<li class="fragment">Instead of passsing <code>succes</code> and <code>error</code> functions in the call, you hook them onto the request</li>
+								</ul>
 							</li>
 						</ul>
 					</section>
