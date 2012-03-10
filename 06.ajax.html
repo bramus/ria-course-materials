@@ -103,7 +103,7 @@
 						<ul>
 							<li class="fragment">
 								Synchronous example
-								<pre class="bigger"><code class="language-js">xhr = new XMLHttpRequest();
+								<pre class="bigger"><code class="language-js" contenteditable>xhr = new XMLHttpRequest();
 xhr.open('GET', 'assets/06/examples/xml.php', false);
 xhr.send(null);
 alert('I am outputted once the call has finished loading (5s delay)');
@@ -111,7 +111,7 @@ alert(xhr.responseText);</code></pre>
 							</li>
 							<li class="fragment">
 								Asynchronous example
-								<pre class="bigger"><code class="language-js">xhr = new XMLHttpRequest();
+								<pre class="bigger"><code class="language-js" contenteditable>xhr = new XMLHttpRequest();
 xhr.onreadystatechange = function() {
 	if (xhr.readyState == 4) {
 		alert(xhr.responseText);
@@ -216,10 +216,17 @@ xhr = new XMLHttpRequest();
 					</section>
 
 					<section>
-						<h2>Plaintext</h2>
+						<h2>Ajax Return Types</h2>
 						<ul>
+							<li class="fragment">Everything returned by Ajax is textual data</li>
 							<li class="fragment">
-								...
+								Doesn't mean it's plaintext though
+								<ul>
+									<li class="fragment">XML</li>
+									<li class="fragment">HTML</li>
+									<li class="fragment">JavaScript</li>
+									<li class="fragment">JSON</li>
+								</ul>
 							</li>
 						</ul>
 					</section>
@@ -228,7 +235,46 @@ xhr = new XMLHttpRequest();
 						<h2>XML</h2>
 						<ul>
 							<li class="fragment">
-								...
+								Initial usage mostly used XML
+								<ul>
+									<li class="fragment">Server must send <code>Content-Type:text/xml</code> header, XHR will <em>automgically</em> parse the returned data as XML</li>
+								</ul>
+							</li>
+							<li class="fragment">
+								Once data is parsed by XHR, walk through the XML nodes tree to get fetch the values you need
+								<ul>
+									<li class="fragment">Most of the time a cumbersome work though</li>
+								</ul>
+							</li>
+							<li class="fragment">
+								Once XML is parsed, build an HTML string with the data and inject the HTML blog into your document.
+							</li>
+						</ul>
+					</section>
+
+					<section>
+						<h2>XML Example</h2>
+						<ul>
+							<li class="fragment">
+								Example
+								<pre class="bigger"><code class="language-js" contenteditable>xhr = new XMLHttpRequest();
+
+xhr.onreadystatechange = function() {
+	if (xhr.readyState == 4) {
+		var xml = xhr.responseXML,
+		    courseName = xml.getElementsByTagName('course')[0].firstChild.nodeValue,
+		    lecturersXml = xml.getElementsByTagName('lecturer'),
+		    lecturers = [];
+		console.log(xml);
+		for (var i = 0, len = lecturersXml.length; i < len; i++) {
+			lecturers.push(lecturersXml[i].firstChild.nodeValue);
+		}
+		alert('&lt;p&gt;' + courseName + ' is taught by ' + lecturers.join(' &amp; ') + '&lt;/p&gt;');
+	}
+};
+
+xhr.open('GET', 'assets/06/examples/xml-nodelay.php', true);
+xhr.send(null);</code></pre>
 							</li>
 						</ul>
 					</section>
@@ -237,7 +283,21 @@ xhr = new XMLHttpRequest();
 						<h2>HTML</h2>
 						<ul>
 							<li class="fragment">
-								...
+								Why not let the server prepare a blob of HTML instead of building it after having parse the XML?
+							</li>
+							<li class="fragment">
+								Example
+								<pre class="bigger"><code class="language-js" contenteditable>xhr = new XMLHttpRequest();
+
+xhr.onreadystatechange = function() {
+	if (xhr.readyState == 4) {
+		var html = xhr.responseText;
+		alert(html);
+	}
+};
+
+xhr.open('GET', 'assets/06/examples/html.php', true);
+xhr.send(null);</code></pre>
 							</li>
 						</ul>
 					</section>
@@ -246,7 +306,45 @@ xhr = new XMLHttpRequest();
 						<h2>JavaScript</h2>
 						<ul>
 							<li class="fragment">
-								...
+								Load in a tad of JavaScript, and then <code>eval()</code> it.
+								<pre class="bigger"><code class="language-js" contenteditable>xhr = new XMLHttpRequest();
+
+xhr.onreadystatechange = function() {
+	if (xhr.readyState == 4) {
+		var js = xhr.responseText;
+		eval(js);
+	}
+};
+
+xhr.open('GET', 'assets/06/examples/js.php', true);
+xhr.send(null);</code></pre>
+							</li>
+							<li class="fragment">
+								Beware when using <code>eval()</code> though: <a href="http://xkr.us/js/eval"><code>eval()</code> is evil</a>.
+								<ul>
+									<li class="fragment">In this case, it is allowed.</li>
+								</ul>
+							</li>
+						</ul>
+					</section>
+
+					<section>
+						<h2>JavaScript: External Files</h2>
+						<ul>
+							<li class="fragment">
+								No need for Ajax if you need to include an external file
+								<pre class="bigger"><code class="language-js dontrun">var head = document.getElementsByTagName("head")[0],
+    script = document.createElement('script');
+
+script.type = 'text/javascript';
+script.src = "/path/to/your/file.js";
+head.appendChild(script);</code></pre>
+							</li>
+							<li class="fragment">
+								Does give problems though, as you cannot know when the script has finsihed loading
+								<ul>
+									<li class="fragment">In that case you will need XHR, or &mdash; even better &mdash; a specific script loader such as <a href="http://requirejs.org/">RequireJS</a>
+								</ul>
 							</li>
 						</ul>
 					</section>
@@ -255,7 +353,47 @@ xhr = new XMLHttpRequest();
 						<h2>JSON</h2>
 						<ul>
 							<li class="fragment">
-								...
+								JSON = JavaScript Object Notation
+								<ul>
+									<li class="fragment">In Short: JSON a JavaScript Object Literal, represented as a string</li>
+									<li class="fragment">Described by Douglas Crockford in 2006 (<a href="http://tools.ietf.org/html/rfc4627">RFC 4627</a>)</li>
+								</ul>
+							</li>
+							<li class="fragment">
+								Format Example
+								<pre class="bigger"><code class="language-javascript dontrun">{
+	&quot;course&quot;: &quot;RIA&quot;,
+	&quot;lecturers&quot;: [
+		{
+			&quot;id&quot;: 1,
+			&quot;name&quot;: &quot;Davy De Winne&quot;
+		},
+		{
+			&quot;id&quot;: 2,
+			&quot;name&quot;: &quot;Bramus Van Damme&quot;
+		}
+	]
+}</code></pre>
+							</li>
+						</ul>
+					</section>
+
+					<section>
+						<h2>JSON Format</h2>
+						<ul>
+							<li class="fragment">
+								JSON = One big Object with keys and values
+								<div style="text-align: center; margin-top: 10px;">
+									<figure>
+										<img src="assets/06/json_object.gif" alt="" title="" height="113" width="598" style="background: #FFF;" />
+										<figcaption>Figure by <a href="http://json.org/">json.org</a></figcaption>
+									</figure>
+								</div>
+								<ul>
+									<li class="fragment">Multiple key-value pairs: comma-delimited</li>
+									<li class="fragment">Keys are of the type <code>string</code> <em>(double quotes required!)</em></li>
+									<li class="fragment">Values are <code>string</code>, <code>number</code>, <code>Object</code>, <code>Array</code>, <code>boolean</code> or <code>null</code></li>
+								</ul>
 							</li>
 						</ul>
 					</section>
@@ -264,7 +402,23 @@ xhr = new XMLHttpRequest();
 						<h2>JSON Example</h2>
 						<ul>
 							<li class="fragment">
-								...
+								Example
+								<pre class="bigger"><code class="language-js" contenteditable>xhr = new XMLHttpRequest();
+xhr.onreadystatechange = function() {
+	if (xhr.readyState == 4) {
+		var json = JSON.parse(xhr.responseText), lecturers  =[];
+		for (var i = 0, len = json.lecturers.length; i < len; i++) {
+			lecturers.push(json.lecturers[i].name);
+		}
+		alert('&lt;p&gt;' + json.course + ' is taught by ' + lecturers.join(' &amp; ') + '&lt;/p&gt;');
+	}
+};
+xhr.open('GET', 'assets/06/examples/json.php', true);
+xhr.send(null);</code></pre>
+								<ul>
+									<li class="fragment">XHR doesn't parse the string to JSON <em>automagically</em>, you will need to parse it with <code>JSON.parse()</code> (reverse: <code>JSON.stringify()</code>)</li>
+									<li class="fragment">Parsing required <a href="https://github.com/douglascrockford/JSON-js">a library</a>, the browser <em>(couldn't)</em> do it natively.</li>
+								</ul>
 							</li>
 						</ul>
 					</section>
@@ -273,7 +427,31 @@ xhr = new XMLHttpRequest();
 						<h2>Sidenote: JSON in PHP</h2>
 						<ul>
 							<li class="fragment">
-								...
+								Since PHP 5.2, JSON in PHP is really easy
+								<ul>
+									<li class="fragment">Encode an Array to JSON with <a href="http://be.php.net/json_encode"><code>json_encode</code></a></li>
+									<li class="fragment">Decode JSON String into an Object or Associative Array with <a href="http://be.php.net/json_decode"><code>json_decode</code></a></li>
+								</ul>
+							</li>
+							<li class="fragment">
+								Send a JSON header back with this header
+								<ul>
+									<li class="fragment"><code>Content-Type:appliction/json</code></li>
+								</ul>
+							</li>
+						</ul>
+					</section>
+
+					<section>
+						<h2>What to choose?</h2>
+						<ul>
+							<li class="fragment">
+								JSON FTW!
+								<ul>
+									<li class="fragment">Easier to work with (both JS &amp; PHP)</li>
+									<li class="fragment">Smaller than XML</li>
+									<li class="fragment">Very readable</li>
+								</ul>
 							</li>
 						</ul>
 					</section>
@@ -457,6 +635,15 @@ xhr = new XMLHttpRequest();
 
 					<section>
 						<h2>Cross Domain: CORS</h2>
+						<ul>
+							<li class="fragment">
+								...
+							</li>
+						</ul>
+					</section>
+
+					<section>
+						<h2>Authentication</h2>
 						<ul>
 							<li class="fragment">
 								...
