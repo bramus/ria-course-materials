@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<title>jQuery Ajax</title>
+</head>
+<body style="background: #FFF;">
+	
+	<h1>History</h1>
+	
+	<ul>
+		<li><a href="#" id="link_1">link 1</a></li>
+		<li><a href="#" id="link_2">link 2</a></li>
+		<li><a href="#" id="link_3">link 3</a></li>
+		<li><a href="#" id="link_4">link 4</a></li>
+	</ul>
+
+	<script src="js/jquery-1.7.1.min.js"></script>
+	<script>
+		// With History!
+		jQuery(document).ready(function($) {
+			$('ul').on('click', 'a', function(e) {
+				e.preventDefault();
+				$('ul a').css('background', 'inherit');
+				$(this).css('background', '#FF9');
+				history.pushState({'id':this.id}, 'clicked ' + this.id, '');
+			});
+			$(window).on('popstate', function(e) {
+				$('ul a').css('background', 'inherit');
+				if (e.originalEvent.state && e.originalEvent.state.id) {
+					$('#' + e.originalEvent.state.id).css('background', '#FF9');
+				}
+			});
+		});
+	</script>
+</body>
+</html>

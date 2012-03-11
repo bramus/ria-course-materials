@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<title>jQuery Ajax</title>
+</head>
+<body style="background: #FFF;">
+	
+	<h1>User Feedback</h1>
+	
+	<img src="../spinners/8-0.gif" style="display: none; margin: 0 auto 0;" id="spinner">
+	
+	<div id="output"></div>
+
+	<script src="js/jquery-1.7.1.min.js"></script>
+	<script>
+		jQuery(document).ready(function($) {
+			$('#spinner').show();
+			$('#output').load('html-delay.php', function() {
+				$('#spinner').hide();					
+			});
+		});
+	</script>
+</body>
+</html>
