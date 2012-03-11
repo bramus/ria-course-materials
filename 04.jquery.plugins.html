@@ -192,7 +192,7 @@
 								<ul>
 									<li>
 										It is mapped to <code>$</code> for convenience
-										<pre class="bigger"><code class="language-js dontrun">// These two have the same result
+										<pre class="bigger"><code class="language-javascript dontrun">// These two have the same result
 var p1 = $('p'),
     p2 = jQuery('p');</code></pre>
 									</li>
@@ -258,13 +258,13 @@ var p1 = $('p'),
 						<ul>
 							<li class="fragment">
 								Method to get a random color
-								<pre class="bigger"><code class="language-js dontrun">var randomColor = function() {
+								<pre class="bigger"><code class="language-javascript dontrun">var randomColor = function() {
 	return '#' + Math.floor(Math.random() * 16777216).toString(16);
 }</code></pre>
 							</li>
 							<li class="fragment">
 								jQuery version:
-								<pre class="bigger"><code class="language-js dontrun">$.extend({
+								<pre class="bigger"><code class="language-javascript dontrun">$.extend({
 	randomColor : function() {
 		return '#' + Math.floor(Math.random() * 16777216).toString(16);
 	}
@@ -312,7 +312,7 @@ var p1 = $('p'),
 						<ul>
 							<li class="fragment">
 								Use an IIFE to make sure <code>$</code> refers to <code>jQuery</code>
-								<pre class="bigger"><code class="language-js dontrun">(function($) {
+								<pre class="bigger"><code class="language-javascript dontrun">(function($) {
 	$.extend({
 		randomColor : function() {
 			return '#' + Math.floor(Math.random() * 16777216).toString(16);
@@ -346,7 +346,7 @@ var p1 = $('p'),
 							</li>
 							<li class="fragment">
 								Use <code>jQuery.extend()</code> to extend <code>jQuery.expr[':']</code> with a new function
-								<pre class="bigger"><code class="language-js dontrun">jQuery.extend(jQuery.expr[':'], {
+								<pre class="bigger"><code class="language-javascript dontrun">jQuery.extend(jQuery.expr[':'], {
 	example : function(elem, index, meta, stack) {
 		// elem - is a current DOM element
 		// index - the current loop index in stack
@@ -375,7 +375,7 @@ var p1 = $('p'),
 						<ul>
 							<li class="fragment">
 								Select all possible lists
-								<pre class="bigger"><code class="language-js dontrun">(function($) {
+								<pre class="bigger"><code class="language-javascript dontrun">(function($) {
 	$.extend($.expr[':'], {
 		lists : function(elem, index, match, stack) {
 			var els = ['ul','ol','dl'];
@@ -386,7 +386,7 @@ var p1 = $('p'),
 							</li>
 							<li class="fragment">
 								Usage
-								<pre class="bigger"><code class="language-js dontrun" data-overlay-example="assets/04/examples/03.html">$(':lists').css('border', '1px solid red');</code></pre>
+								<pre class="bigger"><code class="language-javascript dontrun" data-overlay-example="assets/04/examples/03.html">$(':lists').css('border', '1px solid red');</code></pre>
 							</li>
 							<li class="fragment">
 								Notes
@@ -420,7 +420,7 @@ var p1 = $('p'),
 						<ul>
 							<li class="fragment">
 								Extend <code>jQuery.prototype</code>/<code>$.fn</code> as you'd extend a regular <code>.prototype</code>
-								<pre class="bigger"><code class="language-js dontrun">(function($) {
+								<pre class="bigger"><code class="language-javascript dontrun">(function($) {
 	$.fn.myPlugin = function() {
 		// ... plugin code here
 	}
@@ -428,7 +428,7 @@ var p1 = $('p'),
 							</li>
 							<li class="fragment">
 								Also possible
-								<pre class="bigger"><code class="language-js dontrun">(function($) {
+								<pre class="bigger"><code class="language-javascript dontrun">(function($) {
 	$.fn.extend({
 		myPlugin : function() {
 			// ... plugin code here
@@ -438,7 +438,7 @@ var p1 = $('p'),
 							</li>
 							<li class="fragment">
 								Usage
-								<pre class="bigger"><code class="language-js dontrun">$('...').myPlugin();</code></pre>
+								<pre class="bigger"><code class="language-javascript dontrun">$('...').myPlugin();</code></pre>
 							</li>
 						</ul>
 					</section>
@@ -448,7 +448,7 @@ var p1 = $('p'),
 						<ul>
 							<li class="fragment">
 								The <code>this</code> inside your plugin is a jQuery instance (in contrast to other situations where it's a DOM element)
-								<pre class="bigger"><code class="language-js dontrun">(function($) {
+								<pre class="bigger"><code class="language-javascript dontrun">(function($) {
 	$.fn.slideUpAndRemove = function() {
 		this.slideUp("slow", function() { // &lt;-- jQuery Instance
 	        $(this).remove(); 
@@ -464,7 +464,7 @@ var p1 = $('p'),
 						<ul>
 							<li class="fragment">
 								To not break chainability one <strong>must</strong> return the instance
-								<pre class="bigger"><code class="language-js dontrun">(function($) {
+								<pre class="bigger"><code class="language-javascript dontrun">(function($) {
 	$.fn.slideUpAndRemove = function() {
 		return this.slideUp("slow", function() {
 	        $(this).remove(); 
@@ -474,7 +474,7 @@ var p1 = $('p'),
 							</li>
 							<li class="fragment">
 								Mostly you'll loop all selected elements and still must return the instance
-								<pre class="bigger"><code class="language-js dontrun">(function($) {
+								<pre class="bigger"><code class="language-javascript dontrun">(function($) {
 	$.fn.myPlugin = function() {
 		return this.each(function() {
 	        // ... plugin code here
@@ -493,7 +493,7 @@ var p1 = $('p'),
 						<ul>
 							<li class="fragment">
 								Inject the link locations after each link
-								<pre class="bigger"><code class="language-js dontrun">(function($) {
+								<pre class="bigger"><code class="language-javascript dontrun">(function($) {
 	$.fn.showLinkLocation = function() {
 		return this.filter('a').each(function() {
 			$(this).append( ' <em>(' + this.href + ')</em>');
@@ -503,7 +503,7 @@ var p1 = $('p'),
 							</li>
 							<li class="fragment">
 								Usage
-								<pre class="bigger"><code class="language-js dontrun" data-overlay-example="assets/04/examples/04.html">$('a').showLinkLocation().css('text-decoration','none');</code></pre>
+								<pre class="bigger"><code class="language-javascript dontrun" data-overlay-example="assets/04/examples/04.html">$('a').showLinkLocation().css('text-decoration','none');</code></pre>
 							</li>
 						</ul>
 					</section>
@@ -513,7 +513,7 @@ var p1 = $('p'),
 						<ul>
 							<li class="fragment">
 								Possible, best to work with an object and with defaults
-								<pre class="bigger"><code class="language-js dontrun">(function($) {
+								<pre class="bigger"><code class="language-javascript dontrun">(function($) {
 
 	$.fn.hilight = function(options) {
 		
@@ -541,7 +541,7 @@ var p1 = $('p'),
 						<ul>
 							<li class="fragment">
 								Best to put <code>defaults</code> outside the plugin definition, so they can be adjusted by the user
-								<pre class="bigger"><code class="language-js dontrun">(function($) {
+								<pre class="bigger"><code class="language-javascript dontrun">(function($) {
 
 	$.fn.hilight = function(options) {
 
@@ -569,7 +569,7 @@ var p1 = $('p'),
 						<ul>
 							<li class="fragment">
 								Plugin code
-								<pre class="bigger"><code class="language-js dontrun">(function($) {
+								<pre class="bigger"><code class="language-javascript dontrun">(function($) {
 	$.fn.hilight = function(options) {
 		var o = $.extend({}, $.fn.hilight.defaults, options);
 		return this.each(function() {
@@ -589,7 +589,7 @@ var p1 = $('p'),
 							</li>
 							<li class="fragment">
 								Usage
-								<pre class="bigger"><code class="language-js dontrun" data-overlay-example="assets/04/examples/05.html">$('em').hilight();
+								<pre class="bigger"><code class="language-javascript dontrun" data-overlay-example="assets/04/examples/05.html">$('em').hilight();
 $('a').hilight({foreground: '#00F'});</code></pre>
 							</li>
 						</ul>
@@ -612,7 +612,7 @@ $('a').hilight({foreground: '#00F'});</code></pre>
 						<ul>
 							<li class="fragment">
 								When allowing one to remove hilight, we could do this
-								<pre class="bigger"><code class="language-js dontrun">(function($) {
+								<pre class="bigger"><code class="language-javascript dontrun">(function($) {
 	$.fn.hilight = function(options) {
 		// ... plugin code here
 	};
@@ -641,7 +641,7 @@ $('a').hilight({foreground: '#00F'});</code></pre>
 						<ul>
 							<li class="fragment">
 								What if we could do this?
-								<pre class="bigger"><code class="language-js dontrun">$('em').hilight();
+								<pre class="bigger"><code class="language-javascript dontrun">$('em').hilight();
 $('em').on('click', function() {
 	$(this).hilight('remove');
 });</code></pre>
@@ -662,7 +662,7 @@ $('em').on('click', function() {
 						<ul>
 							<li class="fragment">
 								jQuery has a design pattern for this
-								<pre class="bigger"><code class="language-js dontrun">(function($) {
+								<pre class="bigger"><code class="language-javascript dontrun">(function($) {
 	var methods = {
 		init : function(options) { 
 			// ... plugin code here
@@ -691,7 +691,7 @@ $('em').on('click', function() {
 
 					<section>
 						<h2>Putting it together (1)</h2>
-						<div class="fragment"><pre class="bigger"><code class="language-js dontrun">(function($) {
+						<div class="fragment"><pre class="bigger"><code class="language-javascript dontrun">(function($) {
 	var methods = {
 		init : function(options) { 
 			var o = $.extend({}, $.fn.hilight.defaults, options);
@@ -722,7 +722,7 @@ $('em').on('click', function() {
 
 					<section>
 						<h2>Putting it together (2)</h2>
-						<div class="fragment"><pre class="bigger"><code class="language-js dontrun">// ...
+						<div class="fragment"><pre class="bigger"><code class="language-javascript dontrun">// ...
 
 	$.fn.hilight = function(method) {
 		if (methods[method]) {
@@ -748,7 +748,7 @@ $('em').on('click', function() {
 						<h2>Putting it together (3)</h2>
 						<div>
 							Usage
-							<pre class="bigger"><code class="language-js dontrun" data-overlay-example="assets/04/examples/06.html">// Add highlights
+							<pre class="bigger"><code class="language-javascript dontrun" data-overlay-example="assets/04/examples/06.html">// Add highlights
 $('em').hilight();
 $('a').hilight({foreground: '#00F'});
 

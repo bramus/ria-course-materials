@@ -83,7 +83,7 @@ window.addEventListener('load', function() {
 	}
 
 	// Add Run Button to JS Blocks + Make Incrementable
-	var jsBlocks = document.querySelectorAll('code.language-js');
+	var jsBlocks = document.querySelectorAll('code.language-javascript');
 	for (var i = 0, len = jsBlocks.length; i < len ; i++) {
 
 		// Local reference
