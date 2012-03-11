@@ -103,7 +103,7 @@
 						<ul>
 							<li class="fragment">
 								Synchronous example
-								<pre class="bigger"><code class="language-js" contenteditable>xhr = new XMLHttpRequest();
+								<pre class="bigger"><code class="language-javascript" contenteditable>xhr = new XMLHttpRequest();
 xhr.open('GET', 'assets/06/examples/xml.php', false);
 xhr.send(null);
 alert('I am outputted once the call has finished loading (5s delay)');
@@ -111,7 +111,7 @@ alert(xhr.responseText);</code></pre>
 							</li>
 							<li class="fragment">
 								Asynchronous example
-								<pre class="bigger"><code class="language-js" contenteditable>xhr = new XMLHttpRequest();
+								<pre class="bigger"><code class="language-javascript" contenteditable>xhr = new XMLHttpRequest();
 xhr.onreadystatechange = function() {
 	if (xhr.readyState == 4) {
 		alert(xhr.responseText);
@@ -185,7 +185,7 @@ alert('I am outputted immediately (no delay)');</code></pre>
 						<ul>
 							<li class="fragment">
 								Define your own <code>XMLHttpRequest</code> Object and return the ActiveX Object
-								<pre class="bigger"><code class="language-js">if (typeof XMLHttpRequest == "undefined")
+								<pre class="bigger"><code class="language-javascript">if (typeof XMLHttpRequest == "undefined")
 	XMLHttpRequest = function() {
 		try { return new ActiveXObject("Msxml2.XMLHTTP.6.0"); }
 			catch (e) {}
@@ -272,7 +272,7 @@ xhr = new XMLHttpRequest();
 						<ul>
 							<li class="fragment">
 								Example
-								<pre class="bigger"><code class="language-js" contenteditable>xhr = new XMLHttpRequest();
+								<pre class="bigger"><code class="language-javascript" contenteditable>xhr = new XMLHttpRequest();
 
 xhr.onreadystatechange = function() {
 	if (xhr.readyState == 4) {
@@ -302,7 +302,7 @@ xhr.send(null);</code></pre>
 							</li>
 							<li class="fragment">
 								Example
-								<pre class="bigger"><code class="language-js" contenteditable>xhr = new XMLHttpRequest();
+								<pre class="bigger"><code class="language-javascript" contenteditable>xhr = new XMLHttpRequest();
 
 xhr.onreadystatechange = function() {
 	if (xhr.readyState == 4) {
@@ -322,7 +322,7 @@ xhr.send(null);</code></pre>
 						<ul>
 							<li class="fragment">
 								Load in a tad of JavaScript, and then <code>eval()</code> it.
-								<pre class="bigger"><code class="language-js" contenteditable>xhr = new XMLHttpRequest();
+								<pre class="bigger"><code class="language-javascript" contenteditable>xhr = new XMLHttpRequest();
 
 xhr.onreadystatechange = function() {
 	if (xhr.readyState == 4) {
@@ -348,7 +348,7 @@ xhr.send(null);</code></pre>
 						<ul>
 							<li class="fragment">
 								No need for Ajax if you need to include an external file
-								<pre class="bigger"><code class="language-js dontrun">var head = document.getElementsByTagName("head")[0],
+								<pre class="bigger"><code class="language-javascript dontrun">var head = document.getElementsByTagName("head")[0],
     script = document.createElement('script');
 
 script.type = 'text/javascript';
@@ -418,7 +418,7 @@ head.appendChild(script);</code></pre>
 						<ul>
 							<li class="fragment">
 								Example
-								<pre class="bigger"><code class="language-js" contenteditable>xhr = new XMLHttpRequest();
+								<pre class="bigger"><code class="language-javascript" contenteditable>xhr = new XMLHttpRequest();
 xhr.onreadystatechange = function() {
 	if (xhr.readyState == 4) {
 		var json = JSON.parse(xhr.responseText), lecturers  =[];
@@ -495,7 +495,7 @@ xhr.send(null);</code></pre>
 							</li>
 							<li class="fragment">
 								Example
-								<pre class="bigger"><code class="language-js dontrun" data-overlay-example="assets/06/examples/jquery.ajax.html">jQuery(document).ready(function($) {
+								<pre class="bigger"><code class="language-javascript dontrun" data-overlay-example="assets/06/examples/jquery.ajax.html">jQuery(document).ready(function($) {
 	$.ajax({
 		url: 'json.php',
 		type: 'get',
@@ -573,7 +573,7 @@ xhr.send(null);</code></pre>
 							</li>
 							<li class="fragment">
 								Manually building a querystring
-								<pre class="bigger"><code class="language-js dontrun">var values = [
+								<pre class="bigger"><code class="language-javascript dontrun">var values = [
 	'firstname=' + encodeURIComponent($('#firstname').val()),
 	'lastname=' + encodeURIComponent($('#lastname').val())
 ];
@@ -582,11 +582,11 @@ var queryString = values.join('&amp;');</code></pre>
 							</li>
 							<li class="fragment">
 								Automatic version: <code>$.fn.serialize()</code>
-								<pre class="bigger"><code class="language-js dontrun">var queryString = $('#signupform').serialize();</code></pre>
+								<pre class="bigger"><code class="language-javascript dontrun">var queryString = $('#signupform').serialize();</code></pre>
 							</li>
 							<li class="fragment">
 								Also possible: an Object
-								<pre class="bigger"><code class="language-js dontrun">{key : &quot;value&quot;}</code></pre>
+								<pre class="bigger"><code class="language-javascript dontrun">{key : &quot;value&quot;}</code></pre>
 							</li>
 						</ul>
 					</section>
@@ -596,7 +596,7 @@ var queryString = values.join('&amp;');</code></pre>
 						<ul>
 							<li class="fragment">
 								jQuery1.5 introduced <a href="http://api.jquery.com/category/deferred-object/">deferreds</a> which allow this:
-								<pre class="bigger"><code class="language-js dontrun" data-overlay-example="assets/06/examples/jquery.ajax2.html">jQuery(document).ready(function($) {
+								<pre class="bigger"><code class="language-javascript dontrun" data-overlay-example="assets/06/examples/jquery.ajax2.html">jQuery(document).ready(function($) {
 	$.ajax({
 		url: 'json.php',
 		type: 'get',
@@ -638,7 +638,7 @@ var queryString = values.join('&amp;');</code></pre>
 						<ul>
 							<li class="fragment">
 								Example
-								<pre class="bigger"><code class="language-js dontrun" data-overlay-example="assets/06/examples/jquery.get.html">jQuery(document).ready(function($) {
+								<pre class="bigger"><code class="language-javascript dontrun" data-overlay-example="assets/06/examples/jquery.get.html">jQuery(document).ready(function($) {
 	$.get('json.php', function(data, textStatus, jqXHR) {
 		var lecturers = [];
 		for (var i = 0, len = data.lecturers.length; i < len; i++) {
@@ -650,7 +650,7 @@ var queryString = values.join('&amp;');</code></pre>
 							</li>
 							<li class="fragment">
 								Possible to pass in extra data
-								<pre class="bigger"><code class="language-js dontrun">jQuery(document).ready(function($) {
+								<pre class="bigger"><code class="language-javascript dontrun">jQuery(document).ready(function($) {
 	$.get('json.php', { key: &quot;value&quot; }, function(data, textStatus, jqXHR) {
 		// ...
 	}, 'json');
@@ -664,7 +664,7 @@ var queryString = values.join('&amp;');</code></pre>
 						<ul>
 							<li class="fragment">
 								Same syntax as <code>$.get()</code>
-								<pre class="bigger"><code class="language-js dontrun">jQuery(document).ready(function($) {
+								<pre class="bigger"><code class="language-javascript dontrun">jQuery(document).ready(function($) {
 	$.post('json.php', { key: &quot;value&quot; }, function(data, textStatus, jqXHR) {
 		// ...
 	}, 'json');
@@ -693,7 +693,7 @@ var queryString = values.join('&amp;');</code></pre>
 						<ul>
 							<li class="fragment">
 								Example
-								<pre class="bigger"><code class="language-js dontrun" data-overlay-example="assets/06/examples/jquery.fn.load.html">jQuery(document).ready(function($) {
+								<pre class="bigger"><code class="language-javascript dontrun" data-overlay-example="assets/06/examples/jquery.fn.load.html">jQuery(document).ready(function($) {
 	$('#output').load('html.php');
 });</code></pre>
 							</li>
@@ -708,7 +708,7 @@ var queryString = values.join('&amp;');</code></pre>
 						<ul>
 							<li class="fragment">
 								Example
-								<pre class="bigger"><code class="language-js dontrun" data-overlay-example="assets/06/examples/jquery.getscript.html">jQuery(document).ready(function($) {
+								<pre class="bigger"><code class="language-javascript dontrun" data-overlay-example="assets/06/examples/jquery.getscript.html">jQuery(document).ready(function($) {
 	$.getScript('js.php');
 });</code></pre>
 							</li>
@@ -723,7 +723,7 @@ var queryString = values.join('&amp;');</code></pre>
 						<ul>
 							<li class="fragment">
 								Example
-								<pre class="bigger"><code class="language-js dontrun" data-overlay-example="assets/06/examples/jquery.getjson.html">jQuery(document).ready(function($) {
+								<pre class="bigger"><code class="language-javascript dontrun" data-overlay-example="assets/06/examples/jquery.getjson.html">jQuery(document).ready(function($) {
 	$.getJSON('json.php', function(data, textStatus, jqXHR) {
 		var lecturers = [];
 		for (var i = 0, len = data.lecturers.length; i < len; i++) {
@@ -755,7 +755,7 @@ var queryString = values.join('&amp;');</code></pre>
 									</li>
 									<li class="fragment">
 										jQuery's deferreds allow us to do this
-										<pre class="bigger"><code class="language-js dontrun">function doAjax() { return $.get('foo.htm'); }
+										<pre class="bigger"><code class="language-javascript dontrun">function doAjax() { return $.get('foo.htm'); }
 function doMoreAjax() { return $.get('bar.htm'); }
 
 $.when(doAjax(), doMoreAjax())
@@ -912,7 +912,7 @@ $.when(doAjax(), doMoreAjax())
 						<ul>
 							<li class="fragment">
 								<code>history.pushState()</code>
-								<pre class="bigger"><code class="language-js dontrun">var stateObj = { foo: "bar" };
+								<pre class="bigger"><code class="language-javascript dontrun">var stateObj = { foo: "bar" };
 history.pushState(stateObj, "page 2", "bar.html");</code></pre>
 								<ul>
 									<li class="fragment"><code>stateObj</code> &mdash; An object you want to associate with the history entry. Will be returned when <code>popstate</code> is triggered</li>
@@ -922,7 +922,7 @@ history.pushState(stateObj, "page 2", "bar.html");</code></pre>
 							</li>
 							<li class="fragment">
 								<code>popstate</code> event
-								<pre class="bigger"><code class="language-js dontrun">window.addEventListener('popstate', function(stateObj) {
+								<pre class="bigger"><code class="language-javascript dontrun">window.addEventListener('popstate', function(stateObj) {
 	console.log(stateObj); // { foo: "bar" }
 });</code></pre>
 							</li>
@@ -961,7 +961,7 @@ history.pushState(stateObj, "page 2", "bar.html");</code></pre>
 						<ul>
 							<li class="fragment">
 								With <code>history.pushState()</code>
-								<pre class="bigger"><code class="language-js dontrun">jQuery(document).ready(function($) {
+								<pre class="bigger"><code class="language-javascript dontrun">jQuery(document).ready(function($) {
 	$('ul').on('click', 'a', function(e) {
 		e.preventDefault();
 		$('ul a').css('background', 'inherit');
@@ -985,7 +985,7 @@ history.pushState(stateObj, "page 2", "bar.html");</code></pre>
 						<ul>
 							<li class="fragment">
 								With <code>history.pushState()</code> and <code>location.hash</code>
-								<pre class="bigger"><code class="language-js dontrun">jQuery(document).ready(function($) {
+								<pre class="bigger"><code class="language-javascript dontrun">jQuery(document).ready(function($) {
 	$('ul').on('click', 'a', function(e) {
 		e.preventDefault();
 		$('ul a').css('background', 'inherit');
@@ -1108,7 +1108,7 @@ history.pushState(stateObj, "page 2", "bar.html");</code></pre>
 											<li class="fragment">jQuery will <em>automagically</em> add callback parameter to the request url</li>
 										</ul>
 										
-										<div class="fragment"><pre class="bigger"><code class="language-js dontrun" data-overlay-example="assets/06/examples/jquery.jsonp.html">$.ajax({
+										<div class="fragment"><pre class="bigger"><code class="language-javascript dontrun" data-overlay-example="assets/06/examples/jquery.jsonp.html">$.ajax({
 	url: 'jsonp.php',
 	type: 'get',
 	dataType: 'jsonp',
@@ -1194,7 +1194,7 @@ history.pushState(stateObj, "page 2", "bar.html");</code></pre>
 									</li>
 									<li class="fragment">
 										Some apps require it sent in via a custom header
-										<pre class="bigger"><code class="language-js dontrun">$.ajax({
+										<pre class="bigger"><code class="language-javascript dontrun">$.ajax({
 	url: 'json.php',
 	dataType: 'json',
 	header : { 'X-Api-Key' : 'yourapikey' },

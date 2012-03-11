@@ -249,7 +249,7 @@
 						<ul>
 							<li class="fragment">
 								Basic Selectors
-								<pre class="bigger"><code class="language-js dontrun">// Selecting elements by ID
+								<pre class="bigger"><code class="language-javascript dontrun">// Selecting elements by ID
 $('#myId');
 
 // Selecting elements by class name
@@ -272,7 +272,7 @@ $('ul li:nth-child(2)');</code></pre>
 						<ul>
 							<li class="fragment">
 								jQuery has augmented the selector possibilities by adding their own extras such as
-								<pre class="bigger"><code class="language-js dontrun">// Select all elements that are in the progress of an animation at the time the selector is run
+								<pre class="bigger"><code class="language-javascript dontrun">// Select all elements that are in the progress of an animation at the time the selector is run
 $(':animated');
 
 // Selects all button elements and elements of type button.
@@ -309,7 +309,7 @@ $('td:parent');</code></pre>
 						<ul>
 							<li class="fragment">
 								Sometimes, you'll want to iterate over a selection
-								<pre class="bigger"><code class="language-js dontrun">$('li').each(function() {
+								<pre class="bigger"><code class="language-javascript dontrun">$('li').each(function() {
 	console.log($(this));			
 });</code></pre>
 							</li>
@@ -417,7 +417,7 @@ $('td:parent');</code></pre>
 						<ul>
 							<li class="fragment">
 								To read a value, omit the 2nd parameter
-								<pre class="bigger"><code class="language-js dontrun" data-overlay-example="assets/03/examples/02c.html">$(document).ready(function() {
+								<pre class="bigger"><code class="language-javascript dontrun" data-overlay-example="assets/03/examples/02c.html">$(document).ready(function() {
 
 	// Adjust properties one by one
 	$('li').css('border', '1px solid red');
@@ -490,7 +490,7 @@ $('td:parent');</code></pre>
 						<ul>
 							<li class="fragment">
 								Other Functions: <a href="http://api.jquery.com/toggleClass/">$.fn.toggleClass()</a> and <a href="http://api.jquery.com/hasClass/">$.fn.hasClass()</a>
-								<pre class="bigger"><code class="language-js dontrun" data-overlay-example="assets/03/examples/03b.html">$(document).ready(function() {
+								<pre class="bigger"><code class="language-javascript dontrun" data-overlay-example="assets/03/examples/03b.html">$(document).ready(function() {
 	$('li:last').toggleClass('highlight');
 	if ($('li:last').hasClass('selected')) {
 		alert('last li has the class &quot;selected&quot;');
@@ -563,7 +563,7 @@ $('td:parent');</code></pre>
 						<ul>
 							<li class="fragment">
 								Sidenote: Creating elements
-								<pre class="bigger"><code class="language-js dontrun">// Creating new elements from an HTML string
+								<pre class="bigger"><code class="language-javascript dontrun">// Creating new elements from an HTML string
 var p = $('&lt;p&gt;This is a new paragraph&lt;/p&gt;');
 var li = $('&lt;li class=&quot;new&quot;&gt;new list item&lt;/li&gt;');
 
@@ -594,7 +594,7 @@ var a = $('&lt;a/&gt;', {
 		$('p').after('&lt;p&gt;Injected After&lt;/p&gt;');
 	});
 &lt;/script&gt;</code></pre>
-								<pre class="bigger"><code class="language-js dontrun" data-overlay-example="assets/03/examples/05b.html">$(document).ready(function() {
+								<pre class="bigger"><code class="language-javascript dontrun" data-overlay-example="assets/03/examples/05b.html">$(document).ready(function() {
 	$('p').before('&lt;p&gt;Injected Before&lt;/p&gt;');
 });</code></pre>
 							</li>
@@ -618,7 +618,7 @@ var a = $('&lt;a/&gt;', {
 		$('&lt;p&gt;Injected After&lt;/p&gt;').insertAfter('p');
 	});
 &lt;/script&gt;</code></pre>
-								<pre class="bigger"><code class="language-js dontrun" data-overlay-example="assets/03/examples/05d.html">$(document).ready(function() {
+								<pre class="bigger"><code class="language-javascript dontrun" data-overlay-example="assets/03/examples/05d.html">$(document).ready(function() {
 	$('&lt;p&gt;Injected Before&lt;/p&gt;').insertBefore('p');
 });</code></pre>
 								<ul>
@@ -1035,7 +1035,7 @@ var a = $('&lt;a/&gt;', {
 						<ul>
 							<li class="fragment">
 								jQuery offers shorthand methods to binding events
-								<pre class="bigger"><code class="language-js dontrun" data-overlay-example="assets/03/examples/14b.html">$(document).ready(function() {
+								<pre class="bigger"><code class="language-javascript dontrun" data-overlay-example="assets/03/examples/14b.html">$(document).ready(function() {
 	$('li').css('cursor','pointer').hover(
 		function(e) {
 			$(this).css('color', 'blue');
@@ -1057,7 +1057,7 @@ var a = $('&lt;a/&gt;', {
 						<ul>
 							<li class="fragment">
 								In older jQuery versions <a href="http://api.jquery.com/bind/">$.fn.bind()</a> and <a href="http://api.jquery.com/unbind/">$.fn.unbind()</a> were used
-								<pre class="bigger"><code class="language-js dontrun" data-overlay-example="assets/03/examples/14c.html">$(document).ready(function() {
+								<pre class="bigger"><code class="language-javascript dontrun" data-overlay-example="assets/03/examples/14c.html">$(document).ready(function() {
 	$('li').css('cursor','pointer').bind('mouseover', function(e) {
 		$(this).css('color', 'blue');
 	}).bind('mouseout', function(e) {
@@ -1094,7 +1094,7 @@ var a = $('&lt;a/&gt;', {
 						<ul>
 							<li class="fragment">
 								When binding event handlers with <a href="http://api.jquery.com/on/">$.fn.on()</a> or <a href="http://api.jquery.com/bind/">$.fn.bind()</a> they'll only be hooked to the currently existing elements
-								<pre class="bigger"><code class="language-js dontrun" data-overlay-example="assets/03/examples/15.html">$(document).ready(function() {
+								<pre class="bigger"><code class="language-javascript dontrun" data-overlay-example="assets/03/examples/15.html">$(document).ready(function() {
 
 	// Bind Events
 	$('li').css('cursor','pointer').on('mouseover', function(e) {
@@ -1119,7 +1119,7 @@ var a = $('&lt;a/&gt;', {
 						<ul>
 							<li class="fragment">
 								Example
-								<pre class="bigger"><code class="language-js dontrun" data-overlay-example="assets/03/examples/15b.html">$(document).ready(function() {
+								<pre class="bigger"><code class="language-javascript dontrun" data-overlay-example="assets/03/examples/15b.html">$(document).ready(function() {
 
 	// Bind Events, using delegate
 	$('ul').delegate('li', 'mouseover', function(e) {
@@ -1143,7 +1143,7 @@ var a = $('&lt;a/&gt;', {
 						<ul>
 							<li class="fragment">
 								Possible to use <a href="http://api.jquery.com/on/">$.fn.on()</a> with extra selector string to filter the descendants of the selected elements that trigger the event
-								<pre class="bigger"><code class="language-js dontrun" data-overlay-example="assets/03/examples/15b2.html">$(document).ready(function() {
+								<pre class="bigger"><code class="language-javascript dontrun" data-overlay-example="assets/03/examples/15b2.html">$(document).ready(function() {
 
 	// Bind Events, using delegate
 	$('ul').on('mouseover', 'li', function(e) {
@@ -1170,7 +1170,7 @@ var a = $('&lt;a/&gt;', {
 						<ul>
 							<li class="fragment">
 								Older versions of jQuery used <a href="http://api.jquery.com/live/">$.fn.live()</a> instead of <a href="http://api.jquery.com/delegate/">$.fn.delegate()</a>
-								<pre class="bigger"><code class="language-js dontrun" data-overlay-example="assets/03/examples/15c.html">$(document).ready(function() {
+								<pre class="bigger"><code class="language-javascript dontrun" data-overlay-example="assets/03/examples/15c.html">$(document).ready(function() {
 
 	// Bind events, using live (not recommended!)
 	$('ul li').live('mouseover', function(e) {
@@ -1199,7 +1199,7 @@ var a = $('&lt;a/&gt;', {
 						<ul>
 							<li class="fragment">
 								Use case: Don't bind <em>x</em> event listeners on <em>x</em> cells in a table, but bind 1 event listener on the table and catch the clicks on the cells
-								<pre class="bigger"><code class="language-js dontrun" data-overlay-example="assets/03/examples/15d.html">$(document).ready(function() {
+								<pre class="bigger"><code class="language-javascript dontrun" data-overlay-example="assets/03/examples/15d.html">$(document).ready(function() {
 	// One delegate to rule them all
 	$('table').delegate('td', 'click', function(e) {
 		$(this).css('background', 'gray');
@@ -1312,11 +1312,11 @@ var a = $('&lt;a/&gt;', {
 								<ul>
 									<li>
 										<a href="http://api.jquery.com/jQuery.trim/">$.trim</a>: Remove whitespace from a String
-										<pre class="bigger"><code class="language-js dontrun">$.trim('    lots of extra whitespace    ');</code></pre>
+										<pre class="bigger"><code class="language-javascript dontrun">$.trim('    lots of extra whitespace    ');</code></pre>
 									</li>
 									<li>
 										<a href="http://api.jquery.com/jQuery.each/">$.each</a>: Iterate over Arrays and Objects
-										<pre class="bigger"><code class="language-js dontrun">$.each([ 'foo', 'bar', 'baz' ], function(idx, val) {
+										<pre class="bigger"><code class="language-javascript dontrun">$.each([ 'foo', 'bar', 'baz' ], function(idx, val) {
 	console.log('element ' + idx + 'is ' + val);
 });
 $.each({ foo : 'bar', baz : 'bim' }, function(k, v) {
@@ -1325,11 +1325,11 @@ $.each({ foo : 'bar', baz : 'bim' }, function(k, v) {
 									</li>
 									<li>
 										<a href="http://api.jquery.com/jQuery.inArray/">$.inArray</a>: Get index for element inside an Array
-										<pre class="bigger"><code class="language-js dontrun">$.inArray(4, [ 1, 2, 3, 4, 5 ]); // 3</code></pre>
+										<pre class="bigger"><code class="language-javascript dontrun">$.inArray(4, [ 1, 2, 3, 4, 5 ]); // 3</code></pre>
 									</li>
 									<li>
 										<a href="http://api.jquery.com/jQuery.extend/">$.extend</a>: Merge the contents of two or more objects together into the first object
-										<pre class="bigger"><code class="language-js dontrun">$.extend({}, object1, object2);</code></pre>
+										<pre class="bigger"><code class="language-javascript dontrun">$.extend({}, object1, object2);</code></pre>
 									</li>
 								</ul>
 							</li>
