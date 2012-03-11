@@ -466,6 +466,7 @@ xhr.send(null);</code></pre>
 									<li class="fragment">Easier to work with (both JS &amp; PHP)</li>
 									<li class="fragment">Smaller than XML</li>
 									<li class="fragment">Very readable</li>
+									<li class="fragment">All modern webapp API's output JSON</li>
 								</ul>
 							</li>
 						</ul>
@@ -737,6 +738,37 @@ var queryString = values.join('&amp;');</code></pre>
 							</li>
 						</ul>
 					</section>
+					
+					<section>
+						<h2>Sidenote: Multiple Calls</h2>
+						<ul>
+							<li class="fragment">
+								In some cases, you'll need to do 2 requests before you have all needed data
+								<ul>
+									<li class="fragment">
+										Normal flow: chain calls
+										<ul>
+											<li class="fragment">Invoke call #1</li>
+											<li class="fragment"><code>success</code> function of call #1 will invoke call #2</li>
+											<li class="fragment"><code>success</code> function of call #2 will populate the page</li>
+										</ul>
+									</li>
+									<li class="fragment">
+										jQuery's deferreds allow us to do this
+										<pre class="bigger"><code class="language-js dontrun">function doAjax() { return $.get('foo.htm'); }
+function doMoreAjax() { return $.get('bar.htm'); }
+
+$.when(doAjax(), doMoreAjax())
+.then(function(){
+	console.log('I am fired once BOTH ajax requests have completed!');
+}).fail(function(){
+	console.log('I am fired if one or more requests failed');
+});</code></pre>
+									</li>
+								</ul>
+							</li>
+						</ul>
+					</section>
 
 					<section>
 						<h2>What to use?</h2>
@@ -763,7 +795,18 @@ var queryString = values.join('&amp;');</code></pre>
 						<h2>Ajax Challenges</h2>
 						<ul>
 							<li class="fragment">
-								...
+								When using Ajax, some usability challenges are faced
+								<ul>
+									<li class="fragment">How does the visitor know the site isn't broken bu data is loading?</li>
+									<li class="fragment">The back and previous button (and thus bookmarking of specific content) is broken.
+								</ul>
+							</li>
+							<li class="fragment">
+								As a developer, you're also facing some technical challenges
+								<ul>
+									<li class="fragment">Cross-Domain Communication</li>
+									<li class="fragment">Working with authentication</li>
+								</ul>
 							</li>
 						</ul>
 					</section>
@@ -772,25 +815,195 @@ var queryString = values.join('&amp;');</code></pre>
 						<h2>User Feedback</h2>
 						<ul>
 							<li class="fragment">
-								...
+								Always give the user feedback that something is loading.
+								<ul>
+									<li class="fragment">
+										Textual feedback &mdash; viz. &ldquo;loading&rdquo;
+									</li>
+									<li class="fragment">
+										Spinners (gifs)
+										<div style="text-align: center;">
+											<img src="assets/06/spinners/1-0.gif" />
+											<img src="assets/06/spinners/2-0.gif" />
+											<img src="assets/06/spinners/6-0.gif" />
+											<img src="assets/06/spinners/28-0.gif" /><br />
+											<img src="assets/06/spinners/19-0.gif" />
+										</div>
+									</li>
+								</ul>
+							</li>
+							<li class="fragment">
+								Generate spinners at <a href="http://ajaxload.info/">ajaxload.info</a>
+								<ul>
+									<li class="fragmetn">Also possible with CSS3 nowadays <em>#lmgtfy</em>
+								</ul>
 							</li>
 						</ul>
 					</section>
 
 					<section>
-						<h2>History</h2>
+						<h2>User Feedback: Example</h2>
 						<ul>
 							<li class="fragment">
-								...
+								Show spinner when request is being made, hide spinner when it's done.
+								<pre class="bigger"><code class="language-html dontrun" data-overlay-example="assets/06/examples/challenges.feedback.html">&lt;img src=&quot;spinner.gif&quot; style=&quot;display: none;&quot; id=&quot;spinner&quot;&gt;
+
+&lt;div id=&quot;output&quot;&gt;&lt;/div&gt;
+
+&lt;script src=&quot;js/jquery-1.7.1.min.js&quot;&gt;&lt;/script&gt;
+&lt;script&gt;
+	jQuery(document).ready(function($) {
+		$('#spinner').show();
+		$('#output').load('html-delay.php', function() {
+			$('#spinner').hide();					
+		});
+	});
+&lt;/script&gt;</code></pre>
+							</li>
+							<li class="fragment">
+								Additionally, when loading data after pressing a button
+								<ol>
+									<li class="fragment">Disable the button to prevent the user from clicking it twice</li>
+									<li class="fragment">Show spinner</li>
+								</ol>
+							</li>
+						</ul>
+					</section>
+
+					<section>
+						<h2>History: Hashes</h2>
+						<ul>
+							<li class="fragment">
+								When building a single page interface (think GMail, or even this presentation), you must enable a way to directly link to a certain part/state of the page.
+								<ul>
+									<li class="fragment">Change the <code>hash</code> of the <code>window.location</code></li>
+									<li class="fragment">Listen for the <code>hashchange</code> event to detect wheter a user has clicked the back/forward button and re-apply the state</li>
+									<li class="fragment">When loading the page, check for a <code>hash</code> and re-apply the state</li>
+								</ul>
+							</li>
+							<li class="fragment">
+								Some specific jQuery plugins exist to deal with <code>hashchange</code> which doesn't work in oldIE
 							</li>
 						</ul>
 					</section>
 					
 					<section>
-						<h2>History (better)</h2>
+						<h2>History: pushState</h2>
 						<ul>
 							<li class="fragment">
-								...
+								HTML5 introduced <code>history.pushState()</code> and <code>history.replaceState()</code> which allow you to manipulate the browser <code>history</code> object
+								<ul>
+									<li class="fragment">
+										<code>history.pushState()</code> = add new entry onto history object
+									</li>
+									<li class="fragment">
+										<code>history.replaceState()</code> = replace the current entry in history object
+									</li>
+								</ul>
+							</li>
+							<li class="fragment">
+								Whenever user presses back/forward, browser will trigger a <code>popstate</code> event
+							</li>
+						</ul>
+					</section>
+
+					<section>
+						<h2>History: pushState Syntax</h2>
+						<ul>
+							<li class="fragment">
+								<code>history.pushState()</code>
+								<pre class="bigger"><code class="language-js dontrun">var stateObj = { foo: "bar" };
+history.pushState(stateObj, "page 2", "bar.html");</code></pre>
+								<ul>
+									<li class="fragment"><code>stateObj</code> &mdash; An object you want to associate with the history entry. Will be returned when <code>popstate</code> is triggered</li>
+									<li class="fragment"><code>stateObj</code> &mdash; Title you wish to link to the history entry <em>(ingored)</em></li>
+									<li class="fragment"><code>url</code> &mdash; URL to show in the address bar <em>(optional)</em></li>
+								</ul>
+							</li>
+							<li class="fragment">
+								<code>popstate</code> event
+								<pre class="bigger"><code class="language-js dontrun">window.addEventListener('popstate', function(stateObj) {
+	console.log(stateObj); // { foo: "bar" }
+});</code></pre>
+							</li>
+						</ul>
+					</section>
+
+					<section>
+						<h2>History: pushState Demo (1)</h2>
+						<ul>
+							<li class="fragment">
+								Without <code>history.pushState()</code>
+								<pre class="bigger"><code class="language-html dontrun">&lt;ul&gt;
+	&lt;li&gt;&lt;a href=&quot;#&quot; id=&quot;link_1&quot;&gt;link 1&lt;/a&gt;&lt;/li&gt;
+	&lt;li&gt;&lt;a href=&quot;#&quot; id=&quot;link_2&quot;&gt;link 2&lt;/a&gt;&lt;/li&gt;
+	&lt;li&gt;&lt;a href=&quot;#&quot; id=&quot;link_3&quot;&gt;link 3&lt;/a&gt;&lt;/li&gt;
+	&lt;li&gt;&lt;a href=&quot;#&quot; id=&quot;link_4&quot;&gt;link 4&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;script src=&quot;js/jquery-1.7.1.min.js&quot;&gt;&lt;/script&gt;
+&lt;script&gt;
+	jQuery(document).ready(function($) {
+		$('ul').on('click', 'a', function(e) {
+			e.preventDefault();
+			$('ul a').css('background', 'inherit');
+			$(this).css('background', '#FF9');
+		});
+	});
+&lt;/script&gt;</code></pre>
+								<small><a href="assets/06/examples/challenges.history.html">Show demo &rarr;</a></small>
+							</li>
+						</ul>
+					</section>
+
+					<section>
+						<h2>History: pushState Demo (2)</h2>
+						<ul>
+							<li class="fragment">
+								With <code>history.pushState()</code>
+								<pre class="bigger"><code class="language-js dontrun">jQuery(document).ready(function($) {
+	$('ul').on('click', 'a', function(e) {
+		e.preventDefault();
+		$('ul a').css('background', 'inherit');
+		$(this).css('background', '#FF9');
+		history.pushState({'id':this.id}, 'clicked ' + this.id, '');
+	});
+	$(window).on('popstate', function(e) {
+		$('ul a').css('background', 'inherit');
+		if (e.originalEvent.state && e.originalEvent.state.id) {
+			$('#' + e.originalEvent.state.id).css('background', '#FF9');
+		}
+	});
+});</code></pre>
+								<small><a href="assets/06/examples/challenges.history2.html">Show demo &rarr;</a></small>
+							</li>
+						</ul>
+					</section>
+
+					<section>
+						<h2>History: pushState Demo (3)</h2>
+						<ul>
+							<li class="fragment">
+								With <code>history.pushState()</code> and <code>location.hash</code>
+								<pre class="bigger"><code class="language-js dontrun">jQuery(document).ready(function($) {
+	$('ul').on('click', 'a', function(e) {
+		e.preventDefault();
+		$('ul a').css('background', 'inherit');
+		$(this).css('background', '#FF9');
+		history.pushState({'id':this.id}, 'clicked ' + this.id, '#' + this.id);
+	});
+	$(window).on('popstate', function(e) {
+		$('ul a').css('background', 'inherit');
+		if (e.originalEvent.state && e.originalEvent.state.id) {
+			$('#' + e.originalEvent.state.id).css('background', '#FF9');
+		} else {
+			if (window.location.hash) {
+				$(window.location.hash).css('background', '#FF9');
+			}
+		}
+	});
+});</code></pre>
+								<small><a href="assets/06/examples/challenges.history3.html">Show demo &rarr;</a></small>
 							</li>
 						</ul>
 					</section>
@@ -799,25 +1012,118 @@ var queryString = values.join('&amp;');</code></pre>
 						<h2>Cross Domain</h2>
 						<ul>
 							<li class="fragment">
-								...
+								Cross-Domain XHR Requests are not allowed
+								<div style="text-align: center; margin-top: 10px;">
+									<figure>
+										<img src="assets/06/crossdomain_intro_1.gif" alt="" title="" height="189" width="336" style="background: #FFF;" />
+										<figcaption>Figure by <a href="http://developer.yahoo.com/javascript/howto-proxy.html">Yahoo!</a></figcaption>
+									</figure>
+									<figure>
+										<img src="assets/06/crossdomain_intro_2.gif" alt="" title="" height="189" width="231" style="background: #FFF;" />
+										<figcaption>Figure by <a href="http://developer.yahoo.com/javascript/howto-proxy.html">Yahoo!</a></figcaption>
+									</figure>
+								</div>
+							</li>
+							<li class="fragment">
+								Three possible solutions to bypasssing this problem
+								<ul>
+									<li class="fragment">Proxy Script</li>
+									<li class="fragment">JSONP</li>
+									<li class="fragment">CORS (XHR2)</li>
+								</ul>
 							</li>
 						</ul>
 					</section>
 
 					<section>
-						<h2>Cross Domain: Proxy Script</h2>
+						<h2>Cross Domain: Proxy Script (1)</h2>
 						<ul>
 							<li class="fragment">
-								...
+								Put a little (PHP) Script on your own webserver which fetches the data from the remote server
+								<div style="text-align: center; margin-top: 10px;">
+									<figure>
+										<img src="assets/06/crossdomain_proxy.gif" alt="" title="" height="201" width="525" style="background: #FFF;" />
+										<figcaption>Figure by <a href="http://developer.yahoo.com/javascript/howto-proxy.html">Yahoo!</a></figcaption>
+									</figure>
+								</div>
 							</li>
 						</ul>
 					</section>
 
 					<section>
-						<h2>Cross Domain: JSONP</h2>
+						<h2>Cross Domain: Proxy Script (2)</h2>
 						<ul>
 							<li class="fragment">
-								...
+								Dataflow
+								<ul>
+									<li class="fragment">Client calls <code style="font-size: 60%;">http://site.com/proxy.php?route=ajax%2fuser%2flogin%3fparam_a%3d1%26param_b%3d2</code></li>
+									<li class="fragment"><code style="font-size: 60%;">proxy.php</code> fetches data from <code style="font-size: 60%;">http://othersite.com/ajax/user/login?param_a=1&amp;param_b=2</code></li>
+									<li class="fragment"><code style="font-size: 60%;">proxy.php</code> outputs fetched data</li>
+								</ul>
+							</li>
+							<li class="fragment">
+								<code>proxy.php</code> Implementation
+								<ul>
+									<li class="fragment">From scratch with <a href="http://be.php.net/curl">curl</a></li>
+									<li class="fragment">With the help of PHP HTTP classes such as <a href="http://www.gen-x-design.com/archives/making-restful-requests-in-php/">RESTRequest</a> and <a href="http://code.google.com/p/xunuo/source/browse/trunk/UNDEAD/xunuo.com/class.xhttp.php?spec=svn766&amp;r=766">xhttp</a></li>
+									<li class="fragment">Prefab with projects like <a href="https://github.com/hugeinc/ajax-proxy/">ajax-proxy</a></li>
+								</ul>
+							</li>
+						</ul>
+					</section>
+
+					<section>
+						<h2>Cross Domain: JSONP (1)</h2>
+						<ul>
+							<li class="fragment">
+								Short for <em>JSON with Padding</em>
+							</li>
+							<li class="fragment">
+								Exploits the fact that we <em>can</em> make requests to JavaScript code on other servers
+								<ul>
+									<li class="fragment">
+										Return JSON wrapped inside a <em>callback function</em> instead of just JSON
+										<pre class="bigger"><code class="language-javascript dontrun">{&quot;firstname&quot; : &quot;forrest&quot;, &quot;lastname&quot; : &quot;gump&quot;}</code></pre>
+										<pre class="bigger"><code class="language-javascript dontrun">callbackFunction({&quot;firstname&quot; : &quot;forrest&quot;, &quot;lastname&quot; : &quot;gump&quot;})</code></pre>
+									</li>
+									<li class="fragment">The returned data will be <code>eval()</code>'d, thus the callback function &mdash; which will parse the JSONString to JSON &mdash; will be executed</li>
+								</ul>
+							</li>
+							<li class="fragment">
+								The name of the callback function is passed as an URL parameter, by convention <code>callback</code> or <code>jsonp</code>
+								<pre class="bigger"><code class="donthighlight">http://othersite.com/ajax/user/login?param_a=1&amp;callback=callbackFunction</code></pre>
+							</li>
+						</ul>
+					</section>
+					
+					<section>
+						<h2>Cross Domain: JSONP (2)</h2>
+						<ul>
+							<li class="fragment">
+								In jQuery, working with JSONP is very easy
+								<ul>
+									<li class="fragment">Specify the <code>dataType</code> to being <code>jsonp</code>
+										<ul>
+											<li class="fragment">jQuery will <em>automagically</em> define callback function</li>
+											<li class="fragment">jQuery will <em>automagically</em> add callback parameter to the request url</li>
+										</ul>
+										
+										<div class="fragment"><pre class="bigger"><code class="language-js dontrun" data-overlay-example="assets/06/examples/jquery.jsonp.html">$.ajax({
+	url: 'jsonp.php',
+	type: 'get',
+	dataType: 'jsonp',
+	success: function(data, textStatus, jqXHR) {
+		// ...
+	}
+});</code></pre></div>
+								</ul>
+							</li>
+							<li class="fragment">
+								JSONP downsides:
+								<ul>
+									<li class="fragment">Only works with <code>GET</code></li>
+									<li class="fragment">Can be harmful because external code is <code>eval()</code>'d</li>
+								</ul>
 							</li>
 						</ul>
 					</section>
@@ -826,25 +1132,81 @@ var queryString = values.join('&amp;');</code></pre>
 						<h2>Cross Domain: CORS</h2>
 						<ul>
 							<li class="fragment">
-								...
+								Short for <em>Cross-Origin Resource Sharing</em>
+							</li>
+							<li class="fragment">
+								New feature in <code>XMLHttpRequest2</code>
+							</li>
+							<li class="fragment">
+								Server can specify which domains may call it via a header
+								<ul>
+									<li>
+										In PHP:
+										<pre class="bigger"><code class="language-php dontrun">header('Access-Control-Allow-Origin: othersite.com');</code></pre>
+									</li>
+									<li>Set to <code>*</code> to allow calls from any domain</li>
+								</ul>
+							</li>
+							<li class="fragment">
+								Once CORS is enabled, you can use the remote resource as you'd use a local resource.
+								<ul>
+									<li>Not limited to <code>GET</code>
+								</ul>
+							</li>
+							<li class="fragment">
+								oldIE Note
+								<ul>
+									<li>To mimic CORS in IE8&amp;9, you can use <a href="http://www.nczonline.net/blog/2010/05/25/cross-domain-ajax-with-cross-origin-resource-sharing/">a little helper function</a></li>
+								</ul>
 							</li>
 						</ul>
 					</section>
 
 					<section>
-						<h2>Authentication</h2>
+						<h2>Sidenote: XHR2</h2>
 						<ul>
 							<li class="fragment">
-								...
+								Is in the making
+								<ul>
+									<li class="fragment">Specify response format natively</li>
+									<li class="fragment">Send binary data (file uploads!)</li>
+									<li class="fragment">Cross Origin Resource Sharing</li>
+								</ul>
+							</li>
+							<li class="fragment">
+								More info on <a href="http://www.html5rocks.com/en/tutorials/cors/">html5rocks.com</a>
+							</li>
+							<li class="fragment">
+								Can we use it already? <a href="http://caniuse.com/xhr2">Kinda</a>
 							</li>
 						</ul>
 					</section>
 
 					<section>
-						<h2>Multiple Calls</h2>
+						<h2>Sidenote: Authentication</h2>
 						<ul>
 							<li class="fragment">
-								...
+								When working with public API's, you'll sometimes need to authenticate your app with an API key
+								<ul>
+									<li class="fragment">
+										Some apps accept it as an URL parameter
+										<pre class="bigger"><code class="donthighlight">http://othersite.com/ajax/user/login?param_a=1&amp;apikey=yourapikey</code></pre>
+									</li>
+									<li class="fragment">
+										Some apps require it sent in via a custom header
+										<pre class="bigger"><code class="language-js dontrun">$.ajax({
+	url: 'json.php',
+	dataType: 'json',
+	header : { 'X-Api-Key' : 'yourapikey' },
+	success: function(data, textStatus, jqXHR) {
+		// ...
+	}
+});</code></pre>
+									</li>
+								</ul>
+							</li>
+							<li class="fragment">
+								API keys are used for logging, rate limiting and usage analysis (and eventual blocking)
 							</li>
 						</ul>
 					</section>
@@ -879,6 +1241,12 @@ var queryString = values.join('&amp;');</code></pre>
 							<li><a href="http://www.html5rocks.com/en/tutorials/cors/">http://www.html5rocks.com/en/tutorials/cors/</a></li>
 							<li><a href="http://www.erichynds.com/jquery/using-deferreds-in-jquery/">http://www.erichynds.com/jquery/using-deferreds-in-jquery/</a></li>
 							<li><a href="http://intridea.com/posts/fun-with-jquery-deferred">http://intridea.com/posts/fun-with-jquery-deferred</a></li>
+							<li><a href="https://developer.mozilla.org/en/DOM/Manipulating_the_browser_history">https://developer.mozilla.org/en/DOM/Manipulating_the_browser_history</a></li>
+							<li><a href="http://slides.html5rocks.com/#history-api">http://slides.html5rocks.com/#history-api</a></li>
+							<li><a href="http://robertnyman.com/html5/history-api/history-api.html">http://robertnyman.com/html5/history-api/history-api.html</a></li>
+							<li><a href="http://developer.yahoo.com/javascript/howto-proxy.html">http://developer.yahoo.com/javascript/howto-proxy.html</a></li>
+							<li><a href="http://en.wikipedia.org/wiki/JSON">http://en.wikipedia.org/wiki/JSON</a></li>
+							<li><a href="http://en.wikipedia.org/wiki/JSONP">http://en.wikipedia.org/wiki/JSONP</a></li>
 						</ul>
 					</section>
 				</section>
