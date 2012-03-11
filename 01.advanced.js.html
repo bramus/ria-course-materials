@@ -220,12 +220,12 @@
 						<ul>
 							<li class="fragment">
 								Use the <code>var</code> keyword and assign a <em>value</em> to a <em>name</em>
-								<pre class="bigger"><code contenteditable class="language-js">var firstName = 'Forrest';
+								<pre class="bigger"><code contenteditable class="language-javascript">var firstName = 'Forrest';
 alert(firstName);</code></pre>
 							</li>
 							<li class="fragment">
 								Remember: JavaScript is dynamically typed and weakly typed
-								<pre class="bigger"><code contenteditable class="language-js">// Dynamic typing
+								<pre class="bigger"><code contenteditable class="language-javascript">// Dynamic typing
 var firstName = 'Forrest';
 alert(typeof firstName); // string
 
@@ -244,7 +244,7 @@ alert(typeof firstName); // JavaScript has changed the type to number</code></pr
 							</li>
 							<li class="fragment">
 								Just separate them by a comma
-								<pre class="bigger"><code contenteditable class="language-js">var firstName = 'Forrest',
+								<pre class="bigger"><code contenteditable class="language-javascript">var firstName = 'Forrest',
     lastName = 'Gump';
 
 alert(firstName);
@@ -347,7 +347,7 @@ alert(lastName);</code></pre>
 						<ul>
 							<li class="fragment">
 								Normally, one would do something like this
-								<pre class="bigger"><code contenteditable class="language-js">var firstName = new String('Forrest');</code></pre>
+								<pre class="bigger"><code contenteditable class="language-javascript">var firstName = new String('Forrest');</code></pre>
 								<ul>
 									<li class="fragment">What you get back is an instance of <code>String</code></li>
 									<li class="fragment">The type of the instance itself is <code>Object</code></li>
@@ -355,7 +355,7 @@ alert(lastName);</code></pre>
 								</ul>
 							</li>
 							<li class="fragment">Let's pull out some code to test this
-								<pre class="bigger"><code contenteditable class="language-js">var firstName = new String('Forrest');
+								<pre class="bigger"><code contenteditable class="language-javascript">var firstName = new String('Forrest');
 alert(firstName instanceof String);
 alert(typeof firstName);
 alert(typeof firstName.toString());</code></pre>
@@ -370,7 +370,7 @@ alert(typeof firstName.toString());</code></pre>
 								But next to that syntax, JavaScript also provides something named the <em>literal notation</em>
 							</li>
 							<li class="fragment">Literals allow you to immediately assign a value to a variable
-								<pre class="bigger"><code contenteditable class="language-js">var firstName = 'Forrest';</code></pre>
+								<pre class="bigger"><code contenteditable class="language-javascript">var firstName = 'Forrest';</code></pre>
 								<ul>
 									<li class="fragment">What you get back is the value</li>
 									<li class="fragment">The type of the value is <code>string</code> (dynamic typing in action)</li>
@@ -378,7 +378,7 @@ alert(typeof firstName.toString());</code></pre>
 							</li>
 							<li class="fragment">
 								Again, some code
-								<pre class="bigger"><code contenteditable class="language-js">var firstName = 'Forrest';
+								<pre class="bigger"><code contenteditable class="language-javascript">var firstName = 'Forrest';
 alert(firstName instanceof String);
 alert(typeof firstName);</code></pre>
 							</li>
@@ -419,7 +419,7 @@ Integer num = 3; // Literal</code></pre>
 						<ul>
 							<li class="fragment">
 								Example (1)
-								<pre class="bigger"><code contenteditable class="language-js">var firstName = new String('Forrest'); // String Constructor
+								<pre class="bigger"><code contenteditable class="language-javascript">var firstName = new String('Forrest'); // String Constructor
 var firstName = 'Forrest'; // String Literal
 
 var birthYear = new Number('1945'); // Number Constructor
@@ -444,7 +444,7 @@ function says(sentence) { alert(sentence); }; // The function statement</code></
 						<ul>
 							<li class="fragment">
 								Example (2)
-								<pre class="bigger"><code contenteditable class="language-js">var forrestFriends = new Array('Bubba', 'Lieutenant Dan');
+								<pre class="bigger"><code contenteditable class="language-javascript">var forrestFriends = new Array('Bubba', 'Lieutenant Dan');
 var forrestFriends = ['Bubba', 'Lieutenant Dan']; // Array Literal
 
 var forrest = new Object();
@@ -467,7 +467,7 @@ var forrest = { // Object Literal
 						<ul>
 							<li class="fragment">
 								<span>Remember that if it exists as a primitive data type (viz. <code>string</code>, <code>number</code>, <code>boolean</code>), you'll get the primitive returned when using the literal notation!</span>
-								<pre class="bigger"><code contenteditable class="language-js">// String Instance
+								<pre class="bigger"><code contenteditable class="language-javascript">// String Instance
 var lastName = new String('Gump');
 alert(typeof lastName);
 alert(lastName instanceof String);
@@ -485,7 +485,7 @@ alert(firstName instanceof String);</code></pre>
 						<ul>
 							<li class="fragment">
 								If no primitive variant exists (<code>Object</code>, <code>Array</code>, <code>RegExp</code>, <code>Function</code>), the literal <em>will</em> return an instance when using the literal notation.
-								<pre class="bigger"><code contenteditable class="language-js">// Array Instance
+								<pre class="bigger"><code contenteditable class="language-javascript">// Array Instance
 var forrestFriends = new Array('Bubba', 'Lieutenant Dan');
 alert(typeof forrestFriends);
 alert(forrestFriends instanceof Array);
@@ -512,7 +512,7 @@ alert(forrestFriends instanceof Array);</code></pre>
 							</li>
 							<li class="fragment">
 								Here's some code proof:
-								<pre class="bigger"><code contenteditable class="language-js">// Number Instance
+								<pre class="bigger"><code contenteditable class="language-javascript">// Number Instance
 var birthYear = new Number('1945');
 alert(typeof birthYear);
 alert(birthYear instanceof Number);
@@ -563,7 +563,7 @@ alert(says instanceof Object);</code></pre>
 						<h2>Accessing Object Properties</h2>
 						<ul>
 							<li class="fragment">Via square brackets, or via dot notation
-								<pre class="bigger"><code contenteditable class="language-js">// Object Literal
+								<pre class="bigger"><code contenteditable class="language-javascript">// Object Literal
 var forrest = {
 	firstName : 'Forrest',
 	lastName : 'Gump',
@@ -592,7 +592,7 @@ alert(forrest.says());</code></pre>
 							<li class="fragment">As mentioned: JavaScript will change variable types on the fly <em>(coercion)</em></li>
 							<li class="fragment">
 								This not only happens when assigning values, but also when using variables
-								<pre class="bigger"><code contenteditable class="language-js">// Various 'false' values
+								<pre class="bigger"><code contenteditable class="language-javascript">// Various 'false' values
 var nullVal = null;
 var undefinedVal = undefined;
 var zeroVal = 0;
@@ -604,7 +604,7 @@ if (emptyString) {
 } else {
 	console.log('falsy'); // false-ish
 }</code></pre>
-								<pre class="bigger"><code contenteditable class="language-js">console.log('5' + 6 + 7);</code></pre>
+								<pre class="bigger"><code contenteditable class="language-javascript">console.log('5' + 6 + 7);</code></pre>
 							</li>
 						</ul>
 					</section>
@@ -613,14 +613,14 @@ if (emptyString) {
 						<h2>Implicit Type Conversion (2)</h2>
 						<ul>
 							<li class="fragment">You can prevent coercion by using the <em>identity operator</em>
-								<pre class="bigger"><code contenteditable class="language-js">// Equality
+								<pre class="bigger"><code contenteditable class="language-javascript">// Equality
 alert((7 == '7') ? 'equal' : 'not equal');
 
 // Identity
 alert((7 === '7') ? 'equal (identity)' : 'not equal (identity)');</code></pre>
 							</li>
 							<li class="fragment">Or by explicitly casting a variable to being a certain type
-								<pre class="bigger"><code contenteditable class="language-js">// Type Coercion (default)
+								<pre class="bigger"><code contenteditable class="language-javascript">// Type Coercion (default)
 alert('5' + 6 + 7);
 
 // Prevent Type Coercion
@@ -633,7 +633,7 @@ alert(parseInt('5', 10) + 6 + 7);</code></pre>
 						<h2>Scope (1)</h2>
 						<ul>
 							<li class="fragment">Global or Local
-								<pre class="bigger"><code contenteditable class="language-js">// Global
+								<pre class="bigger"><code contenteditable class="language-javascript">// Global
 var quote = 'I had run for 3 years, 2 months, 14 days, and 16 hours.';
 
 var foo = function() {
@@ -710,7 +710,7 @@ alert(question); // Nope, Chuck Testa! Erm, I mean global!</code></pre>
 							</li>
 							<li class="fragment">
 								Example
-								<pre class="bigger"><code contenteditable class="language-js">// String Instance
+								<pre class="bigger"><code contenteditable class="language-javascript">// String Instance
 var firstName = new String('Forrest'); // an instance of String
 alert(firstName.toUpperCase());
 
@@ -770,7 +770,7 @@ alert(['Bubba', 'Lieutenant Dan'].length);</code></pre>
 					<section>
 						<h2>If-Else &amp; Switch-Case(-Default)</h2>
 						<div class="fragment">
-							<pre class="bigger"><code contenteditable class="language-js">// If statement
+							<pre class="bigger"><code contenteditable class="language-javascript">// If statement
 var badGrades = true;
 if (badGrades) {
 	alert('Mom sleeps with teacher');
@@ -801,7 +801,7 @@ alert(lifeState);</code></pre>
 					<section>
 						<h2>For</h2>
 						<div class="fragment">
-							<pre class="bigger"><code contenteditable class="language-js">// Var we'll be using
+							<pre class="bigger"><code contenteditable class="language-javascript">// Var we'll be using
 var forrestFriends = ['Bubba', 'Lieutenant Dan'];
 
 // For
@@ -815,7 +815,7 @@ for (var i = 0; i &lt; forrestFriends.length; i++) {
 						<h2>For (optimized)</h2>
 						<p class="fragment">Performance can be improved by caching variables. That way JavaScript doesn't have to look up everything again.</p>
 						<div class="fragment">
-							<pre class="bigger"><code contenteditable class="language-js">// Var we'll be using
+							<pre class="bigger"><code contenteditable class="language-javascript">// Var we'll be using
 var forrestFriends = ['Bubba', 'Lieutenant Dan'];
 
 // For
@@ -828,7 +828,7 @@ for (var i = 0, len = forrestFriends.length; i &lt; len; i++) {
 					<section>
 						<h2>For-In</h2>
 						<div class="fragment">
-							<pre class="bigger"><code contenteditable class="language-js">// Vars we'll be using
+							<pre class="bigger"><code contenteditable class="language-javascript">// Vars we'll be using
 var forrest = {
 	firstName : 'Forrest',
 	lastName : 'Gump' // no trailing comma (!)
@@ -851,7 +851,7 @@ for (var prop in forrest) {
 					<section>
 						<h2>While &amp; Do-While</h2>
 						<div class="fragment">
-							<pre class="bigger"><code contenteditable class="language-js">// While
+							<pre class="bigger"><code contenteditable class="language-javascript">// While
 var count = 5;
 while (count > 0) {
 	console.log(count);
@@ -873,7 +873,7 @@ do {
 					<section>
 						<h2>With</h2>
 						<div class="fragment">
-							<pre class="bigger"><code contenteditable class="language-js">// Vars we'll be using
+							<pre class="bigger"><code contenteditable class="language-javascript">// Vars we'll be using
 var forrest = {
 	firstName : 'Forrest',
 	lastName : 'Gump' // no trailing comma (!)
@@ -892,7 +892,7 @@ with (forrest) {
 					<section>
 						<h2>Try-Catch(-Finally)</h2>
 						<div class="fragment">
-							<pre class="bigger"><code contenteditable class="language-js">// Vars we'll be using
+							<pre class="bigger"><code contenteditable class="language-javascript">// Vars we'll be using
 var forrest = {
 	firstName : 'Forrest',
 	lastName : 'Gump',
@@ -930,7 +930,7 @@ try {
 							</li>
 							<li class="fragment">
 								Example
-								<pre class="bigger"><code contenteditable class="language-js">for (var x = 1; x &lt;= 5; x++) {
+								<pre class="bigger"><code contenteditable class="language-javascript">for (var x = 1; x &lt;= 5; x++) {
 	var y = 1;
 	while (y &lt;= 7) {
 		if (y == 5) { break; }
@@ -947,7 +947,7 @@ try {
 						<ul>
 							<li class="fragment">
 								To break the outer loop, one can make use of a <em>label</em>
-								<pre class="bigger"><code contenteditable class="language-js">myForLoop:
+								<pre class="bigger"><code contenteditable class="language-javascript">myForLoop:
 for (var x = 1; x &lt;= 5; x++) {
 	var y = 1;
 	while (y &lt;= 7) {
@@ -967,7 +967,7 @@ for (var x = 1; x &lt;= 5; x++) {
 							<li class="fragment">Valid inside <code>for</code>, <code>for-in</code>, <code>while</code>, and <code>do-while</code>
 							<li class="fragment">
 								Example
-								<pre class="bigger"><code contenteditable class="language-js">for (var x = 1; x &lt;= 5; x++) {
+								<pre class="bigger"><code contenteditable class="language-javascript">for (var x = 1; x &lt;= 5; x++) {
 	for (var y = 1; y &lt;= 7; y++) {
 		if (y == 5) continue;
 		console.log(x + '-' + y);
@@ -982,7 +982,7 @@ for (var x = 1; x &lt;= 5; x++) {
 						<ul>
 							<li class="fragment">
 								Using a <em>label</em> is also possible
-								<pre class="bigger"><code contenteditable class="language-js">myForLoop:
+								<pre class="bigger"><code contenteditable class="language-javascript">myForLoop:
 for (var x = 1; x &lt;= 5; x++) {
 	for (var y = 1; y &lt;= 7; y++) {
 		if (y == 5) { continue myForLoop; }
@@ -1009,7 +1009,7 @@ for (var x = 1; x &lt;= 5; x++) {
 
 					<section>
 						<h2>Ternary Operator</h2>
-						<pre class="bigger fragment"><code contenteditable class="language-js">// A var we'll need
+						<pre class="bigger fragment"><code contenteditable class="language-javascript">// A var we'll need
 var looking = true;
 
 // How you'd probably write it at first
@@ -1020,7 +1020,7 @@ if (looking) {
 	forrestSays = 'It\'s OK';
 }
 alert(forrestSays);</code></pre>
-						<pre class="bigger fragment"><code contenteditable class="language-js">// A var we'll need
+						<pre class="bigger fragment"><code contenteditable class="language-javascript">// A var we'll need
 var looking = true;
 
 // Better: Ternary operators
@@ -1030,7 +1030,7 @@ alert(forrestSays);</code></pre>
 
 					<section>
 						<h2>Shorthand Assignment</h2>
-						<pre class="bigger fragment"><code contenteditable class="language-js">// How you'd probably write it at first
+						<pre class="bigger fragment"><code contenteditable class="language-javascript">// How you'd probably write it at first
 var lifeIs = function(boxOfChocolates) {
 	var life;
 	
@@ -1043,7 +1043,7 @@ var lifeIs = function(boxOfChocolates) {
 	return 'Life is like ' + life;
 };
 alert(lifeIs('a Box of Chocolates'));</code></pre>
-						<pre class="bigger fragment"><code contenteditable class="language-js">// Better: Shorthand assignment
+						<pre class="bigger fragment"><code contenteditable class="language-javascript">// Better: Shorthand assignment
 var lifeIs = function(boxOfChocolates) {
 	return 'Life is like ' + (boxOfChocolates || 'a Snickers bar');
 };
@@ -1052,7 +1052,7 @@ alert(lifeIs('a Box of Chocolates'));</code></pre>
 
 					<section>
 						<h2>Short-Circuit Logic</h2>
-						<pre class="bigger fragment"><code contenteditable class="language-js">// An Object we'll need
+						<pre class="bigger fragment"><code contenteditable class="language-javascript">// An Object we'll need
 var forrest = {
 	firstName : 'Forrest',
 	lastName : 'Gump',
@@ -1065,7 +1065,7 @@ var forrest = {
 if ((forrest != null) && (forrest.says != null)) {
 	forrest.says();
 }</code></pre>
-						<pre class="bigger fragment"><code contenteditable class="language-js">// An Object we'll need
+						<pre class="bigger fragment"><code contenteditable class="language-javascript">// An Object we'll need
 var forrest = {
 	firstName : 'Forrest',
 	lastName : 'Gump',
@@ -1084,7 +1084,7 @@ forrest && forrest.says && forrest.says();
 						<ul>
 							<li class="fragment">
 								It's possible to <em>chain</em> methods, as long as a &mdash; for the next method &mdash; usable value is returned
-								<pre class="bigger"><code contenteditable class="language-js">var example = 'Forrest'.substr(0,5).split('').join('-').toUpperCase();
+								<pre class="bigger"><code contenteditable class="language-javascript">var example = 'Forrest'.substr(0,5).split('').join('-').toUpperCase();
 alert(example);</code></pre>
 							</li>
 							<li class="fragment">
@@ -1111,7 +1111,7 @@ alert(example);</code></pre>
 						<ul>
 							<li class="fragment">
 								Functions can be defined in three ways
-								<pre class="bigger"><code contenteditable class="language-js">// Function Constructor
+								<pre class="bigger"><code contenteditable class="language-javascript">// Function Constructor
 var says = new Function('sentence', 'alert(sentence)');
 
 // function statement or function declaration
@@ -1131,7 +1131,7 @@ var says = function(sentence) { alert(sentence); };</code></pre>
 						<ul>
 							<li class="fragment">
 								Basic usage
-								<pre class="bigger"><code contenteditable class="language-js">var says = function(sentence) {
+								<pre class="bigger"><code contenteditable class="language-javascript">var says = function(sentence) {
 	alert(sentence);
 };
 
@@ -1139,7 +1139,7 @@ says('Stupid is as stupid does');</code></pre>
 							</li>
 							<li class="fragment">
 								Arguments can be passed on
-								<pre class="bigger"><code contenteditable class="language-js">var says = function(sentence) {
+								<pre class="bigger"><code contenteditable class="language-javascript">var says = function(sentence) {
 	alert(sentence);
 };
 
@@ -1157,7 +1157,7 @@ forrestSays('Stupid is as stupid does');</code></pre>
 						<ul>
 							<li class="fragment">
 								Non-primitives are passed by Reference
-								<pre class="bigger"><code contenteditable class="language-js">var change = function(obj) {
+								<pre class="bigger"><code contenteditable class="language-javascript">var change = function(obj) {
 	obj.sentence = 'My name is Forrest, Forrest Gump';
 };
 
@@ -1169,7 +1169,7 @@ var forrest = {
 alert(forrest.sentence);
 change(forrest);
 alert(forrest.sentence);</code></pre>
-								<pre class="bigger"><code contenteditable class="language-js">var change = function(arr) {
+								<pre class="bigger"><code contenteditable class="language-javascript">var change = function(arr) {
 	arr.unshift('Jenny');
 };
 
@@ -1188,7 +1188,7 @@ alert(forrestFriends.length);</code></pre>
 						<ul>
 							<li class="fragment">
 								Primitives are passed by value
-								<pre class="bigger"><code contenteditable class="language-js">var change = function(sentence) {
+								<pre class="bigger"><code contenteditable class="language-javascript">var change = function(sentence) {
 	sentence = 'My name is Forrest, Forrest Gump';
 };
 
@@ -1199,7 +1199,7 @@ alert(sentence);</code></pre>
 							</li>
 							<li class="fragment">
 								Beware: if <em>a primitive variant</em> of the non-primitive argument exists, it's also passed by value!
-								<pre class="bigger"><code contenteditable class="language-js">var change = function(sentence) {
+								<pre class="bigger"><code contenteditable class="language-javascript">var change = function(sentence) {
 	sentence = 'My name is Forrest, Forrest Gump';
 };
 
@@ -1216,7 +1216,7 @@ alert(sentence);</code></pre>
 						<ul>
 							<li class="fragment">
 								Function arguments can be anything, even other functions!
-								<pre class="bigger"><code contenteditable class="language-js">var logs = function(sentence) {
+								<pre class="bigger"><code contenteditable class="language-javascript">var logs = function(sentence) {
 	console.log(sentence);
 };
 
@@ -1242,7 +1242,7 @@ forrestDoes(logs, 'Stupid is as stupid does');</code></pre>
 							</li>
 							<li class="fragment">
 								Can be checked by calling <code>Function#toString</code>
-								<pre class="bigger"><code contenteditable class="language-js">var logs = function(sentence) {
+								<pre class="bigger"><code contenteditable class="language-javascript">var logs = function(sentence) {
 	console.log(sentence);
 };
 
@@ -1266,7 +1266,7 @@ forrestDoes(logs, 'Stupid is as stupid does');</code></pre>
 						<ul>
 							<li class="fragment">
 								You can even directly pass in a function on the fly, without needing to declare it first
-								<pre class="bigger"><code contenteditable class="language-js">var forrestDoes = function(fn, sentence) {
+								<pre class="bigger"><code contenteditable class="language-javascript">var forrestDoes = function(fn, sentence) {
 	fn(sentence);
 };
 
@@ -1292,7 +1292,7 @@ forrestDoes(function(sentence) { // logs from the previous example
 						<ul>
 							<li class="fragment">
 								An example
-								<pre class="bigger"><code contenteditable class="language-js">function change(fn) {
+								<pre class="bigger"><code contenteditable class="language-javascript">function change(fn) {
 	fn = function() {
 		alert('changed');
 	};
@@ -1310,7 +1310,7 @@ says();</code></pre>
 							</li>
 							<li class="fragment">
 								Rather logical, if we remember this
-								<pre class="bigger"><code contenteditable class="language-js">var says = function() { };
+								<pre class="bigger"><code contenteditable class="language-javascript">var says = function() { };
 alert(typeof says); // Not an object!</code></pre>
 							</li>
 						</ul>
@@ -1321,7 +1321,7 @@ alert(typeof says); // Not an object!</code></pre>
 						<ul>
 							<li class="fragment">
 								Functions being passed by value has consequences!
-								<pre class="bigger"><code contenteditable class="language-js">var forrest = {
+								<pre class="bigger"><code contenteditable class="language-javascript">var forrest = {
 	sentence : 'Stupid is as stupid does',
 	say : function() {
 		return this.sentence;
@@ -1345,7 +1345,7 @@ show(forrest.say);</code></pre>
 						<ul>
 							<li class="fragment">
 								If you know the function: fixable by passing the object
-								<pre class="bigger"><code contenteditable class="language-js">var forrest = {
+								<pre class="bigger"><code contenteditable class="language-javascript">var forrest = {
 	sentence : 'Stupid is as stupid does',
 	say : function() {
 		return this.sentence;
@@ -1366,7 +1366,7 @@ show(forrest);</code></pre>
 						<ul>
 							<li class="fragment">
 								If you don't know the function: fixable by passing both the object and the function and then using <code>Function#call</code>
-								<pre class="bigger"><code contenteditable class="language-js">var forrest = {
+								<pre class="bigger"><code contenteditable class="language-javascript">var forrest = {
 	sentence : 'Stupid is as stupid does',
 	say : function() {
 		return this.sentence;
@@ -1390,14 +1390,14 @@ show(forrest);</code></pre>
 						<h2>Self Invoking Functions (1)</h2>
 						<ul>
 							<li class="fragment">Consider this function
-								<pre class="bigger"><code contenteditable class="language-js">var run = function() {
+								<pre class="bigger"><code contenteditable class="language-javascript">var run = function() {
 	alert('Run Forrest, Run');
 };
 run();</code></pre>
 							</li>
 							<li class="fragment">
 								No harm in adding some extra brackets
-								<pre class="bigger"><code contenteditable class="language-js">var run = (function() {
+								<pre class="bigger"><code contenteditable class="language-javascript">var run = (function() {
 	alert('Run Forrest, Run');
 });
 run();</code></pre>
@@ -1413,7 +1413,7 @@ run();</code></pre>
 						<ul>
 							<li class="fragment">
 								So eventually, you'll end up with this
-								<pre class="bigger"><code contenteditable class="language-js">(function() {
+								<pre class="bigger"><code contenteditable class="language-javascript">(function() {
 	alert('Run Forrest, Run');
 })();</code></pre>
 							</li>
@@ -1429,7 +1429,7 @@ run();</code></pre>
 							</li>
 							<li class="fragment">
 								This is also possible
-								<pre class="bigger"><code contenteditable class="language-js">(function() {
+								<pre class="bigger"><code contenteditable class="language-javascript">(function() {
 	alert('Run Forrest, Run');
 }()); // The Crockford Way</code></pre>
 							</li>
@@ -1441,19 +1441,19 @@ run();</code></pre>
 						<ul>
 							<li class="fragment">
 								IIFE's work with function parameters too
-								<pre class="bigger"><code contenteditable class="language-js">(function(sentence) {
+								<pre class="bigger"><code contenteditable class="language-javascript">(function(sentence) {
 	alert(sentence);
 })('Run Forrest, Run');</code></pre>
 								<ul>
 									<li class="fragment">
 										Which is comparable to calling
-										<pre class="bigger"><code contenteditable class="language-js dontrun">run('Run Forrest, Run');</code></pre>
+										<pre class="bigger"><code contenteditable class="language-javascript dontrun">run('Run Forrest, Run');</code></pre>
 									</li>
 								</ul>
 							</li>
 							<li class="fragment">
 								Alternative example
-								<pre class="bigger"><code contenteditable class="language-js">var toSay = 'Run Forrest, Run';
+								<pre class="bigger"><code contenteditable class="language-javascript">var toSay = 'Run Forrest, Run';
 (function(sentence) {
 	alert(sentence);
 })(toSay);</code></pre>
@@ -1466,7 +1466,7 @@ run();</code></pre>
 						<ul>
 							<li class="fragment">
 								It's possible to nest functions
-								<pre class="bigger"><code contenteditable class="language-js">var forrestSays = function(whatForrestSays) {
+								<pre class="bigger"><code contenteditable class="language-javascript">var forrestSays = function(whatForrestSays) {
 	var says = function(sentence) {
 		alert(sentence);
 	};
@@ -1478,7 +1478,7 @@ forrestSays('Stupid is as stupid does');</code></pre>
 							</li>
 							<li class="fragment">
 								Keep the scope in mind!
-								<pre class="bigger"><code contenteditable class="language-js">var forrestSays = function(whatForrestSays) {
+								<pre class="bigger"><code contenteditable class="language-javascript">var forrestSays = function(whatForrestSays) {
 	var says = function(sentence) {
 		alert(sentence);
 	};
@@ -1497,7 +1497,7 @@ says('Stupid is as stupid does'); // will fail, not in scope!</code></pre>
 						<ul>
 							<li class="fragment">
 								Scope also allows you to re-use names
-								<pre class="bigger"><code contenteditable class="language-js">var says = function(sentence) {
+								<pre class="bigger"><code contenteditable class="language-javascript">var says = function(sentence) {
 	alert('Outer says, says "' + sentence + '"');
 };
 
@@ -1526,7 +1526,7 @@ says('Stupid is as stupid does'); // won't fail</code></pre>
 							<li class="fragment">Functions can return values if they want</li>
 							<li class="fragment">
 								Use the <code>return</code> statement
-								<pre class="bigger"><code contenteditable class="language-js">var says = function(what, verb) {
+								<pre class="bigger"><code contenteditable class="language-javascript">var says = function(what, verb) {
 	return what + ' ' + verb;
 };
 
@@ -1535,7 +1535,7 @@ alert(shitHappens);</code></pre>
 							</li>
 							<li class="fragment">
 								Return values can be anything, even functions!
-								<pre class="bigger"><code contenteditable class="language-js">var says = function(what) {
+								<pre class="bigger"><code contenteditable class="language-javascript">var says = function(what) {
     return function(verb) {
         return what + ' ' + verb;
     };
@@ -1554,7 +1554,7 @@ alert(says('Shit')('happens'));</code></pre>
 						<ul>
 							<li class="fragment">
 								Another example
-								<pre class="bigger"><code contenteditable class="language-js">var add = function(x) {
+								<pre class="bigger"><code contenteditable class="language-javascript">var add = function(x) {
 	return function(y) {
 		return x + y; 
 	};
@@ -1569,7 +1569,7 @@ alert(twelve)
 							</li>
 							<li class="fragment">
 								What happens here is that internally <code>add5</code> has become
-									<pre class="bigger"><code contenteditable class="language-js">function(y) {
+									<pre class="bigger"><code contenteditable class="language-javascript">function(y) {
 	return x + y;
 }; // How I know? Try alert(add5.toString()); in the example above ;)</code></pre>
 							</li>
@@ -1615,7 +1615,7 @@ alert(twelve)
 						<ul>
 							<li class="fragment">
 								Example
-								<pre class="bigger"><code contenteditable class="language-js">var firstName = 'Forrest';
+								<pre class="bigger"><code contenteditable class="language-javascript">var firstName = 'Forrest';
 
 var forrestFriends = function() {
 	var friends = ['Bubba', 'Lieutenant Dan'];
@@ -1649,7 +1649,7 @@ alert(forrestFriends());</code></pre>
 						<ul>
 							<li>
 								Example (continued)
-								<pre class="bigger"><code contenteditable class="language-js">var firstName = 'Forrest';
+								<pre class="bigger"><code contenteditable class="language-javascript">var firstName = 'Forrest';
 
 var forrestFriends = function() {
 	var friends = ['Bubba', 'Lieutenant Dan'];
@@ -1682,7 +1682,7 @@ alert(forrestFriends());</code></pre>
 						<ul>
 							<li>
 								Example (continued)
-								<pre class="bigger"><code contenteditable class="language-js">var firstName = 'Forrest';
+								<pre class="bigger"><code contenteditable class="language-javascript">var firstName = 'Forrest';
 
 var forrestFriends = function() {
 	var friends = ['Bubba', 'Lieutenant Dan'];
@@ -1736,7 +1736,7 @@ alert(forrestFriends());</code></pre>
 						<ul>
 							<li class="fragment">
 								Fact: The variables are linked by reference to the <code>LexicalEnvironment</code>
-								<pre class="bigger"><code contenteditable class="language-js">var firstName = 'Forrest';
+								<pre class="bigger"><code contenteditable class="language-javascript">var firstName = 'Forrest';
 
 var forrestFriends = function() {
 	var friends = ['Bubba', 'Lieutenant Dan'];
@@ -1760,7 +1760,7 @@ alert(forrestFriends());</code></pre>
 						<ul>
 							<li class="fragment">
 								Fact: With nested functions: when the outer function has finished, the closure still lives on
-								<pre class="bigger"><code contenteditable class="language-js">var firstName = 'Forrest';
+								<pre class="bigger"><code contenteditable class="language-javascript">var firstName = 'Forrest';
 
 var forrestFriends = function() {
 	var friends = ['Bubba', 'Lieutenant Dan'];
@@ -1807,7 +1807,7 @@ alert(ff());</code></pre>
 						<ul>
 							<li class="fragment">
 								Say you have a function that should work given any number of parameters
-								<pre class="bigger"><code contenteditable class="language-js">var sum = function(a, b, c, d, e) {
+								<pre class="bigger"><code contenteditable class="language-javascript">var sum = function(a, b, c, d, e) {
 	return a + b + c + d + e
 };
 alert(sum(1,2)); // NaN (!)
@@ -1825,7 +1825,7 @@ alert(sum(1,2,3,4,5,6)); // What now?</code></pre>
 						<ul>
 							<li class="fragment">
 								JavaScript provides an <code>arguments</code> variable inside each function
-								<pre class="bigger"><code contenteditable class="language-js">var sum = function() {
+								<pre class="bigger"><code contenteditable class="language-javascript">var sum = function() {
 	alert(typeof arguments);
 	alert(arguments instanceof Object);
 	alert(arguments instanceof Array);
@@ -1844,7 +1844,7 @@ sum(1,2);</code></pre>
 						<ul>
 							<li class="fragment">
 								Working example
-								<pre class="bigger"><code contenteditable class="language-js">var sum = function() {
+								<pre class="bigger"><code contenteditable class="language-javascript">var sum = function() {
 	var sum = 0;
 	for (var i = 0, len = arguments.length; i &lt; len; i++) {
 		sum += parseInt(arguments[i]);
@@ -1863,7 +1863,7 @@ alert(sum(1,2,3,4,5,6));</code></pre>
 						<ul>
 							<li class="fragment">
 								What if you'd want to pass the <code>arguments</code> to an other function?
-								<pre class="bigger"><code contenteditable class="language-js">var otherFunc=function() {
+								<pre class="bigger"><code contenteditable class="language-javascript">var otherFunc=function() {
 	alert('otherFunc : ' + arguments.length);
 };
 
@@ -1889,7 +1889,7 @@ myFunc(1,2,3,4,5,6,7,8,9,10);</code></pre>
 							</li>
 							<li class="fragment">
 								Updated example
-								<pre class="bigger"><code contenteditable class="language-js">var otherFunc = function() {
+								<pre class="bigger"><code contenteditable class="language-javascript">var otherFunc = function() {
 	alert('otherFunc : ' + arguments.length);
 };
 
@@ -1933,7 +1933,7 @@ myFunc(1,2,3,4,5,6,7,8,9,10);</code></pre>
 						<ul>
 							<li class="fragment">
 								Say we have this
-								<pre class="bigger"><code contenteditable class="language-js">var says = function() {
+								<pre class="bigger"><code contenteditable class="language-javascript">var says = function() {
 	var firstName = arguments[0],
 	    sentence = arguments[1];
 	
@@ -1960,7 +1960,7 @@ alert(says('Forrest', 'Stupid is as stupid does'));</code></pre>
 							</li>
 							<li class="fragment">
 								... and we can! By using an <code>Object</code>
-								<pre class="bigger"><code contenteditable class="language-js">var says = function(person) {
+								<pre class="bigger"><code contenteditable class="language-javascript">var says = function(person) {
 	return person.firstName + ' says "' + person.sentence + '"';
 };
 
@@ -2035,7 +2035,7 @@ alert(says(forrest));</code></pre>
 						<ul>
 							<li class="fragment">
 								Creating an <code>Object</code>
-								<pre class="bigger"><code contenteditable class="language-js">// Object Constructor
+								<pre class="bigger"><code contenteditable class="language-javascript">// Object Constructor
 var forrest = new Object();
 forrest.firstName = 'Forrest';
 forrest.lastName = 'Gump';
@@ -2064,7 +2064,7 @@ alert(forrest.says());</code></pre>
 						<ul>
 							<li class="fragment">
 								Just use the <code>this</code> keyword
-								<pre class="bigger"><code contenteditable class="language-js">// Object Literal
+								<pre class="bigger"><code contenteditable class="language-javascript">// Object Literal
 var forrest = {
     firstName : 'Forrest',
     lastName : 'Gump',
@@ -2100,7 +2100,7 @@ alert(forrest.says());</code></pre>
 						<ul>
 							<li class="fragment">
 							Creating multiple <code>Object</code>
-							<pre class="bigger"><code contenteditable class="language-js">var forrest = { // Forrest 
+							<pre class="bigger"><code contenteditable class="language-javascript">var forrest = { // Forrest 
     firstName : 'Forrest',
     lastName : 'Gump',
     says : function() {
@@ -2132,7 +2132,7 @@ var dan = { // Lieutenant Dan
 						<ul>
 							<li class="fragment">
 							In JavaScript, you can create a constructor by using a function
-							<pre class="bigger"><code contenteditable class="language-js">var Person = function(firstName, lastName, sentence) {
+							<pre class="bigger"><code contenteditable class="language-javascript">var Person = function(firstName, lastName, sentence) {
     this.firstName = firstName;
 	this.lastName = lastName;
 	this.sentence = sentence;
@@ -2171,7 +2171,7 @@ alert(dan.says());
 							</li>
 							<li class="fragment">
 								You can take a look of what is in <code>.prototype</code>
-								<pre class="bigger"><code contenteditable class="language-js">console.log(String.prototype);</code></pre>
+								<pre class="bigger"><code contenteditable class="language-javascript">console.log(String.prototype);</code></pre>
 							</li>
 						</ul>
 					</section>
@@ -2181,7 +2181,7 @@ alert(dan.says());
 						<ul>
 							<li class="fragment">
 								If you add a new property/method to <code>.prototype</code>, you're basically changing the class definition
-								<pre class="bigger"><code contenteditable class="language-js">var Person = function(firstName, lastName) {
+								<pre class="bigger"><code contenteditable class="language-javascript">var Person = function(firstName, lastName) {
     this.firstName = firstName;
 	this.lastName = lastName;
 };
@@ -2208,7 +2208,7 @@ alert(dan.isRunning ? 'Dan is running' : 'Dan is not running');</code></pre>
 						<ul>
 							<li class="fragment">
 								You can also add new functionality to the global objects by this
-								<pre class="bigger"><code contenteditable class="language-js">Number.prototype.fahrenheitToCelcius = function() {
+								<pre class="bigger"><code contenteditable class="language-javascript">Number.prototype.fahrenheitToCelcius = function() {
 	return (parseInt(this, 10) - 32) / 1.8;
 };
 Number.prototype.celciusToFahrenheit = function() {
@@ -2233,7 +2233,7 @@ alert(f.fahrenheitToCelcius());
 						<ul>
 							<li class="fragment">
 								Inheritance is possible, by doing something oddlooking like so
-								<pre class="bigger"><code contenteditable class="language-js">var Person = function(firstName, lastName) {
+								<pre class="bigger"><code contenteditable class="language-javascript">var Person = function(firstName, lastName) {
     this.firstName = firstName;
 	this.lastName = lastName;
 };
@@ -2262,7 +2262,7 @@ alert(tomhanks.fullName());</code></pre>
 						<ul>
 							<li class="fragment">
 								We can omit repeating the constructor by making use of <code>Function#call</code>
-								<pre class="bigger"><code contenteditable class="language-js">var Person = function(firstName, lastName) {
+								<pre class="bigger"><code contenteditable class="language-javascript">var Person = function(firstName, lastName) {
     this.firstName = firstName;
 	this.lastName = lastName;
 };
@@ -2293,7 +2293,7 @@ alert(tomhanks.fullName());</code></pre>
 						<ul>
 							<li class="fragment">
 								Note that when extending the prototype of the parent class, the derived class gets it too!
-								<pre class="bigger"><code contenteditable class="language-js">var Person = function(firstName, lastName) {
+								<pre class="bigger"><code contenteditable class="language-javascript">var Person = function(firstName, lastName) {
     this.firstName = firstName;
 	this.lastName = lastName;
 };
@@ -2319,7 +2319,7 @@ alert(tomhanks.isHuman ? 'Human' : 'Not Human');</code></pre>
 						<ul>
 							<li class="fragment">
 								The <strong><em>module pattern</em></strong>, <a href="http://ejohn.org/blog/simple-javascript-inheritance/">popularized by Douglas Crockford</a>, allows having private datamembers
-								<pre class="bigger"><code contenteditable class="language-js">var forrest = (function() {
+								<pre class="bigger"><code contenteditable class="language-javascript">var forrest = (function() {
 
 	var firstName = 'Forrest'; // Private var
 	
@@ -2349,7 +2349,7 @@ alert(forrest.getFirstName() + ' ' + forrest.getLastName());</code></pre>
 						<ul>
 							<li class="fragment">
 								Variant of the <strong><em>module pattern</em></strong>: make everything private and provide pointers to them in the public part
-								<pre class="bigger"><code contenteditable class="language-js">var forrest = (function() {
+								<pre class="bigger"><code contenteditable class="language-javascript">var forrest = (function() {
 
 	var firstName = 'Forrest';
 	var lastName = 'Gump';
@@ -2502,7 +2502,7 @@ alert(forrest.whatDoesHeSay());</code></pre>
 						<ul>
 							<li class="fragment">
 								<code>window.document</code> offers quite a few ways of selecting elements from the document
-								<pre class="bigger"><code contenteditable class="language-js dontrun">// get one element with the given id
+								<pre class="bigger"><code contenteditable class="language-javascript dontrun">// get one element with the given id
 var el = document.getElementById('siteWrapper');
 
 // get all links (&lt;a&gt; elements)
@@ -2526,7 +2526,7 @@ var el = document.querySelector('code pre'); // only returns the first match</co
 						<ul>
 							<li class="fragment">
 								Once you have selected an element, you can manipulate it
-								<pre class="bigger"><code contenteditable class="language-js">// change CSS properties
+								<pre class="bigger"><code contenteditable class="language-javascript">// change CSS properties
 document.getElementById('manipulating-demo').style.border = '1px solid #FFF';
 document.getElementById('manipulating-demo').style.padding = '20px';
 
@@ -2548,7 +2548,7 @@ alert('The element #' + document.getElementById('manipulating-demo').id + ' was 
 						<ul>
 							<li class="fragment">
 								Fragment can heavily be optimized by caching the variable so that the DOM lookup takes place only once
-								<pre class="bigger"><code contenteditable class="language-js">// cache the variable
+								<pre class="bigger"><code contenteditable class="language-javascript">// cache the variable
 var el = document.getElementById('manipulating-demo2');
 
 // change CSS properties
@@ -2573,7 +2573,7 @@ alert('The element #' + el.id + ' was changed');</code></pre>
 						<ul>
 							<li class="fragment">
 								Here's another unoptimized example
-<pre class="bigger"><code contenteditable class="language-js">var allSpans = document.querySelectorAll('#manipulating-unoptimized span');
+<pre class="bigger"><code contenteditable class="language-javascript">var allSpans = document.querySelectorAll('#manipulating-unoptimized span');
 
 for (var i = 0; i &lt; allSpans.length; i++) {
 	allSpans[i].className = 'test';
@@ -2591,7 +2591,7 @@ for (var i = 0; i &lt; allSpans.length; i++) {
 						<ul>
 							<li class="fragment">
 								Optimized version
-<pre class="bigger"><code contenteditable class="language-js">var allSpans = document.querySelectorAll('#manipulating-optimized span');
+<pre class="bigger"><code contenteditable class="language-javascript">var allSpans = document.querySelectorAll('#manipulating-optimized span');
 
 for (var i = 0, len = allSpans.length; i &lt; len; i++) {
 	var curSpan = allSpans[i];
@@ -2683,7 +2683,7 @@ for (var i = 0, len = allSpans.length; i &lt; len; i++) {
 						<ul>
 							<li class="fragment" id="onevent-demo">
 								The old way: <code>#on<em>Eventname</em></code>
-								<pre class="bigger"><code contenteditable class="language-js runonce">var p = document.querySelector('#onevent-demo p');
+								<pre class="bigger"><code contenteditable class="language-javascript runonce">var p = document.querySelector('#onevent-demo p');
 									
 p.onclick = function() { alert('You clicked me!'); };
 p.onmouseover = function() { this.style.backgroundColor = '#333'; };
@@ -2692,7 +2692,7 @@ p.onmouseout = function() { this.style.backgroundColor = ''; };</code></pre>
 							</li>
 							<li class="fragment" id="oneventtwice-demo">
 								Note that when you hook an event twice, it will be overwritten
-								<pre class="bigger"><code contenteditable class="language-js runonce">var p = document.querySelector('#oneventtwice-demo p');
+								<pre class="bigger"><code contenteditable class="language-javascript runonce">var p = document.querySelector('#oneventtwice-demo p');
 
 p.onclick = function() { alert('You clicked me (1)!'); };
 p.onclick = function() { alert('You clicked me (2)!'); };
@@ -2708,7 +2708,7 @@ p.onmouseout = function() { this.style.backgroundColor = ''; };</code></pre>
 						<ul>
 							<li class="fragment" id="addeventlistener-demo">
 								The new, formalized, way: <code>#addEventListener</code>
-								<pre class="bigger"><code contenteditable class="language-js runonce">var p = document.querySelector('#addeventlistener-demo p');
+								<pre class="bigger"><code contenteditable class="language-javascript runonce">var p = document.querySelector('#addeventlistener-demo p');
 
 p.addEventListener('click', function() {
 	alert('You clicked me!'); 
@@ -2729,7 +2729,7 @@ p.addEventListener('mouseout', function() {
 						<ul>
 							<li class="fragment" id="addeventlistenertwice-demo">
 								Calling <code>#addEventListener</code> multiple times for the same event
-								<pre class="bigger"><code contenteditable class="language-js runonce">var p = document.querySelector('#addeventlistenertwice-demo p');
+								<pre class="bigger"><code contenteditable class="language-javascript runonce">var p = document.querySelector('#addeventlistenertwice-demo p');
 
 p.addEventListener('click', function() {
 	alert('You clicked me (1)!'); 
@@ -2753,7 +2753,7 @@ p.addEventListener('mouseout', function() {
 						<ul>
 							<li class="fragment" id="removeeventlistener-demo">
 								Possible by <code>#removeEventListener</code>, but only if you've attached a named function
-								<pre class="bigger"><code contenteditable class="language-js runonce">var p = document.querySelector('#removeeventlistener-demo p');
+								<pre class="bigger"><code contenteditable class="language-javascript runonce">var p = document.querySelector('#removeeventlistener-demo p');
 
 var clickHandler = function() {
 	alert('You clicked me!'); 
@@ -2829,7 +2829,7 @@ p.addEventListener('mouseout', function() {
 						<ul>
 							<li class="fragment" id="bubbling-demo">
 								Run the JS code and then click the center box to see bubbling in action
-								<pre class="bigger"><code contenteditable class="language-js runonce">var divs = document.querySelectorAll('#bubbling-demo div');
+								<pre class="bigger"><code contenteditable class="language-javascript runonce">var divs = document.querySelectorAll('#bubbling-demo div');
 
 for (var i = 0, len = divs.length; i &lt; len; i++) {
 	divs[i].addEventListener('click', function(event) {
@@ -2853,7 +2853,7 @@ for (var i = 0, len = divs.length; i &lt; len; i++) {
 						<ul>
 							<li class="fragment" id="stoppropagation-demo">
 								Possible with <code>Event#stopPropagation</code>
-								<pre class="bigger"><code contenteditable class="language-js runonce">var divs = document.querySelectorAll('#stoppropagation-demo div');
+								<pre class="bigger"><code contenteditable class="language-javascript runonce">var divs = document.querySelectorAll('#stoppropagation-demo div');
 
 for (var i = 0, len = divs.length; i &lt; len; i++) {
 	divs[i].addEventListener('click', function(event) {
@@ -2881,7 +2881,7 @@ for (var i = 0, len = divs.length; i &lt; len; i++) {
 							</li>
 							<li class="fragment" id="stopdefault-demo">
 								Possible with <code>Event#preventDefault</code>
-								<pre class="bigger"><code contenteditable class="language-js runonce">var link = document.querySelector('#stopdefault-demo a');
+								<pre class="bigger"><code contenteditable class="language-javascript runonce">var link = document.querySelector('#stopdefault-demo a');
 
 link.addEventListener('click', function(event) {
 	alert('Link is linked to ' + this.href + ' but won\'t be followed');
@@ -2900,7 +2900,7 @@ link.addEventListener('click', function(event) {
 						<ul>
 							<li class="fragment" id="bubblingtarget-demo">
 								It's possible to know which was the original element that was clicked during the bubbling
-								<pre class="bigger"><code contenteditable class="language-js runonce">var divs = document.querySelectorAll('#bubblingtarget-demo div');
+								<pre class="bigger"><code contenteditable class="language-javascript runonce">var divs = document.querySelectorAll('#bubblingtarget-demo div');
 
 for (var i = 0, len = divs.length; i &lt; len; i++) {
 	divs[i].addEventListener('click', function(event) {
@@ -2930,7 +2930,7 @@ for (var i = 0, len = divs.length; i &lt; len; i++) {
 							</li>
 							<li class="fragment" id="bubbling-advantage-demo">
 								By taking advantage of bubbling and <code>event.target</code> it's possible to bind the handler on the <code>&lt;table&gt;</code> itself.
-								<pre class="bigger"><code contenteditable class="language-js runonce">var table = document.querySelector('#bubbling-advantage-demo table');
+								<pre class="bigger"><code contenteditable class="language-javascript runonce">var table = document.querySelector('#bubbling-advantage-demo table');
 
 table.addEventListener('click', function(event) {
 	alert('Table click event (click was on ' + event.target.innerHTML + ')');
@@ -3005,7 +3005,7 @@ table.addEventListener('click', function(event) {
 						<ul>
 							<li class="fragment" id="capturing-demo">
 								Of course, it's possible to make the event handlers fire during the capturing phase, and not the bubbling phase.
-								<pre class="bigger"><code contenteditable class="language-js runonce">var divs = document.querySelectorAll('#capturing-demo div');
+								<pre class="bigger"><code contenteditable class="language-javascript runonce">var divs = document.querySelectorAll('#capturing-demo div');
 
 for (var i = 0, len = divs.length; i &lt; len; i++) {
 	divs[i].addEventListener('click', function(event) {
@@ -3029,7 +3029,7 @@ for (var i = 0, len = divs.length; i &lt; len; i++) {
 						<ul>
 							<li class="fragment" id="capturing-and-bubbling-demo">
 								FYI: To combine them both, hook two handlers
-								<pre class="bigger"><code contenteditable class="language-js runonce">var divs = document.querySelectorAll('#capturing-and-bubbling-demo div');
+								<pre class="bigger"><code contenteditable class="language-javascript runonce">var divs = document.querySelectorAll('#capturing-and-bubbling-demo div');
 
 for (var i = 0, len = divs.length; i &lt; len; i++) {
 	divs[i].addEventListener('click', function(event) {
@@ -3058,7 +3058,7 @@ for (var i = 0, len = divs.length; i &lt; len; i++) {
 						<ul>
 							<li class="fragment">
 								Say that we have this piece of code, what will be the result?
-								<pre class="bigger"><code contenteditable class="language-js">var link,
+								<pre class="bigger"><code contenteditable class="language-javascript">var link,
     target = Reveal.getCurrentSlide().querySelector('.result');
 
 target.innerHTML = ''; // clear the target
@@ -3091,7 +3091,7 @@ for (var i = 0; i &lt; 3; i++) { // add three links
 						<ul>
 							<li class="fragment">
 								Maybe we can fix it with a local variable?
-								<pre class="bigger"><code contenteditable class="language-js">var link,
+								<pre class="bigger"><code contenteditable class="language-javascript">var link,
     target = Reveal.getCurrentSlide().querySelector('.result');
 
 target.innerHTML = ''; // clear the target
@@ -3125,7 +3125,7 @@ for (var i = 3; i &lt; 6; i++) { // add three links
 								<ul>
 									<li class="fragment">
 										Remember this?
-										<pre class="bigger"><code contenteditable class="language-js">var toSay = 'Run Forrest, Run';
+										<pre class="bigger"><code contenteditable class="language-javascript">var toSay = 'Run Forrest, Run';
 
 (function(sentence) {
 	console.log(sentence);
@@ -3147,7 +3147,7 @@ for (var i = 3; i &lt; 6; i++) { // add three links
 						<ul>
 							<li class="fragment">
 								IIFE to the resue!
-								<pre class="bigger"><code contenteditable class="language-js">var link,
+								<pre class="bigger"><code contenteditable class="language-javascript">var link,
     target = Reveal.getCurrentSlide().querySelector('.result');
 
 target.innerHTML = ''; // clear the target
@@ -3295,7 +3295,7 @@ for (var i = 6; i &lt; 9; i++) { // add three links
 	&lt;script src=&quot;path/to/my.js&quot;&gt;&lt;/script&gt;
 &lt;/body&gt;
 &lt;/html&gt;</code></pre>
-								<pre class="bigger"><code class="language-js dontrun">window.onload = function() {
+								<pre class="bigger"><code class="language-javascript dontrun">window.onload = function() {
 	// ... your code here
 };</code></pre>
 								<ul>
@@ -3310,13 +3310,13 @@ for (var i = 6; i &lt; 9; i++) { // add three links
 						<ul>
 							<li class="fragment">
 								Syntax can be improved, by making use of <code>addEventListener</code>
-								<pre class="bigger"><code class="language-js dontrun">document.addEventListener('load', function(event) {
+								<pre class="bigger"><code class="language-javascript dontrun">document.addEventListener('load', function(event) {
 	// ... your code here
 }, false);</code></pre>
 							</li>
 							<li class="fragment">
 								<code>load</code> is fired when everything (including images) is loaded. Most of the time you'll want to invoke your scripts when the DOM has loaded.
-								<pre class="bigger"><code class="language-js dontrun">
+								<pre class="bigger"><code class="language-javascript dontrun">
 document.addEventListener('DOMContentLoaded', function(event) {
 	// ... your code here
 }, false);</code></pre>
@@ -3357,7 +3357,7 @@ document.addEventListener('DOMContentLoaded', function(event) {
 						<ul>
 							<li class="fragment">
 								The simplest way is to make use of the Object Literal. Just think of a name and you're good to go
-								<pre class="bigger"><code contenteditable class="language-js">var IKDOEICT = {
+								<pre class="bigger"><code contenteditable class="language-javascript">var IKDOEICT = {
 	foo : {
 		bar : function(x) { return x; },
 		baz : function(x) { return x; }
@@ -3379,7 +3379,7 @@ alert(IKDOEICT.foobar.foo('test'));</code></pre>
 						<ul>
 							<li class="fragment">
 								If your code spans over multiple files, then you still can use this
-								<pre class="bigger"><code contenteditable class="language-js">// file 1
+								<pre class="bigger"><code contenteditable class="language-javascript">// file 1
 var IKDOEICT = IKDOEICT || {}; // use existing IKDOEICT, or create a new Object
 
 IKDOEICT.foo = {
@@ -3407,7 +3407,7 @@ alert(IKDOEICT.foo.baz('test'));</code></pre>
 						<ul>
 							<li class="fragment">
 								Using an IIFE is also possible
-								<pre class="bigger"><code contenteditable class="language-js">var IKDOEICT = IKDOEICT || {};
+								<pre class="bigger"><code contenteditable class="language-javascript">var IKDOEICT = IKDOEICT || {};
 
 (function(o){
 
@@ -3435,7 +3435,7 @@ alert(IKDOEICT.foo.baz('test'));</code></pre>
 						<ul>
 							<li class="fragment">
 								The Module Pattern can also be used. Allows you to have private functions/datamembers.
-								<pre class="bigger"><code contenteditable class="language-js">var IKDOEICT = (function(){
+								<pre class="bigger"><code contenteditable class="language-javascript">var IKDOEICT = (function(){
 
 	var privateFunction = function() { return; }
 

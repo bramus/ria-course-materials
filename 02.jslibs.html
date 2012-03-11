@@ -298,7 +298,7 @@
 								<img src="assets/02/lib_swfobject.gif" alt="" title="" height="106" width="418" />
 							</figure>
 							<p><a href="http://code.google.com/p/swfobject/">SWFObject</a> &mdash; Embed Flash Files</p>
-							<pre class="bigger"><code class="language-js dontrun">var flashvars = false;
+							<pre class="bigger"><code class="language-javascript dontrun">var flashvars = false;
 								
 var params = {
   menu: 'false',
@@ -502,11 +502,11 @@ swfobject.embedSWF('myContent.swf', 'myContent', '300', '120', '9.0.0','expressI
 						<ul>
 							<li class="fragment">
 								Add class name to element <code>#message</code> and update its <code>innerHTML</code>
-								<pre class="bigger"><code class="language-js dontrun">$('message').addClassName('read').update('I read this message!');</code></pre>
+								<pre class="bigger"><code class="language-javascript dontrun">$('message').addClassName('read').update('I read this message!');</code></pre>
 							</li>
 							<li class="fragment">
 								Hook click event on some <code>li</code>'s
-								<pre class="bigger"><code class="language-js dontrun">$$('#bmarks li').each(function(li){
+								<pre class="bigger"><code class="language-javascript dontrun">$$('#bmarks li').each(function(li){
 	Event.observe(li, 'click', function(e) {
 		this.style.backgroundColor = 'yellow';
 	}.bindAsEventListener(li));
@@ -514,7 +514,7 @@ swfobject.embedSWF('myContent.swf', 'myContent', '300', '120', '9.0.0','expressI
 							</li>
 							<li class="fragment">
 								slideDown effect (via script.aculo.us)
-								<pre class="bigger"><code class="language-js dontrun">Effect.SlideDown('id_of_element', { duration: 3.0 });</code></pre>
+								<pre class="bigger"><code class="language-javascript dontrun">Effect.SlideDown('id_of_element', { duration: 3.0 });</code></pre>
 							</li>
 						</ul>
 					</section>
@@ -522,7 +522,7 @@ swfobject.embedSWF('myContent.swf', 'myContent', '300', '120', '9.0.0','expressI
 					<section>
 						<h2>Prototype: Example: Classes</h2>
 						<div class="fragment">
-							<pre class="bigger"><code class="language-js dontrun">// properties are directly passed to `create` method
+							<pre class="bigger"><code class="language-javascript dontrun">// properties are directly passed to `create` method
 var Person = Class.create({
 	initialize: function(name) {
 		this.name = name;
@@ -590,7 +590,7 @@ john.say('ahoy matey');
 					<section>
 						<h2>YUI: Example: DOM &amp; Events</h2>
 						<div class="fragment">
-							<pre class="bigger"><code class="language-js dontrun">YAHOO.util.Event.on(window, 'load', function() {
+							<pre class="bigger"><code class="language-javascript dontrun">YAHOO.util.Event.on(window, 'load', function() {
 									
 	var div = YAHOO.util.Dom.get('messages');
 	
@@ -646,7 +646,7 @@ john.say('ahoy matey');
 						<ul>
 							<li class="fragment">
 								Syntax changed under jQuery influence
-								<pre class="bigger"><code class="language-js dontrun">YUI().use('node', function(Y) {
+								<pre class="bigger"><code class="language-javascript dontrun">YUI().use('node', function(Y) {
 
     var onClick = function(e) {
         var type = e.type,
@@ -701,17 +701,17 @@ john.say('ahoy matey');
 						<ul>
 							<li class="fragment">
 								Add class name to element <code>#message</code> and update its <code>innerHTML</code>
-								<pre class="bigger"><code class="language-js dontrun">$('#message').addClass('read').html('I read this message!');</code></pre>
+								<pre class="bigger"><code class="language-javascript dontrun">$('#message').addClass('read').html('I read this message!');</code></pre>
 							</li>
 							<li class="fragment">
 								Hook click event on some <code>li</code>'s
-								<pre class="bigger"><code class="language-js dontrun">$('#bmarks li').on('click', function(e) {
+								<pre class="bigger"><code class="language-javascript dontrun">$('#bmarks li').on('click', function(e) {
 	$(this).css('backgroundColor', 'yellow');
 });</code></pre>
 							</li>
 							<li class="fragment">
 								slideDown effect
-								<pre class="bigger"><code class="language-js dontrun">$('#id_of_element').slideDown(3);</code></pre>
+								<pre class="bigger"><code class="language-javascript dontrun">$('#id_of_element').slideDown(3);</code></pre>
 							</li>
 						</ul>
 					</section>

@@ -187,14 +187,14 @@
 						<ul>
 							<li class="fragment">
 								Bad
-								<pre class="bigger"><code class="language-js dontrun">var myList = $('#myList');
+								<pre class="bigger"><code class="language-javascript dontrun">var myList = $('#myList');
 for (var i = 0; i &lt; 1000; i++){
 	myList.append('&lt;li&gt;This is list item ' + i + '&lt;/li&gt;');
 }</code></pre>
 							</li>
 							<li class="fragment">
 								Good
-								<pre class="bigger"><code class="language-js dontrun">var myList = $('#myList');
+								<pre class="bigger"><code class="language-javascript dontrun">var myList = $('#myList');
 var myListItems = '';
 
 for (var i = 0; i &lt; 1000; i++) {
@@ -247,11 +247,11 @@ myList.html(myListItems);</code></pre>
 								<ul>
 									<li class="fragment">
 										Use <code>.delegate()</code>
-										<pre class="bigger"><code class="language-js dontrun">$('table').delegate('td', 'click', function(e) { ... });</code></pre>
+										<pre class="bigger"><code class="language-javascript dontrun">$('table').delegate('td', 'click', function(e) { ... });</code></pre>
 									</li>
 									<li class="fragment">
 										Use <code>.on()</code> with extra selector string to filter the descendants of the selected elements that trigger the event
-										<pre class="bigger"><code class="language-js dontrun">$('table').on('click', 'td', function(e) { ... });</code></pre>
+										<pre class="bigger"><code class="language-javascript dontrun">$('table').on('click', 'td', function(e) { ... });</code></pre>
 									</li>
 									<li class="fragment">
 										Never use <code>.live()</code>
@@ -311,13 +311,13 @@ myList.html(myListItems);</code></pre>
 						<ul>
 							<li class="fragment">
 								Bad
-								<pre class="bigger"><code class="language-js dontrun">$('a').on('click', function(e) {
+								<pre class="bigger"><code class="language-javascript dontrun">$('a').on('click', function(e) {
 	alert($(this).attr('href'));
 });</code></pre>
 							</li>
 							<li class="fragment">
 								Good
-								<pre class="bigger"><code class="language-js dontrun">$('a').on('click', function(e) {
+								<pre class="bigger"><code class="language-javascript dontrun">$('a').on('click', function(e) {
 	alert(this.href);
 });</code></pre>
 							</li>
