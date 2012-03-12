@@ -296,7 +296,7 @@ xhr.onreadystatechange = function() {
 		    lecturersXml = xml.getElementsByTagName('lecturer'),
 		    lecturers = [];
 		console.log(xml);
-		for (var i = 0, len = lecturersXml.length; i < len; i++) {
+		for (var i = 0, len = lecturersXml.length; i &lt; len; i++) {
 			lecturers.push(lecturersXml[i].firstChild.nodeValue);
 		}
 		alert('&lt;p&gt;' + courseName + ' is taught by ' + lecturers.join(' &amp; ') + '&lt;/p&gt;');
@@ -437,7 +437,7 @@ head.appendChild(script);</code></pre>
 xhr.onreadystatechange = function() {
 	if (xhr.readyState == 4) {
 		var json = JSON.parse(xhr.responseText), lecturers  =[];
-		for (var i = 0, len = json.lecturers.length; i < len; i++) {
+		for (var i = 0, len = json.lecturers.length; i &lt; len; i++) {
 			lecturers.push(json.lecturers[i].name);
 		}
 		alert('&lt;p&gt;' + json.course + ' is taught by ' + lecturers.join(' &amp; ') + '&lt;/p&gt;');
@@ -466,7 +466,7 @@ xhr.send(null);</code></pre>
 							<li class="fragment">
 								Send a JSON header back with this header
 								<ul>
-									<li class="fragment"><code>Content-Type:appliction/json</code></li>
+									<li class="fragment"><code>Content-Type:application/json</code></li>
 								</ul>
 							</li>
 						</ul>
@@ -517,7 +517,7 @@ xhr.send(null);</code></pre>
 		dataType: 'json',
 		success: function(data, textStatus, jqXHR) {
 			var lecturers = [];
-			for (var i = 0, len = data.lecturers.length; i < len; i++) {
+			for (var i = 0, len = data.lecturers.length; i &lt; len; i++) {
 				lecturers.push(data.lecturers[i].name);
 			}
 			$('#output').html('&lt;p&gt;' + data.course + ' is taught by ' + lecturers.join(' &amp; ') + '&lt;/p&gt;');
@@ -618,7 +618,7 @@ var queryString = values.join('&amp;');</code></pre>
 		dataType: 'json'
 	}).success(function(data, textStatus, jqXHR) {
 		var lecturers = [];
-		for (var i = 0, len = data.lecturers.length; i < len; i++) {
+		for (var i = 0, len = data.lecturers.length; i &lt; len; i++) {
 			lecturers.push(data.lecturers[i].name);
 		}
 		$('#output').html('&lt;p&gt;' + data.course + ' is taught by ' + lecturers.join(' &amp; ') + '&lt;/p&gt;');
@@ -656,7 +656,7 @@ var queryString = values.join('&amp;');</code></pre>
 								<pre class="bigger"><code class="language-javascript dontrun" data-overlay-example="assets/06/examples/jquery.get.html">jQuery(document).ready(function($) {
 	$.get('json.php', function(data, textStatus, jqXHR) {
 		var lecturers = [];
-		for (var i = 0, len = data.lecturers.length; i < len; i++) {
+		for (var i = 0, len = data.lecturers.length; i &lt; len; i++) {
 			lecturers.push(data.lecturers[i].name);
 		}
 		$('#output').html('&lt;p&gt;' + data.course + ' is taught by ' + lecturers.join(' &amp; ') + '&lt;/p&gt;');
@@ -741,7 +741,7 @@ var queryString = values.join('&amp;');</code></pre>
 								<pre class="bigger"><code class="language-javascript dontrun" data-overlay-example="assets/06/examples/jquery.getjson.html">jQuery(document).ready(function($) {
 	$.getJSON('json.php', function(data, textStatus, jqXHR) {
 		var lecturers = [];
-		for (var i = 0, len = data.lecturers.length; i < len; i++) {
+		for (var i = 0, len = data.lecturers.length; i &lt; len; i++) {
 			lecturers.push(data.lecturers[i].name);
 		}
 		$('#output').html('&lt;p&gt;' + data.course + ' is taught by ' + lecturers.join(' &amp; ') + '&lt;/p&gt;');
