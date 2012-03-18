@@ -1,0 +1,1250 @@
+<!doctype html>  
+<html lang="en">
+	
+	<head>
+		<meta charset="utf-8">
+		
+		<title>Rich Internet Applications &mdash; 07.RESTful.APIs</title>
+
+		<meta name="description" content="Rich Internet Applications &mdash; 06.Ajax">
+		<meta name="author" content="Bram(us) Van Damme - ikdoeict.be">
+		
+		<link href='http://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+		
+		<link rel="stylesheet" href="css/reset.css">
+		<link rel="stylesheet" href="css/main.css" media="screen">
+		<link rel="stylesheet" href="css/print.css" media="print">
+		<!-- <link rel="stylesheet" href="assets/07/examples.css"> -->
+		
+		<style>
+			code {
+				color: gainsboro;
+			}
+
+			li > code, li em > code, li del > code, li ins > code, p > code {
+				background: #3F3F3F;
+				padding: 2px 4px;
+				box-shadow: 0px 0px 6px rgba(0,0,0,0.3);
+				font-size: 80%;
+			}
+			
+			del code, code.nok {
+				color: #C55;
+			}
+			
+			ins code, code.ok {
+				color: #5C5;
+			}
+		</style>
+
+		<link rel="stylesheet" href="lib/zenburn.css">
+	</head>
+	
+	<body>
+		
+		<div id="reveal">
+			
+			<!-- Any section element inside of this container is displayed as a slide -->
+			<div class="slides">
+
+
+				
+				<!-- 0 : Title -->
+				<section>
+					<section>
+						<h3 class="inverted">Rich Internet Applications</h3>
+						<h1>07.RESTful.APIs</h1>
+					
+						<footer>
+							<em><a href="http://www.ikdoeict.be/">ikdoeict.be</a> &mdash; <a href="mailto:bramus.vandamme@kahosl.be">bramus.vandamme@kahosl.be</a></em>
+						</footer>
+						<script>
+							// Delicously hacky. Look away.
+							if(navigator.userAgent.match(/(iPhone|iPad|iPod|Android)/i))
+							document.write('<p style="color: rgba(0,0,0,0.3); text-shadow: none;">('+'Tap to navigate'+')</p>');
+						</script>
+					</section>
+				</section>
+
+
+				<!-- 1 : REST Intro -->
+				<section>
+
+					<section>
+						<h2>RESTful APIs</h2>
+						<p><img src="assets/07/resting.png" alt="" title="" height="375" width="500" /></p>
+						<q>The key to victory is discipline,<br />and that means a well made bed.</q>
+					</section>
+
+					<section>
+						<h2>RESTful API?</h2>
+						<ul>
+							<li class="fragment">
+								An API that is REST compliant
+							</li>
+						</ul>
+					</section>
+
+					<section>
+						<h2>SRSLY?</h2>
+						<p><img src="assets/07/notsureif.png" alt="Not Sure If ..." title="Not Sure If ..." width="480" height="360" /></p>
+						<p><em>Not sure if trolling or just &ldquo;technically correct&rdquo;</em></p>
+					</section>
+
+					<section>
+						<h2>API</h2>
+						<ul>
+							<li class="fragment">
+								Application Programming Interface
+								<ul>
+									<li class="fragment">Abstract Interface to allow communication between software components</li>
+								</ul>
+							</li>
+							<li class="fragment">
+								In web context
+								<ul>
+									<li class="fragment">Language independent</li>
+									<li class="fragment">Allow you to push/pull data to/from a web site</li>
+									<li class="fragment">Sometimes referred to as a &ldquo;Web Service&rdquo; <em>(blame Microsoft)</em></li>
+									<li class="fragment">Implemented via JavaScript, XML-RPC, SOAP, or REST</li>
+									<li class="fragment">Return formats JS, XML, HTML, plaintext, or JSON(P)</li>
+								</ul>
+							</li>
+							<li class="fragment">
+								You've already implemented a SOAP-based on in the course Webprogrammatie
+							</li>
+						</ul>
+					</section>
+
+					<section>
+						<h2>Why API? (1)</h2>
+						<ul>
+							<li class="fragment">
+								See cool stuff built on top of your technology platform
+								<div style="text-align: center; margin-top: 30px;">
+									<figure class="fragment">
+										<img src="assets/07/BotanicallsSparkfunKit_jade1_800.jpg" alt="" title="" height="300" width="400" />
+										<figcaption>Let your plants tell you via Twitter that they're thirsty with <a href="http://www.botanicalls.com/kits/">botanicalls</a></figcaption>
+									</figure>
+									<figure class="fragment">
+										<img src="assets/07/kickbee.jpg" alt="" title="" height="250" width="400" />
+										<figcaption>Know when your baby kicked via Twitter with <a href="http://www.botanicalls.com/kits/">http://kickbee.net/</a></figcaption>
+									</figure>
+								</div>
+							</li>
+						</ul>
+					</section>
+
+					<section>
+						<h2>Why API? (2)</h2>
+						<ul>
+							<li class="fragment">
+								See cool stuff built using your data
+								<div style="text-align: center; margin-top: 30px;">
+									<figure class="fragment">
+										<img src="assets/07/gowallaheat.jpg" alt="" title="" height="300" width="400" />
+										<figcaption>Visualize your Gowalla (RIP) checkins with <a href="http://gowallaheat.bram.us/">GowallaHEAT</a></figcaption>
+									</figure>
+									<figure class="fragment">
+										<img src="assets/07/tweetie.jpg" alt="" title="" height="300" width="410" />
+										<figcaption>Write your own Twitter Client (and eventually <a href="http://mashable.com/2010/04/09/breaking-twitter-acquires-tweetie-iphone-app/">get bought by Twitter</a>)</figcaption>
+									</figure>
+								</div>
+							</li>
+						</ul>
+					</section>
+					
+					<section>
+						<h2>REST</h2>
+						<ul>
+							<li class="fragment">
+								REST = REpresentational State Transfer
+							</li>
+							<li class="fragment">
+								In web API context
+								<ul>
+									<li class="fragment">
+										<strong>URL</strong>s identify a <strong>Resource</strong>
+										<ul>
+											<li class="fragment">Resources have a hierarchy</li>
+										</ul>
+									</li>
+									<li class="fragment">
+										HTTP <strong>Verbs</strong> are used for <strong>Operations</strong> on resources
+										<ul>
+											<li class="fragment">The verb (<code>GET</code>, <code>POST</code>, <code>PUT</code>, <code>DELETE</code>) is not part of the URL!</li>
+										</ul>
+									</li>
+									<li class="fragment">
+										Returns data <em>(if any)</em> along with an <a href="http://restpatterns.org/HTTP_Status_Codes">HTTP Status Code</a>
+									</li>
+								</ul>
+							</li>
+						</ul>
+					</section>
+
+					<section>
+						<h2>REST URL Examples</h2>
+						<ul>
+							<li class="fragment"><em>Resource Identification</em>
+								<ul>
+									<li><code>/users</code> identifies all users</li>
+									<li><code>/users/1</code> identifies User #1</li>
+								</ul>
+							</li>
+							<li class="fragment"><em>Hierarchy</em>
+								<ul><li><code>/users/1/friends</code> gets all friends of User #1</li></ul>
+							</li>
+							<li class="fragment"><em>Operations</em>
+								<ul>
+									<li><code>GET /users/1</code> will fetch the user</li>
+									<li><code>DELETE /users/1</code> will delete it</li>
+								</ul>
+							</li>
+							<li class="fragment"><em>Status Codes</em>
+								<ul>
+									<li><code>GET /users/1</code> will return <code>200 - OK</code> along with the user data</li>
+									<li><code>POST /users</code> will return <code>201 - Created</code></li>
+								</ul>
+							</li>
+						</ul>
+					</section>
+								
+					<section>
+						<h2>Why REST?</h2>
+						<ul>
+							<li class="fragment">It's easy to work with</li>
+							<li class="fragment">It's easy to implement</li>
+							<li class="fragment">It's well structured</li>
+							<li class="fragment">
+								It's popular
+								<div style="text-align: center; margin-top: 10px;">
+									<figure>
+										<img src="assets/07/rest_winning.png" alt="" title="" height="299" width="707" />
+										<figcaption>Figure by <a href="http://www.slideshare.net/jmusser/pw-glue-conmay2010">jmusser</a></figcaption>
+									</figure>
+								</div>
+							</li>
+						</ul>
+					</section>
+													
+				</section>
+
+
+				<!-- 1 : REST URL Design -->
+				<section>
+
+					<section>
+						<h2>REST URL Design</h2>
+						<p><img src="assets/07/globetrotters.png" alt="" title="" height="375" width="500" /></p>
+						<q>This chronological wang-dang-doodle<br />could destroy the very matrix of reality.</q>
+					</section>
+					
+					<section>
+						<h2>REST URL Design</h2>
+						<ul>
+							<li class="fragment">
+								Truth be told, lots of APIs think they're RESTful when they in fact aren't
+							</li>
+							<li class="fragment">
+								It's simple though, if you apply the basic rules
+								<ol class="fragment">
+									<li>
+										<strong>URL</strong>s identify a <strong>Resource</strong> and are <strong>hierarchical</strong>
+									</li>
+									<li>
+										HTTP <strong>Verbs</strong> are used for <strong>Operations</strong> on resources
+									</li>
+									<li>
+										Returns data <em>(if any)</em> along with an <a href="http://restpatterns.org/HTTP_Status_Codes">HTTP Status Code</a>
+									</li>
+								</ol>
+							</li>
+						</ul>
+					</section>
+
+					<section>
+						<h2>1. Identification &amp; Hierarchy</h2>
+						<ul>
+							<li class="fragment">
+								Basic naming conventions
+								<ul>
+									<li class="fragment">Verbs are bad, nouns are good</li>
+									<li class="fragment">Use plurals</li>
+									<li class="fragment">Respect the Hierarchy</li>
+								</ul>
+							</li>
+							<li class="fragment">
+								Examples
+								<ul>
+									<li class="fragment"><del><code>/product</code></del> &rarr; <ins><code>/products</code></ins></li>
+									<li class="fragment"><del><code>/product/1234</code></del> &rarr; <ins><code>/products/1234</code></ins></li>
+									<li class="fragment"><del><code>/photos/product/1234</code></del> &rarr; <ins><code>/products/1234/photos</code></ins></li>
+									<li class="fragment"><del><code>/photos/product/1234/5678</code></del> &rarr; <ins><code>/products/1234/photos/5678</code></ins></li>
+								</ul>
+							</li>
+						</ul>
+					</section>
+
+					<section>
+						<h2>1. Identification &amp; Hierarchy bis</h2>
+						<ul>
+							<li class="fragment">
+								Use concrete naming, yet don't be too specific
+								<ul>
+									<li class="fragment"><del><code>/things</code></del></li>
+									<li class="fragment"><del><code>/animals</code></del></li>
+									<li class="fragment"><code class="ok">/dogs</code></li>
+									<li class="fragment"><del><code>/beagles</code></del></li>
+								</ul>
+							</li>
+							<li class="fragment">
+								Some cases will require a verb instead of a noun, yet consider these exceptions
+								<ul>
+									<li class="fragment"><code>/search?course=RIA</code></li>
+									<li class="fragment"><code>/convert?from=EUR&amp;to=USD&amp;amount=100</code></li>
+								</ul>
+							</li>
+						</ul>
+					</section>
+
+					<section>
+						<h2>2. HTTP Verbs</h2>
+						<ul>
+							<li class="fragment">
+								HTTP Verbs = CRUD = Queries
+								<ol>
+									<li class="fragment"><code>POST</code> = Create = <code>INSERT</code></li>
+									<li class="fragment"><code>GET</code> = Read = <code>SELECT</code></li>
+									<li class="fragment"><code>PUT</code> = Update = <code>UPDATE</code></li>
+									<li class="fragment"><code>DELETE</code> = Delete = <code>DELETE</code></li>
+								</ol>
+							</li>
+							<li class="fragment">
+								Examples
+								<ol>
+									<li class="fragment"><code>POST /products</code> <em>(data via <code>$_POST</code>)</em></li>
+									<li class="fragment"><code>GET /products</code> or <code>GET /products/1234</code></li>
+									<li class="fragment"><code>PUT /products/1234</code> <em>(data via &ldquo;<code>$_PUT</code>&rdquo;)</em></li>
+									<li class="fragment"><code>DELETE /products/1234</code></li>
+								</ol>
+							</li>
+						</ul>
+					</section>
+
+					<section>
+						<h2>3. HTTP Status Codes (1)</h2>
+						<ul>
+							<li class="fragment">
+								General Codes (applicable to all verbs/resources)
+								<ul>
+									<li class="fragment"><code>401 &mdash; Not Authorized</code> <em>(viz. No API Key given)</em></li>
+									<li class="fragment"><code>405 &mdash; Method Not Allowed</code> <em>(viz. wrong verb for resource)</em></li>
+									<li class="fragment"><code>500 &mdash; Internal Server Error</code> <em>(Developer screwed up ;))</em></li>
+								</ul>
+							</li>
+							<li class="fragment">
+								<code>GET</code> <small style="vertical-align: baseline;">(SQL SELECT)</small>
+								<ul>
+									<li class="fragment"><code>200 &mdash; OK</code> <em>(requested data sent via response body)</em></li>
+									<li class="fragment"><code>404 &mdash; Not Found</code></li>
+								</ul>
+							</li>
+							<li class="fragment">
+								<code>POST</code> <small style="vertical-align: baseline;">(SQL INSERT)</small>
+								<ul>
+									<li class="fragment"><code>201 &mdash; Created</code> <em>(=OK)</em></li>
+									<li class="fragment"><code>400 &mdash; Bad Request</code> <em>(Missing Parameters)</em></li>
+								</ul>
+							</li>
+						</ul>
+					</section>
+
+					<section>
+						<h2>3. HTTP Status Codes (2)</h2>
+						<ul>
+							<li class="fragment">
+								<code>PUT</code> <small style="vertical-align: baseline;">(SQL UPDATE)</small>
+								<ul>
+									<li class="fragment"><code>200 &mdash; OK</code> <em>(requested data sent via response body)</em></li>
+									<li class="fragment"><code>400 &mdash; Bad Request</code> <em>(Missing Parameters)</em></li>
+									<li class="fragment"><code>404 &mdash; Not Found</code></li>
+								</ul>
+							</li>
+							<li class="fragment">
+								<code>DELETE</code> <small style="vertical-align: baseline;">(SQL DELETE)</small>
+								<ul>
+									<li class="fragment"><code>204 &mdash; No Content</code> <em>(=OK &mdash; Note: <strong>no</strong> response body sent!)</em></li>
+									<li class="fragment"><code>404 &mdash; Not Found</code></li>
+								</ul>
+							</li>
+							<li class="fragment">
+								Warning! 
+								<ul><li>HTTP Statuses 4XX and 5XX will invoke <code>$.ajax().error()</code> in jQuery!</li></ul>
+							</li>
+						</ul>
+					</section>
+					
+					<section>
+						<h2>Case Study: Twitter API (1)</h2>
+						<ul>
+							<li class="fragment">
+								One of the first and most popular APIs, suffering from historically grown bloat.
+							</li>
+							<li class="fragment">
+								Get a status
+								<ul>
+									<li class="fragment">
+										Endpoint
+										<ul>
+											<li><code>GET api.twitter.com/1/statuses/show/id.format</code></li>
+										</ul>
+									</li>
+									<li class="fragment">
+										Problems
+										<ul>
+											<li class="fragment">Operation <code>show</code> included in URL</li>
+											<li class="fragment">Status id not a child of <code>statuses</code></li>
+										</ul>
+									</li>
+									<li class="fragment">
+										Better
+										<ul>
+											<li class="fragment"><code>GET api.twitter.com/1/statuses/id</code></li>
+										</ul>
+									</li>
+								</ul>
+							</li>
+						</ul>
+					</section>
+
+					<section>
+						<h2>Case Study: Twitter API (2)</h2>
+						<ul>
+							<li class="fragment">
+								Set (update) your status
+								<ul>
+									<li class="fragment">
+										Endpoint
+										<ul>
+											<li><code>POST api.twitter.com/1/statuses/show/update.format</code></li>
+										</ul>
+									</li>
+									<li class="fragment">
+										Problems
+										<ul>
+											<li class="fragment">Operation <code>update</code> included in URL</li>
+											<li class="fragment">Uses authenticated user implicitly</li>
+										</ul>
+									</li>
+									<li class="fragment">
+										Better
+										<ul>
+											<li class="fragment"><code>POST api.twitter.com/1/users/id/statuses</code></li>
+										</ul>
+									</li>
+								</ul>
+							</li>
+						</ul>
+					</section>
+
+					<section>
+						<h2>Case Study: Twitter API (3)</h2>
+						<ul>
+							<li class="fragment">
+								Remove a status udpate
+								<ul>
+									<li class="fragment">
+										Endpoint
+										<ul>
+											<li><code>POST api.twitter.com/1/statuses/destroy/id.format</code></li>
+										</ul>
+									</li>
+									<li class="fragment">
+										Problems
+										<ul>
+											<li class="fragment">Operation <code>destroy</code> included in URL</li>
+											<li class="fragment">Uses authenticated user implicitly</li>
+										</ul>
+									</li>
+									<li class="fragment">
+										Better
+										<ul>
+											<li class="fragment"><code>DELETE api.twitter.com/1/statuses/id</code></li>
+										</ul>
+									</li>
+								</ul>
+							</li>
+						</ul>
+					</section>
+
+					<section>
+						<h2>Case Study: Twitter API (4)</h2>
+						<ul>
+							<li class="fragment">
+								Get retweets of a status
+								<ul>
+									<li class="fragment">
+										Endpoint
+										<ul>
+											<li><code>GET api.twitter.com/1/statuses/retweets/id.format</code></li>
+										</ul>
+									</li>
+									<li class="fragment">
+										Problems
+										<ul>
+											<li class="fragment">Hierarchy is wrong</li>
+										</ul>
+									</li>
+									<li class="fragment">
+										Better
+										<ul>
+											<li class="fragment"><code>GET api.twitter.com/1/statuses/id/retweets</code></li>
+										</ul>
+									</li>
+								</ul>
+							</li>
+						</ul>
+					</section>
+					
+					<section>
+						<h2>URL Design Sidenotes</h2>
+						<ul>
+							<li class="fragment">
+								API Versioning
+								<ul>
+									<li class="fragment">Allowed in URL, as the 1st param (viz. Twitter <code>api.twitter.com/1/&hellip;</code>)</li>
+									<li class="fragment">Also possible to send it in via a header</li>
+								</ul>
+							</li>
+							<li class="fragment">
+								Pagination
+								<ul>
+									<li class="fragment">Mandatory for huge resources</li>
+									<li class="fragment">Use <code>limit</code> and <code>offset</code> URL Params, defaulting to <code>?limit=10&amp;offset=0</code></li>
+								</ul>
+							</li>
+							<li class="fragment">
+								Filtering &amp; Sorting
+								<ul>
+									<li class="fragment">Via URL Params <code>?filter=foo&amp;sort=asc</code></li>
+								</ul>
+							</li>
+							<li class="fragment">
+								Limiting fields
+								<ul>
+									<li class="fragment">Via URL Param <code>?fields=firstname,lastname,age</code></li>
+								</ul>
+							</li>
+						</ul>
+						<footer class="fragment">These practices are optional, we won't be implementing them ourselves</footer>
+					</section>
+					
+					<section>
+						<h2>Documentation</h2>
+						<ul>
+							<li class="fragment">As with most stuff on the internet, your API is useless without documentation</li>
+							<li class="fragment">
+								If no documentation, at least provide
+								<ul>
+									<li class="fragment"><a href="http://bramus.github.com/simple-rest-api-explorer/">An API explorer</a></li>
+									<li class="fragment">A code example</li>
+								</ul>
+							</li>
+						</ul>
+					</section>
+
+				</section>
+
+
+				<!-- 3 : REST in Plonk -->
+				<section>
+
+					<section>
+						<h2>REST in Plonk</h2>
+						<p><img src="assets/07/groin.png" alt="" title="" height="338" width="600" /></p>
+						<q>Would it cheer you up if I punch Fry in the groin?<br />Cause I'll do it, regardless.</q>
+					</section>
+
+					<section>
+						<h2>Plonk OO Websites Recap</h2>
+						<ul>
+							<li class="fragment">
+								<code>index.php</code> creates an instance of <code>PlonkWebsite</code>
+							</li>
+							<li class="fragment">
+								<code>PlonkWebsite</code> is the <em>Front Controller</em> en decides which module to load based on the <code>module</code> URL parameter
+							</li>
+							<li class="fragment">
+								A module is built on top of <code>PlonkController</code> which
+								<ol>
+									<li class="fragment">Loads the main template</li>
+									<li class="fragment">Processes the action <em>(based on a sent in <code>moduleAction</code>)</em></li>
+									<li class="fragment">Loads the page template <em>(based on a <code>view</code> URL Param)</em></li>
+									<li class="fragment">Processes the view</li>
+									<li class="fragment">Outputs the main template via the <code>display</code> function</li>
+								</ol>
+							</li>
+						</ul>
+					</section>
+
+					<section>
+						<h2>Why Plonk?</h2>
+						<ul>
+							<li class="fragment">
+								We've been using it for quite some time and know it
+							</li>
+							<li class="fragment">
+								With some minor adjustments we implement our API
+								<ol>
+									<li class="fragment">
+										Support <em>nice URLs</em> (<code>http://mysite.tld/module/view/other/params</code>) with <code>mode_rewrite</code>
+									</li>
+									<li class="fragment">
+										Build our own <code>PlonkApiController</code> on top of <code>PlonkController</code>
+										<ul>
+											<li class="fragment">Key difference: no processed templates but JSON as output</li>
+											<li class="fragment">Other difference: no <code>actions</code>, only <code>views</code> <em>(more on that later)</em></li>
+										</ul>
+									</li>
+									<li class="fragment">
+										Build our API implementation on <code>PlonkApiController</code>
+									</li>
+								</ol>
+							</li>
+						</ul>
+					</section>
+					
+					<section>
+						<h2>Before we dive in</h2>
+						<ul>
+							<li class="fragment">
+								I like my code clean, concise, but most of al readable
+								<ul>
+									<li class="fragment">
+										Same goes for JSON API Responses
+									</li>
+								</ul>
+							</li>
+							<li class="fragment">
+								RIA Response format convention:
+								<ul>
+									<li class="fragment">
+										Next to sending the response code and text as an HTTP status, also send it in the response itself, in a <code>status</code> object
+									</li>
+									<li class="fragment">
+										Send the data in a <code>content</code> object
+									</li>
+								</ul>
+								<div class="fragment"><pre class="bigger language-javascript dontrun"><code>{
+   &quot;status&quot;:
+   {
+       &quot;code&quot;: 401,
+       &quot;text&quot;: &quot;Unauthorized&quot;
+   },
+   &quot;content&quot;: &quot;The API Key does not exist or is not valid for this domain&quot;
+}</code></pre></div>
+							</li>
+						</ul>
+					</section>
+					
+					<section>
+						<h2>1. Support nice URLs (1)</h2>
+						<ul>
+							<li class="fragment">
+								Let <code>.htaccess</code> route all requests to non-existing files/directories to <code>index.php</code>
+								<pre class="bigger"><code>&lt;IfModule mod_rewrite.c&gt;
+RewriteEngine On
+RewriteBase /
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule . /index.php [L]
+&lt;/IfModule&gt;</code></pre>
+							</li>
+						</ul>
+					</section>
+
+					<section>
+						<h2>1. Support nice URLs (2)</h2>
+						<ul>
+							<li class="fragment">
+								Adjust <code>PlonkWebsite-&gt;performPrerequisites()</code> to fetch the <em>module</em> from the URL
+								<pre class="bigger language-php"><code>// store the url string
+$this-&gt;urlString = $_SERVER['REQUEST_URI'];
+if (strstr($this-&gt;urlString, '?')) {
+	$this-&gt;urlParts = explode('/', substr($this-&gt;urlString, 1,
+	strpos($this-&gt;urlString, '?') - 1));
+} else {
+	$this-&gt;urlParts = explode('/', substr($this-&gt;urlString, 1));
+}</code></pre>
+								<ul>
+									<li>The module is stored in <code>$this-&gt;urlParts[0]</code></li>
+								</ul>
+							</li>
+							<li class="fragment">
+								Pass <code>$this-&gt;urlParts</code> to <code>PlonkController-&gt;__construct()</code> so that it can fetch the <em>view</em> from <code>$this-&gt;urlParts[1]</code>
+							</li>
+							<li class="fragment">
+								The module constructor should store <code>$this-&gt;urlParts</code> for future reference
+							</li>
+						</ul>
+					</section>
+					
+
+					<section>
+						<h2>2. PlonkApiController</h2>
+						<ul>
+							<li class="fragment">
+								Basic structure <em>(will change)</em>
+								<pre class="bigger language-php"><code>&lt;?php
+class PlonkApiController extends PlonkController {
+	
+	public function __construct(array $urlParts) {
+		parent::__construct($urlParts);
+	}
+	
+	protected function display($status, $content) {
+		header('Cache-Control: no-cache, must-revalidate');
+		header('Expires: Mon, 26 Jul 1997 05:00:00 GMT');
+		header('Content-type: application/json');
+		header('HTTP/1.1 ' . $this->status[0] . ' ' . $this->status[1]);
+		echo json_encode(array(
+			'status' => $this->status,
+			'content' => $this->content
+		));
+	}
+	
+	protected function loadMainTemplate() { return; }
+	protected function loadPageTemplate() { return; }
+}
+// EOF</code></pre>
+							</li>
+						</ul>
+					</section>
+
+
+					<section>
+						<h2>3. Implementation</h2>
+						<ul>
+							<li class="fragment">
+								Very simple example
+								<pre class="bigger language-php"><code>&lt;?php
+class SampleapiController extends PlonkApiController {
+
+	protected $views = array('dogs');
+	
+	public function showDogs() {
+		// detail
+		if (isset($this-&gt;urlParts[2]) &amp;&amp; trim($this-&gt;urlParts[2]) != '') {
+			$dog = SampleapiDB::getDog($this-&gt;urlParts[2]);
+			
+			if ($dog) {
+				$this-&gt;display(array(200,'OK'), $dog);
+			} else {
+				$this-&gt;display(array(404,'Not Found'), 'Invalid Dog ID');
+			}
+		}
+		// overview
+		else {
+			$dogs = SampleapiDB::getDogs();
+			$this-&gt;display(array(200,'OK'), $dogs);
+		}
+	}
+}
+// EOF</code></pre>
+							</li>
+						<ul>
+					</section>
+
+					<section>
+						<h2>That's it?</h2>
+						<ul>
+							<li class="fragment">Basically, yes</li>
+							<li class="fragment">
+								Code can be optimized though
+								<ol>
+									<li class="fragment">Optimize working with statuses</li>
+									<li class="fragment">Support JSONP</li>
+									<li class="fragment">Implement other request methods</li>
+									<li class="fragment">Limit request methods (verbs) on resources</li>
+									<li class="fragment">Enable CORS</li>
+								</ol>
+							</li>
+						</ul>
+					</section>
+
+					<section>
+						<h2>1. Working with statuses (1)</h2>
+						<ul>
+							<li class="fragment">Provide <code>$status</code> and <code>$content</code> datamembers + mutators for them</li>
+							<li class="fragment">Keep list of allowed HTTP Status Codes</li>
+							<li class="fragment">By default, set status to <code>200</code></li>
+						</ul>
+					</section>
+
+					<section>
+						<h2>1. Working with statuses (2)</h2>
+						<div class="fragment">
+							<pre class="bigger language-php"><code>&lt;?php
+class PlonkApiController extends PlonkController {
+
+	private $status, $content;
+
+	final protected function setStatus($statusCode) {
+		$codes = array(
+			200 =&gt; 'OK',
+			// ... List of statuscode with status texts
+		);
+		$this->status = array(
+			'code' => $statusCode,
+			'text' => $codes[$statusCode]
+		);	
+		header('HTTP/1.1 ' . $this->status['code'] . ' ' . $this->status['text']);
+	}
+
+	final protected function setContent($content) {
+		$this->content = $content;
+	}
+
+	...
+
+}
+// EOF</code></pre>
+						</div>
+					</section>
+					
+					<section>
+						<h2>1. Working with statuses (3)</h2>
+						<div class="fragment">
+							<pre class="bigger language-php"><code>&lt;?php
+class PlonkApiController extends PlonkController {
+	
+	...
+
+	protected function display() {
+		header('Cache-Control: no-cache, must-revalidate');
+		header('Expires: Mon, 26 Jul 1997 05:00:00 GMT');
+		header('Content-type: application/json');
+
+		echo json_encode(
+			array(
+				'status' => $this->status,
+				'content' => $this->content
+			)
+		);
+	}
+	
+	...
+
+}
+// EOF</code></pre>
+						<p style="font-size: 50%;">No need to call <code>display()</code> from the implementation anymore, just call <code>setStatus()</code> and <code>setContent()</code></p>
+						</div>
+					</section>
+
+					<section>
+						<h2>2. JSONP</h2>
+						<ul>
+							<li class="fragment">When outputting, check if <code>callback</code> URL Param is set</li>
+						</ul>
+						<div class="fragment">
+							<pre class="bigger language-php"><code>protected function display() {
+								
+	...
+
+	$json = json_encode(
+		array(
+			'status' => $this->status,
+			'content' => $this->content
+		)
+	);
+	
+	// jsonp
+	if (PlonkFilter::getGetValue('callback')) {
+		echo PlonkFilter::getGetValue('callback') . '(' . $json . ');';
+	}
+
+	// json
+	else {
+		echo $json;
+	}
+}</code></pre>
+						</div>
+					</section>
+
+					<section>
+						<h2>3. Other request methods (1)</h2>
+						<ul>
+							<li class="fragment">Keep track of the <code>$requestMethod</code> and implement according to its value</li>
+						</ul>
+						<div class="fragment">
+							<pre class="bigger language-php"><code>&lt;?php
+class PlonkApiController extends PlonkController {
+
+	public function __construct(array $urlParts) {
+
+		// Call Parent Class
+		parent::__construct($urlParts);
+
+		// store request method
+		$this->requestMethod = $_SERVER['REQUEST_METHOD'];
+
+	}
+
+}
+// EOF</code></pre>
+						</div>
+					</section>
+
+					<section>
+						<h2>3. Other request methods (2)</h2>
+						<div class="fragment">
+							<pre class="language-php"><code>public function showDogs() {
+	if (isset($this-&gt;urlParts[2]) &amp;&amp; trim($this-&gt;urlParts[2]) != '') { // detail or delete or update
+		$dog = SampleapiDB::getDog($this-&gt;urlParts[2]);
+		if ($dog) {
+			switch($this-&gt;requestMethod) {
+				case 'GET':
+					// get Dog + Return it + Status 200
+				break;
+				case 'PUT':
+					// Update Dog + Status 200 (all params set) or 400 (params missing)
+				break;
+				case 'DELETE':
+					// Delete Dog + Status 204
+				break;
+			}
+		} else {
+			$this-&gt;setStatus(404);
+			$this-&gt;setContent('Invalid Dog ID');
+		}
+	} else { // overview or insert
+		switch($this-&gt;requestMethod) {
+			case 'GET':
+				// get Dogs + Return them + Status 200
+			break;
+			case 'POST':
+				// Insert Dog + Status 201 (all params set) or 400 (params missing)
+			break;
+		}
+	}
+}</code></pre>
+						</div>
+					</section>
+
+					<section>
+						<h2>3. Other request methods (3)</h2>
+						<ul>
+							<li class="fragment">In PHP, there is no <code>$_PUT</code> ... but we can build that ourselves!</li>
+						</ul>
+						<div class="fragment">
+							<pre class="bigger language-php"><code>...
+case 'PUT':
+
+	$_PUT = array();
+	parse_str(file_get_contents('php://input'), $_PUT);
+
+	// Update Dog + Status 200 (all params set) or 400 (params missing)
+
+break;
+...</code></pre>
+						</div>
+						<ul>
+							<li class="fragment">Note that <code>$_PUT</code> isn't global!</li>
+						</ul>
+					</section>
+
+					<section>
+						<h2>4. Limit request methods (1)</h2>
+						<ul>
+							<li class="fragment">Manually check if the request method is allowed. If not, return a <code>405 &mdash; Method Not Allowed</code></li>
+						</ul>
+						<div class="fragment">
+							<pre class="bigger language-php"><code>public function showDogs() {
+	if (isset($this-&gt;urlParts[2]) &amp;&amp; trim($this-&gt;urlParts[2]) != '') { // detail or delete or update
+		$dog = SampleapiDB::getDog($this-&gt;urlParts[2]);
+		if ($dog) {
+			$this-&gt;setAllowedMethods(array('GET', 'PUT', 'DELETE'));
+			// ...
+		} else {
+			$this-&gt;setStatus(404);
+			$this-&gt;setContent('Invalid Dog ID');
+		}
+	} else { // overview or insert
+		$this-&gt;setAllowedMethods(array('GET, 'POST'));
+		// ...
+	}
+}</code></pre>
+						</div>
+					</section>
+
+					<section>
+						<h2>4. Limit request methods (2)</h2>
+						<div class="fragment">
+							<pre class="bigger language-php"><code>class PlonkApiController extends PlonkController {
+	...
+	public function setAllowedMethods(array $methods = array('get')) {
+		// We'll implement this one in the lab ;-)
+	}
+	...
+}</code></pre>
+						</div>
+					</section>
+
+					<section>
+						<h2>5. CORS (1)</h2>
+						<ul>
+							<li class="fragment">When using CORS, XHR2 does a preflight <code>OPTIONS</code> request to the API endpoint to check the headers if CORS is enabled</li>
+							<li class="fragment">CORS can be enabled via the <code>Access-Control-Allow-Origin</code> header</li>
+							<li class="fragment">XHR2 will also check the <code>Access-Control-Allow-Methods</code> header to see which methods are allowed</li>
+							<li class="fragment">Summarized: <code>PlonkApiController</code> needs to send back those headers if an <code>OPTIONS</code> is done</li>
+						</ul>
+					</section>
+
+					<section>
+						<h2>5. CORS (2)</h2>
+						<div class="fragment">
+							<pre class="language-php"><code>class PlonkApiController extends PlonkController {
+								
+	...
+	
+	public function __construct(array $urlParts) {
+
+		// Call Parent Class
+		parent::__construct($urlParts);
+
+		// store request method
+		$this-&gt;requestMethod = $_SERVER['REQUEST_METHOD'];
+
+		// Tell client that all methods are allowed (must be done first!)
+		if ($this-&gt;requestMethod == 'OPTIONS') {
+			header('Access-Control-Allow-Methods: GET, POST, PUT, DELETE');
+			exit();
+		} else {
+			$this-&gt;setStatus(200);
+			$this-&gt;setContent('');
+		}
+
+	}
+	
+	...
+	
+	final protected function setCors($cors = null) {
+		$this-&gt;cors = (string) $cors;
+		header('Access-Control-Allow-Origin: ' . $this-&gt;cors);
+	}
+	
+	...
+	
+}</code></pre>
+						</div>
+					</section>
+					
+					<section>
+						<h2>5. CORS (3)</h2>
+						<div class="fragment">
+							<pre class="bigger language-php"><code>class SampleapiController extends PlonkApiController {
+								
+	public function __construct(array $urlParts) {
+
+		// Set this before calling the parent constructor,
+		// so that it is outputted when an OPTIONS request comes in
+		$this->setCors('*');
+
+		// Call Parent Class Constructor
+		parent::__construct($urlParts);
+
+	}
+	
+	...
+
+}</code></pre>
+						</div>
+					</section>
+
+					<section>
+						<h2>Phew!</h2>
+						<ul>
+							<li class="fragment">Yeah!</li>
+						</ul>
+					</section>
+
+				</section>
+				
+				<!-- 4 : API Authentication -->
+				<section>
+					<section>
+						<h2>API Authentication</h2>
+						<p><img src="assets/07/grunkalunkas.png" alt="" title="" height="378" width="500" /></p>
+						<q>Who are those horrible orange creatures over there? &mdash; Grunka-Lunkas. &mdash; Tell them I hate them!</q>
+					</section>
+
+					<section>
+						<h2>API Authentication</h2>
+						<ul>
+							<li class="fragment">
+								Two needs for authentication
+								<ol>
+									<li class="fragment">API Consumers <em>(apps using your API)</em></li>
+									<li class="fragment">User Authentications <em>(allowing apps using your API to act on behalf of a user)</em></li>
+								</ol>
+							</li>
+						</ul>
+					</section>
+
+					<section>
+						<h2>1. API Consumers</h2>
+						<ul>
+							<li class="fragment">
+								Make use of API-Keys
+								<ul>
+									<li class="fragment">Require API-Key to be sent in via a header</li>
+									<li class="fragment">Check API-Key in constructor</li>
+								</ul>
+								<div class="fragment">
+									<pre class="bigger language-php"><code>public function __construct(array $urlParts) {
+	$this-&gt;setCors('*');
+	header('Access-Control-Allow-Headers: X-Api-Key');
+	parent::__construct($urlParts);
+	$this-&gt;checkApiKey();
+}
+
+private function checkApiKey() {
+	$headers = apache_request_headers();
+	if(!isset($headers['X-Api-Key'] || !ApiDB::isValidApiKey($headers['X-Api-Key']) {
+		$this-&gt;setStatus(401);
+		$this-&gt;setContent('Missing or invalid API Key.');
+		$this-&gt;display();
+		exit();
+	}	
+}
+</code></pre>
+								</div>
+							</li>
+						</ul>
+					</section>
+
+					<section>
+						<h2>2. User Authentication (1)</h2>
+						<ul>
+							<li class="fragment">
+								API Consumers should never ask the user his/her username/password but should use OAuth2 which works with time-limited access tokens to accessing user data
+								
+								<p style="text-align: center;"><img src="assets/07/oauth2.png" width="300" height="300" alt="" title="" style="background: transparent; border: 0; -webkit-box-shadow: none; -moz-box-shadow: none; -ms-box-shadow: none; -o-box-shadow: none; box-shadow: none;" /><p>
+							</li>
+						</ul>
+					</section>
+
+					<section>
+						<h2>2. User Authentication (2)</h2>
+						<ul>
+							<li class="fragment">
+								OAuth2 in words
+								<ol style="font-size: 70%">
+									<li class="fragment">User is sent to the OAuth provider (along the consumer app's API-Key (<code>client_id</code>) for identification), asking if consumer app may access user data at a certain <code>scope</code> <em>(read/write)</em></li>
+									<li class="fragment">If user accepts the OAuth provider will redirect back to the consumer app's <code>redirect_uri</code> with an <code>authorization_code</code></li>
+									<li class="fragment">In the background, the consumer app must make a request to the OAuth provider with that <code>authorization_code</code>, along with its API-Key (<code>client_id</code>) and secret key (<code>client_secret</code>)</li>
+									<li class="fragment">The OAuth provider will issue an <code>access_token</code> and <code>refresh_token</code></li>
+									<li class="fragment">The <code>access_token</code> must passed with all calls made and is valid for a limited time</li>
+									<li class="fragment">When the <code>access_token</code> has expired, the consumer app needs to do a call to the OAuth Prodider with the <code>refresh_token</code> to get a new pair <code>access_token</code> &amp; <code>refresh_token</code></li>
+								</ol>
+							</li>
+						</ul>
+					</section>
+
+					<section>
+						<h2>2. User Authentication (3)</h2>
+						<ul>
+							<li class="fragment">
+								OAuth2, schematic
+								<p style="text-align: center;"><img src="assets/07/oauth2_flow.png" width="555" height="420" alt="" title="" /><p>
+							</li>
+						</ul>
+					</section>
+
+					<section>
+						<h2>API Authentication</h2>
+						<ul>
+							<li class="fragment">
+								API-Keys are easily implemented, both consumer and provider side
+							</li>
+							<li class="fragment">Once you get the gist of it, OAuth2 is fairly easy ... or you could use a prefab solution if you don't <em>(#lmgtfy)</em></li>
+						</ul>
+					</section>
+					
+				</section>
+
+				
+				<!-- The END -->
+				<section>
+					<section>
+						<h2>Questions?</h2>
+						<footer>
+							<em><a href="http://www.ikdoeict.be/">ikdoeict.be</a> &mdash; <a href="mailto:bramus.vandamme@kahosl.be">bramus.vandamme@kahosl.be</a></em>
+						</footer>
+					</section>
+				</section>
+
+
+
+				<!-- Sources -->
+				<section id="sources">
+					<section>
+						<h2>Sources</h2>
+						<ul>
+							<!-- REST Intro -->
+							<li><a href="http://en.wikipedia.org/wiki/Representational_state_transfer">http://en.wikipedia.org/wiki/Representational_state_transfer</a></li>
+							<li><a href="http://www.slideshare.net/jmusser/pw-glue-conmay2010">http://www.slideshare.net/jmusser/pw-glue-conmay2010</a></li>
+							<li><a href="http://www.slideshare.net/al3x/the-interaction-design-of-apis">http://www.slideshare.net/al3x/the-interaction-design-of-apis</a></li>
+							
+							<!-- REST URL Design -->
+							<li><a href="http://www.slideshare.net/Wombert/phpjp-urls-rest">http://www.slideshare.net/Wombert/phpjp-urls-rest</a></li>
+							<li><a href="http://www.slideshare.net/apigee/restful-api-design-second-edition">http://www.slideshare.net/apigee/restful-api-design-second-edition</a></li>
+							<li><a href="http://restpatterns.org/HTTP_Status_Codes">http://restpatterns.org/HTTP_Status_Codes</a></li>
+							
+							<!-- REST in PHP -->
+							<li><a href="http://www.recessframework.org/page/towards-restful-php-5-basic-tips">http://www.recessframework.org/page/towards-restful-php-5-basic-tips</a></li>
+							<li><a href="http://www.gen-x-design.com/archives/create-a-rest-api-with-php/">http://www.gen-x-design.com/archives/create-a-rest-api-with-php/</a></li>
+							
+							<!-- Authentication -->
+							<li><a href="http://en.wikipedia.org/wiki/Oauth">http://en.wikipedia.org/wiki/Oauth</a></li>
+							<li><a href="http://www.slideshare.net/leahculver/oauth-open-api-authentication">http://www.slideshare.net/leahculver/oauth-open-api-authentication</a></li>
+							
+						</ul>
+					</section>
+				</section>
+				
+			</div>
+
+			<!-- The navigational controls UI -->
+			<aside class="controls">
+				<a class="left" href="#">&#x25C4;</a>
+				<a class="right" href="#">&#x25BA;</a>
+				<a class="up" href="#">&#x25B2;</a>
+				<a class="down" href="#">&#x25BC;</a>
+				<span id="revealIndex">/</span>
+			</aside>
+
+			<!-- Index Link -->
+			<aside class="back">
+				<a href="index.html">&larr; Back to index</a>
+			</aside>
+			
+			<!-- ikdoeict.be Link -->
+			<a href="http://www.ikdoeict.be/" title="ikdoeict.be" id="ikdoeict">ikdoeict.be</a>
+
+			<!-- Displays presentation progress, max value changes via JS to reflect # of slides -->
+			<div class="progress"><span></span></div>
+			
+		</div>
+		
+		<script src="js/reveal.js"></script>
+		<script src="lib/highlight.js"></script>
+		<script src="lib/prefixfree.js"></script>
+		<script src="lib/css-snippets.js"></script>
+		<script src="lib/css-edit.js"></script>
+		<script src="lib/incrementable.js"></script>
+		<script src="js/main.js"></script>
+
+	</body>
+</html>
