@@ -50,15 +50,156 @@
 				<section>
 
 					<section>
-						<p><img src="assets/07/....jpg" alt="" title="" height="252" width="446" /></p>
+						<p><img src="assets/07/globetrotters.png" alt="" title="" height="406" width="540" /></p>
+						<q>This chronological wang-dang-doodle could destroy<br />the very matrix of reality.</q>
 					</section>
 
 					<section>
-						<h2>RESTful APIs?</h2>
+						<h2>RESTful API?</h2>
 						<ul>
-							<li class="fragment"></li>
-							<li class="fragment"></li>
-							<li class="fragment"></li>
+							<li class="fragment">
+								An API that is REST compliant
+							</li>
+						</ul>
+					</section>
+
+					<section>
+						<h2>SRSLY?</h2>
+						<p><img src="assets/07/notsureif.png" alt="Not Sure If ..." title="Not Sure If ..." width="480" height="360" /></p>
+						<p><em>Not sure if trolling or just &ldquo;technically correct&rdquo;</em></p>
+					</section>
+
+					<section>
+						<h2>API</h2>
+						<ul>
+							<li class="fragment">
+								Application Programming Interface
+								<ul>
+									<li class="fragment">Abstract Interface to allow communication between software components</li>
+								</ul>
+							</li>
+							<li class="fragment">
+								In web context
+								<ul>
+									<li class="fragment">Language independent</li>
+									<li class="fragment">Allow you to push/pull data to/from a web site</li>
+									<li class="fragment">Sometimes referred to as a &ldquo;Web Service&rdquo; <em>(blame Microsoft)</em></li>
+									<li class="fragment">Implemented via JavaScript, XML-RPC, SOAP, or REST</li>
+									<li class="fragment">Return formats JS, XML, HTML, plaintext, or JSON(P)</li>
+								</ul>
+							</li>
+						</ul>
+					</section>
+
+					<section>
+						<h2>Why API? (1)</h2>
+						<ul>
+							<li class="fragment">
+								See cool stuff built on top of your technology platform
+								<div style="text-align: center; margin-top: 30px;">
+									<figure class="fragment">
+										<img src="assets/07/BotanicallsSparkfunKit_jade1_800.jpg" alt="" title="" height="300" width="400" />
+										<figcaption>Let your plants tell you via Twitter that they're thirsty with <a href="http://www.botanicalls.com/kits/">botanicalls</a></figcaption>
+									</figure>
+									<figure class="fragment">
+										<img src="assets/07/kickbee.jpg" alt="" title="" height="250" width="400" />
+										<figcaption>Know when your baby kicked via Twitter with <a href="http://www.botanicalls.com/kits/">http://kickbee.net/</a></figcaption>
+									</figure>
+								</div>
+							</li>
+						</ul>
+					</section>
+
+					<section>
+						<h2>Why API? (2)</h2>
+						<ul>
+							<li class="fragment">
+								See cool stuff built using your data
+								<div style="text-align: center; margin-top: 30px;">
+									<figure class="fragment">
+										<img src="assets/07/gowallaheat.jpg" alt="" title="" height="300" width="400" />
+										<figcaption>Visualize your Gowalla (RIP) checkins with <a href="http://gowallaheat.bram.us/">GowallaHEAT</a></figcaption>
+									</figure>
+									<figure class="fragment">
+										<img src="assets/07/tweetie.jpg" alt="" title="" height="300" width="410" />
+										<figcaption>Write your own Twitter Client (and eventually <a href="http://mashable.com/2010/04/09/breaking-twitter-acquires-tweetie-iphone-app/">get bought by Twitter</a>)</figcaption>
+									</figure>
+								</div>
+							</li>
+						</ul>
+					</section>
+					
+					<section>
+						<h2>REST</h2>
+						<ul>
+							<li class="fragment">
+								REST = REpresentational State Transfer
+							</li>
+							<li class="fragment">
+								In web API context
+								<ul>
+									<li class="fragment">
+										<strong>URL</strong>s identify a <strong>Resource</strong>
+										<ul>
+											<li class="fragment">Resources have a hierarchy</li>
+										</ul>
+									</li>
+									<li class="fragment">
+										HTTP <strong>Verbs</strong> are used for <strong>Operations</strong> on resources
+										<ul>
+											<li class="fragment">The verb (<code>GET</code>, <code>POST</code>, <code>PUT</code>, <code>DELETE</code>) is not part of the URL!</li>
+										</ul>
+									</li>
+									<li class="fragment">
+										Returns data along with an <a href="http://restpatterns.org/HTTP_Status_Codes">HTTP Status Code</a>
+									</li>
+								</ul>
+							</li>
+						</ul>
+					</section>
+
+					<section>
+						<h2>REST URL Examples</h2>
+						<ul>
+							<li class="fragment"><em>Resource Identification</em>
+								<ul>
+									<li><code>/users</code> identifies all users</li>
+									<li><code>/users/1</code> identifies User #1</li>
+								</ul>
+							</li>
+							<li class="fragment"><em>Hierarchy</em>
+								<ul><li><code>/users/1/friends</code> gets all friends of User #1</li></ul>
+							</li>
+							<li class="fragment"><em>Operations</em>
+								<ul>
+									<li><code>GET /users/1</code> will fetch the user</li>
+									<li><code>DELETE /users/1</code> will delete it</li>
+								</ul>
+							</li>
+							<li class="fragment"><em>Status Codes</em>
+								<ul>
+									<li><code>GET /users/1</code> will return <code>200 - OK</code> along with the user data</li>
+									<li><code>POST /users</code> will return <code>201 - Created</code></li>
+								</ul>
+							</li>
+						</ul>
+					</section>
+								
+					<section>
+						<h2>Why REST?</h2>
+						<ul>
+							<li class="fragment">It's easy to work with</li>
+							<li class="fragment">It's easy to implement</li>
+							<li class="fragment">It's well structured</li>
+							<li class="fragment">
+								It's popular
+								<div style="text-align: center; margin-top: 10px;">
+									<figure>
+										<img src="assets/07/rest_winning.png" alt="" title="" height="299" width="707" />
+										<figcaption>Figure by <a href="http://www.slideshare.net/jmusser/pw-glue-conmay2010">jmusser</a></figcaption>
+									</figure>
+								</div>
+							</li>
 						</ul>
 					</section>
 													
@@ -82,7 +223,24 @@
 					<section>
 						<h2>Sources</h2>
 						<ul>
-							<li><a href="#">...</a></li>
+							<!-- REST Intro -->
+							<li><a href="http://en.wikipedia.org/wiki/Representational_state_transfer">http://en.wikipedia.org/wiki/Representational_state_transfer</a></li>
+							<li><a href="http://www.slideshare.net/jmusser/pw-glue-conmay2010">http://www.slideshare.net/jmusser/pw-glue-conmay2010</a></li>
+							<li><a href="http://www.slideshare.net/al3x/the-interaction-design-of-apis">http://www.slideshare.net/al3x/the-interaction-design-of-apis</a></li>
+							
+							<!-- REST URL Design -->
+							<li><a href="http://www.slideshare.net/Wombert/phpjp-urls-rest">http://www.slideshare.net/Wombert/phpjp-urls-rest</a></li>
+							<li><a href="http://www.slideshare.net/apigee/restful-api-design-second-edition">http://www.slideshare.net/apigee/restful-api-design-second-edition</a></li>
+							<li><a href="http://restpatterns.org/HTTP_Status_Codes">http://restpatterns.org/HTTP_Status_Codes</a></li>
+							
+							<!-- REST in PHP -->
+							<li><a href="http://www.recessframework.org/page/towards-restful-php-5-basic-tips">http://www.recessframework.org/page/towards-restful-php-5-basic-tips</a></li>
+							<li><a href="http://www.gen-x-design.com/archives/create-a-rest-api-with-php/">http://www.gen-x-design.com/archives/create-a-rest-api-with-php/</a></li>
+							
+							<!-- Authentication -->
+							<li><a href="http://en.wikipedia.org/wiki/Oauth">http://en.wikipedia.org/wiki/Oauth</a></li>
+							<li><a href="http://www.slideshare.net/leahculver/oauth-open-api-authentication">http://www.slideshare.net/leahculver/oauth-open-api-authentication</a></li>
+							
 						</ul>
 					</section>
 				</section>
