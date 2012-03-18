@@ -110,6 +110,9 @@
 									<li class="fragment">Return formats JS, XML, HTML, plaintext, or JSON(P)</li>
 								</ul>
 							</li>
+							<li class="fragment">
+								You've already implemented a SOAP-based on in the course Webprogrammatie
+							</li>
 						</ul>
 					</section>
 
@@ -280,6 +283,7 @@
 									<li class="fragment"><del><code>/photos/product/1234/5678</code></del> &rarr; <ins><code>/products/1234/photos/5678</code></ins></li>
 								</ul>
 							</li>
+						</ul>
 					</section>
 
 					<section>
@@ -301,6 +305,7 @@
 									<li class="fragment"><code>/convert?from=EUR&amp;to=USD&amp;amount=100</code></li>
 								</ul>
 							</li>
+						</ul>
 					</section>
 
 					<section>
@@ -324,6 +329,7 @@
 									<li class="fragment"><code>DELETE /products/1234</code></li>
 								</ol>
 							</li>
+						</ul>
 					</section>
 
 					<section>
@@ -333,8 +339,8 @@
 								General Codes (applicable to all verbs/resources)
 								<ul>
 									<li class="fragment"><code>401 &mdash; Not Authorized</code> <em>(viz. No API Key given)</em></li>
+									<li class="fragment"><code>405 &mdash; Method Not Allowed</code> <em>(viz. wrong verb for resource)</em></li>
 									<li class="fragment"><code>500 &mdash; Internal Server Error</code> <em>(Developer screwed up ;))</em></li>
-									<li class="fragment"><code>501 &mdash; Not Implemented</code> <em>(viz. wrong verb or invalid resource)</em></li>
 								</ul>
 							</li>
 							<li class="fragment">
@@ -351,6 +357,7 @@
 									<li class="fragment"><code>400 &mdash; Bad Request</code> <em>(Missing Parameters)</em></li>
 								</ul>
 							</li>
+						</ul>
 					</section>
 
 					<section>
@@ -371,6 +378,11 @@
 									<li class="fragment"><code>404 &mdash; Not Found</code></li>
 								</ul>
 							</li>
+							<li class="fragment">
+								Warning! 
+								<ul><li>HTTP Statuses 4XX and 5XX will invoke <code>$.ajax().error()</code> in jQuery!</li></ul>
+							</li>
+						</ul>
 					</section>
 					
 					<section>
@@ -542,6 +554,325 @@
 						</ul>
 					</section>
 
+				</section>
+
+
+				<!-- 3 : REST in Plonk -->
+				<section>
+
+					<section>
+						<h2>REST in Plonk</h2>
+						<p><img src="assets/07/groin.png" alt="" title="" height="338" width="600" /></p>
+						<q>Would it cheer you up if I punch Fry in the groin?<br />Cause I'll do it, regardless.</q>
+					</section>
+
+					<section>
+						<h2>Plonk OO Websites Recap</h2>
+						<ul>
+							<li class="fragment">
+								<code>index.php</code> creates an instance of <code>PlonkWebsite</code>
+							</li>
+							<li class="fragment">
+								<code>PlonkWebsite</code> is the <em>Front Controller</em> en decides which module to load based on the <code>module</code> URL parameter
+							</li>
+							<li class="fragment">
+								A module is built on top of <code>PlonkController</code> which
+								<ol>
+									<li class="fragment">Loads the main template</li>
+									<li class="fragment">Processes the action <em>(based on a sent in <code>moduleAction</code>)</em></li>
+									<li class="fragment">Loads the page template <em>(based on a <code>view</code> URL Param)</em></li>
+									<li class="fragment">Processes the view</li>
+									<li class="fragment">Outputs the main template via the <code>display</code> function</li>
+								</ol>
+							</li>
+						</ul>
+					</section>
+
+					<section>
+						<h2>Why Plonk?</h2>
+						<ul>
+							<li class="fragment">
+								We've been using it for quite some time and know it
+							</li>
+							<li class="fragment">
+								With some minor adjustments we implement our API
+								<ol>
+									<li class="fragment">
+										Support <em>nice URLs</em> (<code>http://mysite.tld/module/view/other/params</code>) with <code>mode_rewrite</code>
+									</li>
+									<li class="fragment">
+										Build our own <code>PlonkApiController</code> on top of <code>PlonkController</code>
+										<ul>
+											<li class="fragment">Key difference: no processed templates but JSON as output</li>
+											<li class="fragment">Other difference: no <code>actions</code>, only <code>views</code> <em>(more on that later)</em></li>
+										</ul>
+									</li>
+									<li class="fragment">
+										Build our API implementation on <code>PlonkApiController</code>
+									</li>
+								</ol>
+							</li>
+						</ul>
+					</section>
+					
+					<section>
+						<h2>Before we dive in</h2>
+						<ul>
+							<li class="fragment">
+								I like my code clean, concise, but most of al readable
+								<ul>
+									<li class="fragment">
+										Same goes for JSON API Responses
+									</li>
+								</ul>
+							</li>
+							<li class="fragment">
+								RIA Response format convention:
+								<ul>
+									<li class="fragment">
+										Next to sending the response code and text as an HTTP status, also send it in the response itself, in a <code>status</code> object
+									</li>
+									<li class="fragment">
+										Send the data in a <code>content</code> object
+									</li>
+								</ul>
+								<div class="fragment"><pre class="bigger language-javascript dontrun"><code>{
+   &quot;status&quot;:
+   {
+       &quot;code&quot;: 401,
+       &quot;text&quot;: &quot;Unauthorized&quot;
+   },
+   &quot;content&quot;: &quot;The API Key does not exist or is not valid for this domain&quot;
+}</code></pre></div>
+							</li>
+						</ul>
+					</section>
+					
+					<section>
+						<h2>1. Support nice URLs (1)</h2>
+						<ul>
+							<li class="fragment">
+								Let <code>.htaccess</code> route all requests to non-existing files/directories to <code>index.php</code>
+								<pre class="bigger"><code>&lt;IfModule mod_rewrite.c&gt;
+RewriteEngine On
+RewriteBase /
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule . /index.php [L]
+&lt;/IfModule&gt;</code></pre>
+							</li>
+						</ul>
+					</section>
+
+					<section>
+						<h2>1. Support nice URLs (2)</h2>
+						<ul>
+							<li class="fragment">
+								Adjust <code>PlonkWebsite-&gt;performPrerequisites()</code> to fetch the <em>module</em> from the URL
+								<pre class="bigger language-php"><code>// store the url string
+$this-&gt;urlString = $_SERVER['REQUEST_URI'];
+if (strstr($this-&gt;urlString, '?')) {
+	$this-&gt;urlParts = explode('/', substr($this-&gt;urlString, 1,
+	strpos($this-&gt;urlString, '?') - 1));
+} else {
+	$this-&gt;urlParts = explode('/', substr($this-&gt;urlString, 1));
+}</code></pre>
+							</li>
+							<li class="fragment">
+								Pass <code>$this-&gt;urlParts</code> to <code>PlonkController-&gt;__construct()</code> so that it can fetch the <em>view</em> from <code>$this-&gt;urlParts[1]</code>
+							</li>
+							<li class="fragment">
+								The module constructor should store <code>$this-&gt;urlParts</code> for future reference
+							</li>
+						</ul>
+					</section>
+					
+
+					<section>
+						<h2>2. PlonkApiController</h2>
+						<ul>
+							<li class="fragment">
+								Basic structure <em>(will change)</em>
+								<pre class="bigger language-php"><code>&lt;?php
+class PlonkApiController extends PlonkController {
+	
+	public function __construct(array $urlParts) {
+		parent::__construct($urlParts);
+	}
+	
+	protected function display($status, $content) {
+		header('Cache-Control: no-cache, must-revalidate');
+		header('Expires: Mon, 26 Jul 1997 05:00:00 GMT');
+		header('Content-type: application/json');
+		header('HTTP/1.1 ' . $this->status[0] . ' ' . $this->status[1]);
+		echo json_encode(array(
+			'status' => $this->status,
+			'content' => $this->content
+		));
+	}
+	
+	protected function loadMainTemplate() { return; }
+	protected function loadPageTemplate() { return; }
+}
+// EOF</code></pre>
+							</li>
+						</ul>
+					</section>
+
+
+					<section>
+						<h2>3. Implementation</h2>
+						<ul>
+							<li class="fragment">
+								Very simple example
+								<pre class="bigger language-php"><code>&lt;?php
+class SampleapiController extends PlonkApiController {
+
+	protected $views = array('dogs');
+	
+	public function showDogs() {
+		// detail
+		if (isset($this-&gt;urlParts[2]) &amp;&amp; trim($this-&gt;urlParts[2]) != '') {
+			$dog = SampleapiDB::getDog($this-&gt;urlParts[2]);
+			
+			if ($dog) {
+				$this-&gt;display(array(200,'OK'), $dog);
+			} else {
+				$this-&gt;display(array(404,'Not Found'), 'Invalid Dog ID');
+			}
+		}
+		// overview
+		else {
+			$dogs = SampleapiDB::getDogs();
+			$this-&gt;display(array(200,'OK'), $dogs);
+		}
+	}
+}
+// EOF</code></pre>
+							</li>
+						<ul>
+					</section>
+
+					<section>
+						<h2>That's it?</h2>
+						<ul>
+							<li class="fragment">Basicaly, yes</li>
+							<li class="fragment">
+								Code can be optimized though
+								<ol>
+									<li class="fragment">Optimize working with statuses</li>
+									<li class="fragment">Support JSONP</li>
+									<li class="fragment">Implement other request methods</li>
+									<li class="fragment">Limit request methods (verbs) on resources</li>
+									<li class="fragment">Enable CORS</li>
+								</ol>
+							</li>
+						</ul>
+					</section>
+
+				</section>
+				
+				<!-- 4 : API Authentication -->
+				<section>
+					<section>
+						<h2>API Authentication</h2>
+						<p><img src="assets/07/grunkalunkas.png" alt="" title="" height="378" width="500" /></p>
+						<q>Who are those horrible orange creatures over there? &mdash; Grunka-Lunkas. &mdash; Tell them I hate them!</q>
+					</section>
+
+					<section>
+						<h2>API Authentication</h2>
+						<ul>
+							<li class="fragment">
+								Two needs for authentication
+								<ol>
+									<li class="fragment">API Consumers <em>(apps using your API)</em></li>
+									<li class="fragment">User Authentications <em>(allowing apps using your API to act on behalf of a user)</em></li>
+								</ol>
+							</li>
+						</ul>
+					</section>
+
+					<section>
+						<h2>1. API Consumers</h2>
+						<ul>
+							<li class="fragment">
+								Make use of API-Keys
+								<ul>
+									<li class="fragment">Require API-Key to be sent in via a header</li>
+									<li class="fragment">Check API-Key in constructor</li>
+								</ul>
+								<div class="fragment">
+									<pre class="bigger language-php"><code>public function __construct(array $urlParts) {
+	$this-&gt;setCors('*');
+	header('Access-Control-Allow-Headers: X-Api-Key');
+	parent::__construct($urlParts);
+	$this-&gt;checkApiKey();
+}
+
+private function checkApiKey() {
+	$headers = apache_request_headers();
+	if(!isset($headers['X-Api-Key'] || !ApiDB::isValidApiKey($headers['X-Api-Key']) {
+		$this-&gt;setStatus(401);
+		$this-&gt;setContent('Missing or invalid API Key.');
+		$this-&gt;display();
+		exit();
+	}	
+}
+</code></pre>
+								</div>
+							</li>
+						</ul>
+					</section>
+
+					<section>
+						<h2>2. User Authentication (1)</h2>
+						<ul>
+							<li class="fragment">
+								API Consumers should never ask the user his/her username/password but should use OAuth2 which works with time-limited access tokens to accessing user data
+								
+								<p style="text-align: center;"><img src="assets/07/oauth2.png" width="300" height="300" alt="" title="" style="background: transparent; border: 0; -webkit-box-shadow: none; -moz-box-shadow: none; -ms-box-shadow: none; -o-box-shadow: none; box-shadow: none;" /><p>
+							</li>
+						</ul>
+					</section>
+
+					<section>
+						<h2>2. User Authentication (2)</h2>
+						<ul>
+							<li class="fragment">
+								OAuth2 in words
+								<ol style="font-size: 70%">
+									<li class="fragment">User is sent to the OAuth provider (along the consumer app's API-Key (<code>client_id</code>) for identification), asking if consumer app may access user data at a certain <code>scope</code> <em>(read/write)</em></li>
+									<li class="fragment">If user accepts the OAuth provider will redirect back to the consumer app's <code>redirect_uri</code> with an <code>authorization_code</code></li>
+									<li class="fragment">In the background, the consumer app must make a request to the OAuth provider with that <code>authorization_code</code>, along with its API-Key (<code>client_id</code>) and secret key (<code>client_secret</code>)</li>
+									<li class="fragment">The OAuth provider will issue an <code>access_token</code> and <code>refresh_token</code></li>
+									<li class="fragment">The <code>access_token</code> must passed with all calls made and is valid for a limited time</li>
+									<li class="fragment">When the <code>access_token</code> has expired, the consumer app needs to do a call to the OAuth Prodider with the <code>refresh_token</code> to get a new pair <code>access_token</code> &amp; <code>refresh_token</code></li>
+								</ol>
+							</li>
+						</ul>
+					</section>
+
+					<section>
+						<h2>2. User Authentication (3)</h2>
+						<ul>
+							<li class="fragment">
+								OAuth2, schematic
+								<p style="text-align: center;"><img src="assets/07/oauth2_flow.png" width="555" height="420" alt="" title="" /><p>
+							</li>
+						</ul>
+					</section>
+
+					<section>
+						<h2>API Authentication</h2>
+						<ul>
+							<li class="fragment">
+								API-Keys are easily implemented, both consumer and provider side
+							</li>
+							<li class="fragment">Once you get the gist of it, OAuth2 is fairly easy ... or you could use a prefab solution if you don't <em>(#lmgtfy)</em></li>
+						</ul>
+					</section>
+					
 				</section>
 
 				
