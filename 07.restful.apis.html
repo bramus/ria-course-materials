@@ -21,7 +21,7 @@
 				color: gainsboro;
 			}
 
-			li > code, li em > code, li del > code, li ins > code {
+			li > code, li em > code, li del > code, li ins > code, p > code {
 				background: #3F3F3F;
 				padding: 2px 4px;
 				box-shadow: 0px 0px 6px rgba(0,0,0,0.3);
@@ -677,6 +677,9 @@ if (strstr($this-&gt;urlString, '?')) {
 } else {
 	$this-&gt;urlParts = explode('/', substr($this-&gt;urlString, 1));
 }</code></pre>
+								<ul>
+									<li>The module is stored in <code>$this-&gt;urlParts[0]</code></li>
+								</ul>
 							</li>
 							<li class="fragment">
 								Pass <code>$this-&gt;urlParts</code> to <code>PlonkController-&gt;__construct()</code> so that it can fetch the <em>view</em> from <code>$this-&gt;urlParts[1]</code>
@@ -756,7 +759,7 @@ class SampleapiController extends PlonkApiController {
 					<section>
 						<h2>That's it?</h2>
 						<ul>
-							<li class="fragment">Basicaly, yes</li>
+							<li class="fragment">Basically, yes</li>
 							<li class="fragment">
 								Code can be optimized though
 								<ol>
@@ -767,6 +770,302 @@ class SampleapiController extends PlonkApiController {
 									<li class="fragment">Enable CORS</li>
 								</ol>
 							</li>
+						</ul>
+					</section>
+
+					<section>
+						<h2>1. Working with statuses (1)</h2>
+						<ul>
+							<li class="fragment">Provide <code>$status</code> and <code>$content</code> datamembers + mutators for them</li>
+							<li class="fragment">Keep list of allowed HTTP Status Codes</li>
+							<li class="fragment">By default, set status to <code>200</code></li>
+						</ul>
+					</section>
+
+					<section>
+						<h2>1. Working with statuses (2)</h2>
+						<div class="fragment">
+							<pre class="bigger language-php"><code>&lt;?php
+class PlonkApiController extends PlonkController {
+
+	private $status, $content;
+
+	final protected function setStatus($statusCode) {
+		$codes = array(
+			200 =&gt; 'OK',
+			// ... List of statuscode with status texts
+		);
+		$this->status = array(
+			'code' => $statusCode,
+			'text' => $codes[$statusCode]
+		);	
+		header('HTTP/1.1 ' . $this->status['code'] . ' ' . $this->status['text']);
+	}
+
+	final protected function setContent($content) {
+		$this->content = $content;
+	}
+
+	...
+
+}
+// EOF</code></pre>
+						</div>
+					</section>
+					
+					<section>
+						<h2>1. Working with statuses (3)</h2>
+						<div class="fragment">
+							<pre class="bigger language-php"><code>&lt;?php
+class PlonkApiController extends PlonkController {
+	
+	...
+
+	protected function display() {
+		header('Cache-Control: no-cache, must-revalidate');
+		header('Expires: Mon, 26 Jul 1997 05:00:00 GMT');
+		header('Content-type: application/json');
+
+		echo json_encode(
+			array(
+				'status' => $this->status,
+				'content' => $this->content
+			)
+		);
+	}
+	
+	...
+
+}
+// EOF</code></pre>
+						<p style="font-size: 50%;">No need to call <code>display()</code> from the implementation anymore, just call <code>setStatus()</code> and <code>setContent()</code></p>
+						</div>
+					</section>
+
+					<section>
+						<h2>2. JSONP</h2>
+						<ul>
+							<li class="fragment">When outputting, check if <code>callback</code> URL Param is set</li>
+						</ul>
+						<div class="fragment">
+							<pre class="bigger language-php"><code>protected function display() {
+								
+	...
+
+	$json = json_encode(
+		array(
+			'status' => $this->status,
+			'content' => $this->content
+		)
+	);
+	
+	// jsonp
+	if (PlonkFilter::getGetValue('callback')) {
+		echo PlonkFilter::getGetValue('callback') . '(' . $json . ');';
+	}
+
+	// json
+	else {
+		echo $json;
+	}
+}</code></pre>
+						</div>
+					</section>
+
+					<section>
+						<h2>3. Other request methods (1)</h2>
+						<ul>
+							<li class="fragment">Keep track of the <code>$requestMethod</code> and implement according to its value</li>
+						</ul>
+						<div class="fragment">
+							<pre class="bigger language-php"><code>&lt;?php
+class PlonkApiController extends PlonkController {
+
+	public function __construct(array $urlParts) {
+
+		// Call Parent Class
+		parent::__construct($urlParts);
+
+		// store request method
+		$this->requestMethod = $_SERVER['REQUEST_METHOD'];
+
+	}
+
+}
+// EOF</code></pre>
+						</div>
+					</section>
+
+					<section>
+						<h2>3. Other request methods (2)</h2>
+						<div class="fragment">
+							<pre class="language-php"><code>public function showDogs() {
+	if (isset($this-&gt;urlParts[2]) &amp;&amp; trim($this-&gt;urlParts[2]) != '') { // detail or delete or update
+		$dog = SampleapiDB::getDog($this-&gt;urlParts[2]);
+		if ($dog) {
+			switch($this-&gt;requestMethod) {
+				case 'GET':
+					// get Dog + Return it + Status 200
+				break;
+				case 'PUT':
+					// Update Dog + Status 200 (all params set) or 400 (params missing)
+				break;
+				case 'DELETE':
+					// Delete Dog + Status 204
+				break;
+			}
+		} else {
+			$this-&gt;setStatus(404);
+			$this-&gt;setContent('Invalid Dog ID');
+		}
+	} else { // overview or insert
+		switch($this-&gt;requestMethod) {
+			case 'GET':
+				// get Dogs + Return them + Status 200
+			break;
+			case 'POST':
+				// Insert Dog + Status 201 (all params set) or 400 (params missing)
+			break;
+		}
+	}
+}</code></pre>
+						</div>
+					</section>
+
+					<section>
+						<h2>3. Other request methods (3)</h2>
+						<ul>
+							<li class="fragment">In PHP, there is no <code>$_PUT</code> ... but we can build that ourselves!</li>
+						</ul>
+						<div class="fragment">
+							<pre class="bigger language-php"><code>...
+case 'PUT':
+
+	$_PUT = array();
+	parse_str(file_get_contents('php://input'), $_PUT);
+
+	// Update Dog + Status 200 (all params set) or 400 (params missing)
+
+break;
+...</code></pre>
+						</div>
+						<ul>
+							<li class="fragment">Note that <code>$_PUT</code> isn't global!</li>
+						</ul>
+					</section>
+
+					<section>
+						<h2>4. Limit request methods (1)</h2>
+						<ul>
+							<li class="fragment">Manually check if the request method is allowed. If not, return a <code>405 &mdash; Method Not Allowed</code></li>
+						</ul>
+						<div class="fragment">
+							<pre class="bigger language-php"><code>public function showDogs() {
+	if (isset($this-&gt;urlParts[2]) &amp;&amp; trim($this-&gt;urlParts[2]) != '') { // detail or delete or update
+		$dog = SampleapiDB::getDog($this-&gt;urlParts[2]);
+		if ($dog) {
+			$this-&gt;setAllowedMethods(array('GET', 'PUT', 'DELETE'));
+			// ...
+		} else {
+			$this-&gt;setStatus(404);
+			$this-&gt;setContent('Invalid Dog ID');
+		}
+	} else { // overview or insert
+		$this-&gt;setAllowedMethods(array('GET, 'POST'));
+		// ...
+	}
+}</code></pre>
+						</div>
+					</section>
+
+					<section>
+						<h2>4. Limit request methods (2)</h2>
+						<div class="fragment">
+							<pre class="bigger language-php"><code>class PlonkApiController extends PlonkController {
+	...
+	public function setAllowedMethods(array $methods = array('get')) {
+		// We'll implement this one in the lab ;-)
+	}
+	...
+}</code></pre>
+						</div>
+					</section>
+
+					<section>
+						<h2>5. CORS (1)</h2>
+						<ul>
+							<li class="fragment">When using CORS, XHR2 does a preflight <code>OPTIONS</code> request to the API endpoint to check the headers if CORS is enabled</li>
+							<li class="fragment">CORS can be enabled via the <code>Access-Control-Allow-Origin</code> header</li>
+							<li class="fragment">XHR2 will also check the <code>Access-Control-Allow-Methods</code> header to see which methods are allowed</li>
+							<li class="fragment">Summarized: <code>PlonkApiController</code> needs to send back those headers if an <code>OPTIONS</code> is done</li>
+						</ul>
+					</section>
+
+					<section>
+						<h2>5. CORS (2)</h2>
+						<div class="fragment">
+							<pre class="language-php"><code>class PlonkApiController extends PlonkController {
+								
+	...
+	
+	public function __construct(array $urlParts) {
+
+		// Call Parent Class
+		parent::__construct($urlParts);
+
+		// store request method
+		$this-&gt;requestMethod = $_SERVER['REQUEST_METHOD'];
+
+		// Tell client that all methods are allowed (must be done first!)
+		if ($this-&gt;requestMethod == 'OPTIONS') {
+			header('Access-Control-Allow-Methods: GET, POST, PUT, DELETE');
+			exit();
+		} else {
+			$this-&gt;setStatus(200);
+			$this-&gt;setContent('');
+		}
+
+	}
+	
+	...
+	
+	final protected function setCors($cors = null) {
+		$this-&gt;cors = (string) $cors;
+		header('Access-Control-Allow-Origin: ' . $this-&gt;cors);
+	}
+	
+	...
+	
+}</code></pre>
+						</div>
+					</section>
+					
+					<section>
+						<h2>5. CORS (3)</h2>
+						<div class="fragment">
+							<pre class="bigger language-php"><code>class SampleapiController extends PlonkApiController {
+								
+	public function __construct(array $urlParts) {
+
+		// Set this before calling the parent constructor,
+		// so that it is outputted when an OPTIONS request comes in
+		$this->setCors('*');
+
+		// Call Parent Class Constructor
+		parent::__construct($urlParts);
+
+	}
+	
+	...
+
+}</code></pre>
+						</div>
+					</section>
+
+					<section>
+						<h2>Phew!</h2>
+						<ul>
+							<li class="fragment">Yeah!</li>
 						</ul>
 					</section>
 
