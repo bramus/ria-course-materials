@@ -15,6 +15,27 @@
 		<link rel="stylesheet" href="css/main.css" media="screen">
 		<link rel="stylesheet" href="css/print.css" media="print">
 		<!-- <link rel="stylesheet" href="assets/07/examples.css"> -->
+		
+		<style>
+			code {
+				color: gainsboro;
+			}
+
+			li > code, li em > code, li del > code, li ins > code {
+				background: #3F3F3F;
+				padding: 2px 4px;
+				box-shadow: 0px 0px 6px rgba(0,0,0,0.3);
+				font-size: 80%;
+			}
+			
+			del code, code.nok {
+				color: #C55;
+			}
+			
+			ins code, code.ok {
+				color: #5C5;
+			}
+		</style>
 
 		<link rel="stylesheet" href="lib/zenburn.css">
 	</head>
@@ -50,8 +71,9 @@
 				<section>
 
 					<section>
-						<p><img src="assets/07/globetrotters.png" alt="" title="" height="406" width="540" /></p>
-						<q>This chronological wang-dang-doodle could destroy<br />the very matrix of reality.</q>
+						<h2>RESTful APIs</h2>
+						<p><img src="assets/07/resting.png" alt="" title="" height="375" width="500" /></p>
+						<q>The key to victory is discipline,<br />and that means a well made bed.</q>
 					</section>
 
 					<section>
@@ -151,7 +173,7 @@
 										</ul>
 									</li>
 									<li class="fragment">
-										Returns data along with an <a href="http://restpatterns.org/HTTP_Status_Codes">HTTP Status Code</a>
+										Returns data <em>(if any)</em> along with an <a href="http://restpatterns.org/HTTP_Status_Codes">HTTP Status Code</a>
 									</li>
 								</ul>
 							</li>
@@ -203,6 +225,323 @@
 						</ul>
 					</section>
 													
+				</section>
+
+
+				<!-- 1 : REST URL Design -->
+				<section>
+
+					<section>
+						<h2>REST URL Design</h2>
+						<p><img src="assets/07/globetrotters.png" alt="" title="" height="375" width="500" /></p>
+						<q>This chronological wang-dang-doodle<br />could destroy the very matrix of reality.</q>
+					</section>
+					
+					<section>
+						<h2>REST URL Design</h2>
+						<ul>
+							<li class="fragment">
+								Truth be told, lots of APIs think they're RESTful when they in fact aren't
+							</li>
+							<li class="fragment">
+								It's simple though, if you apply the basic rules
+								<ol class="fragment">
+									<li>
+										<strong>URL</strong>s identify a <strong>Resource</strong> and are <strong>hierarchical</strong>
+									</li>
+									<li>
+										HTTP <strong>Verbs</strong> are used for <strong>Operations</strong> on resources
+									</li>
+									<li>
+										Returns data <em>(if any)</em> along with an <a href="http://restpatterns.org/HTTP_Status_Codes">HTTP Status Code</a>
+									</li>
+								</ol>
+							</li>
+						</ul>
+					</section>
+
+					<section>
+						<h2>1. Identification &amp; Hierarchy</h2>
+						<ul>
+							<li class="fragment">
+								Basic naming conventions
+								<ul>
+									<li class="fragment">Verbs are bad, nouns are good</li>
+									<li class="fragment">Use plurals</li>
+									<li class="fragment">Respect the Hierarchy</li>
+								</ul>
+							</li>
+							<li class="fragment">
+								Examples
+								<ul>
+									<li class="fragment"><del><code>/product</code></del> &rarr; <ins><code>/products</code></ins></li>
+									<li class="fragment"><del><code>/product/1234</code></del> &rarr; <ins><code>/products/1234</code></ins></li>
+									<li class="fragment"><del><code>/photos/product/1234</code></del> &rarr; <ins><code>/products/1234/photos</code></ins></li>
+									<li class="fragment"><del><code>/photos/product/1234/5678</code></del> &rarr; <ins><code>/products/1234/photos/5678</code></ins></li>
+								</ul>
+							</li>
+					</section>
+
+					<section>
+						<h2>1. Identification &amp; Hierarchy bis</h2>
+						<ul>
+							<li class="fragment">
+								Use concrete naming, yet don't be too specific
+								<ul>
+									<li class="fragment"><del><code>/things</code></del></li>
+									<li class="fragment"><del><code>/animals</code></del></li>
+									<li class="fragment"><code class="ok">/dogs</code></li>
+									<li class="fragment"><del><code>/beagles</code></del></li>
+								</ul>
+							</li>
+							<li class="fragment">
+								Some cases will require a verb instead of a noun, yet consider these exceptions
+								<ul>
+									<li class="fragment"><code>/search?course=RIA</code></li>
+									<li class="fragment"><code>/convert?from=EUR&amp;to=USD&amp;amount=100</code></li>
+								</ul>
+							</li>
+					</section>
+
+					<section>
+						<h2>2. HTTP Verbs</h2>
+						<ul>
+							<li class="fragment">
+								HTTP Verbs = CRUD = Queries
+								<ol>
+									<li class="fragment"><code>POST</code> = Create = <code>INSERT</code></li>
+									<li class="fragment"><code>GET</code> = Read = <code>SELECT</code></li>
+									<li class="fragment"><code>PUT</code> = Update = <code>UPDATE</code></li>
+									<li class="fragment"><code>DELETE</code> = Delete = <code>DELETE</code></li>
+								</ol>
+							</li>
+							<li class="fragment">
+								Examples
+								<ol>
+									<li class="fragment"><code>POST /products</code> <em>(data via <code>$_POST</code>)</em></li>
+									<li class="fragment"><code>GET /products</code> or <code>GET /products/1234</code></li>
+									<li class="fragment"><code>PUT /products/1234</code> <em>(data via &ldquo;<code>$_PUT</code>&rdquo;)</em></li>
+									<li class="fragment"><code>DELETE /products/1234</code></li>
+								</ol>
+							</li>
+					</section>
+
+					<section>
+						<h2>3. HTTP Status Codes (1)</h2>
+						<ul>
+							<li class="fragment">
+								General Codes (applicable to all verbs/resources)
+								<ul>
+									<li class="fragment"><code>401 &mdash; Not Authorized</code> <em>(viz. No API Key given)</em></li>
+									<li class="fragment"><code>500 &mdash; Internal Server Error</code> <em>(Developer screwed up ;))</em></li>
+									<li class="fragment"><code>501 &mdash; Not Implemented</code> <em>(viz. wrong verb or invalid resource)</em></li>
+								</ul>
+							</li>
+							<li class="fragment">
+								<code>GET</code> <small style="vertical-align: baseline;">(SQL SELECT)</small>
+								<ul>
+									<li class="fragment"><code>200 &mdash; OK</code> <em>(requested data sent via response body)</em></li>
+									<li class="fragment"><code>404 &mdash; Not Found</code></li>
+								</ul>
+							</li>
+							<li class="fragment">
+								<code>POST</code> <small style="vertical-align: baseline;">(SQL INSERT)</small>
+								<ul>
+									<li class="fragment"><code>201 &mdash; Created</code> <em>(=OK)</em></li>
+									<li class="fragment"><code>400 &mdash; Bad Request</code> <em>(Missing Parameters)</em></li>
+								</ul>
+							</li>
+					</section>
+
+					<section>
+						<h2>3. HTTP Status Codes (2)</h2>
+						<ul>
+							<li class="fragment">
+								<code>PUT</code> <small style="vertical-align: baseline;">(SQL UPDATE)</small>
+								<ul>
+									<li class="fragment"><code>200 &mdash; OK</code> <em>(requested data sent via response body)</em></li>
+									<li class="fragment"><code>400 &mdash; Bad Request</code> <em>(Missing Parameters)</em></li>
+									<li class="fragment"><code>404 &mdash; Not Found</code></li>
+								</ul>
+							</li>
+							<li class="fragment">
+								<code>DELETE</code> <small style="vertical-align: baseline;">(SQL DELETE)</small>
+								<ul>
+									<li class="fragment"><code>204 &mdash; No Content</code> <em>(=OK &mdash; Note: <strong>no</strong> response body sent!)</em></li>
+									<li class="fragment"><code>404 &mdash; Not Found</code></li>
+								</ul>
+							</li>
+					</section>
+					
+					<section>
+						<h2>Case Study: Twitter API (1)</h2>
+						<ul>
+							<li class="fragment">
+								One of the first and most popular APIs, suffering from historically grown bloat.
+							</li>
+							<li class="fragment">
+								Get a status
+								<ul>
+									<li class="fragment">
+										Endpoint
+										<ul>
+											<li><code>GET api.twitter.com/1/statuses/show/id.format</code></li>
+										</ul>
+									</li>
+									<li class="fragment">
+										Problems
+										<ul>
+											<li class="fragment">Operation <code>show</code> included in URL</li>
+											<li class="fragment">Status id not a child of <code>statuses</code></li>
+										</ul>
+									</li>
+									<li class="fragment">
+										Better
+										<ul>
+											<li class="fragment"><code>GET api.twitter.com/1/statuses/id</code></li>
+										</ul>
+									</li>
+								</ul>
+							</li>
+						</ul>
+					</section>
+
+					<section>
+						<h2>Case Study: Twitter API (2)</h2>
+						<ul>
+							<li class="fragment">
+								Set (update) your status
+								<ul>
+									<li class="fragment">
+										Endpoint
+										<ul>
+											<li><code>POST api.twitter.com/1/statuses/show/update.format</code></li>
+										</ul>
+									</li>
+									<li class="fragment">
+										Problems
+										<ul>
+											<li class="fragment">Operation <code>update</code> included in URL</li>
+											<li class="fragment">Uses authenticated user implicitly</li>
+										</ul>
+									</li>
+									<li class="fragment">
+										Better
+										<ul>
+											<li class="fragment"><code>POST api.twitter.com/1/users/id/statuses</code></li>
+										</ul>
+									</li>
+								</ul>
+							</li>
+						</ul>
+					</section>
+
+					<section>
+						<h2>Case Study: Twitter API (3)</h2>
+						<ul>
+							<li class="fragment">
+								Remove a status udpate
+								<ul>
+									<li class="fragment">
+										Endpoint
+										<ul>
+											<li><code>POST api.twitter.com/1/statuses/destroy/id.format</code></li>
+										</ul>
+									</li>
+									<li class="fragment">
+										Problems
+										<ul>
+											<li class="fragment">Operation <code>destroy</code> included in URL</li>
+											<li class="fragment">Uses authenticated user implicitly</li>
+										</ul>
+									</li>
+									<li class="fragment">
+										Better
+										<ul>
+											<li class="fragment"><code>DELETE api.twitter.com/1/statuses/id</code></li>
+										</ul>
+									</li>
+								</ul>
+							</li>
+						</ul>
+					</section>
+
+					<section>
+						<h2>Case Study: Twitter API (4)</h2>
+						<ul>
+							<li class="fragment">
+								Get retweets of a status
+								<ul>
+									<li class="fragment">
+										Endpoint
+										<ul>
+											<li><code>GET api.twitter.com/1/statuses/retweets/id.format</code></li>
+										</ul>
+									</li>
+									<li class="fragment">
+										Problems
+										<ul>
+											<li class="fragment">Hierarchy is wrong</li>
+										</ul>
+									</li>
+									<li class="fragment">
+										Better
+										<ul>
+											<li class="fragment"><code>GET api.twitter.com/1/statuses/id/retweets</code></li>
+										</ul>
+									</li>
+								</ul>
+							</li>
+						</ul>
+					</section>
+					
+					<section>
+						<h2>URL Design Sidenotes</h2>
+						<ul>
+							<li class="fragment">
+								API Versioning
+								<ul>
+									<li class="fragment">Allowed in URL, as the 1st param (viz. Twitter <code>api.twitter.com/1/&hellip;</code>)</li>
+									<li class="fragment">Also possible to send it in via a header</li>
+								</ul>
+							</li>
+							<li class="fragment">
+								Pagination
+								<ul>
+									<li class="fragment">Mandatory for huge resources</li>
+									<li class="fragment">Use <code>limit</code> and <code>offset</code> URL Params, defaulting to <code>?limit=10&amp;offset=0</code></li>
+								</ul>
+							</li>
+							<li class="fragment">
+								Filtering &amp; Sorting
+								<ul>
+									<li class="fragment">Via URL Params <code>?filter=foo&amp;sort=asc</code></li>
+								</ul>
+							</li>
+							<li class="fragment">
+								Limiting fields
+								<ul>
+									<li class="fragment">Via URL Param <code>?fields=firstname,lastname,age</code></li>
+								</ul>
+							</li>
+						</ul>
+						<footer class="fragment">These practices are optional, we won't be implementing them ourselves</footer>
+					</section>
+					
+					<section>
+						<h2>Documentation</h2>
+						<ul>
+							<li class="fragment">As with most stuff on the internet, your API is useless without documentation</li>
+							<li class="fragment">
+								If no documentation, at least provide
+								<ul>
+									<li class="fragment"><a href="http://bramus.github.com/simple-rest-api-explorer/">An API explorer</a></li>
+									<li class="fragment">A code example</li>
+								</ul>
+							</li>
+						</ul>
+					</section>
+
 				</section>
 
 				
