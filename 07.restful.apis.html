@@ -523,9 +523,28 @@
 					</section>
 
 					<section>
-						<h2>Case Study: MoviesDB</h2>
+						<h2>Case Study: MoviesDB (1)</h2>
 						<p style="text-align: center;" class="fragment"><a href="http://bramus.github.com/simple-rest-api-explorer/"><img src="assets/07/moviesdb.png" width="600" height="487" alt="" title="" style="background: transparent; border: 0; -webkit-box-shadow: none; -moz-box-shadow: none; -ms-box-shadow: none; -o-box-shadow: none; box-shadow: none;" /></a><p>
 						<footer class="fragment">(click image to launch)</footer>
+					</section>
+
+					<section>
+						<h2>Case Study: MoviesDB (2)</h2>
+						<ul>
+							<li class="fragment">
+								Simple example API
+							</li>
+							<li class="fragment">
+								Experiment with the API Explorer to see which status codes are returned when calling it.
+							</li>
+							<li class="fragment">
+								Note:
+								<ul>
+									<li class="fragment">An endpoint to <code>/movies/#/photos</code> isn't provided <strong>on purpose</strong>, but <code>photos</code> are passed along with the <code>/movies/#</code></li>
+									<li class="fragment">Reason: makes your project assignment a tad easier ;-)</li>
+								</ul>
+							</li>
+						</ul>
 					</section>
 					
 					<section>
@@ -588,28 +607,6 @@
 					</section>
 
 					<section>
-						<h2>Plonk OO Websites Recap</h2>
-						<ul>
-							<li class="fragment">
-								<code>index.php</code> creates an instance of <code>PlonkWebsite</code>
-							</li>
-							<li class="fragment">
-								<code>PlonkWebsite</code> is the <em>Front Controller</em> en decides which module to load based on the <code>module</code> URL parameter
-							</li>
-							<li class="fragment">
-								A module is built on top of <code>PlonkController</code> which
-								<ol>
-									<li class="fragment">Loads the main template</li>
-									<li class="fragment">Processes the action <em>(based on a sent in <code>moduleAction</code>)</em></li>
-									<li class="fragment">Loads the page template <em>(based on a <code>view</code> URL Param)</em></li>
-									<li class="fragment">Processes the view</li>
-									<li class="fragment">Outputs the main template via the <code>display</code> function</li>
-								</ol>
-							</li>
-						</ul>
-					</section>
-
-					<section>
 						<h2>Why Plonk?</h2>
 						<ul>
 							<li class="fragment">
@@ -631,6 +628,28 @@
 									<li class="fragment">
 										Build our API implementation on <code>PlonkApiController</code>
 									</li>
+								</ol>
+							</li>
+						</ul>
+					</section>
+
+					<section>
+						<h2>Plonk OO Websites Recap</h2>
+						<ul>
+							<li class="fragment">
+								<code>index.php</code> creates an instance of <code>PlonkWebsite</code>
+							</li>
+							<li class="fragment">
+								<code>PlonkWebsite</code> is the <em>Front Controller</em> en decides which module to load based on the <code>module</code> URL parameter
+							</li>
+							<li class="fragment">
+								A module is built on top of <code>PlonkController</code> which
+								<ol>
+									<li class="fragment">Loads the main template</li>
+									<li class="fragment">Processes the action <em>(based on a sent in <code>moduleAction</code>)</em></li>
+									<li class="fragment">Loads the page template <em>(based on a <code>view</code> URL Param)</em></li>
+									<li class="fragment">Processes the view</li>
+									<li class="fragment">Outputs the main template via the <code>display</code> function</li>
 								</ol>
 							</li>
 						</ul>
@@ -1109,7 +1128,7 @@ break;
 								Two needs for authentication
 								<ol>
 									<li class="fragment">API Consumers <em>(apps using your API)</em></li>
-									<li class="fragment">User Authentications <em>(allowing apps using your API to act on behalf of a user)</em></li>
+									<li class="fragment">User Authentication <em>(allowing apps using your API to act on behalf of a user)</em></li>
 								</ol>
 							</li>
 						</ul>
@@ -1175,7 +1194,7 @@ private function checkApiKey() {
 						<h2>2. User Authentication (1)</h2>
 						<ul>
 							<li class="fragment">
-								API Consumers should never ask the user his/her username/password but should use OAuth2 which works with time-limited access tokens to accessing user data
+								API Consumers should <strong>never</strong> ask the user his/her username/password <em>(password anti-pattern!)</em> but should use OAuth2 which works with time-limited access tokens to accessing user data
 								
 								<p style="text-align: center;"><img src="assets/07/oauth2.png" width="300" height="300" alt="" title="" style="background: transparent; border: 0; -webkit-box-shadow: none; -moz-box-shadow: none; -ms-box-shadow: none; -o-box-shadow: none; box-shadow: none;" /><p>
 							</li>
