@@ -427,7 +427,7 @@
 									<li class="fragment">
 										Endpoint
 										<ul>
-											<li><code>POST api.twitter.com/1/statuses/show/update.format</code></li>
+											<li><code>POST api.twitter.com/1/statuses/update/id.format</code></li>
 										</ul>
 									</li>
 									<li class="fragment">
@@ -470,7 +470,7 @@
 									<li class="fragment">
 										Better
 										<ul>
-											<li class="fragment"><code>DELETE api.twitter.com/1/statuses/id</code></li>
+											<li class="fragment"><code>DELETE api.twitter.com/1/users/id/statuses/id</code></li>
 										</ul>
 									</li>
 								</ul>
@@ -572,7 +572,7 @@
 							<li class="fragment">
 								If no documentation, at least provide
 								<ul>
-									<li class="fragment"><a href="http://bramus.github.com/simple-rest-api-explorer/">An API explorer</a></li>
+									<li class="fragment"><a href="http://bramus.github.com/simple-rest-api-explorer/">An API explorer</a> <em>(just download and adjust it)</em></li>
 									<li class="fragment">A code example</li>
 								</ul>
 							</li>
@@ -634,7 +634,7 @@
 									<li class="fragment">Processes the action <em>(based on a sent in <code>moduleAction</code>)</em></li>
 									<li class="fragment">Loads the page template <em>(based on a <code>view</code> URL Param)</em></li>
 									<li class="fragment">Processes the view</li>
-									<li class="fragment">Outputs the main template via the <code>display</code> function</li>
+									<li class="fragment">Outputs the main template via the <code>display()</code> function</li>
 								</ol>
 							</li>
 						</ul>
@@ -644,7 +644,7 @@
 						<h2>Before we dive in</h2>
 						<ul>
 							<li class="fragment">
-								I like my code clean, concise, but most of al readable
+								I like my code clean, concise, but most of al <strong>readable</strong>
 								<ul>
 									<li class="fragment">
 										Same goes for JSON API Responses
@@ -686,6 +686,8 @@ RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule . /index.php [L]
 &lt;/IfModule&gt;</code></pre>
 							</li>
+							<li class="fragment">Note: In WampServer, you'll <a href="assets/07/wamp_url_rewrite.png">need to enable the Apache rewrite module first</a></li>
+							<li class="fragment">Note: Won't work in IIS <em>(alternative available: #lmgtfy)</em></li>
 						</ul>
 					</section>
 
@@ -703,15 +705,16 @@ if (strstr($this-&gt;urlString, '?')) {
 	$this-&gt;urlParts = explode('/', substr($this-&gt;urlString, 1));
 }</code></pre>
 								<ul>
-									<li>The module is stored in <code>$this-&gt;urlParts[0]</code></li>
+									<li class="fragment">The module is stored in <code>$this-&gt;urlParts[0]</code></li>
+									<li class="fragment">
+										Pass <code>$this-&gt;urlParts</code> to <code>PlonkController-&gt;__construct()</code> so that it can fetch the <em>view</em> from <code>$this-&gt;urlParts[1]</code>
+									</li>
+									<li class="fragment">
+										The module constructor should store <code>$this-&gt;urlParts</code> for future reference
+									</li>
 								</ul>
 							</li>
-							<li class="fragment">
-								Pass <code>$this-&gt;urlParts</code> to <code>PlonkController-&gt;__construct()</code> so that it can fetch the <em>view</em> from <code>$this-&gt;urlParts[1]</code>
-							</li>
-							<li class="fragment">
-								The module constructor should store <code>$this-&gt;urlParts</code> for future reference
-							</li>
+							<li class="fragment">Note: Requires that your app is in the root of your server (use localhost or use <a href="http://mikebernat.com/blog/Adding_Virtual_Hosts_to_Apache_&amp;_Wampserver">vhosts</a>!)</li>
 						</ul>
 					</section>
 					
