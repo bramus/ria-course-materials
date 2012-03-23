@@ -1,0 +1,642 @@
+<!doctype html>  
+<html lang="en">
+	
+	<head>
+		<meta charset="utf-8">
+		
+		<title>Rich Internet Applications &mdash; 08.Misc.Topics</title>
+
+		<meta name="description" content="Rich Internet Applications &mdash; 08.Misc.Topics">
+		<meta name="author" content="Bram(us) Van Damme - Davy De Winne - ikdoeict.be">
+		
+		<link href='http://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+		
+		<link rel="stylesheet" href="css/reset.css">
+		<link rel="stylesheet" href="css/main.css" media="screen">
+		<link rel="stylesheet" href="css/print.css" media="print">
+		<!-- <link rel="stylesheet" href="assets/08/examples.css"> -->
+
+		<link rel="stylesheet" href="lib/zenburn.css">
+		
+		<style>
+			code {
+				color: gainsboro;
+			}
+
+			li > code, li em > code, li del > code, li ins > code, p > code {
+				background: #3F3F3F;
+				padding: 2px 4px;
+				box-shadow: 0px 0px 6px rgba(0,0,0,0.3);
+				font-size: 80%;
+			}
+			
+			del code, code.nok {
+				color: #C55;
+			}
+			
+			ins code, code.ok {
+				color: #5C5;
+			}
+		</style>
+		
+	</head>
+	
+	<body>
+		
+		<div id="reveal">
+			
+			<!-- Any section element inside of this container is displayed as a slide -->
+			<div class="slides">
+
+
+				
+				<!-- 0 : Title -->
+				<section>
+					<section>
+						<h3 class="inverted">Rich Internet Applications</h3>
+						<h1>08.Misc.Topics</h1>
+					
+						<footer>
+							<em><a href="http://www.ikdoeict.be/">ikdoeict.be</a> &mdash; <a href="mailto:bramus.vandamme@kahosl.be">bramus.vandamme@kahosl.be</a> &mdash; <a href="mailto:davy.dewinne@kahosl.be">davy.dewinne@kahosl.be</a></em>
+						</footer>
+						<script>
+							// Delicously hacky. Look away.
+							if(navigator.userAgent.match(/(iPhone|iPad|iPod|Android)/i))
+							document.write('<p style="color: rgba(0,0,0,0.3); text-shadow: none;">('+'Tap to navigate'+')</p>');
+						</script>
+					</section>
+				</section>
+
+
+				<!-- 1 : Intro -->
+				<section>
+					<section>
+						<h2>Misc Topics</h2>
+						<p><img src="assets/08/theprisonerofbenda.jpg" alt="" title="" height="376" width="640" /></p>
+						<q>I'm not sure. I'm afraid we need to use ... Math.</q>
+					</section>
+				</section>
+
+
+				<!-- 2 : CSS Preprocessors -->
+				<section>
+					<section>
+						<h2>CSS Preprocessors</h2>
+						<ul>
+							<li class="fragment">
+								New way to writing CSS, giving us
+								<ul>
+									<li class="fragment">Variables</li>
+									<li class="fragment">Nesting</li>
+									<li class="fragment">Mixins (includes)</li>
+									<li class="fragment">Operations &amp; Functions</li>
+								</ul>
+							</li>
+							<li class="fragment">
+								Two popular systems
+								<ul>
+									<li class="fragment"><a href="http://sass-lang.com/">Sass</a></li>
+									<li class="fragment"><a href="http://lesscss.org/">Less</a></li>
+								</ul>
+							</li>
+							<li class="fragment">
+								Write &ldquo;Special CSS&rdquo;, then compile it to CSS
+							</li>
+						</ul>
+					</section>
+					
+					<section>
+						<h2>CSS Preprocessors Example (1)</h2>
+						<ul>
+							<li class="fragment">
+								Nesting
+								<div class="fragment">
+									<div style="width: 50%; float: left;">
+										<pre class="bigger"><code>/* style.scss */
+
+#navbar {
+  width: 80%;
+  height: 23px;
+
+  ul { list-style-type: none; }
+  
+  li {
+    float: left;
+    a { font-weight: bold; }
+  }
+}</code></pre>
+									</div>
+									<div style="width: 50%; float: left;">
+										<pre class="bigger"><code class="language-css">/* compiled style.css */
+
+#navbar {
+  width: 80%;
+  height: 23px; }
+
+#navbar ul {
+  list-style-type: none; }
+
+#navbar li {
+  float: left; }
+
+#navbar li a {
+  font-weight: bold; }</code></pre>
+									</div>
+								</div>
+							</li>
+						</ul>
+					</section>
+					
+					<section>
+						<h2>CSS Preprocessors Example (2)</h2>
+						<ul>
+							<li class="fragment" style="clear: left;">
+								Variables
+								<div class="fragment">
+									<div style="width: 50%; float: left;">
+										<pre class="bigger"><code>/* style.scss */
+
+$main-color: #ce4dd6;
+$style: solid;
+
+#navbar {
+  border-bottom: {
+    color: $main-color;
+    style: $style;
+  }
+}
+a {
+  color: $main-color;
+  &:hover { border-bottom: $style 1px; }
+}</code></pre>
+									</div>
+									<div style="width: 50%; float: left;">
+										<pre class="bigger"><code class="language-css">/* compiled style.css */
+
+#navbar {
+  border-bottom-color: #ce4dd6;
+  border-bottom-style: solid; }
+
+a {
+  color: #ce4dd6; }
+  
+a:hover {
+  border-bottom: solid 1px; }</code></pre>
+									</div>
+								</div>
+							</li>
+						</ul>
+					</section>
+					
+					<section>
+						<h2>CSS Preprocessors Example (3)</h2>
+						<ul>
+							<li class="fragment" style="clear: left;">
+								Mixins
+								<div class="fragment">
+									<div style="width: 50%; float: left;">
+										<pre class="bigger"><code class="language-css">/* style.scss */
+
+@mixin rounded-top {
+  $side: top;
+  $radius: 10px;
+
+  border-#{$side}-radius: $radius;
+  -moz-border-radius-#{$side}: $radius;
+  -webkit-border-#{$side}-radius: $radius;
+}
+
+#navbar li { @include rounded-top; }
+#footer { @include rounded-top; }</code></pre>
+									</div>
+									<div style="width: 50%; float: left;">
+										<pre class="bigger"><code class="language-css">/* compiled style.css */
+
+#navbar li {
+  border-top-radius: 10px;
+  -moz-border-radius-top: 10px;
+  -webkit-border-top-radius: 10px; }
+
+#footer {
+  border-top-radius: 10px;
+  -moz-border-radius-top: 10px;
+  -webkit-border-top-radius: 10px; }</code></pre>
+									</div>
+								</div>
+							</li>
+						</ul>
+					</section>
+					
+				</section>
+
+
+				<!-- 3 : H5BP -->
+				<section>
+					<section>
+						<h2>HTML5 Boilerplate</h2>
+						<ul>
+							<li class="fragment">
+								<a href="http://html5boilerplate.com/">http://html5boilerplate.com/</a>
+							</li>
+							<li class="fragment">
+								Full blown start template to develop an HTML5 page
+								<ul>
+									<li class="fragment">Doctype</li>
+									<li class="fragment">IE SHIV</li>
+									<li class="fragment">Mobile Optimizations</li>
+									<li class="fragment">(old)IE Optimizations</li>
+									<li class="fragment">jQuery &amp; Modernizr included by default</li>
+								</ul>
+							</li>
+						</ul>
+					</section>
+				</section>
+
+
+				<!-- 4 : CSS Frameworks & Grid Systems -->
+				<section>
+					<section>
+						<h2>CSS Frameworks &amp; Grid Systems</h2>
+						<ul>
+							<li class="fragment">
+								Think of it as H5BP but then for styling your pages
+								<ul>
+									<li class="fragment">Reset</li>
+									<li class="fragment">Basic Typography</li>
+									<li class="fragment">
+										Grid System
+										<ul>
+											<li>Columns &amp; Gaps</li>
+											<li>Can even be responsive</li>
+										</ul>
+									</li>
+								</ul>
+							</li>
+							<li class="fragment">
+								Examples
+								<ul>
+									<li class="fragment"><a href="http://www.getskeleton.com/">Skeleton</a></li>
+									<li class="fragment"><a href="http://goldengridsystem.com/">Golden Grid System</a></li>
+									<li class="fragment"><a href="http://lessframework.com/">Less Framework</a></li>
+									<li class="fragment"><a href="http://twitter.github.com/bootstrap/">Bootstrap, from Twitter</a></li>
+									<li class="fragment"><a href="http://foundation.zurb.com/">Zurb Foundation</a></li>
+									<li class="fragment">...</li>
+								</ul>
+							</li>
+						</ul>
+					</section>
+				</section>
+
+
+				<!-- 5 : Modernizr -->
+				<section>
+
+					<section>
+						<h2>Modernizr</h2>
+						<ul>
+							<li class="fragment">
+								HMTL5 &amp; CS3 Feature Detection via JavaScript<br />
+								<ul>
+									<li class="fragment"><a href="http://www.modernizr.com/">http://www.modernizr.com/</a></li>
+								</ul>
+							</li>
+							<li class="fragment">
+								Sets classes on the <code>&lt;html&gt;</code> tag tellling you if the browser suppors feature X or not
+								<pre class="bigger"><code class="language-html dontrun">&lt;html lang=&quot;en&quot; dir=&quot;ltr&quot; id=&quot;modernizrcom&quot; class=&quot;js no-touch postmessage history multiplebgs boxshadow opacity cssanimations csscolumns cssgradients csstransforms csstransitions fontface localstorage sessionstorage svg inlinesvg blobbuilder bloburls download formdata wf-proximanova1proximanova2-n4-active wf-proximanova1proximanova2-i4-active wf-proximanova1proximanova2-n7-active wf-proximanova1proximanova2-i7-active wf-proximanovacondensed1proximanovacondensed2-n6-active wf-athelas1athelas2-n4-active wf-active js flexbox flexbox-legacy canvas canvastext webgl no-touch geolocation postmessage websqldatabase indexeddb hashchange history draganddrop websockets rgba hsla multiplebgs backgroundsize borderimage borderradius boxshadow textshadow opacity cssanimations csscolumns cssgradients cssreflections csstransforms csstransforms3d csstransitions fontface generatedcontent video audio localstorage sessionstorage webworkers applicationcache svg inlinesvg smil svgclippaths tk-loaded wf-active&quot;&gt;</code></pre>
+							</li>
+						</ul>
+					</section>
+					
+					<section>
+						<h2>Modernizr</h2>
+						<ul>
+							<li class="fragment">
+								Based on the classes, you can fix some CSS if a certain feature isn't available
+								<pre class="bigger"><code class="language-css">.no-borderradius .box {
+	/* a bit less padding perhaps? Or some background image? */									
+}</code></pre>
+							</li>
+							<li class="fragment">
+								Recommended presentation: <a href="http://www.slideshare.net/paul.irish/modernizr-lightning-talk">Modernizr - Detecting HTML5 and CSS3 support</a>
+							</li>
+						</ul>
+					</section>
+					
+				</section>
+
+
+				<!-- 6 : Polyfills -->
+				<section>
+					<section>
+						<h2>Polyfills and Shims</h2>
+						<ul>
+							<li class="fragment">
+								Little pieces of JavaScript/HTML/CSS that provide support for missing browser features
+							</li>
+							<li class="fragment">
+								What's the difference between the two?
+								<ul>
+									<li class="fragment">
+										Polyfill: Provided code mimics the native API in browsers that don't support the feature
+										<ul>
+											<li class="fragment">viz. IE7 doesn't support <code>sessionStorage</code>, but if you plug in a <a href="https://gist.github.com/350433">sessionStorage polyfill</a>, it'll work without needing to adjust your code</li>
+										</ul>
+									</li>
+									<li class="fragment">
+										Shim: Provided code provides an alternative or a hotfix you can use if the feature is unsupported
+										<ul>
+											<li class="fragment">viz. <a href="http://www.dillerdesign.com/experiment/DD_belatedPNG/">DD_BelatedPNG</a> to give IE6 transparent .png support</li>
+										</ul>
+									</li>
+								</ul>
+							</li>
+							<li class="fragment">
+								Huge list/overview available <a href="https://github.com/Modernizr/Modernizr/wiki/HTML5-Cross-browser-Polyfills">on the Modernizr Wiki</a>
+							</li>
+						</ul>
+					</section>
+					<section>
+						<h2>Polyfills and Shims</h2>
+						<ul>
+							<li class="fragment">
+								Modernizr + <a href="http://yepnopejs.com/">yepnope</a> + Polyfill = #winning
+								<pre class="bigger"><code class="language-js dontrun">yepnope({
+	test: Modernizr.geolocation,
+	yep: 'regular-styles.css',
+	nope: ['modified-styles.css', 'geolocation-polyfill.js']
+});</code></pre>
+							</li>
+							<li class="fragment">
+								Recommended read: <a href="http://www.netmagazine.com/features/making-html5-and-css3-work-polyfills-and-shims">Making HTML5 and CSS3 work with polyfills and shims</a>
+							</li>
+						</ul>
+					</section>
+				</section>
+
+
+				<!-- 7 : UI Thread -->
+				<section>
+					<section>
+						<h2>The UI Thread</h2>
+						<ul>
+							<li class="fragment">
+								The browser has something called <em>The UI Thread</em>
+								<ul>
+									<li class="fragment">
+										Tasks
+										<ul>
+											<li>Draw UI Updates</li>
+											<li>Execute JavaScript</li>
+										</ul>
+									</li>
+									<li class="fragment">
+										Only one task can happen at the same time
+									</li>
+									<li class="fragment">
+										Tasks are queued
+									</li>
+								</ul>
+							</li>
+							<li class="fragment">
+								Example: button <code>onclick</code> handler
+								<ul>
+									<li class="fragment">Change UI to button down (pressed) state</li>
+									<li class="fragment">Execute handler</li>
+									<li class="fragment">Change UI to button up (normal) state</li>
+								</ul>
+							</li>
+						</ul>
+					</section>
+					
+					<section>
+						<h2>The UI Thread</h2>
+						<ul>
+							<li class="fragment">
+								Take this handler function for example
+								<pre class="bigger"><code class="language-javascript">var square = document.getElementById('square');
+for (var i = 0; i &lt; 100; i++) {
+	square.style.left = parseInt(square.style.left) + 1 + 'px';
+}</code></pre>
+								<div id="square" style="margin: 0 auto 0; background: lime; width: 100px; height: 100px; text-align: center; line-height: 100px; font-size: 14px; position: relative; left: 0;">#square</div>
+							</li>
+							<li class="fragment">
+								Remember: one task at a time!
+								<ul>
+									<li>No UI updates while executing JavaScript!</li>
+								</ul>
+							</li>
+						</ul>
+						
+					</section>
+					
+					<section>
+						<h2>The UI Thread</h2>
+						<ul>
+							<li class="fragment">
+								Solution: use <code>setTimeOut()</code> or <code>setInterval()</code>
+								<pre class="bigger"><code class="language-javascript">var square = document.getElementById('square2'),
+    i = 0;
+var move = function() {
+	square.style.left = parseInt(square.style.left) + 1 + 'px';
+	if (i++ &lt; 100) setTimeout(move, 1000 / 60);
+}
+
+move();
+</code></pre>
+								<div id="square2" style="margin: 0 auto 0; background: lime; width: 100px; height: 100px; text-align: center; line-height: 100px; font-size: 14px; position: relative; left: 0;">#square</div>
+							</li>
+							<li class="fragment">
+								Other solution: use XHR asynchronously 
+							</li>
+						</ul>
+						
+					</section>
+					
+					<section>
+						<h2>The UI Thread</h2>
+						<ul>
+							<li class="fragment">
+								Recommended read: <a href="http://www.slideshare.net/nzakas/responsive-interfaces">Responsive Interfaces</a>
+							</li>
+						</ul>
+						
+					</section>
+					
+				</section>
+				
+
+				<!-- 8 : Cronjobs -->
+				<section>
+					<section>
+						<h2>Cronjobs</h2>
+						<ul>
+							<li class="fragment">
+								Some tasks can't be performed in one simple go
+								<ul>
+									<li>viz. send out 10000 mails</li>
+								</ul>
+							</li>
+							<li class="fragment">
+								Some tasks need to run once a day
+								<ul>
+									<li>viz. process gathered stats and create a linechart of the data</li>
+								</ul>
+							</li>
+							<li class="fragment">
+								Possible via <em>cronjobs</em>
+								<ul>
+									<li>On Linux: <code>crontab</code></li>
+									<li>On Windows: Task Scheduler</li>
+								</ul>
+							</li>
+							<li class="fragment">
+								Most of the time a cronjob will fetch a (PHP) script to performs the task required
+								<ul>
+									<li>Mostly via <code>wget</code> or <code>curl</code></li>
+								</ul>
+							</li>
+						</ul>
+					</section>
+				</section>
+				
+
+				<!-- 9 : Domain Registration -->
+				<section>
+					<section>
+						<h2>Domain Registration</h2>
+						<ul>
+							<li class="fragment">
+								In Belgium
+								<ul>
+									<li class="fragment"><code>.be</code> Top Level Domain in control of <a href="http://www.dns.be/">DNS.be</a></li>
+									<li class="fragment">Registration possible via a <a href="http://www.dns.be/whois/findRegistrars/?0">registrar</a> <em>(registered agent)</em></li>
+									<li class="fragment">Registrar registers your domain on your name</li>
+								</ul>
+							</li>
+							<li class="fragment">Domains mostly registered for a period of one year</li>
+							<li class="fragment">
+								If you don't renew a domain in due time, it's placed in <a href="http://www.dns.be/nl/domeinnaam/domeinnaamstatus">quarantine</a> for 40 days
+								<ul>
+									<li class="fragment">Orignal registrant can re-active the domain (at an extra cost)</li>
+									<li class="fragment">After 40 days, anyone can register it</li>
+								</ul>
+							</li>
+							<li class="fragment">
+								Other terms you should know
+								<ul>
+									<li class="fragment">Move a domain = change registrar</li>
+									<li class="fragment">Transfer a domain = change owner</li>
+								</ul>
+							</li>
+						</ul>
+					</section>
+				</section>
+				
+
+				<!-- 10 : Website Publishing -->
+				<section>
+					<section>
+						<h2>Website Publishing</h2>
+						<ul>
+							<li class="fragment">
+								Most of the time
+								<ul>
+									<li class="fragment">Upload changed files via FTP</li>
+									<li class="fragment">Go to PHPMyAdmin and do some DB changes</li>
+									<li class="fragment">Hope that site still works and you haven't made any mistakes</li>
+								</ul>
+							</li>
+							<li class="fragment">
+								Things can be automated though
+							</li>
+							<li class="fragment">
+								Example: <a href="https://github.com/capistrano/capistrano/wiki/">Capistrano</a>
+								<ul>
+									<li class="fragment">Make changes and commit them to your version control system</li>
+									<li class="fragment">Run <code>cap deploy</code> on your machine, sit back, and enjoy the show</li>
+									<li class="fragment">Possible to roll back if you've deployed a wrong version</li>
+								</ul>
+							</li>
+						</ul>
+					</section>
+				</section>
+				
+
+				<!-- 11 : PHP Frameworks -->
+				<section>
+					<section>
+						<h2>PHP Frameworks</h2>
+						<ul>
+							<li class="fragment">@see Davy</li>
+						</ul>
+					</section>
+				</section>
+				
+
+				<!-- 12 : Content Management Systems -->
+				<section>
+					<section>
+						<h2>Content Management Systems</h2>
+						<ul>
+							<li class="fragment">@see Davy</li>
+						</ul>
+					</section>
+				</section>
+				
+				
+				<!-- The END -->
+				<section>
+					<section>
+						<h2>Questions?</h2>
+						<footer>
+							<em><a href="http://www.ikdoeict.be/">ikdoeict.be</a> &mdash; <a href="mailto:bramus.vandamme@kahosl.be">bramus.vandamme@kahosl.be</a> &mdash; <a href="mailto:davy.dewinne@kahosl.be">davy.dewinne@kahosl.be</a></em>
+						</footer>
+					</section>
+				</section>
+
+
+
+				<!-- Sources -->
+				<section id="sources">
+					<section>
+						<h2>Sources</h2>
+						<ul>
+							<li><a href="http://www.slideshare.net/nzakas/responsive-interfaces">The UI Thread</a></li>
+						</ul>
+					</section>
+				</section>
+				
+			</div>
+
+			<!-- The navigational controls UI -->
+			<aside class="controls">
+				<a class="left" href="#">&#x25C4;</a>
+				<a class="right" href="#">&#x25BA;</a>
+				<a class="up" href="#">&#x25B2;</a>
+				<a class="down" href="#">&#x25BC;</a>
+				<span id="revealIndex">/</span>
+			</aside>
+
+			<!-- Index Link -->
+			<aside class="back">
+				<a href="index.html">&larr; Back to index</a>
+			</aside>
+			
+			<!-- ikdoeict.be Link -->
+			<a href="http://www.ikdoeict.be/" title="ikdoeict.be" id="ikdoeict">ikdoeict.be</a>
+
+			<!-- Displays presentation progress, max value changes via JS to reflect # of slides -->
+			<div class="progress"><span></span></div>
+			
+		</div>
+		
+		<script src="js/reveal.js"></script>
+		<script src="lib/highlight.js"></script>
+		<script src="lib/prefixfree.js"></script>
+		<script src="lib/css-snippets.js"></script>
+		<script src="lib/css-edit.js"></script>
+		<script src="lib/incrementable.js"></script>
+		<script src="js/main.js"></script>
+
+	</body>
+</html>
