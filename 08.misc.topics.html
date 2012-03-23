@@ -127,7 +127,7 @@
 }</code></pre>
 									</div>
 									<div style="width: 50%; float: left;">
-										<pre class="bigger language-css"><code>/* compiled style.css */
+										<pre class="bigger"><code class="language-css">/* compiled style.css */
 
 #navbar {
   width: 80%;
@@ -171,7 +171,7 @@ a {
 }</code></pre>
 									</div>
 									<div style="width: 50%; float: left;">
-										<pre class="bigger language-css"><code>/* compiled style.css */
+										<pre class="bigger"><code class="language-css">/* compiled style.css */
 
 #navbar {
   border-bottom-color: #ce4dd6;
@@ -195,7 +195,7 @@ a:hover {
 								Mixins
 								<div class="fragment">
 									<div style="width: 50%; float: left;">
-										<pre class="bigger"><code>/* style.scss */
+										<pre class="bigger"><code class="language-css">/* style.scss */
 
 @mixin rounded-top {
   $side: top;
@@ -210,7 +210,7 @@ a:hover {
 #footer { @include rounded-top; }</code></pre>
 									</div>
 									<div style="width: 50%; float: left;">
-										<pre class="bigger language-css"><code>/* compiled style.css */
+										<pre class="bigger"><code class="language-css">/* compiled style.css */
 
 #navbar li {
   border-top-radius: 10px;
@@ -290,6 +290,7 @@ a:hover {
 
 				<!-- 5 : Modernizr -->
 				<section>
+
 					<section>
 						<h2>Modernizr</h2>
 						<ul>
@@ -301,16 +302,17 @@ a:hover {
 							</li>
 							<li class="fragment">
 								Sets classes on the <code>&lt;html&gt;</code> tag tellling you if the browser suppors feature X or not
-								<pre class="bigger language-html dontrun"><code>&lt;html lang=&quot;en&quot; dir=&quot;ltr&quot; id=&quot;modernizrcom&quot; class=&quot;js no-touch postmessage history multiplebgs boxshadow opacity cssanimations csscolumns cssgradients csstransforms csstransitions fontface localstorage sessionstorage svg inlinesvg blobbuilder bloburls download formdata wf-proximanova1proximanova2-n4-active wf-proximanova1proximanova2-i4-active wf-proximanova1proximanova2-n7-active wf-proximanova1proximanova2-i7-active wf-proximanovacondensed1proximanovacondensed2-n6-active wf-athelas1athelas2-n4-active wf-active js flexbox flexbox-legacy canvas canvastext webgl no-touch geolocation postmessage websqldatabase indexeddb hashchange history draganddrop websockets rgba hsla multiplebgs backgroundsize borderimage borderradius boxshadow textshadow opacity cssanimations csscolumns cssgradients cssreflections csstransforms csstransforms3d csstransitions fontface generatedcontent video audio localstorage sessionstorage webworkers applicationcache svg inlinesvg smil svgclippaths tk-loaded wf-active&quot;&gt;</code></pre>
+								<pre class="bigger"><code class="language-html dontrun">&lt;html lang=&quot;en&quot; dir=&quot;ltr&quot; id=&quot;modernizrcom&quot; class=&quot;js no-touch postmessage history multiplebgs boxshadow opacity cssanimations csscolumns cssgradients csstransforms csstransitions fontface localstorage sessionstorage svg inlinesvg blobbuilder bloburls download formdata wf-proximanova1proximanova2-n4-active wf-proximanova1proximanova2-i4-active wf-proximanova1proximanova2-n7-active wf-proximanova1proximanova2-i7-active wf-proximanovacondensed1proximanovacondensed2-n6-active wf-athelas1athelas2-n4-active wf-active js flexbox flexbox-legacy canvas canvastext webgl no-touch geolocation postmessage websqldatabase indexeddb hashchange history draganddrop websockets rgba hsla multiplebgs backgroundsize borderimage borderradius boxshadow textshadow opacity cssanimations csscolumns cssgradients cssreflections csstransforms csstransforms3d csstransitions fontface generatedcontent video audio localstorage sessionstorage webworkers applicationcache svg inlinesvg smil svgclippaths tk-loaded wf-active&quot;&gt;</code></pre>
 							</li>
 						</ul>
 					</section>
+					
 					<section>
 						<h2>Modernizr</h2>
 						<ul>
 							<li class="fragment">
 								Based on the classes, you can fix some CSS if a certain feature isn't available
-								<pre class="bigger language-css"><code>.no-borderradius .box {
+								<pre class="bigger"><code class="language-css">.no-borderradius .box {
 	/* a bit less padding perhaps? Or some background image? */									
 }</code></pre>
 							</li>
@@ -319,16 +321,53 @@ a:hover {
 							</li>
 						</ul>
 					</section>
+					
 				</section>
 
 
 				<!-- 6 : Polyfills -->
 				<section>
 					<section>
-						<h2>Polyfills</h2>
+						<h2>Polyfills and Shims</h2>
 						<ul>
 							<li class="fragment">
-								
+								Little pieces of JavaScript/HTML/CSS that provide support for missing browser features
+							</li>
+							<li class="fragment">
+								What's the difference between the two?
+								<ul>
+									<li class="fragment">
+										Polyfill: Provided code mimics the native API in browsers that don't support the feature
+										<ul>
+											<li class="fragment">viz. IE7 doesn't support <code>sessionStorage</code>, but if you plug in a <a href="https://gist.github.com/350433">sessionStorage polyfill</a>, it'll work without needing to adjust your code</li>
+										</ul>
+									</li>
+									<li class="fragment">
+										Shim: Provided code provides an alternative or a hotfix you can use if the feature is unsupported
+										<ul>
+											<li class="fragment">viz. <a href="http://www.dillerdesign.com/experiment/DD_belatedPNG/">DD_BelatedPNG</a> to give IE6 transparent .png support</li>
+										</ul>
+									</li>
+								</ul>
+							</li>
+							<li class="fragment">
+								Huge list/overview available <a href="https://github.com/Modernizr/Modernizr/wiki/HTML5-Cross-browser-Polyfills">on the Modernizr Wiki</a>
+							</li>
+						</ul>
+					</section>
+					<section>
+						<h2>Polyfills and Shims</h2>
+						<ul>
+							<li class="fragment">
+								Modernizr + <a href="http://yepnopejs.com/">yepnope</a> + Polyfill = #winning
+								<pre class="bigger"><code class="language-js dontrun">yepnope({
+	test: Modernizr.geolocation,
+	yep: 'regular-styles.css',
+	nope: ['modified-styles.css', 'geolocation-polyfill.js']
+});</code></pre>
+							</li>
+							<li class="fragment">
+								Recommended read: <a href="http://www.netmagazine.com/features/making-html5-and-css3-work-polyfills-and-shims">Making HTML5 and CSS3 work with polyfills and shims</a>
 							</li>
 						</ul>
 					</section>
@@ -338,11 +377,91 @@ a:hover {
 				<!-- 7 : UI Thread -->
 				<section>
 					<section>
-						<h2>JS UI Thread</h2>
+						<h2>The UI Thread</h2>
 						<ul>
-							<li class="fragment">...</li>
+							<li class="fragment">
+								The browser has something called <em>The UI Thread</em>
+								<ul>
+									<li class="fragment">
+										Tasks
+										<ul>
+											<li>Draw UI Updates</li>
+											<li>Execute JavaScript</li>
+										</ul>
+									</li>
+									<li class="fragment">
+										Only one task can happen at the same time
+									</li>
+									<li class="fragment">
+										Tasks are queued
+									</li>
+								</ul>
+							</li>
+							<li class="fragment">
+								Example: button <code>onclick</code> handler
+								<ul>
+									<li class="fragment">Change UI to button down (pressed) state</li>
+									<li class="fragment">Execute handler</li>
+									<li class="fragment">Change UI to button up (normal) state</li>
+								</ul>
+							</li>
 						</ul>
 					</section>
+					
+					<section>
+						<h2>The UI Thread</h2>
+						<ul>
+							<li class="fragment">
+								Take this handler function for example
+								<pre class="bigger"><code class="language-javascript">var square = document.getElementById('square');
+for (var i = 0; i &lt; 100; i++) {
+	square.style.left = parseInt(square.style.left) + 1 + 'px';
+}</code></pre>
+								<div id="square" style="margin: 0 auto 0; background: lime; width: 100px; height: 100px; text-align: center; line-height: 100px; font-size: 14px; position: relative; left: 0;">#square</div>
+							</li>
+							<li class="fragment">
+								Remember: one task at a time!
+								<ul>
+									<li>No UI updates while executing JavaScript!</li>
+								</ul>
+							</li>
+						</ul>
+						
+					</section>
+					
+					<section>
+						<h2>The UI Thread</h2>
+						<ul>
+							<li class="fragment">
+								Solution: use <code>setTimeOut()</code> or <code>setInterval()</code>
+								<pre class="bigger"><code class="language-javascript">var square = document.getElementById('square2'),
+    i = 0;
+var move = function() {
+	square.style.left = parseInt(square.style.left) + 1 + 'px';
+	if (i++ &lt; 100) setTimeout(move, 1000 / 60);
+}
+
+move();
+</code></pre>
+								<div id="square2" style="margin: 0 auto 0; background: lime; width: 100px; height: 100px; text-align: center; line-height: 100px; font-size: 14px; position: relative; left: 0;">#square</div>
+							</li>
+							<li class="fragment">
+								Other solution: use XHR asynchronously 
+							</li>
+						</ul>
+						
+					</section>
+					
+					<section>
+						<h2>The UI Thread</h2>
+						<ul>
+							<li class="fragment">
+								Recommended read: <a href="http://www.slideshare.net/nzakas/responsive-interfaces">Responsive Interfaces</a>
+							</li>
+						</ul>
+						
+					</section>
+					
 				</section>
 				
 
@@ -351,7 +470,31 @@ a:hover {
 					<section>
 						<h2>Cronjobs</h2>
 						<ul>
-							<li class="fragment">...</li>
+							<li class="fragment">
+								Some tasks can't be performed in one simple go
+								<ul>
+									<li>viz. send out 10000 mails</li>
+								</ul>
+							</li>
+							<li class="fragment">
+								Some tasks need to run once a day
+								<ul>
+									<li>viz. process gathered stats and create a linechart of the data</li>
+								</ul>
+							</li>
+							<li class="fragment">
+								Possible via <em>cronjobs</em>
+								<ul>
+									<li>On Linux: <code>crontab</code></li>
+									<li>On Windows: Task Scheduler</li>
+								</ul>
+							</li>
+							<li class="fragment">
+								Most of the time a cronjob will fetch a (PHP) script to performs the task required
+								<ul>
+									<li>Mostly via <code>wget</code> or <code>curl</code></li>
+								</ul>
+							</li>
 						</ul>
 					</section>
 				</section>
@@ -362,7 +505,29 @@ a:hover {
 					<section>
 						<h2>Domain Registration</h2>
 						<ul>
-							<li class="fragment">...</li>
+							<li class="fragment">
+								In Belgium
+								<ul>
+									<li class="fragment"><code>.be</code> Top Level Domain in control of <a href="http://www.dns.be/">DNS.be</a></li>
+									<li class="fragment">Registration possible via a <a href="http://www.dns.be/whois/findRegistrars/?0">registrar</a> <em>(registered agent)</em></li>
+									<li class="fragment">Registrar registers your domain on your name</li>
+								</ul>
+							</li>
+							<li class="fragment">Domains mostly registered for a period of one year</li>
+							<li class="fragment">
+								If you don't renew a domain in due time, it's placed in <a href="http://www.dns.be/nl/domeinnaam/domeinnaamstatus">quarantine</a> for 40 days
+								<ul>
+									<li class="fragment">Orignal registrant can re-active the domain (at an extra cost)</li>
+									<li class="fragment">After 40 days, anyone can register it</li>
+								</ul>
+							</li>
+							<li class="fragment">
+								Other terms you should know
+								<ul>
+									<li class="fragment">Move a domain = change registrar</li>
+									<li class="fragment">Transfer a domain = change owner</li>
+								</ul>
+							</li>
 						</ul>
 					</section>
 				</section>
@@ -371,9 +536,27 @@ a:hover {
 				<!-- 10 : Website Publishing -->
 				<section>
 					<section>
-						<h2>Domain Registration</h2>
+						<h2>Website Publishing</h2>
 						<ul>
-							<li class="fragment">...</li>
+							<li class="fragment">
+								Most of the time
+								<ul>
+									<li class="fragment">Upload changed files via FTP</li>
+									<li class="fragment">Go to PHPMyAdmin and do some DB changes</li>
+									<li class="fragment">Hope that site still works and you haven't made any mistakes</li>
+								</ul>
+							</li>
+							<li class="fragment">
+								Things can be automated though
+							</li>
+							<li class="fragment">
+								Example: <a href="https://github.com/capistrano/capistrano/wiki/">Capistrano</a>
+								<ul>
+									<li class="fragment">Make changes and commit them to your version control system</li>
+									<li class="fragment">Run <code>cap deploy</code> on your machine, sit back, and enjoy the show</li>
+									<li class="fragment">Possible to roll back if you've deployed a wrong version</li>
+								</ul>
+							</li>
 						</ul>
 					</section>
 				</section>
@@ -384,7 +567,7 @@ a:hover {
 					<section>
 						<h2>PHP Frameworks</h2>
 						<ul>
-							<li class="fragment">...</li>
+							<li class="fragment">@see Davy</li>
 						</ul>
 					</section>
 				</section>
@@ -395,7 +578,7 @@ a:hover {
 					<section>
 						<h2>Content Management Systems</h2>
 						<ul>
-							<li class="fragment">...</li>
+							<li class="fragment">@see Davy</li>
 						</ul>
 					</section>
 				</section>
@@ -418,7 +601,7 @@ a:hover {
 					<section>
 						<h2>Sources</h2>
 						<ul>
-							<li><a href="#">...</a></li>
+							<li><a href="http://www.slideshare.net/nzakas/responsive-interfaces">The UI Thread</a></li>
 						</ul>
 					</section>
 				</section>
