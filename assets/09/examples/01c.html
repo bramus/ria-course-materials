@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<title>From pixels to percentages</title>
+	<style>
+		.clearfix:after {
+			content: ".";
+			display: block;
+			height: 0;
+			clear: both;
+			visibility: hidden;
+		}
+		
+		body {
+			font: 300 24px/48px "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", sans-serif;
+			background: #fff;
+		}
+		
+		#wrapper{
+			width: 960px;
+			margin: 0 auto 0;
+		}
+		
+		#primary, #secondary, #wrapper {
+			height: 400px;
+			color: #333;
+			text-align: center;
+		}
+		
+		#primary, #secondary {
+			float: left;
+			background: #EFEFEF;
+			width: 66.666667%;
+		}
+		
+		em {
+			font-size: 18px;
+			color: #666;
+		}
+		
+		#secondary {
+			background: #CCC;
+			width: 33.333333%;
+		}
+		
+		article, aside {
+			float: left;
+			height: 352px;
+			background: #ccc;
+			font-size: 14px;
+			line-height: 36px;
+		}
+
+		article {
+			width: 78.125%;
+			background: #bbb;
+		}
+
+		aside {
+			width: 21.875%;
+			background: #aaa;
+		}
+	</style>
+</head>
+<body>
+	
+	<div id="wrapper" class="clearfix">
+		<p>&lt;-- 960px --&gt;</p>
+		<section id="secondary">
+			&lt;-- 33.333333% --&gt;
+		</section>
+		<section id="primary">
+			&lt;-- 66.666667% --&gt;
+			<article>
+				&lt;-- 78.125% --&gt;
+			</article>
+			<aside>
+				&lt;-- 21.875% --&gt;
+			</aside>
+		</section>
+		<p><code>target / context = result</code></p>
+	</div>
+	
+</body>
+</html>

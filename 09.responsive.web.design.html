@@ -1,0 +1,733 @@
+<!doctype html>  
+<html lang="en">
+	
+	<head>
+		<meta charset="utf-8">
+		
+		<title>Rich Internet Applications &mdash; 09.Responsive.Web.Design</title>
+
+		<meta name="description" content="Rich Internet Applications &mdash; 09.Responsive.Web.Design">
+		<meta name="author" content="Bram(us) Van Damme - Davy De Winne - ikdoeict.be">
+		
+		<link href='http://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+		
+		<link rel="stylesheet" href="css/reset.css">
+		<link rel="stylesheet" href="css/main.css" media="screen">
+		<link rel="stylesheet" href="css/print.css" media="print">
+		<!-- <link rel="stylesheet" href="assets/08/examples.css"> -->
+
+		<link rel="stylesheet" href="lib/zenburn.css">
+		
+		<style>
+			code {
+				color: gainsboro;
+			}
+
+			li > code, li em > code, li del > code, li ins > code, p > code {
+				background: #3F3F3F;
+				padding: 2px 4px;
+				box-shadow: 0px 0px 6px rgba(0,0,0,0.3);
+				font-size: 80%;
+			}
+			
+			del code, code.nok {
+				color: #C55;
+			}
+			
+			ins code, code.ok {
+				color: #5C5;
+			}
+		</style>
+		
+	</head>
+	
+	<body>
+		
+		<div id="reveal">
+			
+			<!-- Any section element inside of this container is displayed as a slide -->
+			<div class="slides">
+
+
+				
+				<!-- 0 : Title -->
+				<section>
+					<section>
+						<h3 class="inverted">Rich Internet Applications</h3>
+						<h1>09.Responsive.<br />Web.Design</h1>
+					
+						<footer>
+							<em><a href="http://www.ikdoeict.be/">ikdoeict.be</a> &mdash; <a href="mailto:bramus.vandamme@kahosl.be">bramus.vandamme@kahosl.be</a></em>
+						</footer>
+						<script>
+							// Delicously hacky. Look away.
+							if(navigator.userAgent.match(/(iPhone|iPad|iPod|Android)/i))
+							document.write('<p style="color: rgba(0,0,0,0.3); text-shadow: none;">('+'Tap to navigate'+')</p>');
+						</script>
+					</section>
+				</section>
+
+
+				<!-- 1 : Intro -->
+				<section>
+					<section>
+						<h2>Responsive Web Design</h2>
+						<p><img src="assets/09/ascent-of-bot.png" alt="" title="" height="371" width="684" /></p>
+						<q>Hey, look! I found a robot fossil!</q>
+					</section>
+
+					<section>
+						<h2>Responsive Web Design?</h2>
+						
+						<p style="text-align: center;">
+							<a href="http://speakerdeck.com/u/bytte/p/responsive-web-design-1"><img src="assets/09/9aeede98879911e180d51231380fcd7e_7.jpg" alt="" title="" height="406" width="406" /></a>
+						</p>
+						<footer>
+							Guest Lecture by <a href="http://www.twitter.com/bytte">Thomas Byttebier</a> <em><small style="vertical-align: baseline">(click image to view slides)</small></em>
+						</footer>
+						<!-- Works, but is the wrong version
+						<div style="width:510px; margin: 0 auto 0;" id="__ss_10389263">
+							<iframe src="http://www.slideshare.net/slideshow/embed_code/10389263" width="510" height="426" frameborder="0" marginwidth="0" marginheight="0" scrolling="no"></iframe>
+						</div>
+						-->
+						<!-- Correct version, but flaky when embedding (and when going fullscreen)
+						<div style="width: 510px; height: 388px; margin: 0 auto 0;">
+						<script async class="speakerdeck-embed" data-id="4f8d3fce78ea60001f01565e" data-ratio="1.3333333333333333" src="//speakerdeck.comassets/embed.js"></script>
+						</div>
+						-->
+					</section>
+				</section>
+
+
+				<!-- 2 : Fluid Layouts -->
+				<section>
+					
+					<section>
+						<h2>Practical: Fluid Layouts</h2>
+						<p><img src="assets/09/theprisonerofbenda.jpg" alt="" title="" height="376" width="640" /></p>
+						<q>I'm not sure. I'm afraid we need to use ... Math.</q>
+					</section>
+					
+					<section>
+						<h2>Practical: Fluid Layouts</h2>
+						<ul>
+							<li class="fragment">
+								Two steps to converting a pixel based layout to a fluid one
+								<ol>
+									<li class="fragment">Convert the grid used to percentage based values</li>
+									<li class="fragment">Convert the font-sizes used to em based values</li>
+								</ol>
+							</li>
+							<li class="fragment">
+								Magic formula: <code>target / context = result</code>
+							</li>
+						</ul>
+					</section>
+					
+					<section>
+						<h2>Flexible Grid (1)</h2>
+						<ul>
+							<li class="fragment">
+								Let's start from this basic, pixel based, grid
+								<p>
+									<figure style="margin: 0 auto 0; width: 720px; display: block;">
+										<img src="assets/09/examples/01a.jpg" height="360" width="720" alt="Our basic grid" title="Our basic grid" />
+										<figcaption>Our basic grid</figcaption>
+									</figure>
+								</p>
+							</li>
+						</ul>
+					</section>
+					
+					<section>
+						<h2>Flexible Grid (2)</h2>
+						<ul>
+							<li class="fragment">
+								Code is pretty straightforward
+								<pre class="bigger"><code class="language-html dontrun" data-overlay-example="assets/09/examples/01a.html" data-overlay-width="1000" data-overlay-height="610">&lt;div id=&quot;wrapper&quot; class=&quot;clearfix&quot; style=&quot;width: 960px;&quot;&gt;
+	&lt;section id=&quot;secondary&quot; style=&quot;width: 320px; float: left;&quot;&gt;
+		...
+	&lt;/section&gt;
+	&lt;section id=&quot;primary&quot; style=&quot;width: 640px; float: left;&quot;&gt;
+		...
+		&lt;article style=&quot;width: 500px; float: left;&quot;&gt;
+			...
+		&lt;/article&gt;
+		&lt;aside style=&quot;width: 140px; float: left;&quot;&gt;
+			...
+		&lt;/aside&gt;
+	&lt;/section&gt;
+&lt;/div&gt;</code></pre>
+							</li>
+						</ul>
+					</section>
+					
+					<section>
+						<h2>Flexible Grid (3)</h2>
+						<ul>
+							<li class="fragment">
+								Conversion to percentages via our magic formula <code style="white-space: nowrap">target / context = result</code>
+								<ul>
+									<li class="fragment">
+										<code>#secondary</code>
+										<ul>
+											<li class="fragment"><code>target</code> = width the box should be = 320px</li>
+											<li class="fragment"><code>context</code> = width of its parent <code>#sitewrapper</code> = 960px</li>
+											<li class="fragment"><code>result</code> = 320px / 960px = 33.333333%</li>
+										</ul>
+									</li>
+									<li class="fragment">
+										<code>#primary</code>
+										<ul>
+											<li class="fragment"><code>target</code> = width the box should be = 640px</li>
+											<li class="fragment"><code>context</code> = width of its parent <code>#sitewrapper</code> = 960px</li>
+											<li class="fragment"><code>result</code> = 640px / 960px = 66.666667%</li>
+										</ul>
+									</li>
+								</ul>
+							</li>
+						</ul>
+					</section>
+					
+					<section>
+						<h2>Flexible Grid (4)</h2>
+						<ul>
+							<li class="fragment">
+								Conversion to percentages via our magic formula <code style="white-space: nowrap">target / context = result</code>
+								<ul>
+									<li class="fragment">
+										<code>article</code>
+										<ul>
+											<li class="fragment"><code>target</code> = width the box should be = 500px</li>
+											<li class="fragment"><code>context</code> = width of its parent <code>#primary</code> = 640px</li>
+											<li class="fragment"><code>result</code> = 500px / 640px = 78.125%</li>
+										</ul>
+									</li>
+									<li class="fragment">
+										<code>aside</code>
+										<ul>
+											<li class="fragment"><code>target</code> = width the box should be = 140px</li>
+											<li class="fragment"><code>context</code> = width of its parent <code>#primary</code> = 640px</li>
+											<li class="fragment"><code>result</code> = 140px / 640px = 21.875%</li>
+										</ul>
+									</li>
+								</ul>
+							</li>
+						</ul>
+					</section>
+					
+					<section>
+						<h2>Flexible Grid (5)</h2>
+						<ul>
+							<li class="fragment">
+								Resulting code
+								<pre class="bigger"><code class="language-html dontrun" data-overlay-example="assets/09/examples/01c.html" data-overlay-width="1000" data-overlay-height="610">&lt;div id=&quot;wrapper&quot; class=&quot;clearfix&quot; style=&quot;width: 960px;&quot;&gt;
+	&lt;section id=&quot;secondary&quot; style=&quot;width: 33.333333%; float: left;&quot;&gt;
+		...
+	&lt;/section&gt;
+	&lt;section id=&quot;primary&quot; style=&quot;width: 66.666667%; float: left;&quot;&gt;
+		...
+		&lt;article style=&quot;width: 78.125%; float: left;&quot;&gt;
+			...
+		&lt;/article&gt;
+		&lt;aside style=&quot;width:  21.875%; float: left;&quot;&gt;
+			...
+		&lt;/aside&gt;
+	&lt;/section&gt;
+&lt;/div&gt;</code></pre>
+							</li>
+						</ul>
+						<footer class="fragment"><em>Note that the wrapper still has it width set in pixels. This is allowed. For now.</em></footer>
+					</section>
+
+					<section>
+						<h2>Flexible Font Sizes (1)</h2>
+						<ul>
+							<li class="fragment">Setting the <code>font-size</code> to an <code>em</code>-based value will allow fluid font-sizes
+								<ul>
+									<li class="fragment">An <code>em</code> is a relative unit
+									<li class="fragment"><code>1em</code> = the font-size of the current context</li>
+									<li class="fragment">By default the context is the <code>&lt;body&gt;</code>, which defaults to 16px</li>
+								</ul>
+							</li>
+							<li class="fragment">
+								Let's take this example
+								<pre class="bigger"><code class="language-html dontrun" data-overlay-example="assets/09/examples/02a.html">&lt;h1 style=&quot;font-size: 28px;&quot;&gt;This is a test &lt;small style=&quot;font-size: 16px;&quot;&gt;and only a test&lt;/small&gt;&lt;/h1&gt;
+&lt;p style=&quot;font-size: 13px;&quot;&gt;I'm not kidding!&lt;/p&gt;</pre></code>
+							</li>
+						</ul>
+					</section>
+
+					<section>
+						<h2>Flexible Font Sizes (2)</h2>
+						<ul>
+							<li class="fragment">
+								Conversion to percentages via our magic formula <code style="white-space: nowrap">target / context = result</code>
+								<ul>
+									<li class="fragment">
+										<code>h1</code>
+										<ul>
+											<li class="fragment"><code>target</code> = the font-size it should be = 28px</li>
+											<li class="fragment"><code>context</code> = the font-size of its parent, <code>body</code> = 16px</li>
+											<li class="fragment"><code>result</code> = 28px / 16px = 1.75em</li>
+										</ul>
+									</li>
+									<li class="fragment">
+										<code>p</code>
+										<ul>
+											<li class="fragment"><code>target</code> = the font-size it should be = 13px</li>
+											<li class="fragment"><code>context</code> = the font-size of its parent, <code>body</code> = 16px</li>
+											<li class="fragment"><code>result</code> = 13px / 16px = 0.8125em</li>
+										</ul>
+									</li>
+								</ul>
+							</li>
+						</ul>
+					</section>
+
+					<section>
+						<h2>Flexible Font Sizes (3)</h2>
+						<ul>
+							<li class="fragment">
+								Conversion to percentages via our magic formula <code style="white-space: nowrap">target / context = result</code>
+								<ul>
+									<li class="fragment">
+										<code>small</code>
+										<ul>
+											<li class="fragment"><code>target</code> = the font-size it should be = 16px</li>
+											<li class="fragment"><code>context</code> = the font-size of its parent, <code>h1</code> = 28px</li>
+											<li class="fragment"><code>result</code> = 16px / 28px = 0.571428571em</li>
+										</ul>
+									</li>
+									<li class="fragment">
+										Resulting code
+										<pre class="bigger"><code class="language-html dontrun" data-overlay-example="assets/09/examples/02b.html">&lt;h1 style=&quot;font-size: 1.75em;&quot;&gt;This is a test &lt;small style=&quot;font-size: 0.571428571em;&quot;&gt;and only a test&lt;/small&gt;&lt;/h1&gt;
+&lt;p style=&quot;font-size: 0.8125em;&quot;&gt;I'm not kidding!&lt;/p&gt;</pre></code>
+									</li>
+								</ul>
+							</li>
+						</ul>
+					</section>
+
+					<section>
+						<h2>Closing Notes</h2>
+						<ul>
+							<li class="fragment">
+								Don't round the values that you've calculated.
+								<ul>
+									<li>0.5em is not the same as 0.571428571em!</li>
+								</ul>
+							</li>
+							<li class="fragment">
+								When creating a fluid grid, it's not common to convert the vertical values.
+							</li>
+							<li class="fragment">
+								When creating a fluid grid, (horizontal) margins and paddings are converted like you'd convert the width 
+								<ul>
+									<li><code>target</code> = target padding/margin you want</li>
+								</ul>
+							</li>
+							<li class="fragment">
+								Working with borders is difficult. Use <code>box-sizing: border-box;</code> to adjust the box model being used
+								<ul>
+									<li>That way <a href="http://css-tricks.com/box-sizing/">the rendered width will be the CSS <code>width</code> you specify</a>; the padding and border won't be added to it.</li>
+								</ul>
+							</li>
+						</ul>
+					</section>
+					
+				</section>
+
+
+				<!-- 3 : Media Queries -->
+				<section>
+					<section>
+						<h2>Practical: Media Queries</h2>
+						<p><img src="assets/09/brainslug.jpg" alt="" title="" height="393" width="500" /></p>
+						<q>The flight had a stopover on the Brain Slug Planet. Hermes liked it so much he decided to stay of his own free will.</q>
+					</section>
+					
+					<section>
+						<h2>Plan Ahead (1)</h2>
+						<ul>
+							<li class="fragment">
+								Stop &amp; think! Don't jump into your CSS editor and start coding but plan ahead.
+							</li>
+							<li class="fragment">
+								Make sketches, or a prototype at the various widths
+								<div style="width: 538px; margin: 12px auto 0;">
+									<figure>
+										<img src="assets/09/sketch.jpg" alt="" title="" height="300" width="538" />
+										<figcaption>Image by <a href="http://www.webdesignerdepot.com/2012/02/designing-for-responsiveness/">Webdesigner Depot</a></figcaption>
+									</figure>
+								</div>
+							</li>
+						</ul>
+					</section>
+					
+					<section>
+						<h2>Plan Ahead (2)</h2>
+						<ul>
+							<li class="fragment">
+								Be inspired by sites such as <a href="http://mediaqueri.es/">Mediaqueri.es</a>
+								<p style="text-align: center;">
+									<img src="assets/09/tumblr_lw8s7e8KPT1qlg7tzo1_500.png" alt="" title="" width="262" height="500" />
+								</p>
+							</li>
+						</ul>
+					</section>
+					
+					<section>
+						<h2>Think Mobile First &amp; Focus</h2>
+						<ul>
+							<li class="fragment">
+								Layouting the mobile view of the site first forces you to focus on what really matters: <strong>the content</strong>
+								<p style="text-align: center;">
+									<img src="assets/09/focus.jpg" alt="" title="" width="472" height="300" />
+								</p>
+							</li>
+						</ul>
+						<footer class="fragment"><em>Personally, I first design not the smallest layout, but the second smallest one</em></footer>
+					</section>
+					
+					<section>
+						<h2>Implement Mobile First &amp; scale up (1)</h2>
+						<ul>
+							<li class="fragment">
+								Slice and code the smallest layout you've created,<br />then augment upwards
+								<pre class="bigger"><code class="language-css dontrun">/* General CSS (fonts, colors, etc) + Mobile First Layout */
+html { ... }
+body { ... }
+h1 { ... }
+header { ... }
+section#main { ... }
+
+/* From 360 pixels width and up */
+@media (min-width: 360px) {
+	/* note: all styles above will be inherited! */
+	h1 { ... }
+	section#main { ... }	
+}</code></pre>
+							</li>
+						</ul>
+					</section>
+					
+					<section>
+						<h2>Implement Mobile First &amp; scale up (2)</h2>
+						<ul>
+							<li class="fragment">
+								Include <a href="https://github.com/scottjehl/Respond">respond.js</a> on your page to make oldIE interpret the rules
+								<pre class="bigger"><code class="language-html dontrun">&lt;!--[if (lt IE 9) &amp; (!IEMobile)]&gt;&lt;script src=&quot;js/respond.min.js&quot;&gt;&lt;/script&gt;&lt;![endif]--&gt;</code></pre>
+							</li>
+							<li class="fragment">
+								Include a <code>viewport</code> metatag to let mobile browsers properly render the site
+								<pre class="bigger"><code class="language-html dontrun">&lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot; /&gt;</code></pre>
+							</li>
+						</ul>
+					</section>
+					
+					<section>
+						<h2>When to apply a different layout?</h2>
+						<ul>
+							<li class="fragment">
+								Don't use device breakpoints such as 320, 480, 768, etc.
+								<ul>
+									<li class="fragment">Devices will change.</li>
+									<li class="fragment">Screen-sizes vary, a lot: <a href="http://stephanierieger.com/the-trouble-with-android/">The trouble with Android</a></li>
+								</ul>
+							</li>
+							<li class="fragment">
+								Do set breakpoints when the layout becomes awkward or unusable
+								<ul>
+									<li class="fragment">e.g. column becomes too narrow</li>
+								</ul>
+							</li>
+						</ul>
+					</section>
+					
+				</section>
+
+
+				<!-- 4 : Fluid Media -->
+				<section>
+					<section>
+						<h2>Practical: Fluid Media</h2>
+						<p><img src="assets/09/mythreesuns.png" alt="" title="" height="384" width="512" /></p>
+						<q>Please Don't Drink The Emperor!</q>
+					</section>
+					
+					<section>
+						<h2>Fluid Images (1)</h2>
+						<ul>
+							<li class="fragment">
+								Prevent images from bleeding out of their fluid wrapper by limiting its <code>max-width</code> to <code>100%</code>
+								<pre class="bigger"><code class="language-css dontrun">img {
+	max-width: 100%;
+	_width: 100%; /* fix for IE6 who doesn't understand max-width */
+}</code></pre>
+							</li>
+						</ul>
+					</section>
+					
+					<section>
+						<h2>Fluid Images (2)</h2>
+						<ul>
+							<li class="fragment">
+								Scaling down images isn't small bandwidth friendly
+								<ul>
+									<li class="fragment">
+										Some hacky solutions exist <a href="http://blog.cloudfour.com/responsive-imgs-part-2/">(list)</a>
+										<ul>
+											<li><code>.htaccess</code> redirect + resize script: <a href="http://adaptive-images.com/">Adaptive Images</a>, <a href="https://github.com/filamentgroup/Responsive-Images">Responsive-Images JS</a>, etc.</li>
+											<li>Define bigger image as URL part or via data attribute: <a href="https://github.com/joshje/Responsive-Enhance">Responsive Enhance</a>, etc.</li>
+											<li>...</li>
+										</ul>
+									</li>
+									<li class="fragment">
+										A <a href="http://www.w3.org/community/respimg/">W3C community group is pondering how to fix it properly</a>, preferably using a new syntax
+										<pre class="bigger"><code class="language-html dontrun">&lt;picture alt=&quot;A giant stone face at The Bayon temple in Cambodia&quot;&gt;
+    &lt;!-- &lt;source src=&quot;small.jpg&quot;&gt; --&gt;
+    &lt;source src=&quot;small.jpg&quot;&gt;
+    &lt;!-- &lt;source src=&quot;medium.jpg&quot; media=&quot;(min-width: 400px)&quot;&gt; --&gt;
+    &lt;source src=&quot;medium.jpg&quot; media=&quot;(min-width: 400px)&quot;&gt;
+    &lt;!-- &lt;source src=&quot;large.jpg&quot; media=&quot;(min-width: 800px)&quot;&gt; --&gt;
+    &lt;source src=&quot;large.jpg&quot; media=&quot;(min-width: 800px)&quot;&gt;
+
+    &lt;!-- Fallback content for non-JS browsers. --&gt;
+    &lt;noscript&gt;&lt;img src=&quot;small.jpg&quot; alt=&quot;...&quot;&gt;&lt;/noscript&gt;
+&lt;/picture&gt;</code></pre>
+										<ul>
+											<li>Although not standarized, a polyfill <a href="https://github.com/scottjehl/picturefill">already exists</a>!</li>
+										</ul>
+									</li>
+								</ul>
+							</li>
+						</ul>
+					</section>
+					
+					<section>
+						<h2>Fluid Images (3)</h2>
+						<ul>
+							<li class="fragment">
+								Problem: Mobile != small bandwidth
+								<ul>
+									<li class="fragment">It's not because I am visiting a site on my mobile phone that I am on the road</li>
+									<li class="fragment">I can be connected over wifi</li>
+									<li class="fragment">I can be at home in my couch</li>
+									<li class="fragment">...</li>
+								</ul>
+							</li>
+							<li class="fragment">
+								The current proposal is lacking, one also needs to take connection speed into account
+								<ul>
+									<li class="fragment">The Community group is aware of this</li>
+									<li class="fragment">
+										Some JavaScript based solutions already exist
+										<ul>
+											<li><a href="https://github.com/nathanford/pngy">Pngy</a></li>
+											<li><a href="https://github.com/adamdbradley/foresight.js">foresight.js</a></li>
+										</ul>
+									</li>
+								</ul>
+							</li>
+						</ul>
+					</section>
+					
+					<section>
+						<h2>Fluid Video</h2>
+						<ul>
+							<li class="fragment">
+								Same trick as for images works
+								<pre class="bigger"><code class="language-css dontrun">video, embed, object {
+	max-width: 100%;
+	_width: 100%; /* fix for IE6 who doesn't understand max-width */
+}</code></pre>
+							</li>
+							<li class="fragment">
+								Use of <a href="http://fitvidsjs.com/">fitvids.js</a> is recommended, as it uses <a href="http://www.alistapart.com/articles/creating-intrinsic-ratios-for-video/">intrinsic ratios</a>.
+							</li>
+						</ul>
+					</section>
+					
+				</section>
+
+
+				<!-- 5 : Tools -->
+				<section>
+					
+					<section>
+						<h2>Practical: Tools</h2>
+						<p><img src="assets/09/smelloscope.png" alt="" title="" height="390" width="519" /></p>
+						<q>The Smell-O-Scope is brilliant, I tell you!</q>
+					</section>
+					
+					<section>
+						<h2>Easily test your layouts</h2>
+						<p class="fragment" style="text-align: center;"><img src="assets/09/resizer.jpg" width="" height="400" alt="" title="" style="background: transparent; border: 0; -webkit-box-shadow: none; -moz-box-shadow: none; -ms-box-shadow: none; -o-box-shadow: none; box-shadow: none;" /></p>
+						<footer class="fragment"><a href="http://codebomber.com/jquery/resizer/">Resizer Bookmarklet / Chrome Extension</a></footer>
+					</section>
+					
+					<section>
+						<h2>Test your layouts all at once</h2>
+						<p class="fragment" style="text-align: center;"><img src="assets/09/allatonce.png" width="" height="487" alt="" title="" style="background: transparent; border: 0; -webkit-box-shadow: none; -moz-box-shadow: none; -ms-box-shadow: none; -o-box-shadow: none; box-shadow: none;" /></p>
+						<footer class="fragment"><a href="http://mattkersley.com/responsive/">Responsive Design Testing</a></footer>
+					</section>
+					
+					<section>
+						<h2>Find that tricky breakpoint</h2>
+						<p class="fragment" style="text-align: center;"><img src="assets/09/responsivepx.png" width="" height="487" alt="" title="" style="background: transparent; border: 0; -webkit-box-shadow: none; -moz-box-shadow: none; -ms-box-shadow: none; -o-box-shadow: none; box-shadow: none;" /></p>
+						<footer class="fragment"><a href="http://responsivepx.com/">ResponsivePX</a></footer>
+					</section>
+					
+				</section>
+
+
+				<!-- 7 : Final Note -->
+				<section>
+					
+					<section>
+						<h2>Final Notes</h2>
+						<p><img src="assets/09/preacherbot.png" alt="" title="" height="390" width="520" /></p>
+						<q>Do you, Leela, copy and paste his response<br />till death do you part?</q>
+					</section>
+					
+					<section>
+						<h2>Future Friendly</h2>
+						<ul>
+							<li class="fragment">
+								We can't predict the future. Things will indefinitely change
+								<ul>
+									<li>New devices</li>
+									<li>New ways to accessing information</li>
+									<li>...</li>
+								</ul>
+							</li>
+							<li class="fragment">
+								Don't code for the proprietary solutions that exist now, but keep the future in mind, be <a href="http://futurefriend.ly/">future friendly</a>
+								<ul>
+									<li class="fragment">Create meaningful content and services; Focus!</li>
+									<li class="fragment">Define your data in way that it's interoperable and can exist later on</li>
+									<li class="fragment">Structure and store your content so that it can be read by anyone, on any device, any time, in different contexts</li>
+								</ul>
+							</li>
+						</ul>
+					</section>
+					
+					<section>
+						<h2>There is no mobile web</h2>
+						<div style="margin: 160px auto 0; width: 700px;">
+							<q>There is no Mobile Web. There is only The Web, which we view in different ways. There is also no Desktop Web. Or Tablet Web.</q>
+							<p style="text-align: right; margin-top: 40px;"><small>&mdash; <a href="http://www.the-haystack.com/2011/01/07/there-is-no-mobile-web/">Stephen Hay</a></small></p>
+						</div>
+					</section>
+					
+					<section>
+						<h2>No Silver Bullets (1)</h2>
+						<ul>
+							<li class="fragment">
+								Again <small><a href="08.misc.topics.html#/15">&#9873;</a></small>:
+								<div style="margin: 130px auto 0; width: 700px;">
+									<q>If you're looking for the more honest, truthful answer to pretty much any question on web design and usability, here it is: It depends.</q>
+									<p style="text-align: right; margin-top: 40px;"><small>&mdash; <a href="http://adactio.com/journal/4437/">Jeremy Keith</a></small></p>
+								</div>
+							</li>
+						</ul>
+					</section>
+					
+					<section>
+						<h2>No Silver Bullets (2)</h2>
+						<ul>
+							<li class="fragment">RWD is not the answer to everything.
+							<li class="fragment">
+								In some cases, you'll need a combination of techniques, a variant or an alternative
+								<ul>
+									<li>eg. <a href="http://www.lukew.com/ff/entry.asp?1392">RESS: Responsive Design + Server Side Components</a>
+										<ul>
+											<li>Selectively deliver lightweight versions of some parts of your site to mobile devices</li>
+										</ul>
+									</li>
+								</ul>
+							</li>
+							<li class="fragment">
+								In some cases you <strong>will need</strong> a separate app, or a separate website
+							</li>
+						</ul>
+					</section>
+					
+					<section>
+						<h2>Recommended Reading</h2>
+						<p><a href="http://www.abookapart.com/products/mobile-first-responsive-web-design-bundle"><img src="assets/09/feature-bundle-6-4.jpg" alt="" title="" height="294" width="640" /></a></p>
+						<p style="text-align: center;"><a href="http://www.abookapart.com/products/mobile-first-responsive-web-design-bundle">Responsive Web Design &amp; Mobile First <em>(A Book Apart)</em></a></p>
+					</section>
+					
+					<section>
+						<h2>Recommended online material</h2>
+						<ul>
+							<li><a href="http://www.slideshare.net/bryanrieger/rethinking-the-mobile-web-by-yiibu">Rethinking the Mobile Web</a></li>
+							<li><a href="http://www.slideshare.net/bradfrostweb/for-a-futurefriendly-web">For a Future Friendly Web</a></li>
+							<li><a href="http://mobilewebbestpractices.com/">Mobile Web Best Pratices</a></li>
+							<li><a href="http://bradfrostweb.com/blog/web/responsive-nav-patterns/">Responsive Navigation Patterns</a></li>
+							<li><a href="http://speakerdeck.com/u/malarkey/p/fashionably-flexible-responsive-web-design-full-day-workshop-1">Fashionably flexible responsive web design</a> (!!)</li>
+						</ul>
+					</section>
+					
+				</section>
+				
+				
+				<!-- The END -->
+				<section>
+					<section>
+						<h2>Questions?</h2>
+						<footer>
+							<em><a href="http://www.ikdoeict.be/">ikdoeict.be</a> &mdash; <a href="mailto:bramus.vandamme@kahosl.be">bramus.vandamme@kahosl.be</a></em>
+						</footer>
+					</section>
+				</section>
+
+
+
+				<!-- Sources -->
+				<!--
+				<section id="sources">
+					<section>
+						<h2>Sources</h2>
+						<ul>
+							<li></li>
+						</ul>
+					</section>
+				</section>
+				-->
+			</div>
+
+			<!-- The navigational controls UI -->
+			<aside class="controls">
+				<a class="left" href="#">&#x25C4;</a>
+				<a class="right" href="#">&#x25BA;</a>
+				<a class="up" href="#">&#x25B2;</a>
+				<a class="down" href="#">&#x25BC;</a>
+				<span id="revealIndex">/</span>
+			</aside>
+
+			<!-- Index Link -->
+			<aside class="back">
+				<a href="index.html">&larr; Back to index</a>
+			</aside>
+			
+			<!-- ikdoeict.be Link -->
+			<a href="http://www.ikdoeict.be/" title="ikdoeict.be" id="ikdoeict">ikdoeict.be</a>
+
+			<!-- Displays presentation progress, max value changes via JS to reflect # of slides -->
+			<div class="progress"><span></span></div>
+			
+		</div>
+		
+		<script src="js/reveal.js"></script>
+		<script src="lib/highlight.js"></script>
+		<script src="lib/prefixfree.js"></script>
+		<script src="lib/css-snippets.js"></script>
+		<script src="lib/css-edit.js"></script>
+		<script src="lib/incrementable.js"></script>
+		<script src="js/main.js"></script>
+
+	</body>
+</html>

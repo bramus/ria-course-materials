@@ -74,7 +74,7 @@ window.addEventListener('load', function() {
 			button.value = 'Show Example';
 			button.className = 'run';
 			button.addEventListener('click', function() {
-				showInOverlay(codeBlock, null, this.parentNode.querySelector('code').getAttribute('data-overlay-example'));
+				showInOverlay(this.parentNode.querySelector('code'), null, this.parentNode.querySelector('code').getAttribute('data-overlay-example'));
 			});
 			codeBlock.parentNode.appendChild(button);
 			
