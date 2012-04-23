@@ -14,7 +14,7 @@
 		<link rel="stylesheet" href="css/reset.css">
 		<link rel="stylesheet" href="css/main.css" media="screen">
 		<link rel="stylesheet" href="css/print.css" media="print">
-		<!-- <link rel="stylesheet" href="assets/08/examples.css"> -->
+		<link rel="stylesheet" href="assets/09/examples.css">
 
 		<link rel="stylesheet" href="lib/zenburn.css">
 		
@@ -213,6 +213,9 @@
 									</li>
 								</ul>
 							</li>
+							<li class="fragment">
+								Finally, change the <code>width</code> of the <code>#wrapper</code> to <code>max-width</code>
+							</li>
 						</ul>
 					</section>
 					
@@ -221,7 +224,7 @@
 						<ul>
 							<li class="fragment">
 								Resulting code
-								<pre class="bigger"><code class="language-html dontrun" data-overlay-example="assets/09/examples/01c.html" data-overlay-width="1000" data-overlay-height="610">&lt;div id=&quot;wrapper&quot; class=&quot;clearfix&quot; style=&quot;width: 960px;&quot;&gt;
+								<pre class="bigger"><code class="language-html dontrun" data-overlay-example="assets/09/examples/01c.html" data-overlay-width="1000" data-overlay-height="610">&lt;div id=&quot;wrapper&quot; class=&quot;clearfix&quot; style=&quot;max-width: 960px;&quot;&gt;
 	&lt;section id=&quot;secondary&quot; style=&quot;width: 33.333333%; float: left;&quot;&gt;
 		...
 	&lt;/section&gt;
@@ -238,6 +241,30 @@
 							</li>
 						</ul>
 						<footer class="fragment"><em>Note that the wrapper still has it width set in pixels. This is allowed. For now.</em></footer>
+					</section>
+					
+					<section>
+						<h2>Flexible Grid (6)</h2>
+						<ul>
+							<li class="fragment">
+								Other horizontal values such as margins and paddings are converted like you'd convert the width 
+								<ul>
+									<li><code>target</code> = target padding/margin you want</li>
+									<li><code>context</code> = width of the parent</li>
+								</ul>
+							</li>
+							<li class="fragment">
+								Use <code>box-sizing: border-box;</code> when working with borders to adjust the box model being used
+								<ul>
+									<li>
+										That way <a href="http://css-tricks.com/box-sizing/">the rendered width will be the CSS <code>width</code> you specify</a>; the padding and border won't be added to it
+										<div style="text-align: center;">
+											<img src="assets/09/widthbox.png" alt="" title="" height="100" width="" class="zoom" />
+										</div>
+									</li>
+								</ul>
+							</li>
+						</ul>
 					</section>
 
 					<section>
@@ -320,18 +347,6 @@
 							</li>
 							<li class="fragment">
 								When creating a fluid grid, it's not common to convert the vertical values.
-							</li>
-							<li class="fragment">
-								When creating a fluid grid, (horizontal) margins and paddings are converted like you'd convert the width 
-								<ul>
-									<li><code>target</code> = target padding/margin you want</li>
-								</ul>
-							</li>
-							<li class="fragment">
-								Working with borders is difficult. Use <code>box-sizing: border-box;</code> to adjust the box model being used
-								<ul>
-									<li>That way <a href="http://css-tricks.com/box-sizing/">the rendered width will be the CSS <code>width</code> you specify</a>; the padding and border won't be added to it.</li>
-								</ul>
 							</li>
 						</ul>
 					</section>
@@ -445,6 +460,43 @@ section#main { ... }
 						</ul>
 					</section>
 					
+					<section>
+						<h2>What to change?</h2>
+						<ul>
+							<li class="fragment">
+								Font-sizes
+							</li>
+							<li class="fragment">
+								Positioning of the main boxes/containers
+								<ul>
+									<li>Next to each other &rarr; Underneath each other</li>
+								</ul>
+							</li>
+							<li class="fragment">
+								Place text into <a href="http://www.robertnyman.com/css3/multi-column-layout/multi-column-layout.html">CSS3 columns</a>
+							</li>
+							<li class="fragment">
+								Visibility of items
+								<ul>
+									<li>Beware though, RWD is not only <code>display: none;</code></li>
+								</ul>
+							</li>
+							<li class="fragment">
+								Navigation is quite tricky
+								<ul>
+									<li>Use one of the <a href="http://bradfrostweb.com/blog/web/responsive-nav-patterns/">Responsive Navigation Patterns</a></li>
+								</ul>
+							</li>
+							<li class="fragment">
+								Static elements vs. Interactive Elements
+								<ul>
+									<li>eg. small screen device: image of a map</li>
+									<li>eg. big screen device: interactive Google Maps interface</li>
+								</ul>
+							</li>
+						</ul>
+					</section>
+					
 				</section>
 
 
@@ -461,12 +513,13 @@ section#main { ... }
 						<ul>
 							<li class="fragment">
 								Prevent images from bleeding out of their fluid wrapper by limiting its <code>max-width</code> to <code>100%</code>
-								<pre class="bigger"><code class="language-css dontrun">img {
+								<pre class="bigger"><code class="language-css dontrun" data-overlay-example="assets/09/examples/03.html" data-overlay-width="500" data-overlay-height="300">img {
 	max-width: 100%;
 	_width: 100%; /* fix for IE6 who doesn't understand max-width */
 }</code></pre>
 							</li>
 						</ul>
+						<footer class="fragment">The example launched has a limited width, and the image will be resized by the <code>max-width</code></footer>
 					</section>
 					
 					<section>
@@ -486,14 +539,14 @@ section#main { ... }
 									<li class="fragment">
 										A <a href="http://www.w3.org/community/respimg/">W3C community group is pondering how to fix it properly</a>, preferably using a new syntax
 										<pre class="bigger"><code class="language-html dontrun">&lt;picture alt=&quot;A giant stone face at The Bayon temple in Cambodia&quot;&gt;
-    &lt;!-- &lt;source src=&quot;small.jpg&quot;&gt; --&gt;
+    &lt;!-- small version --&gt;
     &lt;source src=&quot;small.jpg&quot;&gt;
-    &lt;!-- &lt;source src=&quot;medium.jpg&quot; media=&quot;(min-width: 400px)&quot;&gt; --&gt;
+    &lt;!-- medium version, from 400px width --&gt;
     &lt;source src=&quot;medium.jpg&quot; media=&quot;(min-width: 400px)&quot;&gt;
-    &lt;!-- &lt;source src=&quot;large.jpg&quot; media=&quot;(min-width: 800px)&quot;&gt; --&gt;
+    &lt;!-- large version, from 800px width --&gt;
     &lt;source src=&quot;large.jpg&quot; media=&quot;(min-width: 800px)&quot;&gt;
 
-    &lt;!-- Fallback content for non-JS browsers. --&gt;
+    &lt;!-- Fallback for browsers that don't support this elem/polyfill --&gt;
     &lt;noscript&gt;&lt;img src=&quot;small.jpg&quot; alt=&quot;...&quot;&gt;&lt;/noscript&gt;
 &lt;/picture&gt;</code></pre>
 										<ul>
@@ -577,6 +630,12 @@ section#main { ... }
 						<h2>Find that tricky breakpoint</h2>
 						<p class="fragment" style="text-align: center;"><img src="assets/09/responsivepx.png" width="" height="487" alt="" title="" style="background: transparent; border: 0; -webkit-box-shadow: none; -moz-box-shadow: none; -ms-box-shadow: none; -o-box-shadow: none; box-shadow: none;" /></p>
 						<footer class="fragment"><a href="http://responsivepx.com/">ResponsivePX</a></footer>
+					</section>
+					
+					<section>
+						<h2>Test all mobile devices at once</h2>
+						<p class="fragment" style="text-align: center;"><img src="assets/09/shadow.png" width="560" height="316" alt="" title="" /></p>
+						<footer class="fragment"><a href="http://labs.adobe.com/technologies/shadow/">Adobe Shadow</a> (beta)</footer>
 					</section>
 					
 				</section>
@@ -664,10 +723,10 @@ section#main { ... }
 						<h2>Recommended online material</h2>
 						<ul>
 							<li><a href="http://www.slideshare.net/bryanrieger/rethinking-the-mobile-web-by-yiibu">Rethinking the Mobile Web</a></li>
+							<li><a href="http://globalmoxie.com/jhc/prez/mobile-context-myth-fowd.pdf">The Myths of Mobile Context</a></li>
 							<li><a href="http://www.slideshare.net/bradfrostweb/for-a-futurefriendly-web">For a Future Friendly Web</a></li>
 							<li><a href="http://mobilewebbestpractices.com/">Mobile Web Best Pratices</a></li>
-							<li><a href="http://bradfrostweb.com/blog/web/responsive-nav-patterns/">Responsive Navigation Patterns</a></li>
-							<li><a href="http://speakerdeck.com/u/malarkey/p/fashionably-flexible-responsive-web-design-full-day-workshop-1">Fashionably flexible responsive web design</a> (!!)</li>
+							<li><a href="http://speakerdeck.com/u/malarkey/p/fashionably-flexible-responsive-web-design-full-day-workshop-1">Fashionably flexible responsive web design</a></li>
 						</ul>
 					</section>
 					
