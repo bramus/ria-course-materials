@@ -1,0 +1,436 @@
+<!doctype html>  
+<html lang="en">
+	
+	<head>
+		<meta charset="utf-8">
+		
+		<title>Rich Internet Applications &mdash; 09.Responsive.Web.Design</title>
+
+		<meta name="description" content="Rich Internet Applications &mdash; 09.Responsive.Web.Design">
+		<meta name="author" content="Bram(us) Van Damme - Davy De Winne - ikdoeict.be">
+		
+		<link href='http://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+		
+		<link rel="stylesheet" href="css/reset.css">
+		<link rel="stylesheet" href="css/main.css" media="screen">
+		<link rel="stylesheet" href="css/print.css" media="print">
+		<link rel="stylesheet" href="assets/09/examples.css">
+
+		<link rel="stylesheet" href="lib/zenburn.css">
+		
+		<style>
+			code {
+				color: gainsboro;
+			}
+
+			li > code, li em > code, li del > code, li ins > code, p > code {
+				background: #3F3F3F;
+				padding: 2px 4px;
+				box-shadow: 0px 0px 6px rgba(0,0,0,0.3);
+				font-size: 80%;
+			}
+			
+			del code, code.nok {
+				color: #C55;
+			}
+			
+			ins code, code.ok {
+				color: #5C5;
+			}
+		</style>
+		
+	</head>
+	
+	<body>
+		
+		<div id="reveal">
+			
+			<!-- Any section element inside of this container is displayed as a slide -->
+			<div class="slides">
+
+
+				
+				<!-- 0 : Title -->
+				<section>
+					<section>
+						<h3 class="inverted">Rich Internet Applications</h3>
+						<h1>10.Mobile.Apps</h1>
+					
+						<footer>
+							<em><a href="http://www.ikdoeict.be/">ikdoeict.be</a> &mdash; <a href="mailto:davy.dewinne@kahosl.be">davy.dewinne@kahosl.be</a></em>
+						</footer>
+						<script>
+							// Delicously hacky. Look away.
+							if(navigator.userAgent.match(/(iPhone|iPad|iPod|Android)/i))
+							document.write('<p style="color: rgba(0,0,0,0.3); text-shadow: none;">('+'Tap to navigate'+')</p>');
+						</script>
+					</section>
+				</section>
+
+
+				<!-- 1 : Intro -->
+				<section>
+					<section>
+						<h2>Mobile Applications</h2>
+						<p>
+							<figure>
+								<img src="assets/10/3kindsofapps.png" alt="" title="" height="302" width="585" />
+								<figcaption>&copy;<a href="worklight.com">worklight.com</a></figcaption>
+							</figure>
+						</p>
+						<p></p>
+					</section>
+
+				</section>
+
+
+				<!-- 2 : Native apps -->
+				<section>
+					
+					<section>
+						<h2>Native Applications</h2>
+						<p><img src="assets/10/nativeapps.png" alt="" title=""  height="302" width="183" /></p>
+					</section>
+					
+					<section>
+						<h2>Native Applications</h2>
+						<ul>
+							<li>
+								App runs directly on the OS
+							</li>
+							<li>
+								Interacts with the mobile operating system
+								<ul>
+									<li>Through API
+										<ul>
+											<li>Low-level: hardware-access services</li>
+											<li>High-level: "software"-access services (messages, calls, agenda, &hellip;)</li>
+										</ul>		
+									</li>
+									<li>Unique for each OS</li>
+								</ul>
+							</li>
+							<li>
+								User interface components
+							</li>
+							<li>
+								Can use all functionality that the mobile devices offer
+								<ul>
+									<li>Hardware</li>
+									<li>Performance</li>
+								</ul>
+							</li>
+							<li>
+								Code written for one mobile platform cannot be used on another
+							</li>
+						</ul>
+					</section>
+					
+					<section>
+						<h2>Apple / iOS</h2>
+						<ul>
+							<li>
+								<strong>Language:</strong> Objective C, C, C++
+							</li>
+							<li>
+								<strong>SDK / tools:</strong> Xcode / iOS SDK
+							</li>
+							<li>
+								<strong>Packaging format:</strong> *.app
+							</li>
+							<li>
+								Has to be developed on MacOS
+							</li>
+						</ul>
+					</section>
+					
+					<section>
+						<h2>Android</h2>
+						<ul>
+							<li>
+								<strong>Language:</strong> Java
+							</li>
+							<li>
+								<strong>SDK / tools:</strong> Android SDK
+							</li>
+							<li>
+								<strong>Packaging format:</strong> *.apk
+							</li>
+							<li>
+								Can be developed on each platform (<a href="http://www.youtube.com/watch?v=kLO1djacsfg" title="Java 4 ever - The movie">it's Java!</a>)
+							</li>
+						</ul>
+					</section>
+					
+					<section>
+						<h2>Windows phone</h2>
+						<ul>
+							<li>
+								<strong>Language:</strong> C#, VB.net, &hellip;
+							</li>
+							<li>
+								<strong>SDK / tools:</strong> Visual Studio, Windows phone dev-tools
+							</li>
+							<li>
+								<strong>Packaging format:</strong> *.xap
+							</li>
+							<li>
+								Has to be developed on Windows (or <a href="http://www.mono-project.com/">Mono</a>)
+							</li>
+						</ul>
+					</section>
+					
+					<section>
+						<h2>BlackBerry</h2>
+						<ul>
+							<li>
+								<strong>Language:</strong> Java
+							</li>
+							<li>
+								<strong>SDK / tools:</strong> BlackBerry plugin
+							</li>
+							<li>
+								<strong>Packaging format:</strong> *.cod
+							</li>
+							<li>
+								Can be developed on each platform (<a href="http://www.youtube.com/watch?v=kLO1djacsfg" title="Java 4 ever - The movie">it's Java!</a>)
+							</li>
+						</ul>
+					</section>
+				
+					
+				</section>
+
+
+				<!-- 3 : Web apps-->
+				<section>
+					<section>
+						<h2>Mobile web applications</h2>
+						<p><img src="assets/10/webapps.png" alt="" title="" height="302" width="183" /></p>
+					</section>
+					<section>
+						<h2>Mobile web applications</h2>
+						<ul>
+							<li>
+								Web application that is optimized for mobile
+							</li>
+							<li>
+								Written in HTML5, CCS3 &amp; JavaScript
+							</li>
+							<li>
+								Most of these looks like an application
+								<ul>
+									<li>Designed for a perfect touch/mobile experience
+										<ul>
+											<li>jQuery mobile</li>
+											<li>Sencha Touch</li>
+										</ul>		
+									</li>
+								</ul>
+							</li>
+							<li>
+								Advantages:
+								<ul>
+									<li>Less code (Responsive Web application)</li>
+									<li>Easier (costs)</li>
+									<li>Multiplatform</li>
+									<li>Up to date</li>
+								</ul>
+							</li>
+							<li>
+								Disadvantages:
+								<ul>
+									<li>Works not or partly offline</li>
+									<li>Performance</li>
+									<li>Can't use all the features of the device</li>
+								</ul>
+							</li>
+						</ul>
+					</section>
+				</section>
+				
+				<!-- 4 : Hybrid apps-->
+				<section>
+					
+					<section>
+						<h2>Hybrid mobile applications</h2>
+						<p><img src="assets/10/hybridapps.png" alt="" title="" height="302" width="183" />
+						</p>
+					</section>
+					<section>
+						<h2>Hybrid mobile applications (1)</h2>
+						<ul>
+							<li>
+								Combination of Native and Web
+							</li>
+							<li>
+								Native part
+								<ul>
+									<li>HTML, JavaScript, &hellip; rendering engine</li>
+									<li>Communicates with OS API's</li>
+									<li>Offers a new API</li>
+									<li>Possible to add your native part</li>
+									<li>Different for each OS</li>
+								</ul>
+							</li>
+							<li>
+								Web part
+								<ul>
+									<li>Online or embedded HTML &amp; JavaScript application</li>
+									<li>Communicates with the "native part" API </li>
+								</ul>
+							</li>
+						</ul>
+					</section>
+					<section>
+						<h2>Hybrid mobile applications (2)</h2>
+						<ul>
+							<li>
+								Advantages:
+								<ul>
+									<li>Easier (costs)</li>
+									<li>Multiplatform</li>
+									<li>Better performance than web apps</li>
+								</ul>
+							</li>
+							
+							<li>
+								Disadvantages:
+								<ul>
+									<li>Use of the hardware can be a problem</li>
+									<li>Poorer performance than native apps</li>
+								</ul>
+							</li>
+							
+						</ul>
+					</section>
+				</section>
+				
+				
+				<!-- 5 : summary-->
+				<section>
+					
+					<section>
+						<h2>Comparing</h2>
+						<p>
+							<figure>
+								<img src="assets/10/comparison.png" alt="" title="" height="555" width="770" />
+								<figcaption>&copy;<a href="worklight.com">worklight.com</a></figcaption>
+							</figure>
+								</p>
+					</section>
+					<section>
+						<h2>When to choose a native</h2>
+						<ul>
+							<li>
+								Existing native skills: You have experience with the native development languages
+							</li>
+							<li>
+								Single platform: You have only one target OS 	
+							</li>
+							<li>
+								Native functionality: Is a key actor of your application (Example: making calls)
+							</li>		
+							<li>
+								Rich UI requirements: Fast &amp; rich interface (Example: complex games)				
+							</li>		
+						</ul>
+					</section>
+					
+					<section>
+						<h2>When to choose a web</h2>
+						<ul>
+							<li>
+								Existing web skills: You have experience with HTML, JavaScript, &hellip;
+							</li>
+							<li>
+								Online goals: Application is only useful with an internet connection
+							</li>		
+							<li>
+								Wide distribution: multiplatform and also useful at a desktop, TV, &hellip; (Responsive web app)
+							</li>	
+							<li>
+								Update frequency: Application needs to be updated more than usual						
+							</li>	
+							<li>
+								Performance doesn't matter &amp; no need for native hardware features		
+							</li>					
+						</ul>
+					</section>
+					
+					<section>
+						<h2>When to choose a hybrid</h2>
+						<ul>
+							<li>
+								Existing web skills: You have experience with HTML, JavaScript, &hellip;
+							</li>
+							<li>
+								Offline usage: Your app needs to be available without an internet connection		
+							</li>	 
+							<li>
+								Multiplatform: You are targetting multiple platforms	
+							</li>		 							
+							<li>
+								Performance isn't a high priority		
+							</li>	 							
+						</ul>
+					</section>
+				</section>
+				
+				<!-- The END -->
+				<section>
+					<section>
+						<h2>Questions?</h2>
+						<footer>
+							<em><a href="http://www.ikdoeict.be/">ikdoeict.be</a> &mdash; <a href="mailto:davy.dewinne@kahosl.be">davy.dewinne@kahosl.be</a></em>
+						</footer>
+					</section>
+				</section>
+
+
+
+				<!-- Sources -->
+				<!--
+				<section id="sources">
+					<section>
+						<h2>Sources</h2>
+						<ul>
+							<li></li>
+						</ul>
+					</section>
+				</section>
+				-->
+			</div>
+
+			<!-- The navigational controls UI -->
+			<aside class="controls">
+				<a class="left" href="#">&#x25C4;</a>
+				<a class="right" href="#">&#x25BA;</a>
+				<a class="up" href="#">&#x25B2;</a>
+				<a class="down" href="#">&#x25BC;</a>
+				<span id="revealIndex">/</span>
+			</aside>
+
+			<!-- Index Link -->
+			<aside class="back">
+				<a href="index.html">&larr; Back to index</a>
+			</aside>
+			
+			<!-- ikdoeict.be Link -->
+			<a href="http://www.ikdoeict.be/" title="ikdoeict.be" id="ikdoeict">ikdoeict.be</a>
+
+			<!-- Displays presentation progress, max value changes via JS to reflect # of slides -->
+			<div class="progress"><span></span></div>
+			
+		</div>
+		
+		<script src="js/reveal.js"></script>
+		<script src="lib/highlight.js"></script>
+		<script src="lib/prefixfree.js"></script>
+		<script src="lib/css-snippets.js"></script>
+		<script src="lib/css-edit.js"></script>
+		<script src="lib/incrementable.js"></script>
+		<script src="js/main.js"></script>
+
+	</body>
+</html>
