@@ -546,7 +546,10 @@
 								Pagination
 								<ul>
 									<li class="fragment">Mandatory for huge resources</li>
-									<li class="fragment">Use <code>limit</code> and <code>offset</code> URL Params, defaulting to <code>?limit=10&amp;offset=0</code></li>
+									<li class="fragment">
+										Use <code>limit</code> and <code>offset</code> URL Params, defaulting to <code>?limit=10&amp;offset=&lt;max_id&gt;</code><br />
+										<em>Avoid using numbers for <code>offset</code>, opt for id-constraint based on sorting method; this avoids doubles when paginating over a frequently updated result set.</em>
+									</li>
 								</ul>
 							</li>
 							<li class="fragment">
