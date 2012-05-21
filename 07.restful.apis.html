@@ -104,14 +104,14 @@
 								In web context
 								<ul>
 									<li class="fragment">Language independent</li>
-									<li class="fragment">Allow you to push/pull data to/from a web site</li>
+									<li class="fragment">Allows you to push/pull data to/from a web site</li>
 									<li class="fragment">Sometimes referred to as a &ldquo;Web Service&rdquo; <em>(blame Microsoft)</em></li>
 									<li class="fragment">Implemented via JavaScript, XML-RPC, SOAP, or REST</li>
 									<li class="fragment">Return formats JS, XML, HTML, plaintext, or JSON(P)</li>
 								</ul>
 							</li>
 							<li class="fragment">
-								You've already implemented a SOAP-based on in the course Webprogrammatie
+								You've already implemented a SOAP-based one in the course Webprogrammatie
 							</li>
 						</ul>
 					</section>
@@ -547,7 +547,7 @@
 								<ul>
 									<li class="fragment">Mandatory for huge resources</li>
 									<li class="fragment">
-										Use <code>limit</code> and <code>offset</code> URL Params, defaulting to <code>?limit=10&amp;offset=&lt;max_id&gt;</code><br />
+										Use <code>limit</code> and <code>offset</code> URL params, defaulting to <code>?limit=10&amp;offset=&lt;max_id&gt;</code><br />
 										<em>Avoid using numbers for <code>offset</code>, opt for id-constraint based on sorting method; this avoids doubles when paginating over a frequently updated result set.</em>
 									</li>
 								</ul>
@@ -555,13 +555,13 @@
 							<li class="fragment">
 								Filtering &amp; Sorting
 								<ul>
-									<li class="fragment">Via URL Params <code>?filter=foo&amp;sort=asc</code></li>
+									<li class="fragment">Via URL params <code>?filter=foo&amp;sort=asc</code></li>
 								</ul>
 							</li>
 							<li class="fragment">
 								Limiting fields
 								<ul>
-									<li class="fragment">Via URL Param <code>?fields=firstname,lastname,age</code></li>
+									<li class="fragment">Via URL param <code>?fields=firstname,lastname,age</code></li>
 								</ul>
 							</li>
 						</ul>
@@ -635,7 +635,7 @@
 								<ol>
 									<li class="fragment">Loads the main template</li>
 									<li class="fragment">Processes the action <em>(based on a sent in <code>moduleAction</code>)</em></li>
-									<li class="fragment">Loads the page template <em>(based on a <code>view</code> URL Param)</em></li>
+									<li class="fragment">Loads the page template <em>(based on a <code>view</code> URL param)</em></li>
 									<li class="fragment">Processes the view</li>
 									<li class="fragment">Outputs the main template via the <code>display()</code> function</li>
 								</ol>
@@ -647,7 +647,7 @@
 						<h2>Before we dive in</h2>
 						<ul>
 							<li class="fragment">
-								I like my code clean, concise, but most of al <strong>readable</strong>
+								I like my code clean, concise, but most of all <strong>readable</strong>
 								<ul>
 									<li class="fragment">
 										Same goes for JSON API Responses
@@ -876,7 +876,7 @@ class PlonkApiController extends PlonkController {
 					<section>
 						<h2>2. JSONP</h2>
 						<ul>
-							<li class="fragment">When outputting, check if <code>callback</code> URL Param is set</li>
+							<li class="fragment">When outputting, check if <code>callback</code> URL param is set</li>
 						</ul>
 						<div class="fragment">
 							<pre class="bigger language-php"><code>protected function display() {
