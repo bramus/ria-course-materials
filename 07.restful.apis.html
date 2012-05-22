@@ -1203,7 +1203,10 @@ private function checkApiKey() {
 									<li class="fragment">In the background, the consumer app must make a request to the OAuth provider with that <code>authorization_code</code>, along with its API-Key (<code>client_id</code>) and secret key (<code>client_secret</code>)</li>
 									<li class="fragment">The OAuth provider will issue an <code>access_token</code> and <code>refresh_token</code></li>
 									<li class="fragment">The <code>access_token</code> must passed with all calls made and is valid for a limited time</li>
-									<li class="fragment">When the <code>access_token</code> has expired, the consumer app needs to do a call to the OAuth Prodider with the <code>refresh_token</code> to get a new pair <code>access_token</code> &amp; <code>refresh_token</code></li>
+									<li class="fragment">
+										When the <code>access_token</code> has expired, the consumer app needs to do a call to the OAuth Prodider with the <code>refresh_token</code> to get a new pair <code>access_token</code> &amp; <code>refresh_token</code><br />
+										<em>Remark: Treat <a href="http://stackoverflow.com/questions/1878830/securly-storing-openid-identifiers-and-oauth-tokens">OAuth tokens as passwords</a>! (Encrypt!)</em>
+									</li>
 								</ol>
 							</li>
 						</ul>
