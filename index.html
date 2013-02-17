@@ -1,14 +1,14 @@
-<!doctype html>  
+<!doctype html>
 <html lang="en">
-	
+
 	<head>
 		<meta charset="utf-8">
-		
-		<title>Rich Internet Applications</title>
 
-		<meta name="description" content="Rich Internet Applications">
-		<meta name="author" content="Bram(us) Van Damme - ikdoeict.be">
-		
+		<title>Web &amp; Mobile Development</title>
+
+		<meta name="description" content="Web &amp; Mobile Development">
+		<meta name="author" content="Bram(us) Van Damme &amp; Davy De Winne - ikdoeict.be">
+
 		<meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0" />
 		<meta name="apple-mobile-web-app-capable" content="yes" />
 		<meta name="HandheldFriendly" content="True" />
@@ -16,13 +16,13 @@
 
 		<meta http-equiv="cleartype" content="on" />
 		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-		
+
 		<link href='http://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
-		
+
 		<link rel="stylesheet" href="css/reset.css">
 		<link rel="stylesheet" href="css/main.css">
 		<style>
-		
+
 			/* clearfix */
 			.clearfix:after {
 				content: ".";
@@ -44,16 +44,16 @@
 			* html .clearfix {
 				height: 1%;
 			}
-			
+
 			/* main overrides */
 			html, body {
 				overflow: auto;
 			}
-			
+
 			#reveal .intro section footer {
 				position: static;
 			}
-			
+
 			/* intro */
 			#reveal .intro {
 				max-width: 1200px;
@@ -61,39 +61,43 @@
 				text-align: center;
 				margin: 0 auto 0;
 			}
-			
+
 			#reveal .intro > section {
 				width: 100%;
 				/* min-height: 600px; */
 			}
-			
+
 			#reveal .intro ul.thumbs {
 				width: 100%;
 				padding: 0;
 				margin: 0 auto 50px;
 				list-style: none;
 			}
-			
+
 			#reveal .intro ul.thumbs li {
 				width: 20%;
 				float: left;
 				text-align: center;
 				margin: 0;
 			}
-			
+
+			#reveal .intro ul.thumbs li.notyet {
+				opacity: 0.3;
+			}
+
 			#reveal .intro ul.thumbs li img {
 				max-width: 100%;
 			}
-			
+
 			#reveal #about {
 				position: fixed;
-				height: 415px;
+				height: 435px;
 				right: 0;
 				bottom: 25px;
 				overflow: hidden;
 				width: 30px;
 				padding: 15px 0 0 20px;
-				
+
 				-webkit-box-shadow: -10px 0px 25px #1c1e20;
 				-moz-box-shadow:    -10px 0px 25px #1c1e20;
 				box-shadow:         -10px 0px 25px #1c1e20;
@@ -101,12 +105,12 @@
 				opacity: 0.8;
 				background: rgba(46,49,51,0.9);
 			}
-			
+
 			#reveal #about:hover {
 				width: 240px;
 				opacity: 1;
 			}
-			
+
 			#reveal #about p {
 				font-size: 15px;
 				line-height: 1.2;
@@ -123,42 +127,42 @@
 				     -o-transition: all .2s ease;
 				        transition: all .2s ease;
 			}
-			
+
 			@media (max-width: 1330px) {
-				
+
 				#reveal h1 {
 					font-size: 100px;
 				}
-				
+
 				#reveal h3 {
 					font-size: 40px;
 				}
-				
+
 			}
-			
+
 			@media (max-width: 1200px) {
-				
+
 				#reveal #about {
 					height: auto;
 					position: static;
 					width: 90%;
 					margin: 25px auto 25px;
 					padding: 15px;
-				} 
-				
+				}
+
 				#reveal #about:hover {
 					width: 90%;
 				}
-				
+
 				#reveal #about p {
 					width: 100%;
 					margin-bottom: 12px;
 				}
-				
+
 				#reveal .intro ul.thumbs li {
 					width: 25%;
 				}
-				
+
 			}
 
 			@media (max-width: 1100px) {
@@ -174,7 +178,7 @@
 			}
 
 			@media (max-width: 960px) {
-			
+
 				#reveal .intro ul.thumbs li {
 					width: 33%;
 				}
@@ -214,7 +218,7 @@
 				#reveal h1 {
 					font-size: 80px;
 				}
-				
+
 				#reveal h3 {
 					font-size: 30px;
 				}
@@ -226,11 +230,11 @@
 				#reveal .intro ul.thumbs li {
 					width: 100%;
 				}
-				
+
 				#reveal .intro section footer {
 					font-size: 50%;
 				}
-				
+
 				#reveal #about p {
 					font-size: 13px;
 				}
@@ -242,7 +246,7 @@
 				#reveal h1 {
 					font-size: 60px;
 				}
-				
+
 				#reveal h3 {
 					font-size: 20px;
 				}
@@ -260,47 +264,47 @@
 				}
 
 			}
-			
+
 		</style>
 	</head>
-	
+
 	<body>
-		
+
 		<div id="reveal">
 			<div class="intro">
 				<section>
-					<h1>Rich Internet Applications<small>*</small></h1>
-					<h3>Professional Bachelor ICT &mdash; 2011-2012</h3>
+					<h1>Web &amp; Mobile Development</h1>
+					<h3>Professional Bachelor ICT &mdash; 2012-2013</h3>
 					<ul class="thumbs clearfix">
 						<li><a href="00.intro.html" title="00.intro"><img src="assets/index/00.jpg" alt="00.intro" title="00.intro" /></a></li>
 						<li><a href="01.advanced.js.html" title="01.Advanced.JS"><img src="assets/index/01.jpg" alt="00.Advanced.JS" title="01.Advanced.JS" /></a></li>
-						<li><a href="02.jslibs.html" title="02.JS.Libraries"><img src="assets/index/02.jpg" alt="02.JS.Libraries" title="02.JS.Libraries" /></a></li>
-						<li><a href="03.jquery.intro.html" title="03.jQuery.Introduction"><img src="assets/index/03.jpg" alt="03.jQuery.Introduction" title="03.jQuery.Introduction" /></a></li>
-						<li><a href="04.jquery.plugins.html" title="04.jQuery.Plugins"><img src="assets/index/04.jpg" alt="04.jQuery.Plugins" title="04.jQuery.Plugins" /></a></li>
-						<li><a href="05.js.optimization.html" title="05.JS.Optimization"><img src="assets/index/05.jpg" alt="05.JS.Optimization" title="05.JS.Optimization" /></a></li>
-						<li><a href="06.ajax.html" title="06.Ajax"><img src="assets/index/06.jpg" alt="06.Ajax" title="06.Ajax" /></a></li>
-						<li><a href="07.restful.apis.html" title="07.RESTful.APIs"><img src="assets/index/07.jpg" alt="07.RESTful.APIs" title="07.RESTful.APIs" /></a></li>
-						<li><a href="08.misc.topics.html" title="08.Misc.Topics"><img src="assets/index/08.jpg" alt="08.Misc.Topics" title="08.Misc.Topics" /></a></li>
-						<li><a href="09.responsive.web.design.html" title="09.Responsive.Web.Design"><img src="assets/index/09.jpg" alt="09.Responsive.Web.Design" title="09.Responsive.Web.Design" /></a></li>
-						<li><a href="10.mobile.apps.html" title="10.Mobile.Apps"><img src="assets/index/10.jpg" alt="10.Mobile.Apps" title="10.Mobile.Apps" /></a></li>
+						<li class="notyet"><a href="02.jslibs.html" title="02.JS.Libraries"><img src="assets/index/02.jpg" alt="02.JS.Libraries" title="02.JS.Libraries" /></a></li>
+						<li class="notyet"><a href="03.jquery.intro.html" title="03.jQuery.Introduction"><img src="assets/index/03.jpg" alt="03.jQuery.Introduction" title="03.jQuery.Introduction" /></a></li>
+						<li class="notyet"><a href="04.jquery.plugins.html" title="04.jQuery.Plugins"><img src="assets/index/04.jpg" alt="04.jQuery.Plugins" title="04.jQuery.Plugins" /></a></li>
+						<li class="notyet"><a href="05.js.optimization.html" title="05.JS.Optimization"><img src="assets/index/05.jpg" alt="05.JS.Optimization" title="05.JS.Optimization" /></a></li>
+						<li class="notyet"><a href="06.ajax.html" title="06.Ajax"><img src="assets/index/06.jpg" alt="06.Ajax" title="06.Ajax" /></a></li>
+						<li class="notyet"><a href="07.restful.apis.html" title="07.RESTful.APIs"><img src="assets/index/07.jpg" alt="07.RESTful.APIs" title="07.RESTful.APIs" /></a></li>
+						<li class="notyet"><a href="08.misc.topics.html" title="08.Misc.Topics"><img src="assets/index/08.jpg" alt="08.Misc.Topics" title="08.Misc.Topics" /></a></li>
+						<li class="notyet"><a href="09.responsive.web.design.html" title="09.Responsive.Web.Design"><img src="assets/index/09.jpg" alt="09.Responsive.Web.Design" title="09.Responsive.Web.Design" /></a></li>
+						<li class="notyet"><a href="10.mobile.apps.html" title="10.Mobile.Apps"><img src="assets/index/10.jpg" alt="10.Mobile.Apps" title="10.Mobile.Apps" /></a></li>
 					</ul>
 					<footer>
 						<em><a href="http://www.ikdoeict.be/">ikdoeict.be</a> &mdash; <a href="mailto:bramus.vandamme@kahosl.be">bramus.vandamme@kahosl.be</a></em><br />
 						<small style="vertical-align: baseline; opacity: 0.2;">(* next year to be renamed to &ldquo;Web &amp; Mobile Development&rdquo;)</small>
 					</footer>
 				</section>
-			</div>	
+			</div>
 			<div id="about">
-				<p>This collection of slides form the course materials for the <strong>Rich Internet Applications</strong> course, part of the <a href="http://www.ikdoeict.be/">Professional Bachelor ICT</a> study programme, taught at <a href="http://www.kahosl.be/">KaHo Sint-Lieven</a>, Ghent, Belgium.</p>
-				<p>The materials were developed by Bram(us) Van Damme, lecturer ICT at KaHo Sint-Lieven, who blogs over at <a href="http://www.bram.us/">bram.us</a> and Twitters as <a href="http://www.twitter.com/bramus">@bramus</a>.</p>
-				<p>The materials may be used freely, as long as credit to Bramus is present and the top right graphical link to <a href="http://www.ikdoeict.be/">ikdoeict.be</a> remains in place.</p>
+				<p>This collection of slides form the course materials for the <strong>Web &amp; Mobile Development</strong> course <em>(formerly Rich Internet Applications)</em>, part of the <a href="http://www.ikdoeict.be/">Professional Bachelor ICT</a> study programme, taught at <a href="http://www.kahosl.be/">KaHo Sint-Lieven</a>, Ghent, Belgium.</p>
+				<p>The materials were developed by Bram(us) Van Damme, lecturer ICT at KaHo Sint-Lieven, who blogs over at <a href="http://www.bram.us/">bram.us</a> and Twitters as <a href="http://www.twitter.com/bramus">@bramus</a>, and Davy De Winne</p>
+				<p>The materials may be used freely, as long as credit to the authors is present and the top right graphical link to <a href="http://www.ikdoeict.be/">ikdoeict.be</a> remains in place.</p>
 				<p>Suggestions and additions may be mailed to Bramus, or sent via <a href="https://github.com/bramus/ria-course-materials">a pull request on GitHub</a>.</p>
 			</div>
 
 			<!-- ikdoeict.be Link -->
 			<a href="http://www.ikdoeict.be/" title="ikdoeict.be" id="ikdoeict">ikdoeict.be</a>
-			
+
 		</div>
-		
+
 	</body>
 </html>
