@@ -119,7 +119,7 @@
 								</ul>
 							</li>
 							<li class="fragment">
-								Officially, JavaScript is maintained by Mozilla nowadays.
+								Officially, JavaScript <a href="https://developer.mozilla.org/en-US/docs/JavaScript">is maintained by Mozilla</a> nowadays.
 								<ul>
 									<li class="fragment">Current version JavaScript 1.8.5</li>
 									<li class="fragment">Non-Mozilla implementations claim &ldquo;JavaScript Compliance&rdquo; but actually target the ECMAScript standard.</li>
@@ -146,6 +146,7 @@
 								<uL>
 									<li class="fragment"><a href="http://nodejs.org/">Node.js</a> is powered by Google's V8</li>
 									<li class="fragment"><a href="https://developer.mozilla.org/en/Rhino">Rhino</a> is an open source JavaScript engine developed by Mozilla and written in Java</li>
+									<li class="fragment"><a href="http://www.adobe.com/devnet/photoshop/scripting.html">Photoshop (!) also comes with a JavaScript engine</a></li>
 								</ul>
 							</li>
 						</ul>
@@ -161,7 +162,7 @@
 					<section>
 						<h2>JavaScript 101 with Forrest Gump</h2>
 						<p><img src="assets/01/forrestgump.jpg" alt="Forrest Gump" title="Forrest Gump" width="467" height="350" /></p>
-						<p>Because <strong>Forrest Gump</strong> is one of those movies ...</p>
+						<p>Because Forrest Gump is one of those movies ...</p>
 					</section>
 
 					<section>
@@ -365,15 +366,15 @@ alert(lastName);</code></pre>
 								<pre class="bigger"><code contenteditable class="language-javascript">var firstName = new String('Forrest');</code></pre>
 								<ul>
 									<li class="fragment">What you get back is an instance of <code>String</code></li>
-									<li class="fragment">The type of the instance itself is <code>Object</code></li>
+									<li class="fragment">The type of the instance itself is <code>object</code></li>
 									<li class="fragment">The type of the value inside that instance is <code>string</code></li>
 								</ul>
 							</li>
 							<li class="fragment">Let's pull out some code to test this
 								<pre class="bigger"><code contenteditable class="language-javascript">var firstName = new String('Forrest');
-alert(firstName instanceof String);
-alert(typeof firstName);
-alert(typeof firstName.toString());</code></pre>
+alert(firstName instanceof String); // true
+alert(typeof firstName); // object
+alert(typeof firstName.toString()); // string</code></pre>
 							</li>
 						</ul>
 					</section>
@@ -394,8 +395,8 @@ alert(typeof firstName.toString());</code></pre>
 							<li class="fragment">
 								Again, some code
 								<pre class="bigger"><code contenteditable class="language-javascript">var firstName = 'Forrest';
-alert(firstName instanceof String);
-alert(typeof firstName);</code></pre>
+alert(firstName instanceof String); // false
+alert(typeof firstName); // string</code></pre>
 							</li>
 						</ul>
 					</section>
@@ -484,13 +485,13 @@ var forrest = { // Object Literal
 								<span>Remember that if it exists as a primitive data type (viz. <code>string</code>, <code>number</code>, <code>boolean</code>), you'll get the primitive returned when using the literal notation!</span>
 								<pre class="bigger"><code contenteditable class="language-javascript">// String Instance
 var lastName = new String('Gump');
-alert(typeof lastName);
-alert(lastName instanceof String);
+alert(typeof lastName); // object
+alert(lastName instanceof String); // true
 
 // String Literal
 var firstName = 'Forrest';
-alert(typeof firstName);
-alert(firstName instanceof String);</code></pre>
+alert(typeof firstName); // string
+alert(firstName instanceof String); // false</code></pre>
 							</li>
 						</ul>
 					</section>
@@ -502,13 +503,13 @@ alert(firstName instanceof String);</code></pre>
 								If no primitive variant exists (<code>Object</code>, <code>Array</code>, <code>RegExp</code>, <code>Function</code>), the literal <em>will</em> return an instance when using the literal notation.
 								<pre class="bigger"><code contenteditable class="language-javascript">// Array Instance
 var forrestFriends = new Array('Bubba', 'Lieutenant Dan');
-alert(typeof forrestFriends);
-alert(forrestFriends instanceof Array);
+alert(typeof forrestFriends); // object
+alert(forrestFriends instanceof Array); // true
 
 // Array Literal
 var forrestFriends = ['Bubba', 'Lieutenant Dan'];
-alert(typeof forrestFriends);
-alert(forrestFriends instanceof Array);</code></pre>
+alert(typeof forrestFriends); // object
+alert(forrestFriends instanceof Array); // true</code></pre>
 							</li>
 						</ul>
 					</section>
@@ -615,9 +616,9 @@ var falseVal = false;
 var emptyString = '';
 
 if (emptyString) {
-	console.log('truthy');
+	alert('truthy');
 } else {
-	console.log('falsy'); // false-ish
+	alert('falsy'); // false-ish
 }</code></pre>
 								<pre class="bigger"><code contenteditable class="language-javascript">console.log('5' + 6 + 7);</code></pre>
 							</li>
@@ -752,18 +753,18 @@ alert(['Bubba', 'Lieutenant Dan'].length);</code></pre>
 							<li class="fragment">
 								In JavaScript, about everything is an <code>Object</code>
 								<ul>
-									<li class="fragment">JavaScript provides properties and methods which you can call/access</li>
+									<li class="fragment">JavaScript provides properties and methods which you can access/call</li>
 								</ul>
 							</li>
 							<li class="fragment">
-								JavaScript provides a shorthand, which is called the <strong>Literal Notation</strong>
+								JavaScript provides a shorthand (<strong>Literal Notation</strong>)
 								<ul>
 									<li class="fragment">
-										A primitive type will be returned when possible (<code>String</code>, <code>Number</code>, <code>Boolean</code>)
+										Primitive returned when possible (<code>String</code>, <code>Number</code>, <code>Boolean</code>)
 									</li>
 								</ul>
 							<li class="fragment">
-								Variables have a certain scope in which they are accessible.
+								Variables have a scope in which they are accessible.
 								<ul>
 									<li>It's possible to access variables that live in an outer scope</li>
 								</ul>
@@ -1392,7 +1393,7 @@ var show = function(obj, fn) {
 	alert(fn.call(obj));
 };
 
-show(forrest);</code></pre>
+show(forrest, forrest.say);</code></pre>
 								<ul>
 									<li class="fragment"><code>Function#call</code> lets you call a function and give a new meaning to <code>this</code> when calling it</li>
 									<li class="fragment">More on <code>Function#call</code> <a href="#/6/33">later</a></code>
@@ -1565,40 +1566,7 @@ alert(says('Shit')('happens'));</code></pre>
 					</section>
 
 					<section>
-						<h2>Return Values (2)</h2>
-						<ul>
-							<li class="fragment">
-								Another example
-								<pre class="bigger"><code contenteditable class="language-javascript">var add = function(x) {
-	return function(y) {
-		return x + y;
-	};
-};
-var add5 = add(5),
-    add6 = add(6);
-var eleven = add5(6),
-    twelve = add6(6);
-alert(eleven);
-alert(twelve)
-</code></pre>
-							</li>
-							<li class="fragment">
-								What happens here is that internally <code>add5</code> has become
-									<pre class="bigger"><code contenteditable class="language-javascript">function(y) {
-	return x + y;
-}; // How I know? Try alert(add5.toString()); in the example above ;)</code></pre>
-							</li>
-							<li class="fragment">
-								Now, how come add5 knows the value of <code>x</code>?
-								<ul>
-									<li>Mind you, <code>x</code> is not part of the global scope</li>
-								</ul>
-							</li>
-						</ul>
-					</section>
-
-					<section>
-						<h2>Closures</h2>
+						<h2>Wow, what just happened there?</h2>
 						<ul>
 							<li class="fragment">
 								Turns out JavaScript does something magical known as creating <strong><em>closures</em></strong> when you create a function
@@ -1798,6 +1766,39 @@ alert(ff());</code></pre>
 					</section>
 
 					<section>
+						<h2>Closures: Topping things off</h2>
+						<ul>
+							<li class="fragment">
+								Final example
+								<pre class="bigger"><code contenteditable class="language-javascript">var add = function(x) {
+	return function(y) {
+		return x + y;
+	};
+};
+var add5 = add(5),
+    add6 = add(6);
+var eleven = add5(6),
+    twelve = add6(6);
+alert(eleven);
+alert(twelve)
+</code></pre>
+							</li>
+							<li class="fragment">
+								Internally <code>add5</code> has become
+									<pre class="bigger"><code contenteditable class="language-javascript">function(y) {
+	return x + y;
+}; // How I know? Try alert(add5.toString()); in the example above ;)</code></pre>
+							</li>
+							<li class="fragment">
+								Now, how come add5 knows the value of <code>x</code>?
+								<ul>
+									<li>Yes, closures!</li>
+								</ul>
+							</li>
+						</ul>
+					</section>
+
+					<section>
 						<h2>Closures: In Closing</h2>
 						<ul>
 							<li class="fragment">
@@ -1899,7 +1900,7 @@ myFunc(1,2,3,4,5,6,7,8,9,10);</code></pre>
 						<h2>Function#apply</h2>
 						<ul>
 							<li class="fragment">
-								<code>Function#apply</code> allows you to call an other function and give it a new meaning of <code>this</code>. Arguments passed in via an <code>Array</code> like <code>Object</code>
+								<code>Function#apply</code> allows you to call an other function and give it a new meaning of <code>this</code>. Arguments passed in using an <code>Array</code>-like <code>Object</code>
 								<pre class="bigger"><code class="donthighlight">Function#apply(this, Array(arg1[, arg2[, ...[, argN]]]));</code></pre>
 							</li>
 							<li class="fragment">
@@ -1995,6 +1996,30 @@ alert(says(forrest));</code></pre>
 									<li>Sequence of parameters not important</li>
 									<li>Easy working with optional parameters</li>
 								</ul>
+							</li>
+						</ul>
+					</section>
+
+					<section>
+						<h2>Function arguments: DIY (3)</h2>
+						<ul>
+							<li class="fragment">
+								It's even possible to force having defaults using this
+								<pre class="bigger"><code contenteditable class="language-javascript">var extend = function(params, defaults) {
+	for (var i in defaults) {
+		if (!params[i]) {
+			params[i] = defaults[i];
+		}
+	}
+};
+
+var foo = function(params) {
+	var defaults  = { position: 'left', start: 0, stop: 10 };
+	extend(params, defaults);
+	console.log(params);
+};
+
+foo({ position: 'left', start: 3 });</code></pre>
 							</li>
 						</ul>
 					</section>
@@ -2135,8 +2160,8 @@ var dan = { // Lieutenant Dan
 // ...
 </code></pre>
 							<ul>
-								<li class="fragment">Yeah, that looks quite cumbersome</li>
-								<li class="fragment">What if we could implement some of the OO stuff we know from Java and the like?</li>
+								<li class="fragment">Yeah, that's not <abbr title="Don't repeat yourself">DRY</abbr></li>
+								<li class="fragment">What if we could implement some of the OO stuff we already know?</li>
 							</ul>
 							</li>
 						</ul>
@@ -2164,7 +2189,7 @@ alert(forrest.says());
 alert(dan.says());
 </code></pre>
 							<ul>
-								<li class="fragment">When documenting, we can talk about <code>Person#firstName</code>, <code>Person#lastName</code>, <code>Person#sentence</code> and <code>Person#says</code> as those are propertiers/methods of <code>Person</code></li>
+								<li class="fragment">When documenting, we can talk about <code>Person#firstName</code>, <code>Person#lastName</code>, <code>Person#sentence</code> and <code>Person#says</code> as those are properties/methods of <code>Person</code></li>
 							</ul>
 							</li>
 						</ul>
@@ -2237,7 +2262,7 @@ alert(c.celciusToFahrenheit());
 alert(f.fahrenheitToCelcius());
 </code></pre>
 								<ul>
-									<li class="fragment">Use with caution though (see further)!</li>
+									<li class="fragment">But <a href="http://perfectionkills.com/whats-wrong-with-extending-the-dom/">you shouldn't extend built-in objects</a>, really!</li>
 								</ul>
 							</li>
 						</ul>
@@ -2652,17 +2677,19 @@ for (var i = 0, len = allSpans.length; i &lt; len; i++) {
 						<h2>Traversing (2)</h2>
 						<ul>
 							<li class="fragment">
-								Note that <code>Node#childNodes</code> also takes the whitespace nodes into account!
+								Beware though: those functions take whitespace into account
 								<ul>
-									<li class="fragment">If you only want the element nodes, you must use <code>Node#children</code></li>
+									<li>Up the DOM tree: <code>Node#parentNode</code></li>
+									<li>Down the DOM tree: <code>Node#childNodes</code>, <code>Node#firstChild</code>, <code>Node#lastChild</code></li>
+									<li>Left/Right on the DOM tree: <code>Node#previousSibling</code>, <code>Node#nextSibling</code></li>
 								</ul>
 							</li>
 							<li class="fragment">
-								In short
+								These don't, and work with actual elements
 								<ul>
-									<li>Up the DOM tree: <code>Node#parentNode</code></li>
-									<li>Down the DOM tree: <code>Node#childNodes</code>/<code>Node#children</code>, <code>Node#firstChilde</code>, <code>Node#lastChild</code></li>
-									<li>Left/Right on the DOM tree: <code>Node#previousSibling</code>, <code>Node#nextSibling</code></li>
+									<li>Up the DOM tree: <code>Node#parentElement</code></li>
+									<li>Down the DOM tree: <code>Node#children</code>, <code>Node#firstElementChild</code>, <code>Node#lastElementChild</code>
+									<li>Left/Right on the DOM tree: <code>Node#previousElementSibling</code>, <code>Node#nextElementSibling</code></li>
 								</ul>
 							</li>
 						</ul>
@@ -2906,6 +2933,9 @@ link.addEventListener('click', function(event) {
 							</li>
 							<li class="fragment">
 								In the past, this was done by <code>return false;</code>
+								<ul>
+									<li>Don't use this, as it also stops the bubbling</li>
+								</ul>
 							</li>
 						</ul>
 					</section>
@@ -3497,7 +3527,8 @@ alert(IKDOEICT.foo.baz('test'));</code></pre>
 								Cache your variables
 							</li>
 							<li class="fragment">
-								Don't extend built-in Objects
+								<a href="http://perfectionkills.com/whats-wrong-with-extending-the-dom/
+	http://bonsaiden.github.com/JavaScript-Garden/">Don't extend built-in Objects</a>
 								<ul>
 									<li>Because you might implement it differently</li>
 									<li>Because you might use a name that later will be used by the browser/JavaScript</li>
