@@ -1095,7 +1095,7 @@ ins code, code.ok {
 	color: #5C5;
 }
 
-strong {
+.slides strong {
 	color: #553d00;
 	background: transparent url('../assets/strong.png') no-repeat 50% 50%;
 	font-size: 80%;
