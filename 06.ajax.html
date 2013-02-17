@@ -1,16 +1,16 @@
-<!doctype html>  
+<!doctype html>
 <html lang="en">
-	
+
 	<head>
 		<meta charset="utf-8">
-		
-		<title>Rich Internet Applications &mdash; 06.Ajax</title>
 
-		<meta name="description" content="Rich Internet Applications &mdash; 06.Ajax">
+		<title>Web &amp; Mobile Development &mdash; 06.Ajax</title>
+
+		<meta name="description" content="Web &amp; Mobile Development &mdash; 06.Ajax">
 		<meta name="author" content="Bram(us) Van Damme - ikdoeict.be">
-		
+
 		<link href='http://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
-		
+
 		<link rel="stylesheet" href="css/reset.css">
 		<link rel="stylesheet" href="css/main.css" media="screen">
 		<link rel="stylesheet" href="css/print.css" media="print">
@@ -18,22 +18,22 @@
 
 		<link rel="stylesheet" href="lib/zenburn.css">
 	</head>
-	
+
 	<body>
-		
+
 		<div id="reveal">
-			
+
 			<!-- Any section element inside of this container is displayed as a slide -->
 			<div class="slides">
 
 
-				
+
 				<!-- 0 : Title -->
 				<section>
 					<section>
-						<h3 class="inverted">Rich Internet Applications</h3>
+						<h3 class="inverted">Web &amp; Mobile Development <small>JLW288</small></h3>
 						<h1>06.Ajax</h1>
-					
+
 						<footer>
 							<em><a href="http://www.ikdoeict.be/">ikdoeict.be</a> &mdash; <a href="mailto:bramus.vandamme@kahosl.be">bramus.vandamme@kahosl.be</a></em>
 						</footer>
@@ -77,7 +77,7 @@
 							</li>
 						</ul>
 					</section>
-					
+
 					<section>
 						<h2>XMLHttpRequest</h2>
 						<ul>
@@ -97,7 +97,7 @@
 						</ul>
 						<footer class="fragment"><em>(* by now other formats are more popular)</em></footer>
 					</section>
-					
+
 					<section>
 						<h2>Example</h2>
 						<ul>
@@ -217,7 +217,7 @@ xhr = new XMLHttpRequest();
 							</li>
 						</ul>
 					</section>
-													
+
 				</section>
 
 
@@ -471,7 +471,7 @@ xhr.send(null);</code></pre>
 							</li>
 						</ul>
 					</section>
-					
+
 				</section>
 
 
@@ -590,7 +590,7 @@ var queryString = values.join('&amp;');</code></pre>
 							</li>
 						</ul>
 					</section>
-					
+
 					<section>
 						<h2>$.ajax() alternative syntax</h2>
 						<ul>
@@ -738,7 +738,7 @@ var queryString = values.join('&amp;');</code></pre>
 							</li>
 						</ul>
 					</section>
-					
+
 					<section>
 						<h2>Sidenote: Multiple Calls</h2>
 						<ul>
@@ -855,7 +855,7 @@ $.when(doAjax(), doMoreAjax())
 	jQuery(document).ready(function($) {
 		$('#spinner').show();
 		$('#output').load('html-delay.php', function() {
-			$('#spinner').hide();					
+			$('#spinner').hide();
 		});
 	});
 &lt;/script&gt;</code></pre>
@@ -886,7 +886,7 @@ $.when(doAjax(), doMoreAjax())
 							</li>
 						</ul>
 					</section>
-					
+
 					<section>
 						<h2>History: pushState</h2>
 						<ul>
@@ -1095,7 +1095,7 @@ history.pushState(stateObj, "page 2", "bar.html");</code></pre>
 							</li>
 						</ul>
 					</section>
-					
+
 					<section>
 						<h2>Cross Domain: JSONP (2)</h2>
 						<ul>
@@ -1107,7 +1107,7 @@ history.pushState(stateObj, "page 2", "bar.html");</code></pre>
 											<li class="fragment">jQuery will <em>automagically</em> define callback function</li>
 											<li class="fragment">jQuery will <em>automagically</em> add callback parameter to the request url</li>
 										</ul>
-										
+
 										<div class="fragment"><pre class="bigger"><code class="language-javascript dontrun" data-overlay-example="assets/06/examples/jquery.jsonp.html">$.ajax({
 	url: 'jsonp.php',
 	type: 'get',
@@ -1212,7 +1212,7 @@ history.pushState(stateObj, "page 2", "bar.html");</code></pre>
 					</section>
 
 				</section>
-				
+
 				<!-- The END -->
 				<section>
 					<section>
@@ -1250,7 +1250,7 @@ history.pushState(stateObj, "page 2", "bar.html");</code></pre>
 						</ul>
 					</section>
 				</section>
-				
+
 			</div>
 
 			<!-- The navigational controls UI -->
@@ -1266,15 +1266,15 @@ history.pushState(stateObj, "page 2", "bar.html");</code></pre>
 			<aside class="back">
 				<a href="index.html">&larr; Back to index</a>
 			</aside>
-			
+
 			<!-- ikdoeict.be Link -->
 			<a href="http://www.ikdoeict.be/" title="ikdoeict.be" id="ikdoeict">ikdoeict.be</a>
 
 			<!-- Displays presentation progress, max value changes via JS to reflect # of slides -->
 			<div class="progress"><span></span></div>
-			
+
 		</div>
-		
+
 		<script src="js/reveal.js"></script>
 		<script src="lib/highlight.js"></script>
 		<script src="lib/prefixfree.js"></script>
