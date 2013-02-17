@@ -1,41 +1,20 @@
-<!doctype html>  
+<!doctype html>
 <html lang="en">
-	
+
 	<head>
 		<meta charset="utf-8">
-		
-		<title>Rich Internet Applications &mdash; 07.RESTful.APIs</title>
 
-		<meta name="description" content="Rich Internet Applications &mdash; 06.Ajax">
+		<title>Web &amp; Mobile Development &mdash; 07.RESTful.APIs</title>
+
+		<meta name="description" content="Web &amp; Mobile Development &mdash; 07.RESTful.APIs">
 		<meta name="author" content="Bram(us) Van Damme - ikdoeict.be">
-		
+
 		<link href='http://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
-		
+
 		<link rel="stylesheet" href="css/reset.css">
 		<link rel="stylesheet" href="css/main.css" media="screen">
 		<link rel="stylesheet" href="css/print.css" media="print">
 		<!-- <link rel="stylesheet" href="assets/07/examples.css"> -->
-		
-		<style>
-			code {
-				color: gainsboro;
-			}
-
-			li > code, li em > code, li del > code, li ins > code, p > code {
-				background: #3F3F3F;
-				padding: 2px 4px;
-				box-shadow: 0px 0px 6px rgba(0,0,0,0.3);
-				font-size: 80%;
-			}
-			
-			del code, code.nok {
-				color: #C55;
-			}
-			
-			ins code, code.ok {
-				color: #5C5;
-			}
-		</style>
 
 		<link rel="stylesheet" href="lib/zenburn.css">
 		
@@ -54,22 +33,22 @@
 		</script>
 
 	</head>
-	
+
 	<body>
-		
+
 		<div id="reveal">
-			
+
 			<!-- Any section element inside of this container is displayed as a slide -->
 			<div class="slides">
 
 
-				
+
 				<!-- 0 : Title -->
 				<section>
 					<section>
-						<h3 class="inverted">Rich Internet Applications</h3>
+						<h3 class="inverted">Web &amp; Mobile Development <small>JLW288</small></h3>
 						<h1>07.RESTful.APIs</h1>
-					
+
 						<footer>
 							<em><a href="http://www.ikdoeict.be/">ikdoeict.be</a> &mdash; <a href="mailto:bramus.vandamme@kahosl.be">bramus.vandamme@kahosl.be</a></em>
 						</footer>
@@ -168,7 +147,7 @@
 							</li>
 						</ul>
 					</section>
-					
+
 					<section>
 						<h2>REST</h2>
 						<ul>
@@ -224,7 +203,7 @@
 							</li>
 						</ul>
 					</section>
-								
+
 					<section>
 						<h2>Why REST?</h2>
 						<ul>
@@ -242,7 +221,7 @@
 							</li>
 						</ul>
 					</section>
-													
+
 				</section>
 
 
@@ -254,7 +233,7 @@
 						<p><img src="assets/07/globetrotters.png" alt="" title="" height="375" width="500" /></p>
 						<q>This chronological wang-dang-doodle<br />could destroy the very matrix of reality.</q>
 					</section>
-					
+
 					<section>
 						<h2>REST URL Design</h2>
 						<ul>
@@ -394,12 +373,12 @@
 								</ul>
 							</li>
 							<li class="fragment">
-								Warning! 
+								Warning!
 								<ul><li>HTTP Statuses 4XX and 5XX will invoke <code>$.ajax().error()</code> in jQuery!</li></ul>
 							</li>
 						</ul>
 					</section>
-					
+
 					<section>
 						<h2>Case Study: Twitter API (1)</h2>
 						<ul>
@@ -546,7 +525,7 @@
 							</li>
 						</ul>
 					</section>
-					
+
 					<section>
 						<h2>URL Design Sidenotes</h2>
 						<ul>
@@ -582,7 +561,7 @@
 						</ul>
 						<footer class="fragment">These practices are optional, we won't be implementing them ourselves</footer>
 					</section>
-					
+
 					<section>
 						<h2>Documentation</h2>
 						<ul>
@@ -657,7 +636,7 @@
 							</li>
 						</ul>
 					</section>
-					
+
 					<section>
 						<h2>Before we dive in</h2>
 						<ul>
@@ -690,7 +669,7 @@
 							</li>
 						</ul>
 					</section>
-					
+
 					<section>
 						<h2>1. Support nice URLs (1)</h2>
 						<ul>
@@ -735,7 +714,7 @@ if (strstr($this-&gt;urlString, '?')) {
 							<li class="fragment">Note: Requires that your app is in the root of your server (use localhost or use <a href="http://mikebernat.com/blog/Adding_Virtual_Hosts_to_Apache_&amp;_Wampserver">vhosts</a>!)</li>
 						</ul>
 					</section>
-					
+
 
 					<section>
 						<h2>2. PlonkApiController</h2>
@@ -744,11 +723,11 @@ if (strstr($this-&gt;urlString, '?')) {
 								Basic structure <em>(will change)</em>
 								<pre class="bigger language-php"><code>&lt;?php
 class PlonkApiController extends PlonkController {
-	
+
 	public function __construct(array $urlParts) {
 		parent::__construct($urlParts);
 	}
-	
+
 	protected function display($status, $content) {
 		header('Cache-Control: no-cache, must-revalidate');
 		header('Expires: Mon, 26 Jul 1997 05:00:00 GMT');
@@ -759,7 +738,7 @@ class PlonkApiController extends PlonkController {
 			'content' => $this->content
 		));
 	}
-	
+
 	protected function loadMainTemplate() { return; }
 	protected function loadPageTemplate() { return; }
 }
@@ -778,12 +757,12 @@ class PlonkApiController extends PlonkController {
 class SampleapiController extends PlonkApiController {
 
 	protected $views = array('dogs');
-	
+
 	public function showDogs() {
 		// detail
 		if (isset($this-&gt;urlParts[2]) &amp;&amp; trim($this-&gt;urlParts[2]) != '') {
 			$dog = SampleapiDB::getDog($this-&gt;urlParts[2]);
-			
+
 			if ($dog) {
 				$this-&gt;display(array(200,'OK'), $dog);
 			} else {
@@ -844,7 +823,7 @@ class PlonkApiController extends PlonkController {
 		$this->status = array(
 			'code' => $statusCode,
 			'text' => $codes[$statusCode]
-		);	
+		);
 		header('HTTP/1.1 ' . $this->status['code'] . ' ' . $this->status['text']);
 	}
 
@@ -858,13 +837,13 @@ class PlonkApiController extends PlonkController {
 // EOF</code></pre>
 						</div>
 					</section>
-					
+
 					<section>
 						<h2>1. Working with statuses (3)</h2>
 						<div class="fragment">
 							<pre class="bigger language-php"><code>&lt;?php
 class PlonkApiController extends PlonkController {
-	
+
 	...
 
 	protected function display() {
@@ -879,7 +858,7 @@ class PlonkApiController extends PlonkController {
 			)
 		);
 	}
-	
+
 	...
 
 }
@@ -895,7 +874,7 @@ class PlonkApiController extends PlonkController {
 						</ul>
 						<div class="fragment">
 							<pre class="bigger language-php"><code>protected function display() {
-								
+
 	...
 
 	$json = json_encode(
@@ -904,7 +883,7 @@ class PlonkApiController extends PlonkController {
 			'content' => $this->content
 		)
 	);
-	
+
 	// jsonp
 	if (PlonkFilter::getGetValue('callback')) {
 		header('Content-type: application/javascript');
@@ -1053,9 +1032,9 @@ break;
 						<h2>5. CORS (2)</h2>
 						<div class="fragment">
 							<pre class="language-php"><code>class PlonkApiController extends PlonkController {
-								
+
 	...
-	
+
 	public function __construct(array $urlParts) {
 
 		// Call Parent Class
@@ -1074,25 +1053,25 @@ break;
 		}
 
 	}
-	
+
 	...
-	
+
 	final protected function setCors($cors = null) {
 		$this-&gt;cors = (string) $cors;
 		header('Access-Control-Allow-Origin: ' . $this-&gt;cors);
 	}
-	
+
 	...
-	
+
 }</code></pre>
 						</div>
 					</section>
-					
+
 					<section>
 						<h2>5. CORS (3)</h2>
 						<div class="fragment">
 							<pre class="bigger language-php"><code>class SampleapiController extends PlonkApiController {
-								
+
 	public function __construct(array $urlParts) {
 
 		// Set this before calling the parent constructor,
@@ -1103,7 +1082,7 @@ break;
 		parent::__construct($urlParts);
 
 	}
-	
+
 	...
 
 }</code></pre>
@@ -1118,7 +1097,7 @@ break;
 					</section>
 
 				</section>
-				
+
 				<!-- 4 : API Authentication -->
 				<section>
 					<section>
@@ -1164,7 +1143,7 @@ private function checkApiKey() {
 		$this-&gt;setContent('Missing or invalid API Key.');
 		$this-&gt;display();
 		exit();
-	}	
+	}
 }</code></pre>
 								</div>
 							</li>
@@ -1177,18 +1156,18 @@ private function checkApiKey() {
 							<li class="fragment">
 								Note: <code>apache_request_headers()</code> not always available!
 								<div class="fragment">
-									<pre class="bigger language-php"><code>if (!function_exists('apache_request_headers')) { 
-    eval(' 
-        function apache_request_headers() { 
-            foreach($_SERVER as $key=>$value) { 
-                if (substr($key,0,5)==&quot;HTTP_&quot;) { 
-                    $key=str_replace(&quot; &quot;,&quot;-&quot;,ucwords(strtolower(str_replace(&quot;_&quot;,&quot; &quot;,substr($key,5))))); 
-                    $out[$key]=$value; 
-                } 
-            } 
-            return $out; 
-        } 
-    '); 
+									<pre class="bigger language-php"><code>if (!function_exists('apache_request_headers')) {
+    eval('
+        function apache_request_headers() {
+            foreach($_SERVER as $key=>$value) {
+                if (substr($key,0,5)==&quot;HTTP_&quot;) {
+                    $key=str_replace(&quot; &quot;,&quot;-&quot;,ucwords(strtolower(str_replace(&quot;_&quot;,&quot; &quot;,substr($key,5)))));
+                    $out[$key]=$value;
+                }
+            }
+            return $out;
+        }
+    ');
 }</code></pre>
 								</div>
 							</li>
@@ -1201,7 +1180,7 @@ private function checkApiKey() {
 						<ul>
 							<li class="fragment">
 								API Consumers should <strong>never</strong> ask the user his/her username/password <em>(password anti-pattern!)</em> but should use OAuth2 which works with time-limited access tokens to accessing user data
-								
+
 								<p style="text-align: center;"><img src="assets/07/oauth2.png" width="300" height="300" alt="" title="" style="background: transparent; border: 0; -webkit-box-shadow: none; -moz-box-shadow: none; -ms-box-shadow: none; -o-box-shadow: none; box-shadow: none;" /><p>
 							</li>
 						</ul>
@@ -1246,10 +1225,10 @@ private function checkApiKey() {
 							<li class="fragment">Once you get the gist of it, OAuth2 is fairly easy ... or you could use a prefab solution if you don't <em>(#lmgtfy)</em></li>
 						</ul>
 					</section>
-					
+
 				</section>
 
-				
+
 				<!-- The END -->
 				<section>
 					<section>
@@ -1271,25 +1250,25 @@ private function checkApiKey() {
 							<li><a href="http://en.wikipedia.org/wiki/Representational_state_transfer">http://en.wikipedia.org/wiki/Representational_state_transfer</a></li>
 							<li><a href="http://www.slideshare.net/jmusser/pw-glue-conmay2010">http://www.slideshare.net/jmusser/pw-glue-conmay2010</a></li>
 							<li><a href="http://www.slideshare.net/al3x/the-interaction-design-of-apis">http://www.slideshare.net/al3x/the-interaction-design-of-apis</a></li>
-							
+
 							<!-- REST URL Design -->
 							<li><a href="http://www.slideshare.net/Wombert/phpjp-urls-rest">http://www.slideshare.net/Wombert/phpjp-urls-rest</a></li>
 							<li><a href="http://www.slideshare.net/apigee/restful-api-design-second-edition">http://www.slideshare.net/apigee/restful-api-design-second-edition</a></li>
 							<li><a href="http://restpatterns.org/HTTP_Status_Codes">http://restpatterns.org/HTTP_Status_Codes</a></li>
 							<li><a href="http://httpstatus.es/">http://httpstatus.es/</a></li>
-							
+
 							<!-- REST in PHP -->
 							<li><a href="http://www.recessframework.org/page/towards-restful-php-5-basic-tips">http://www.recessframework.org/page/towards-restful-php-5-basic-tips</a></li>
 							<li><a href="http://www.gen-x-design.com/archives/create-a-rest-api-with-php/">http://www.gen-x-design.com/archives/create-a-rest-api-with-php/</a></li>
-							
+
 							<!-- Authentication -->
 							<li><a href="http://en.wikipedia.org/wiki/Oauth">http://en.wikipedia.org/wiki/Oauth</a></li>
 							<li><a href="http://www.slideshare.net/leahculver/oauth-open-api-authentication">http://www.slideshare.net/leahculver/oauth-open-api-authentication</a></li>
-							
+
 						</ul>
 					</section>
 				</section>
-				
+
 			</div>
 
 			<!-- The navigational controls UI -->
@@ -1305,15 +1284,15 @@ private function checkApiKey() {
 			<aside class="back">
 				<a href="index.html">&larr; Back to index</a>
 			</aside>
-			
+
 			<!-- ikdoeict.be Link -->
 			<a href="http://www.ikdoeict.be/" title="ikdoeict.be" id="ikdoeict">ikdoeict.be</a>
 
 			<!-- Displays presentation progress, max value changes via JS to reflect # of slides -->
 			<div class="progress"><span></span></div>
-			
+
 		</div>
-		
+
 		<script src="js/reveal.js"></script>
 		<script src="lib/highlight.js"></script>
 		<script src="lib/prefixfree.js"></script>

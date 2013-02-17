@@ -1051,3 +1051,121 @@ html {
 	opacity: 1!important;
 	position: relative!important;
 }
+
+
+/*********************************************
+ * EXTRAS BY BRAMUS
+ *********************************************/
+
+#reveal .columns .column {
+	float: left;
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+#reveal .columns .column img {
+	max-width: 100%;
+}
+
+#reveal .columns .column-12 {
+	width: 50%;
+}
+
+#reveal .columns .column-13 {
+	width: 33.333%;
+}
+
+code {
+	color: gainsboro;
+}
+
+li > code, li em > code, li del > code, li ins > code, p > code {
+	background: #3F3F3F;
+	padding: 2px 4px;
+	box-shadow: 0px 0px 6px rgba(0,0,0,0.3);
+	font-size: 80%;
+}
+
+del code, code.nok {
+	color: #C55;
+}
+
+ins code, code.ok {
+	color: #5C5;
+}
+
+.slides strong {
+	color: #553d00;
+	background: transparent url('../assets/strong.png') no-repeat 50% 50%;
+	font-size: 80%;
+	padding: 0 4px;
+	font-family: palatino, times;
+	font-weight: 300;
+	font-style: italic;
+}
+
+#reveal section img.noborder {
+	background: transparent;
+	border: 0;
+	-webkit-box-shadow: none;
+	-moz-box-shadow: none;
+	-ms-box-shadow: none;
+	-o-box-shadow: none;
+	box-shadow: none;"
+}
+
+#reveal .hastooltip {
+	position: relative;
+}
+
+#reveal .hastooltip .tooltip {
+	position: absolute;
+	bottom: 5px;
+	right: 5px;
+	background-image: url('../assets/comments.png');
+	background-position: bottom right;
+	background-repeat: no-repeat;
+	width: 60px;
+	height: 60px;
+	z-index: 110;
+}
+
+#reveal .tooltip div {
+	display: none;
+	position: absolute;
+	bottom: 30px;
+	right: 40px;
+	font-size: 50%;
+	line-height: 1.48;
+	min-width: 420px;
+	opacity: 0.9;
+	border: 2px solid #ccc;
+	padding: 20px;
+	background-color: #ffc;
+	background-image: -webkit-linear-gradient(rgba(255,255,255,.5), rgba(255,255,180,0));
+	background-image: -moz-linear-gradient(rgba(255,255,255,.5), rgba(255,255,180,0));
+	background-image: -ms-linear-gradient(rgba(255,255,255,.5), rgba(255,255,180,0));
+	background-image: -o-linear-gradient(rgba(255,255,255,.5), rgba(255,255,180,0));
+	background-image: linear-gradient(rgba(255,255,255,.5), rgba(255,255,180,0));
+	border-radius: 4px;
+	box-shadow: 0 1px 2px rgba(0,0,0,.4), 0 1px 0 rgba(255,255,255,.5) inset;
+	text-shadow: 0 1px 0 rgba(255,255,255,.4);
+	color: #333;
+}
+
+#reveal .tooltip:hover div {
+	display: block;
+}
+
+#reveal .tooltip ul {
+	margin: 5px 5px 5px 15px;
+}
+
+#reveal .tooltip ul li {
+	margin-left: 10px;
+}
+
+#reveal .tooltip div *:last-child {
+	margin-bottom: 0;
+}

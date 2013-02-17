@@ -1,16 +1,16 @@
-<!doctype html>  
+<!doctype html>
 <html lang="en">
-	
+
 	<head>
 		<meta charset="utf-8">
-		
-		<title>Rich Internet Applications &mdash; 01.Advanced.JS</title>
 
-		<meta name="description" content="Rich Internet Applications &mdash; 01.Advanced.JS">
+		<title>Web &amp; Mobile Development &mdash; 01.Advanced.JS</title>
+
+		<meta name="description" content="Web &amp; Mobile Development &mdash; 01.Advanced.JS">
 		<meta name="author" content="Bram(us) Van Damme - ikdoeict.be">
-		
+
 		<link href='http://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
-		
+
 		<link rel="stylesheet" href="css/reset.css">
 		<link rel="stylesheet" href="css/main.css" media="screen">
 		<link rel="stylesheet" href="css/print.css" media="print">
@@ -33,22 +33,22 @@
 		</script>
 		
 	</head>
-	
+
 	<body>
-		
+
 		<div id="reveal">
-			
+
 			<!-- Any section element inside of this container is displayed as a slide -->
 			<div class="slides">
 
 
-				
+
 				<!-- 0 : Title -->
 				<section>
 					<section>
-						<h3 class="inverted">Rich Internet Applications</h3>
+						<h3 class="inverted">Web &amp; Mobile Development <small>JLW288</small></h3>
 						<h1>01.Advanced.JS</h1>
-					
+
 						<footer>
 							<em><a href="http://www.ikdoeict.be/">ikdoeict.be</a> &mdash; <a href="mailto:bramus.vandamme@kahosl.be">bramus.vandamme@kahosl.be</a></em>
 						</footer>
@@ -61,7 +61,7 @@
 				</section>
 
 
-				
+
 				<!-- 1 : JavaScript? -->
 				<section>
 
@@ -150,7 +150,7 @@
 							</li>
 						</ul>
 					</section>
-					
+
 				</section>
 
 
@@ -185,7 +185,7 @@
 						</div>
 						<p style="font-size: 80%">Another thank you goes out to <a href="http://www.mathias.be/">Mathias Bynens</a> <em>(2nd one from the left)</em> who gave some handy remarks.</p>
 					</section>
-					
+
 				</section>
 
 
@@ -267,7 +267,7 @@ alert(lastName);</code></pre>
 							</li>
 						</ul>
 					</section>
-					
+
 					<section>
 						<h2>JavaScript Data Types (1)</h2>
 						<ul>
@@ -318,7 +318,7 @@ alert(lastName);</code></pre>
 							</li>
 						</ul>
 					</section>
-					
+
 					<section>
 						<h2>Not Sure If ...</h2>
 						<p><img src="assets/01/notsureif.png" alt="Not Sure If ..." title="Not Sure If ..." width="480" height="360" /></p>
@@ -356,7 +356,7 @@ alert(lastName);</code></pre>
 							</li>
 						</ul>
 					</section>
-					
+
 					<section>
 						<h2>Global Objects and Literals (2)</h2>
 						<ul>
@@ -377,7 +377,7 @@ alert(typeof firstName.toString());</code></pre>
 							</li>
 						</ul>
 					</section>
-					
+
 					<section>
 						<h2>Global Objects and Literals (3)</h2>
 						<ul>
@@ -450,7 +450,7 @@ var says = new Function('sentence', 'alert(sentence)'); // Function Constructor
 var says = function(sentence) { alert(sentence); }; // Function Literal
 function says(sentence) { alert(sentence); }; // The function statement</code></pre>
 							</li>
-						
+
 						</ul>
 					</section>
 
@@ -476,7 +476,7 @@ var forrest = { // Object Literal
 							</li>
 						</ul>
 					</section>
-					
+
 					<section>
 						<h2>Global Objects and Literals (7)</h2>
 						<ul>
@@ -656,7 +656,7 @@ var foo = function() {
 	alert(saying);
 
 	alert(quote); // Access to Global
-	
+
     question = 'Why don\'t you love me, Jenny?'; // Local ?
 	alert(question);
 };
@@ -711,7 +711,7 @@ alert(question); // Nope, Chuck Testa! Erm, I mean global!</code></pre>
 								Full list of properties/methods to be found on <a href="https://developer.mozilla.org/en/JavaScript/Reference#Global_Objects">Mozilla Developer Network</a> or <a href="http://es5.github.com/">the ECMAScript Spec</a>
 							</li>
 						</ul>
-						
+
 					</section>
 
 					<section>
@@ -763,14 +763,14 @@ alert(['Bubba', 'Lieutenant Dan'].length);</code></pre>
 									</li>
 								</ul>
 							<li class="fragment">
-								Variables have a certain scope in which they are accessible. 
+								Variables have a certain scope in which they are accessible.
 								<ul>
 									<li>It's possible to access variables that live in an outer scope</li>
 								</ul>
 							</li>
-						</ul>	
+						</ul>
 					</section>
-					
+
 				</section>
 
 				<!-- 4: JavaScript Control Structures -->
@@ -796,7 +796,7 @@ if (badGrades) {
 // Switch statement
 var age = 10,
 	lifeState;
-	
+
 switch (age) {
 	case 10:
 		lifeState = 'Young';
@@ -952,7 +952,7 @@ try {
 		console.log(x + '-' + y);
 		y++;
 	}
-}</code></pre>	
+}</code></pre>
 							</li>
 						</ul>
 					</section>
@@ -987,7 +987,7 @@ for (var x = 1; x &lt;= 5; x++) {
 		if (y == 5) continue;
 		console.log(x + '-' + y);
 	}
-}</code></pre>	
+}</code></pre>
 							</li>
 						</ul>
 					</section>
@@ -1003,12 +1003,12 @@ for (var x = 1; x &lt;= 5; x++) {
 		if (y == 5) { continue myForLoop; }
 		console.log(x + '-' + y);
 	}
-}</code></pre>	
+}</code></pre>
 							</li>
 						</ul>
 						<p class="fragment"><small>In this example you get the same result as the first <code>break</code> example</small></p>
 					</section>
-					
+
 				</section>
 
 
@@ -1048,13 +1048,13 @@ alert(forrestSays);</code></pre>
 						<pre class="bigger fragment"><code contenteditable class="language-javascript">// How you'd probably write it at first
 var lifeIs = function(boxOfChocolates) {
 	var life;
-	
+
 	if (!boxOfChocolates) {
 		life = 'a Snickers bar';
 	} else {
 		life = boxOfChocolates;
 	}
-	
+
 	return 'Life is like ' + life;
 };
 alert(lifeIs('a Box of Chocolates'));</code></pre>
@@ -1107,7 +1107,7 @@ alert(example);</code></pre>
 							</li>
 						</ul>
 					</section>
-					
+
 				</section>
 
 
@@ -1177,7 +1177,7 @@ forrestSays('Stupid is as stupid does');</code></pre>
 };
 
 // Object Literal => Object Returned
-var forrest = { 
+var forrest = {
 	sentence : 'Stupid is as stupid does'
 };
 
@@ -1248,7 +1248,7 @@ forrestDoes(logs, 'Stupid is as stupid does');</code></pre>
 							</li>
 						</ul>
 					</section>
-					
+
 					<section>
 						<h2>Function arguments: Functions (2)</h2>
 						<ul>
@@ -1313,7 +1313,7 @@ forrestDoes(function(sentence) { // logs from the previous example
 	};
 };
 var says = function() {
-	alert('Stupid is as stupid does'); 
+	alert('Stupid is as stupid does');
 };
 
 says();
@@ -1485,7 +1485,7 @@ run();</code></pre>
 	var says = function(sentence) {
 		alert(sentence);
 	};
-	
+
 	says(whatForrestSays);
 };
 
@@ -1571,7 +1571,7 @@ alert(says('Shit')('happens'));</code></pre>
 								Another example
 								<pre class="bigger"><code contenteditable class="language-javascript">var add = function(x) {
 	return function(y) {
-		return x + y; 
+		return x + y;
 	};
 };
 var add5 = add(5),
@@ -1596,7 +1596,7 @@ alert(twelve)
 							</li>
 						</ul>
 					</section>
-					
+
 					<section>
 						<h2>Closures</h2>
 						<ul>
@@ -1796,7 +1796,7 @@ alert(ff());</code></pre>
 							</li>
 						</ul>
 					</section>
-										
+
 					<section>
 						<h2>Closures: In Closing</h2>
 						<ul>
@@ -1805,7 +1805,7 @@ alert(ff());</code></pre>
 								<ul>
 									<li><a href="https://developer.mozilla.org/en/JavaScript/Guide/Closures">Mozilla Developer Network: Closures</a></li>
 									<li><a href="http://javascript.info/tutorial/closures">JavaScript.info: Closures</a> <em>(great info on <code>LexicalEnvironment</code>)</em></li>
-									<li><a href="http://javascriptweblog.wordpress.com/2010/10/25/understanding-javascript-closures/">Angus Croll: Understanding JavaScript Closures</a></li>	
+									<li><a href="http://javascriptweblog.wordpress.com/2010/10/25/understanding-javascript-closures/">Angus Croll: Understanding JavaScript Closures</a></li>
 								</ul>
 							</li>
 							<li class="fragment">
@@ -1951,7 +1951,7 @@ myFunc(1,2,3,4,5,6,7,8,9,10);</code></pre>
 								<pre class="bigger"><code contenteditable class="language-javascript">var says = function() {
 	var firstName = arguments[0],
 	    sentence = arguments[1];
-	
+
 	return firstName + ' says "' + sentence + '"';
 };
 
@@ -2041,7 +2041,7 @@ alert(says(forrest));</code></pre>
 					<section>
 						<h2>Advanced JavaScript: Objects</h2>
 						<p><img src="assets/01/army.jpg" alt="To do whatever you tell me, drill sergeant!" title="To do whatever you tell me, drill sergeant!" width="467" height="316" /></p>
-						<q>Gump! What's your sole purpose in this army?</q><br /> 
+						<q>Gump! What's your sole purpose in this army?</q><br />
 						<q>To do whatever you tell me, drill sergeant!</q>
 					</section>
 
@@ -2073,7 +2073,7 @@ alert(forrest.says());</code></pre>
 							</li>
 						</ul>
 					</section>
-					
+
 					<section>
 						<h2>Accessing inner properties</h2>
 						<ul>
@@ -2107,15 +2107,15 @@ alert(forrest.says());</code></pre>
 							</li>
 						</ul>
 					</section>
-					
-					
+
+
 
 					<section>
 						<h2>Multiple Objects</h2>
 						<ul>
 							<li class="fragment">
 							Creating multiple <code>Object</code>
-							<pre class="bigger"><code contenteditable class="language-javascript">var forrest = { // Forrest 
+							<pre class="bigger"><code contenteditable class="language-javascript">var forrest = { // Forrest
     firstName : 'Forrest',
     lastName : 'Gump',
     says : function() {
@@ -2123,7 +2123,7 @@ alert(forrest.says());</code></pre>
     }
 };
 
-var dan = { // Lieutenant Dan 
+var dan = { // Lieutenant Dan
 	firstName : 'Dan',
 	lastName : 'Taylor',
 	says : function() {
@@ -2151,7 +2151,7 @@ var dan = { // Lieutenant Dan
     this.firstName = firstName;
 	this.lastName = lastName;
 	this.sentence = sentence;
-	
+
     this.says = function() {
     	return this.firstName + ' says "' + this.sentence + '"';
     };
@@ -2203,7 +2203,7 @@ alert(dan.says());
 
 Person.prototype.isRunning = false;
 Person.prototype.run = function() {
-	this.isRunning = true; 
+	this.isRunning = true;
 };
 
 var forrest = new Person('Forrest', 'Gump');
@@ -2337,11 +2337,11 @@ alert(tomhanks.isHuman ? 'Human' : 'Not Human');</code></pre>
 								<pre class="bigger"><code contenteditable class="language-javascript">var forrest = (function() {
 
 	var firstName = 'Forrest'; // Private var
-	
+
 	var says = function() { // Private function
 		return 'Stupid is as stupid does';
 	};
-	
+
 	return {
 		lastName : 'Gump', // Public var
 		getLastName : function() { // Public function
@@ -2351,7 +2351,7 @@ alert(tomhanks.isHuman ? 'Human' : 'Not Human');</code></pre>
 			return firstName; // no this when accessing private vars!
 		}
 	};
-	
+
 })(); // IIFE
 
 alert(forrest.getFirstName() + ' ' + forrest.getLastName());</code></pre>
@@ -2383,14 +2383,14 @@ alert(forrest.getFirstName() + ' ' + forrest.getLastName());</code></pre>
 		getLastName: getLastName,
 		whatDoesHeSay: says
 	};
-	
+
 })(); // IIFE
 
 alert(forrest.whatDoesHeSay());</code></pre>
 							</li>
 						</ul>
 					</section>
-				
+
 				</section>
 
 
@@ -2487,7 +2487,7 @@ alert(forrest.whatDoesHeSay());</code></pre>
 							<li class="fragment">
 								 ... the DOM tree would look like this
 							</li>
-						</ul>	
+						</ul>
 						<div style="text-align: center;">
 							<figure class="fragment">
 								<img src="assets/01/simpledom2.png" alt="" title="" height="335" width="500" />
@@ -2502,7 +2502,7 @@ alert(forrest.whatDoesHeSay());</code></pre>
 							<li class="fragment">
 								 Actually, it would look like this
 							</li>
-						</ul>	
+						</ul>
 						<div style="text-align: center;">
 							<figure class="fragment">
 								<img src="assets/01/simpledom2_white.png" alt="" title="" height="335" width="558" />
@@ -2665,7 +2665,7 @@ for (var i = 0, len = allSpans.length; i &lt; len; i++) {
 									<li>Left/Right on the DOM tree: <code>Node#previousSibling</code>, <code>Node#nextSibling</code></li>
 								</ul>
 							</li>
-						</ul>	
+						</ul>
 					</section>
 
 					<section>
@@ -2699,7 +2699,7 @@ for (var i = 0, len = allSpans.length; i &lt; len; i++) {
 							<li class="fragment" id="onevent-demo">
 								The old way: <code>#on<em>Eventname</em></code>
 								<pre class="bigger"><code contenteditable class="language-javascript runonce">var p = document.querySelector('#onevent-demo p');
-									
+
 p.onclick = function() { alert('You clicked me!'); };
 p.onmouseover = function() { this.style.backgroundColor = '#333'; };
 p.onmouseout = function() { this.style.backgroundColor = ''; };</code></pre>
@@ -2716,7 +2716,7 @@ p.onmouseout = function() { this.style.backgroundColor = ''; };</code></pre>
 								<p style="text-align: center; cursor: pointer;">I am the 2nd demo</p>
 							</li>
 						</ul>
-					</section>	
+					</section>
 
 					<section>
 						<h2>Hooking Events (2)</h2>
@@ -2726,10 +2726,10 @@ p.onmouseout = function() { this.style.backgroundColor = ''; };</code></pre>
 								<pre class="bigger"><code contenteditable class="language-javascript runonce">var p = document.querySelector('#addeventlistener-demo p');
 
 p.addEventListener('click', function() {
-	alert('You clicked me!'); 
+	alert('You clicked me!');
 });
 p.addEventListener('mouseover', function() {
-	this.style.backgroundColor = '#333'; 
+	this.style.backgroundColor = '#333';
 });
 p.addEventListener('mouseout', function() {
 	this.style.backgroundColor = '';
@@ -2747,13 +2747,13 @@ p.addEventListener('mouseout', function() {
 								<pre class="bigger"><code contenteditable class="language-javascript runonce">var p = document.querySelector('#addeventlistenertwice-demo p');
 
 p.addEventListener('click', function() {
-	alert('You clicked me (1)!'); 
+	alert('You clicked me (1)!');
 });
 p.addEventListener('click', function() {
-	alert('You clicked me (2)!'); 
+	alert('You clicked me (2)!');
 });
 p.addEventListener('mouseover', function() {
-	this.style.backgroundColor = '#333'; 
+	this.style.backgroundColor = '#333';
 });
 p.addEventListener('mouseout', function() {
 	this.style.backgroundColor = '';
@@ -2771,14 +2771,14 @@ p.addEventListener('mouseout', function() {
 								<pre class="bigger"><code contenteditable class="language-javascript runonce">var p = document.querySelector('#removeeventlistener-demo p');
 
 var clickHandler = function() {
-	alert('You clicked me!'); 
+	alert('You clicked me!');
 };
 
 p.addEventListener('click', clickHandler);
 p.removeEventListener('click', clickHandler);
 
 p.addEventListener('mouseover', function() {
-	this.style.backgroundColor = '#333'; 
+	this.style.backgroundColor = '#333';
 });
 p.addEventListener('mouseout', function() {
 	this.style.backgroundColor = '';
@@ -2793,11 +2793,11 @@ p.addEventListener('mouseout', function() {
 						<ul>
 							<li class="fragment">
 								If an element and one of its ancestors have an event handler for the same event, what happens?
-								
+
 								<div class="capture-bubble-d1">1  <!-- the topmost -->
 								    <div class="capture-bubble-d2">2
 								        <div class="capture-bubble-d3">3 <!-- the innermost -->
-								        </div> 
+								        </div>
 								    </div>
 								</div>
 							</li>
@@ -2856,7 +2856,7 @@ for (var i = 0, len = divs.length; i &lt; len; i++) {
 								<div class="capture-bubble-d1">1  <!-- the topmost -->
 								    <div class="capture-bubble-d2">2
 								        <div class="capture-bubble-d3">3 <!-- the innermost -->
-								        </div> 
+								        </div>
 								    </div>
 								</div>
 							</li>
@@ -2881,7 +2881,7 @@ for (var i = 0, len = divs.length; i &lt; len; i++) {
 								<div class="capture-bubble-d1">1  <!-- the topmost -->
 								    <div class="capture-bubble-d2">2
 								        <div class="capture-bubble-d3">3 <!-- the innermost -->
-								        </div> 
+								        </div>
 								    </div>
 								</div>
 							</li>
@@ -2927,7 +2927,7 @@ for (var i = 0, len = divs.length; i &lt; len; i++) {
 								<div class="capture-bubble-d1">1  <!-- the topmost -->
 								    <div class="capture-bubble-d2">2
 								        <div class="capture-bubble-d3">3 <!-- the innermost -->
-								        </div> 
+								        </div>
 								    </div>
 								</div>
 							</li>
@@ -3032,7 +3032,7 @@ for (var i = 0, len = divs.length; i &lt; len; i++) {
 								<div class="capture-bubble-d1">1  <!-- the topmost -->
 								    <div class="capture-bubble-d2">2
 								        <div class="capture-bubble-d3">3 <!-- the innermost -->
-								        </div> 
+								        </div>
 								    </div>
 								</div>
 							</li>
@@ -3061,13 +3061,13 @@ for (var i = 0, len = divs.length; i &lt; len; i++) {
 								<div class="capture-bubble-d1">1  <!-- the topmost -->
 								    <div class="capture-bubble-d2">2
 								        <div class="capture-bubble-d3">3 <!-- the innermost -->
-								        </div> 
+								        </div>
 								    </div>
 								</div>
 							</li>
 						</ul>
 					</section>
-					
+
 					<section>
 						<h2>Events: The Loop Problem (1)</h2>
 						<ul>
@@ -3182,7 +3182,7 @@ for (var i = 6; i &lt; 9; i++) { // add three links
 							</li>
 						</ul>
 					</section>
-					
+
 					<section>
 						<h2>Attaching scripts</h2>
 						<ul>
@@ -3290,7 +3290,7 @@ for (var i = 6; i &lt; 9; i++) { // add three links
 								</ul>
 							</li>
 						</ul>
-					</section>			
+					</section>
 
 					<section>
 						<h2>Script execution (1)</h2>
@@ -3319,7 +3319,7 @@ for (var i = 6; i &lt; 9; i++) { // add three links
 							</li>
 						</ul>
 					</section>
-					
+
 					<section>
 						<h2>Script execution (2)</h2>
 						<ul>
@@ -3557,7 +3557,7 @@ alert(IKDOEICT.foo.baz('test'));</code></pre>
 						</ul>
 					</section>
 				</section>
-				
+
 			</div>
 
 			<!-- The navigational controls UI -->
@@ -3573,15 +3573,15 @@ alert(IKDOEICT.foo.baz('test'));</code></pre>
 			<aside class="back">
 				<a href="index.html">&larr; Back to index</a>
 			</aside>
-			
+
 			<!-- ikdoeict.be Link -->
 			<a href="http://www.ikdoeict.be/" title="ikdoeict.be" id="ikdoeict">ikdoeict.be</a>
 
 			<!-- Displays presentation progress, max value changes via JS to reflect # of slides -->
 			<div class="progress"><span></span></div>
-			
+
 		</div>
-		
+
 		<script src="js/reveal.js"></script>
 		<script src="lib/highlight.js"></script>
 		<script src="lib/prefixfree.js"></script>

@@ -1,16 +1,16 @@
-<!doctype html>  
+<!doctype html>
 <html lang="en">
-	
+
 	<head>
 		<meta charset="utf-8">
-		
-		<title>Rich Internet Applications &mdash; 03.jQuery.Introduction</title>
 
-		<meta name="description" content="Rich Internet Applications &mdash; 03.jQuery.Introduction">
+		<title>Web &amp; Mobile Development &mdash; 03.jQuery.Introduction</title>
+
+		<meta name="description" content="Web &amp; Mobile Development &mdash; 03.jQuery.Introduction">
 		<meta name="author" content="Bram(us) Van Damme - ikdoeict.be">
-		
+
 		<link href='http://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
-		
+
 		<link rel="stylesheet" href="css/reset.css">
 		<link rel="stylesheet" href="css/main.css" media="screen">
 		<link rel="stylesheet" href="css/print.css" media="print">
@@ -33,22 +33,22 @@
 		</script>
 		
 	</head>
-	
+
 	<body>
-		
+
 		<div id="reveal">
-			
+
 			<!-- Any section element inside of this container is displayed as a slide -->
 			<div class="slides">
 
 
-				
+
 				<!-- 0 : Title -->
 				<section>
 					<section>
-						<h3 class="inverted">Rich Internet Applications</h3>
+						<h3 class="inverted">Web &amp; Mobile Development <small>JLW288</small></h3>
 						<h1>03.jQuery.intro</h1>
-					
+
 						<footer>
 							<em><a href="http://www.ikdoeict.be/">ikdoeict.be</a> &mdash; <a href="mailto:bramus.vandamme@kahosl.be">bramus.vandamme@kahosl.be</a></em>
 						</footer>
@@ -173,7 +173,7 @@
 							</li>
 						</ul>
 					</section>
-					
+
 					<section>
 						<h2>Including jQuery (1)</h2>
 						<ul>
@@ -218,10 +218,10 @@
 		});
 	&lt;/script&gt;
 ...</code></pre>
-							</li> 	
+							</li>
 						</ul>
 					</section>
-					
+
 				</section>
 
 
@@ -233,7 +233,7 @@
 						<p><img src="assets/03/futurama_benderpointing.jpg" alt="" title="" height="309" width="446" /></p>
 						<q>Everybody's a jerk. You, me, this jerk.</q>
 					</section>
-					
+
 					<section>
 						<h2>Selecting Elements</h2>
 						<ul>
@@ -309,7 +309,7 @@ $('td:parent');</code></pre>
 							</li>
 						</ul>
 					</section>
-					
+
 					<section>
 						<h2>Selectors Reference</h2>
 						<ul>
@@ -325,7 +325,7 @@ $('td:parent');</code></pre>
 							<li class="fragment">
 								Sometimes, you'll want to iterate over a selection
 								<pre class="bigger"><code class="language-javascript dontrun">$('li').each(function() {
-	console.log($(this));			
+	console.log($(this));
 });</code></pre>
 							</li>
 							<li class="fragment">
@@ -336,7 +336,7 @@ $('td:parent');</code></pre>
 							</li>
 						</ul>
 					</section>
-					
+
 				</section>
 
 
@@ -361,7 +361,7 @@ $('td:parent');</code></pre>
 									<li class="fragment">Add, Move, Copy &amp; Remove Elements</li>
 								</ul>
 							</li>
-							
+
 							<li class="fragment">
 								jQuery provides functions to do these manipulations
 								<ul>
@@ -444,7 +444,7 @@ $('td:parent');</code></pre>
 		'background-color': 'lime',
 		'width': '250px'
 	});
-	
+
 	alert($('ul li:nth-child(1)').css('width'));
 });</code></pre>
 							</li>
@@ -741,7 +741,7 @@ var a = $('&lt;a/&gt;', {
 							</li>
 						</ul>
 					</section>
-					
+
 				</section>
 
 
@@ -1054,7 +1054,7 @@ var a = $('&lt;a/&gt;', {
 	$('li').css('cursor','pointer').hover(
 		function(e) {
 			$(this).css('color', 'blue');
-		}, 
+		},
 		function(e) {
 			$(this).css('color', 'black');
 		}
@@ -1119,10 +1119,10 @@ var a = $('&lt;a/&gt;', {
 	}).on('click', function(e) {
 		$(this).css('color', 'red');
 	});
-	
+
 	// Append new list item
 	$('ul').append('&lt;li&gt;new list item, injected after the event binding&lt;/li&gt;');
-	
+
 });</code></pre>
 							</li>
 							<li class="fragment">Can be fixed by using <a href="http://api.jquery.com/delegate/">$.fn.delegate()</a></li>
@@ -1385,7 +1385,7 @@ $.each({ foo : 'bar', baz : 'bim' }, function(k, v) {
 						<h2>Other Utility Functions/Objects</h2>
 						<ul>
 							<li class="fragment">
-								Basic checking functions such as 
+								Basic checking functions such as
 								<ul>
 									<li><a href="http://api.jquery.com/jQuery.isArray/">$.isArray</a></li>
 									<li><a href="http://api.jquery.com/jQuery.isFunction/">$.isFunction</a></li>
@@ -1438,7 +1438,7 @@ $.each({ foo : 'bar', baz : 'bim' }, function(k, v) {
 						</ul>
 					</section>
 				</section>
-				
+
 			</div>
 
 			<!-- The navigational controls UI -->
@@ -1454,15 +1454,15 @@ $.each({ foo : 'bar', baz : 'bim' }, function(k, v) {
 			<aside class="back">
 				<a href="index.html">&larr; Back to index</a>
 			</aside>
-			
+
 			<!-- ikdoeict.be Link -->
 			<a href="http://www.ikdoeict.be/" title="ikdoeict.be" id="ikdoeict">ikdoeict.be</a>
 
 			<!-- Displays presentation progress, max value changes via JS to reflect # of slides -->
 			<div class="progress"><span></span></div>
-			
+
 		</div>
-		
+
 		<script src="js/reveal.js"></script>
 		<script src="lib/highlight.js"></script>
 		<script src="lib/prefixfree.js"></script>

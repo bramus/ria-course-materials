@@ -1,16 +1,16 @@
-<!doctype html>  
+<!doctype html>
 <html lang="en">
-	
+
 	<head>
 		<meta charset="utf-8">
-		
-		<title>Rich Internet Applications &mdash; 00.intro</title>
 
-		<meta name="description" content="Rich Internet Applications &mdash; 00.intro">
+		<title>Web &amp; Mobile Development &mdash; 00.intro</title>
+
+		<meta name="description" content="Web &amp; Mobile Development &mdash; 00.intro">
 		<meta name="author" content="Bram(us) Van Damme - ikdoeict.be">
-		
+
 		<link href='http://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
-		
+
 		<link rel="stylesheet" href="css/reset.css">
 		<link rel="stylesheet" href="css/main.css" media="screen">
 		<link rel="stylesheet" href="css/print.css" media="print">
@@ -32,20 +32,20 @@
 		</script>
 		
 	</head>
-	
+
 	<body>
-		
+
 		<div id="reveal">
-			
+
 			<!-- Any section element inside of this container is displayed as a slide -->
 			<div class="slides">
-				
+
 				<!-- 0 : Title -->
 				<section>
 					<section>
-						<h3 class="inverted">Rich Internet Applications</h3>
+						<h3 class="inverted">Web &amp; Mobile Development <small>JLW288</small></h3>
 						<h1>00.intro</h1>
-					
+
 						<footer>
 							<em><a href="http://www.ikdoeict.be/">ikdoeict.be</a> &mdash; <a href="mailto:bramus.vandamme@kahosl.be">bramus.vandamme@kahosl.be</a></em>
 						</footer>
@@ -56,9 +56,15 @@
 						</script>
 					</section>
 				</section>
-				
+
 				<!-- 1 : Slidedeck? -->
 				<section>
+
+					<section>
+						<h2>Slidedeck?!</h2>
+						<p><img src="assets/00/futurama_kwanza.png" alt="" title="" height="376" width="500" /></p>
+						<footer><em>(press the down key)</em></footer>
+					</section>
 
 					<section>
 						<h2>Wait? What? This is it?!</h2>
@@ -73,15 +79,20 @@
 					</section>
 
 					<section>
-						<h2>Yay, a subslide!</h2>
+						<h2>Lost?</h2>
 						<ul class="short">
-							<li class="fragment">Told you it would work :-)</li>
+							<li>Compass <em>(Bottom-Right)</em></li>
+							<li>Slide Number <em>(Bottom-Right)</em></li>
+							<li>Progress Bar <em>(Bottom)</em></li>
+							<li>Slide Overview <em>(space)</em></li>
+							<li>Back to index link <em>(Top-Left)</em></li>
 						</ul>
 					</section>
 
 					<section>
-						<h2>Code Examples (1)</h2>
+						<h2>Code Examples</h2>
 						<ul>
+							<li>This slidedeck is filled with interactive examples</li>
 							<li>
 								Syntax Highlighted + Editable
 								<ul>
@@ -102,7 +113,7 @@
 	color: lime;
 }</code></pre>
 					</section>
-					
+
 					<section>
 						<h2>Code Examples: CSS</h2>
 						<ul>
@@ -123,20 +134,19 @@
 							</li>
 						</ul>
 					</section>
-					
+
 					<section>
 						<h2>Code Examples: JS</h2>
 						<ul>
-							<li>Javascript blocks can even be run!</li>
-							<li>Use &ldquo;Run&rdquo; button, or hit CTRL+ENTER</li>	
+							<li>JavaScript blocks can even be run!</li>
+							<li>Use &ldquo;Run&rdquo; button, or hit CTRL+ENTER</li>
 						</ul>
 						<pre class="bigger"><code contenteditable class="language-javascript">// A comment
 alert('OK GO!');</code></pre>
 						<ul>
 							<li class="fragment">Note
 								<ul>
-									<li>Most JavaScript samples in future slides will use <code>console.log()</code></li>
-									<li><a href="http://getfirebug.com/">Firebug</a> <em>(or the like)</em> required!</li>
+									<li>Most JavaScript examples will use <code>console.log()</code> &mdash; <a href="http://getfirebug.com/">Firebug</a> <em>(or the like)</em> required!</li>
 								</ul>
 							</li>
 						</ul>
@@ -145,7 +155,7 @@ alert('OK GO!');</code></pre>
 					<section>
 						<h2>Code Examples: HTML</h2>
 						<ul>
-							<li>And HTML blocks can be rendered into an overlay</li>
+							<li>HTML blocks can be rendered into an overlay</li>
 							<li>Use &ldquo;Show in overlay&rdquo; button, or hit CTRL+ENTER</li>
 							<li>Click the dark overlay background to close it</li>
 						</ul>
@@ -160,7 +170,13 @@ alert('OK GO!');</code></pre>
 					<section>
 						<h2>Code Examples: HTML &amp; PHP</h2>
 						<ul>
-							<li>HTML &amp; PHP examples can be linked to a working example. The example can be rendered into the overlay</li>
+							<li>
+								HTML &amp; PHP examples can be linked to a working example.
+								<ul>
+									<li>The example can be rendered into the overlay</li>
+									<li>The example can be linked into a new window/tab</li>
+								</ul>
+							</li>
 							<li>Use &ldquo;Show in script overlay&rdquo; button, or hit CTRL+ENTER</li>
 							<li>Click the dark overlay background to close it</li>
 						</ul>
@@ -168,17 +184,10 @@ alert('OK GO!');</code></pre>
 	echo 'Hello world! The time is now ' . date('Y-m-d H:i:s', time());
 ?&gt;
 </code></pre>
-					</section>
-					
-					<section>
-						<h2>Lost?</h2>
-						<ul class="short">
-							<li>Compass <em>(Bottom-Right)</em></li>
-							<li>Slide Number <em>(Bottom-Right)</em></li>
-							<li>Progress Bar <em>(Bottom)</em></li>
-							<li>Slide Overview <em>(space)</em></li>
-							<li>Back to index link <em>(Top-Left)</em></li>
-						</ul>
+						<footer>
+							<span class="fragment" style="display: block;">Note: PHP code examples aren't editable</span>
+							<span class="fragment">Beware: PHP code examples don't run on GitHub!</span>
+						</footer>
 					</section>
 
 					<section>
@@ -199,161 +208,231 @@ alert('OK GO!');</code></pre>
 							</li>
 						</ul>
 					</section>
-					
+
 				</section>
-				
-				<!-- 2 : Prerequisites -->
+
+
+				<!-- 2: Web &amp; Mobile Development -->
 				<section>
-					
+
 					<section>
-						<h2>Prerequisites</h2>
-						<p>Stuff you <em>(should)</em> already know...</p>
+						<h2>Web &amp; Mobile Development</h2>
+						<p><img src="assets/00/futurama_helmet.jpg" alt="" title="" height="330" width="470" /></p>
+						<q>Back on track ...</q>
 					</section>
-					
+
 					<section>
-						<h2>Webtechnieken1</h2>
+						<h2>Instructors</h2>
+						<ul class="columns">
+							<li class="fragment column column-12" style="text-align: center; line-height: 1.2;">
+								<p><img src="assets/00/lecturer_bramus.jpg" width="300" alt="" title="" /></p>
+								<p style="font-size: 75%">Bram(us) Van Damme<br /><a href="mailto:bramus.vandamme@kahosl.be">bramus.vandamme@kahosl.be</a></p>
+							</li>
+							<li class="fragment column column-12" style="text-align: center; line-height: 1.2;">
+								<p><img src="assets/00/lecturer_davy.jpg" width="300" alt="" title="" /></p>
+								<p style="font-size: 75%">Davy De Winne<br /><a href="mailto:davy.dewinne@kahosl.be">davy.dewinne@kahosl.be</a></p>
+							</li>
+						</ul>
+					</section>
+
+					<section>
+						<h2>Timing</h2>
 						<ul>
-							<li>XHTML
+							<li class="fragment">
+								One semester = 13 weeks
 								<ul>
-									<li>Correct use of elements</li>
-									<li>Propper syntax / validation</li>
+									<li>Note: Week 13 = polyweek</li>
 								</ul>
 							</li>
-							<li>CSS
+							<li class="fragment">
+								Weekly hands-on labs
 								<ul>
-									<li>Text styling &amp; Backgrounds</li>
-									<li>Box Model</li>
-									<li>Positioning with float/absolute/relative/fixed</li>
-								</ul>
-							</li>
-							<li>Basic Javascript
-								<ul>
-									<li>Variables &amp; Functions</li>
-									<li>Unobtrusive</li>
-									<li>Formchecking</li>
+									<li>Theoretical background + practice throughout timeslot</li>
 								</ul>
 							</li>
 						</ul>
 					</section>
-					
+
+
 					<section>
-						<h2>Webtechnieken2</h2>
+						<h2>Prerequisites (1)</h2>
 						<ul>
-							<li>Client-Server
-								<ul>
-									<li>GET/POST</li>
-								</ul>
-							</li>
-							<li>PHP Basics
-								<ul>
-									<li>Syntax</li>
-									<li>Forms</li>
-									<li>Files &amp; Folders</li>
-									<li>Persistency</li>
-								</ul>
-							</li>
-							<li>PHP Intermediate
-								<ul>
-									<li>Code Organisation and Classes</li>
-									<li>Templates</li>
-									<li>Database Connectivity (MySQL)</li>
-								</ul>
-							</li>
-						</ul>
-					</section>
-					
-					<section>
-						<h2>Webtechnieken3</h2>
-						<ul>
-							<li>PHP Intermediate
-								<ul>
-									<li>Code Libraries (Plonk)</li>
-									<li>Object Oriented Websites</li>
-								</ul>
-							</li>
-							<li>Use Cases, Wireframes &amp; Storyboarding
-								<ul>
-									<li>Flow!</li>
-								</ul>
-							</li>
-							<li>New techniques
-								<ul>
-									<li>HTML5</li>
-									<li>CSS3</li>
-									<li>New JS
+							<li>
+								Webtechnieken1
+								<div class="columns">
+									<div class="column column-12">
 										<ul>
-											<li>Drag and Drop, Geolocation, Notifications, ...</li>
+											<li class="fragment">
+												XHTML
+												<ul>
+													<li>Correct use of elements</li>
+													<li>Propper syntax / validation</li>
+												</ul>
+											</li>
+											<li class="fragment">
+												CSS
+												<ul>
+													<li>Text styling &amp; Backgrounds</li>
+													<li>Box Model</li>
+													<li>Positioning with float/absolute/relative/fixed</li>
+												</ul>
+											</li>
+										</ul>
+									</div>
+									<div class="column column-12">
+										<ul>
+											<li class="fragment">
+												Basic Javascript
+												<ul>
+													<li>Variables &amp; Functions</li>
+													<li>Unobtrusive</li>
+													<li>Formchecking</li>
+												</ul>
+											</li>
+											<li class="fragment">
+												Firebug (or the like) &mdash; <a href="https://vimeo.com/6313836">video</a>
+												<ul>
+													<li>Seriously, without this you can't be a webdeveloper.</li>
+												</ul>
+											</li>
+										</ul>
+									</div>
+								</div>
+							</li>
+						</ul>
+					</section>
+
+					<section>
+						<h2>Prerequisites (2)</h2>
+						<ul>
+							<li>
+								Webtechnieken2
+								<div class="columns">
+									<div class="column column-12">
+										<ul>
+											<li class="fragment">Client-Server
+												<ul>
+													<li>GET/POST</li>
+												</ul>
+											</li>
+											<li class="fragment">PHP Basics
+												<ul>
+													<li>Syntax</li>
+													<li>Forms</li>
+													<li>Files &amp; Folders</li>
+													<li>Persistency</li>
+												</ul>
+											</li>
+										</ul>
+									</div>
+									<div class="column column-12">
+										<ul>
+											<li class="fragment">PHP Intermediate
+												<ul>
+													<li>Code Organisation and Classes</li>
+													<li>Templates</li>
+													<li>Database Connectivity (MySQL)</li>
+												</ul>
+											</li>
+										</ul>
+									</div>
+								</div>
+							</li>
+						</ul>
+					</section>
+
+					<section>
+						<h2>Prerequisites (2)</h2>
+						<ul>
+							<li>
+								Webtechnieken3
+								<div class="columns">
+									<div class="column column-12">
+										<ul>
+											<li class="fragment">PHP Intermediate
+												<ul>
+													<li>Code Libraries (Plonk)</li>
+													<li>Object Oriented Websites</li>
+												</ul>
+											</li>
+											<li class="fragment">Use Cases, Wireframes &amp; Storyboarding
+												<ul>
+													<li>Flow!</li>
+												</ul>
+											</li>
+										</ul>
+									</div>
+									<div class="column column-12">
+										<ul>
+											<li class="fragment">New techniques
+												<ul>
+													<li>HTML5</li>
+													<li>CSS3</li>
+													<li>New JS
+														<ul>
+															<li>Drag and Drop, Geolocation, Notifications, ...</li>
+														</ul>
+													</li>
+												</ul>
+											</li>
+										</ul>
+									</div>
+								</div>
+							</li>
+						</ul>
+					</section>
+
+					<section>
+						<h2>Prerequisites (2)</h2>
+						<ul>
+							<li>
+								Gegevensbanken
+								<ul>
+									<li class="fragment">Structured Query Language
+										<ul>
+											<li>Basic CRUD Actions <em>(INSERT, SELECT, UPDATE, DELETE)</em></li>
+											<li>Subqueries &amp; Joins <em>(left, right, inner)</em></li>
+											<li>Calculations <em>(numbers, dates, etc.)</em></li>
+											<li>Optimization <em>(EXPLAIN ...)</em></li>
+										</ul>
+									</li>
+									<li class="fragment">Basic Administration
+										<ul>
+											<li>Import &amp; Export</li>
+											<li>User Management</li>
 										</ul>
 									</li>
 								</ul>
 							</li>
 						</ul>
 					</section>
-					
-					<section>
-						<h2>Gegevensbanken</h2>
-						<ul>
-							<li>Structured Query Language
-								<ul>
-									<li>Basic CRUD Actions <em>(INSERT, SELECT, UPDATE, DELETE)</em></li>
-									<li>Subqueries &amp; Joins <em>(left, right, inner)</em></li>
-									<li>Calculations <em>(numbers, dates, etc.)</em></li>
-									<li>Optimization <em>(EXPLAIN ...)</em></li>
-								</ul>
-							</li>
-							<li>Basic Administration
-								<ul>
-									<li>Import &amp; Export</li>
-									<li>User Management</li>
-								</ul>
-							</li>
-						</ul>
-					</section>
 
 					<section>
-						<h2>Firebug (or the like)</h2>
-						<iframe src="http://player.vimeo.com/video/6313836" width="500" height="375" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>
-						<p>Seriously, without this tool you can't be a webdeveloper.</p>
-					</section>
-					
-				</section>
-
-				<!-- 3 : Contents of this course -->
-				<section>
-					
-					<section>
-						<h2>Course Subjects</h2>
+						<h2>Course Subjects (1)</h2>
 						<ul>
 							<li class="fragment">Advanced Javascript</li>
 							<li class="fragment">Javascript Libraries and jQuery Basics</li>
 							<li class="fragment">jQuery Intermediate
 								<ul>
-									<li class="fragment">jQuery Plugins &amp; Performance</li>
+									<li class="fragment">jQuery Plugins &amp; Performance/Optimization</li>
 									<li class="fragment">Ajax &amp; JSON</li>
 								</ul>
 							</li>
-							<li class="fragment">APIs, JSON &amp; PHP</li>
-							<li class="fragment">Things you should know as a webdeveloper</li>
-							<li class="fragment">Responsive Webdesign
-								<ul>
-									<li class="fragment">Introduction</li>
-									<li class="fragment">Fluid Layouts</li>
-									<li class="fragment">Media Queries</li>
-									<li class="fragment">Mobile First</li>
-									<li class="fragment">Challenges</li>
-								</ul>
-							</li>
+							<li class="fragment">RESTful APIs</li>
+							<li class="fragment">Responsive Webdesign</li>
+							<li class="fragment">Mobile Apps</li>
 						</ul>
 					</section>
-					
+
 					<section>
-						<h2>What about mobile apps?</h2>
-						
+						<h2>Course Subjects (2)</h2>
+
+						<blockquote>What about mobile apps?</blockquote>
+
 						<ul class="short">
 							<li class="fragment">Alas, no time this year</li>
 							<li class="fragment">But things will change next year
 								<ul>
-									<li><strong>RIA</strong> &rarr; <strong>Web &amp; Mobile Development</strong></li>
 									<li>Exit Javascript
 										<ul>
 											<li>Moves forward to Webscripting1 &amp; Webscripting2 <em>(*)</em></li>
@@ -367,51 +446,113 @@ alert('OK GO!');</code></pre>
 								</ul>
 							</li>
 						</ul>
-						
-						<footer class="fragment"><small>(*) Other name changes: Webtechnieken2 &rarr; Webscripting1; Webtechnieken3 &rarr; Webscripting2</small></footer>
-						
-					</section>
-					
-				</section>
 
-				<!-- 5 : Methodology -->
-				<section>
+						<footer class="fragment"><small>(*) Other name changes: Webtechnieken2 &rarr; Webscripting1; Webtechnieken3 &rarr; Webscripting2</small></footer>
+
+					</section>
+
 					<section>
-						<h2>Methodology</h2>
+						<h2>Technology</h2>
 						<ul>
-							<li>Instructors
+							<li class="fragment">
+								Technology
 								<ul>
-									<li>Bram(us) Van Damme &mdash; <a href="mailto:bramus.vandamme@kahosl.be">bramus.vandamme@kahosl.be</a></li>
-									<li>Davy De Winne &mdash; <a href="mailto:davy.dewinne@kahosl.be">davy.dewinne@kahosl.be</a></li>
+									<li>Scripting Language: PHP 5.4</li>
+									<li>Databaseserver: MySQL and SQLite3</li>
+									<li>Webserver: Apache or <a href="http://php.net/manual/en/features.commandline.webserver.php">PHP 5.4's built-in server</a></li>
 								</ul>
 							</li>
-							<li>Weekly hands-on labs
+							<li class="fragment">
+								<a href="http://www.wampserver.com/en/">Wampserver</a> (Win) or <a href="http://www.mamp.info/en/">MAMP (Pro)</a> (OS X) recommended
 								<ul>
-									<li>Theoretical background + practice throughout timeslot</li>
-								</ul>
-							</li>
-							<li>Study materials, tasks and announcements
-								<ul>
-									<li>
-										Study materials: <a href="https://github.com/bramus/ria-course-materials/">GitHub</a>
+									<li class="fragment">Follow <a href="http://helpdesk.ikdoeict.be/index.php?/Knowledgebase/Article/View/11/4/howto-installatieconfiguratie-van-software-wamplamp-stack">these instructions</a> to configure your install</li>
+									<li class="fragment">Be sure to add the PHP binary to your system's <code>PATH</code>
 										<ul>
-											<li>Git Read Access: <code>git://github.com/bramus/ria-course-materials.git</code></li>
-										</ul>
-									</li>
-									<li>Tasks/Labs: Toledo</li>
-									<li>Announcements: Toledo
-										<ul>
-											<li>Check it ... <strong>regularly</strong></li>
+											<li>Windows: Add <code>C:\wamp\bin\php\<em>version</em>\</code> to <code>PATH</code> via Computer Settings</li>
+											<li>OS X: Paste this on the Terminal: <code>echo 'export PATH=/Applications/MAMP/bin/php/php<em>version</em>/bin/:$PATH' &gt;&gt; ~/.bash_profile</code></li>
 										</ul>
 									</li>
 								</ul>
 							</li>
 						</ul>
 					</section>
-				</section>
 
-				<!-- 6 : Evaluation -->
-				<section>
+					<section>
+						<h2>Development</h2>
+						<ul>
+							<li class="fragment">
+								A PHP specific IDE
+								<ul>
+									<li>Netbeans</li>
+									<li>Aptana Studio</li>
+									<li>PHPStorm</li>
+									<li>Zend Studio</li>
+								</ul>
+							</li>
+							<li class="fragment">
+								Your favorite text editor with these features (<a href="http://www.codelord.net/2010/02/16/stop-coding-in-the-middle-ages/ ">why?</a>)
+								<ul>
+									<li>Syntax Highlighting</li>
+									<li>Autocompletion</li>
+									<li>PHPDoc Integration</li>
+									<li>On-the-fly syntax check</li>
+								</ul>
+							</li>
+						</ul>
+					</section>
+
+					<section>
+						<h2>Course Materials, Assignments &amp; Announcements</h2>
+						<ul>
+							<li class="fragment">
+								Everything distributed via Toledo
+								<ul>
+									<li>Check it regularly!</li>
+								</ul>
+							</li>
+							<li class="fragment">
+								Course Materials
+								<ul>
+									<li>Available on <a href="http://bramus.github.com/ria-course-materials/">GitHub</a></li>
+									<li>Feel free to fork and commit improvements/additions</li>
+								</ul>
+							</li>
+							<li class="fragment">
+								Assignments
+								<ul>
+									<li>Several tasks grouped into one big assignment</li>
+									<li>To be completed by the end of the week (Sunday, 8PM)</li>
+								</ul>
+							</li>
+						</ul>
+					</section>
+
+					<section>
+						<h2>Cloning the Course Materials</h2>
+						<ul>
+							<li class="fragment">
+								<a href="http://git-scm.com/downloads">Download</a> and install Git
+								<ul>
+									<li>Choose <em>&ldquo;Run Git from the Windows Command Prompt&rdquo;</em> during install
+								</ul>
+							</li>
+							<li class="fragment">
+								Clone the repository
+								<pre class="bigger"><code>cd c:\wamp\www
+git clone https://github.com/bramus/ria-course-materials.git</code></pre>
+
+								<ul><li>Visit your copy at <a href="http://localhost/ria-course-materials">http://localhost/ria-course-materials</a></li></ul>
+							</li>
+							<li class="fragment">
+								Update the repository regularly to get the latest version
+								<pre class="bigger"><code>cd c:\wamp\www\ria-course-materials
+git reset --hard
+git pull</code></pre>
+							</li>
+						</ul>
+						<footer>Note: This is an example on Windows using Wampserver</footer>
+					</section>
+
 					<section>
 						<h2>Evaluation</h2>
 						<ul>
@@ -428,7 +569,7 @@ alert('OK GO!');</code></pre>
 							<li class="fragment">Project #2: 40%
 								<ul>
 									<li>End Term Project</li>
-									<li>Free to choose what to do <em>(proposal must be approved by us first)</em></li>
+									<li>Free to choose what to do <em>(proposal must get approved by us)</em></li>
 									<li>Deadline at the end of the semester</li>
 									<li>Presentation/Demonstration/Evaluation at the end of the semester</li>
 									<li>More details later ... :)</li>
@@ -438,14 +579,98 @@ alert('OK GO!');</code></pre>
 					</section>
 				</section>
 
-				<!-- 7 : Domestic Conventions -->
+				<!-- 6 : Help! -->
 				<section>
+
+					<section>
+						<h2>When stuck ...</h2>
+						<p><img src="assets/00/futurama_bender_turtle.gif" alt="" title="" height="350" width="470" /></p>
+					</section>
+
+					<section>
+						<h2>Help yourself ...</h2>
+						<ul>
+							<li class="fragment">
+								Breathe in, breathe out, and THINK!
+								<ul>
+									<li>
+										Error visible? Read it!
+										<ul>
+											<li>PHP will tell you what went wrong in which file and on what line</li>
+										</ul>
+									</li>
+									<li>
+										Correct URL? Correct variable? Does the variable contain anything?
+										<ul>
+											<li>Debugsession</li>
+											<li>use <code>Plonk::dump();</code> (PHP) or <code>console.log()</code> (JS)</li>
+										</ul>
+									</li>
+									<li>
+										TIP: <a href="http://en.wikipedia.org/wiki/Rubber_duck_debugging">Rubber Duck Debugging</a>
+									</li>
+								</ul>
+							</li>
+							<li class="fragment">
+								Use the built-in help
+								<ul>
+									<li>Syntax Highlighting</li>
+									<li>Function autocompletion</li>
+									<li>Function documentation (PHPDoc)</li>
+								</ul>
+							</li>
+						</ul>
+					</section>
+
+					<section>
+						<h2>... or get helped</h2>
+						<ul>
+							<li>
+								Keep the <a href="http://blogs.perl.org/users/chisel/2011/12/the-ten-minute-thinking-rule.html">10 minute thinking rule</a> in mind!
+
+								<blockquote style="width: 90%; text-align: justify;">You may only interrupt another co-worker to ask a question if you have sat on your own for ten minutes and tried to figure out the solution yourself. When asked, you must be able to demonstrate that you’ve made some effort.</blockquote>
+
+								<ul>
+									<li class="fragment">
+										Check the slides and code examples
+									</li>
+									<li class="fragment">
+										Check <a href="http://php.net/addslashes">http://php.net/<em>nameofthefunction</em></a> or <a href="http://api.jquery.com">http://api.jquery.com</a>
+									</li>
+									<li class="fragment">
+										Check Google <em>(#lmgtfy)</em>
+									</li>
+									<li class="fragment">
+										Check ICT-Blue (Forum/Wiki)
+									</li>
+								</ul>
+
+							</li>
+							<li class="fragment">
+								Ask a colleague or post a question on ICT-Blue
+								<ul>
+									<li>Mail a link to the topic on ICT-Blue to your instructor</li>
+								</ul>
+							</li>
+						</ul>
+					</section>
+				</section>
+
+
+				<!-- 7: Domestic Conventions -->
+				<section>
+
+					<section>
+						<h2>Domestic Conventions</h2>
+						<p><img src="assets/00/futurama_preacherbot.png" alt="" title="" height="352" width="470" /></p>
+					</section>
+
 					<section>
 						<h2>Domestic Conventions<br /><small>(Huishoudelijk Reglement)</small></h2>
 						<ul>
-							<li>Do apply</li>
-							<li>Can be found on Toledo</li>
-							<li>Rules/Conventions about
+							<li class="fragment">Do apply</li>
+							<li class="fragment">Can be found on Toledo</li>
+							<li class="fragment">Rules/Conventions about
 								<ul>
 									<li>Plagiarism</li>
 									<li>Deadlines and Uploads</li>
@@ -455,8 +680,9 @@ alert('OK GO!');</code></pre>
 							</li>
 						</ul>
 					</section>
+
 				</section>
-				
+
 				<!-- 8: The END -->
 				<section>
 					<section>
@@ -466,7 +692,7 @@ alert('OK GO!');</code></pre>
 						</footer>
 					</section>
 				</section>
-				
+
 			</div>
 
 			<!-- The navigational controls UI -->
@@ -477,7 +703,7 @@ alert('OK GO!');</code></pre>
 				<a class="down" href="#">&#x25BC;</a>
 				<span id="revealIndex">/</span>
 			</aside>
-			
+
 			<!-- Index Link -->
 			<aside class="back">
 				<a href="index.html">&larr; Back to index</a>
@@ -485,12 +711,12 @@ alert('OK GO!');</code></pre>
 
 			<!-- ikdoeict.be Link -->
 			<a href="http://www.ikdoeict.be/" title="ikdoeict.be" id="ikdoeict">ikdoeict.be</a>
-			
+
 			<!-- Displays presentation progress, max value changes via JS to reflect # of slides -->
 			<div class="progress"><span></span></div>
-			
+
 		</div>
-		
+
 		<script src="js/reveal.js"></script>
 		<script src="lib/highlight.js"></script>
 		<script src="lib/prefixfree.js"></script>

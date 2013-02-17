@@ -1,16 +1,16 @@
-<!doctype html>  
+<!doctype html>
 <html lang="en">
-	
+
 	<head>
 		<meta charset="utf-8">
-		
-		<title>Rich Internet Applications &mdash; 04.jQuery.Plugins</title>
 
-		<meta name="description" content="Rich Internet Applications &mdash; 04.jQuery.Plugins">
+		<title>Web &amp; Mobile Development &mdash; 04.jQuery.Plugins</title>
+
+		<meta name="description" content="Web &amp; Mobile Development &mdash; 04.jQuery.Plugins">
 		<meta name="author" content="Bram(us) Van Damme - ikdoeict.be">
-		
+
 		<link href='http://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
-		
+
 		<link rel="stylesheet" href="css/reset.css">
 		<link rel="stylesheet" href="css/main.css" media="screen">
 		<link rel="stylesheet" href="css/print.css" media="print">
@@ -33,22 +33,22 @@
 		</script>
 		
 	</head>
-	
+
 	<body>
-		
+
 		<div id="reveal">
-			
+
 			<!-- Any section element inside of this container is displayed as a slide -->
 			<div class="slides">
 
 
-				
+
 				<!-- 0 : Title -->
 				<section>
 					<section>
 						<h3 class="inverted">Rich Internet Applications</h3>
 						<h1>04.jQuery.plugins</h1>
-					
+
 						<footer>
 							<em><a href="http://www.ikdoeict.be/">ikdoeict.be</a> &mdash; <a href="mailto:bramus.vandamme@kahosl.be">bramus.vandamme@kahosl.be</a></em>
 						</footer>
@@ -124,7 +124,7 @@
 							</li>
 						</ul>
 					</section>
-					
+
 					<section>
 						<h2>Plugin Types</h2>
 						<ul>
@@ -230,7 +230,7 @@ var p1 = $('p'),
 							</li>
 						</ul>
 					</section>
-					
+
 				</section>
 
 
@@ -451,7 +451,7 @@ var p1 = $('p'),
 								<pre class="bigger"><code class="language-javascript dontrun">(function($) {
 	$.fn.slideUpAndRemove = function() {
 		this.slideUp("slow", function() { // &lt;-- jQuery Instance
-	        $(this).remove(); 
+	        $(this).remove();
 	    });
 	}
 })(jQuery);</code></pre>
@@ -467,7 +467,7 @@ var p1 = $('p'),
 								<pre class="bigger"><code class="language-javascript dontrun">(function($) {
 	$.fn.slideUpAndRemove = function() {
 		return this.slideUp("slow", function() {
-	        $(this).remove(); 
+	        $(this).remove();
 	    });
 	}
 })(jQuery);</code></pre>
@@ -516,19 +516,19 @@ var p1 = $('p'),
 								<pre class="bigger"><code class="language-javascript dontrun">(function($) {
 
 	$.fn.hilight = function(options) {
-		
+
 		var defaults = {
 			foreground: 'red',
 			background: 'yellow'
 		};
-		
+
 		// Extend our default options with those provided.
 		var o = $.extend({}, defaults, options);
-		
+
 		return this.each(function() {
 			// ... plugin code here
 		});
-		
+
 	};
 
 }(jQuery));</code></pre>
@@ -553,7 +553,7 @@ var p1 = $('p'),
 		});
 
 	};
-	
+
 	$.fn.hilight.defaults = {
 		foreground: 'red',
 		background: 'yellow'
@@ -664,7 +664,7 @@ $('em').on('click', function() {
 								jQuery has a design pattern for this
 								<pre class="bigger"><code class="language-javascript dontrun">(function($) {
 	var methods = {
-		init : function(options) { 
+		init : function(options) {
 			// ... plugin code here
 		},
 		otherfunction : function() {
@@ -677,9 +677,9 @@ $('em').on('click', function() {
 				this, Array.prototype.slice.call(arguments, 1));
 		} else if (typeof method === 'object' || ! method) {
 			return methods.init.apply(this, arguments);
-		} else { 
+		} else {
 			$.error('Method ' + method + ' does not exist on jQuery.plugin');
-		}    
+		}
 	};
 })(jQuery);</code></pre>
 								<ul>
@@ -693,7 +693,7 @@ $('em').on('click', function() {
 						<h2>Putting it together (1)</h2>
 						<div class="fragment"><pre class="bigger"><code class="language-javascript dontrun">(function($) {
 	var methods = {
-		init : function(options) { 
+		init : function(options) {
 			var o = $.extend({}, $.fn.hilight.defaults, options);
 			return this.each(function() {
 				var $this = $(this);
@@ -730,16 +730,16 @@ $('em').on('click', function() {
 				this, Array.prototype.slice.call(arguments, 1));
 		} else if (typeof method === 'object' || ! method) {
 			return methods.init.apply(this, arguments);
-		} else { 
+		} else {
 			$.error('Method ' +  method + ' does not exist on jQuery.hilight');
-		}    
+		}
 	};
-	
+
 	$.fn.hilight.defaults = {
 		foreground: 'red',
 		background: 'yellow'
 	};
-	
+
 })(jQuery);</code></pre>
 						</div>
 					</section>
@@ -786,9 +786,9 @@ setTimeout(function() {
 							</li>
 						</ul>
 					</section>
-					
+
 				</section>
-				
+
 				<!-- The END -->
 				<section>
 					<section>
@@ -818,7 +818,7 @@ setTimeout(function() {
 						</ul>
 					</section>
 				</section>
-				
+
 			</div>
 
 			<!-- The navigational controls UI -->
@@ -834,15 +834,15 @@ setTimeout(function() {
 			<aside class="back">
 				<a href="index.html">&larr; Back to index</a>
 			</aside>
-			
+
 			<!-- ikdoeict.be Link -->
 			<a href="http://www.ikdoeict.be/" title="ikdoeict.be" id="ikdoeict">ikdoeict.be</a>
 
 			<!-- Displays presentation progress, max value changes via JS to reflect # of slides -->
 			<div class="progress"><span></span></div>
-			
+
 		</div>
-		
+
 		<script src="js/reveal.js"></script>
 		<script src="lib/highlight.js"></script>
 		<script src="lib/prefixfree.js"></script>
