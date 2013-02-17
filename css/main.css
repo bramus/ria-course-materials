@@ -1169,3 +1169,7 @@ ins code, code.ok {
 #reveal .tooltip div *:last-child {
 	margin-bottom: 0;
 }
+
+abbr {
+	border-bottom: 1px dotted #ccc;
+}
