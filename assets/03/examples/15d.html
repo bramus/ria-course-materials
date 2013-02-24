@@ -40,7 +40,7 @@
 	<script>
 		$(document).ready(function() {
 			// One delegate to rule them all
-			$('table').delegate('td', 'click', function(e) {
+			$('table').on('click', 'td', function(e) {
 				$(this).css('background', 'gray');
 			});			
 		});
