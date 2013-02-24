@@ -706,7 +706,7 @@ var a = $('&lt;a/&gt;', {
 						<h2>Removing Elements</h2>
 						<ul>
 							<li class="fragment">
-								Use <a href="http://api.jquery.com/remove/">$.fn.remove()</a> or <a href="http://api.jquery.com/empty/">$.fn.empty</a>
+								Use <a href="http://api.jquery.com/remove/">$.fn.remove()</a> or <a href="http://api.jquery.com/empty/">$.fn.empty()</a>
 								<pre class="bigger"><code class="language-html dontrun" data-overlay-example="assets/03/examples/08.html">&lt;ul&gt;
 	&lt;li&gt;Ham&lt;/li&gt;
 	&lt;li&gt;Bread&lt;/li&gt;
@@ -720,8 +720,7 @@ var a = $('&lt;a/&gt;', {
 	$(document).ready(function() {
 		$('p').remove();
 		$('ul').empty().append('&lt;li&gt;Apple&lt;/li&gt;');
-	});
-&lt;/script&gt;</code></pre>
+	});</code></pre>
 							</li>
 						</ul>
 					</section>
@@ -1072,7 +1071,7 @@ var a = $('&lt;a/&gt;', {
 					</section>
 
 					<section>
-						<h2>The eventObject</h2>
+						<h2>jQuery.Event</h2>
 						<ul>
 							<li class="fragment">
 								The <a href="http://api.jquery.com/category/events/event-object/">jQuery eventObject</a> is a normalized event object according to W3C Specifications through all browsers
@@ -1080,9 +1079,9 @@ var a = $('&lt;a/&gt;', {
 							<li class="fragment">
 								It works in the same manner as the W3C Event Object
 								<ul>
-									<li class="fragment">The property <code>event.target</code> holds the element that was clicked</li>
-									<li class="fragment">Call <code>event.preventDefault</code> to prevent the default action</li>
-									<li class="fragment">Call <code>event.stopPropagation</code> to stop bubbling of the event</li>
+									<li class="fragment">The property <code>jQuery.Event#target</code> holds the element that was clicked</li>
+									<li class="fragment">Call <code>jQuery.Event#preventDefault()</code> to prevent the default action</li>
+									<li class="fragment">Call <code>jQuery.Event#stopPropagation()</code> to stop bubbling of the event</li>
 								</ul>
 							</li>
 						</ul>
