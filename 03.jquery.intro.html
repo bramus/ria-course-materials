@@ -17,7 +17,7 @@
 		<link rel="stylesheet" href="assets/03/examples.css">
 
 		<link rel="stylesheet" href="lib/zenburn.css">
-		
+
 		<script type="text/javascript">
 
 		  var _gaq = _gaq || [];
@@ -31,7 +31,20 @@
 		  })();
 
 		</script>
-		
+
+		<style>
+			.jquerycharts img {
+				cursor: pointer;
+			}
+
+			.jquerycharts img:hover {
+			    -webkit-transform: scale(2);
+			    -moz-transform: scale(2);
+			    -o-transform: scale(2);
+			    -ms-transform: scale(2);
+			    transform: scale(2);
+			}
+		</style>
 	</head>
 
 	<body>
@@ -101,13 +114,16 @@
 					<section>
 						<h2>How popular is jQuery Exactly?</h2>
 						<p class="fragment">1 in every 2 of the top 10K websites is using jQuery</p>
-						<figure class="fragment">
-							<img src="assets/03/jslibs_stat_jquery.png" alt="" title="" width="400" height="320" />
-						</figure>
-						<figure class="fragment">
-							<img src="assets/03/jslibs_stat.png" alt="" title="" width="355" height="320" />
-						</figure>
-						<p class="fragment">jQuery is used by 44.1% of all top 10K websites <br /><small>(JS market share 84.7%)</small></p>
+						<div class="jquerycharts">
+							<figure class="fragment">
+								<img src="assets/03/jslibs_stat_2013_all.png" alt="" title="" height="250" />
+							</figure>
+							<figure class="fragment">
+								<img src="assets/03/jslibs_stat_2013_jquery.png" alt="" title="" height="250" />
+							</figure>
+						</div>
+						<p class="fragment">jQuery is used by 55.7% of all top 10K websites <br /><small>(JS market share 90.7%)</small></p>
+						<footer class="fragment"><em>That's a 10% increase compared to last year!</em></footer>
 					</section>
 
 					<section>
@@ -116,9 +132,7 @@
 							<li class="fragment">
 								June 2005:
 								<ul>
-									<li>Ben Nolan released <a href="http://bennolan.com/behaviour/">Behaviour</a> which <a href="http://scrap.dasgenie.com/articles/2006/09/14/applying-behaviour-without-behaviour-js">allowed</a> to bind events on elements based on (basic) CSS selectors</li>
-									<li>Worked well with Prototype</li>
-									<li>Allowed to remove those pesky <code>onclick=...</code> attr from your HTML</li>
+									<li>Ben Nolan released <a href="http://bennolan.com/behaviour/">Behaviour</a> which <a href="http://scrap.dasgenie.com/articles/2006/09/14/applying-behaviour-without-behaviour-js">allowed</a> to bind events on elements based on (basic) CSS selectors in PrototypeJS</li>
 								</ul>
 							</li>
 							<li class="fragment">
@@ -130,7 +144,7 @@
 							<li class="fragment">
 								January 2006:
 								<ul>
-									<li>John Resig attended Barcamp NYC and announced jQuery</li>
+									<li>jQuery first release (<a href="http://ejohn.org/blog/barcampnyc-wrap-up/">announced at Barcamp NYC</a>)</li>
 								</ul>
 							</li>
 							<li class="fragment">
@@ -140,6 +154,7 @@
 								</ul>
 							</li>
 						</ul>
+						<footer class="fragment"><em>Note: The idea of a CSS selector engine <a href="http://paulirish.com/2008/javascript-css-selector-engine-timeline/">has been going on since 2003</a></em></li>
 					</section>
 				</section>
 
@@ -168,7 +183,7 @@
 								<ul>
 									<li class="fragment"><a href="http://woorkup.com/wp-content/uploads/2011/12/jQuery-17-Visual-Cheat-Sheet1.pdf">jQuery Visual Cheatsheet</a> &mdash; Extensive cheatsheet (PDF)</li>
 									<li class="fragment"><a href="http://docs.jquery.com/Main_Page">jQuery Docs</a> &mdash; Official jQuery Wiki</li>
-									<li class="fragment"><a href="http://stage.learn.jquery.com/">learn.jquery.com</a> &mdash; jQuery introduction and tutorials (new)</li>
+									<li class="fragment"><a href="http://learn.jquery.com/">learn.jquery.com</a> &mdash; jQuery introduction and tutorials (new)</li>
 								</ul>
 							</li>
 						</ul>
@@ -189,11 +204,11 @@
 								<pre class="bigger"><code class="language-html dontrun" data-overlay-example="assets/03/examples/01.html">&lt;!doctype html&gt;
 &lt;html lang=&quot;en&quot;&gt;
 &lt;head&gt;
-	&lt;title&gt;Including jQuery<&lt;/title&gt;
+	&lt;title&gt;Including jQuery&lt;/title&gt;
 &lt;/head&gt;
 &lt;body&gt;
-	&lt;h1&gt;Including jQuery<&lt;/h1&gt;
-	&lt;script src=&quot;assets/03/examples/jquery-1.7.1.min.js&quot;&gt;&lt;/script&gt;
+	&lt;h1&gt;Including jQuery&lt;/h1&gt;
+	&lt;script src=&quot;assets/03/examples/jquery-1.9.1.min.js&quot;&gt;&lt;/script&gt;
 	&lt;script&gt;
 		$(document).ready(function() {
 			alert('loaded');
@@ -211,7 +226,7 @@
 							<li class="fragment">
 								Also possible
 								<pre class="bigger"><code class="language-html dontrun" data-overlay-example="assets/03/examples/01a.html">...
-	&lt;script src=&quot;assets/03/examples/jquery-1.7.1.min.js&quot;&gt;&lt;/script&gt;
+	&lt;script src=&quot;assets/03/examples/jquery-1.9.1.min.js&quot;&gt;&lt;/script&gt;
 	&lt;script&gt;
 		$(function() {
 			alert('loaded');
@@ -384,7 +399,7 @@ $('td:parent');</code></pre>
 	&lt;li&gt;Bread&lt;/li&gt;
 	&lt;li&gt;Banana&lt;/li&gt;
 &lt;/ul&gt;
-&lt;script src=&quot;jquery-1.7.1.min.js&quot;&gt;&lt;/script&gt;
+&lt;script src=&quot;jquery-1.9.1.min.js&quot;&gt;&lt;/script&gt;
 &lt;script&gt;
 	$(document).ready(function() {
 
@@ -488,7 +503,7 @@ $('td:parent');</code></pre>
 		&lt;li&gt;Bread&lt;/li&gt;
 		&lt;li class=&quot;selected&quot;&gt;Banana&lt;/li&gt;
 	&lt;/ul&gt;
-    &lt;script src=&quot;jquery-1.7.1.min.js&quot;&gt;&lt;/script&gt;
+    &lt;script src=&quot;jquery-1.9.1.min.js&quot;&gt;&lt;/script&gt;
     &lt;script&gt;
 	    $(document).ready(function() {
 			$('li:last').addClass('highlight').removeClass('selected');
@@ -528,7 +543,7 @@ $('td:parent');</code></pre>
 
 &lt;p&gt;(loading...)&lt;/p&gt;
 
-&lt;script src=&quot;jquery-1.7.1.min.js&quot;&gt;&lt;/script&gt;
+&lt;script src=&quot;jquery-1.9.1.min.js&quot;&gt;&lt;/script&gt;
 &lt;script&gt;
 	$(document).ready(function() {
 		$('#pass').val('NEWP4SSWORD');
@@ -558,7 +573,7 @@ $('td:parent');</code></pre>
 
 &lt;p id=&quot;output&quot;&gt;(loading...)&lt;/p&gt;
 
-&lt;script src=&quot;jquery-1.7.1.min.js&quot;&gt;&lt;/script&gt;
+&lt;script src=&quot;jquery-1.9.1.min.js&quot;&gt;&lt;/script&gt;
 &lt;script&gt;
 	$(document).ready(function() {
 		$('#output').html('The emphasis is ' + $('em').attr('title'));
@@ -603,7 +618,7 @@ var a = $('&lt;a/&gt;', {
 	&lt;p&gt;Goodbye&lt;/p&gt;
 &lt;/div&gt;
 
-&lt;script src=&quot;jquery-1.7.1.min.js&quot;&gt;&lt;/script&gt;
+&lt;script src=&quot;jquery-1.9.1.min.js&quot;&gt;&lt;/script&gt;
 &lt;script&gt;
 	$(document).ready(function() {
 		$('p').after('&lt;p&gt;Injected After&lt;/p&gt;');
@@ -627,7 +642,7 @@ var a = $('&lt;a/&gt;', {
 	&lt;p&gt;Goodbye&lt;/p&gt;
 &lt;/div&gt;
 
-&lt;script src=&quot;jquery-1.7.1.min.js&quot;&gt;&lt;/script&gt;
+&lt;script src=&quot;jquery-1.9.1.min.js&quot;&gt;&lt;/script&gt;
 &lt;script&gt;
 	$(document).ready(function() {
 		$('&lt;p&gt;Injected After&lt;/p&gt;').insertAfter('p');
@@ -666,7 +681,7 @@ var a = $('&lt;a/&gt;', {
 	&lt;li&gt;Banana&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;script src=&quot;jquery-1.7.1.min.js&quot;&gt;&lt;/script&gt;
+&lt;script src=&quot;jquery-1.9.1.min.js&quot;&gt;&lt;/script&gt;
 &lt;script&gt;
 	$(document).ready(function() {
 		$('ul').prepend('&lt;li&gt;Apple&lt;/li&gt;').append('&lt;li&gt;Pear&lt;/li&gt;');
@@ -687,7 +702,7 @@ var a = $('&lt;a/&gt;', {
 	&lt;li&gt;Banana&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;script src=&quot;jquery-1.7.1.min.js&quot;&gt;&lt;/script&gt;
+&lt;script src=&quot;jquery-1.9.1.min.js&quot;&gt;&lt;/script&gt;
 &lt;script&gt;
 	$(document).ready(function() {
 		$('li:last').prependTo('ul');
@@ -708,7 +723,7 @@ var a = $('&lt;a/&gt;', {
 	&lt;li&gt;Banana&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;script src=&quot;jquery-1.7.1.min.js&quot;&gt;&lt;/script&gt;
+&lt;script src=&quot;jquery-1.9.1.min.js&quot;&gt;&lt;/script&gt;
 &lt;script&gt;
 	$(document).ready(function() {
 		$('li:last').clone().appendTo('ul');
@@ -722,7 +737,7 @@ var a = $('&lt;a/&gt;', {
 						<h2>Removing Elements</h2>
 						<ul>
 							<li class="fragment">
-								Use <a href="http://api.jquery.com/remove/">$.fn.remove()</a> or <a href="http://api.jquery.com/empty/">$.fn.empty</a>
+								Use <a href="http://api.jquery.com/remove/">$.fn.remove()</a> or <a href="http://api.jquery.com/empty/">$.fn.empty()</a>
 								<pre class="bigger"><code class="language-html dontrun" data-overlay-example="assets/03/examples/08.html">&lt;ul&gt;
 	&lt;li&gt;Ham&lt;/li&gt;
 	&lt;li&gt;Bread&lt;/li&gt;
@@ -731,7 +746,7 @@ var a = $('&lt;a/&gt;', {
 
 &lt;p&gt;A paragraph&lt;/p&gt;
 
-&lt;script src=&quot;jquery-1.7.1.min.js&quot;&gt;&lt;/script&gt;
+&lt;script src=&quot;jquery-1.9.1.min.js&quot;&gt;&lt;/script&gt;
 &lt;script&gt;
 	$(document).ready(function() {
 		$('p').remove();
@@ -911,7 +926,7 @@ var a = $('&lt;a/&gt;', {
 	&lt;li&gt;list item 5&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;script src=&quot;jquery-1.7.1.min.js&quot;&gt;&lt;/script&gt;
+&lt;script src=&quot;jquery-1.9.1.min.js&quot;&gt;&lt;/script&gt;
 &lt;script&gt;
 	$(document).ready(function() {
 		$('#third-item').siblings().css('border', '1px solid red');
@@ -940,7 +955,7 @@ var a = $('&lt;a/&gt;', {
 	&lt;li&gt;list item 5&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;script src=&quot;jquery-1.7.1.min.js&quot;&gt;&lt;/script&gt;
+&lt;script src=&quot;jquery-1.9.1.min.js&quot;&gt;&lt;/script&gt;
 &lt;script&gt;
 	$(document).ready(function() {
 		$('#third-item').next().css('border', '1px solid red');
@@ -964,7 +979,7 @@ var a = $('&lt;a/&gt;', {
 	&lt;li&gt;list item 5&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;script src=&quot;jquery-1.7.1.min.js&quot;&gt;&lt;/script&gt;
+&lt;script src=&quot;jquery-1.9.1.min.js&quot;&gt;&lt;/script&gt;
 &lt;script&gt;
 	$(document).ready(function() {
 		$('#third-item')
@@ -986,7 +1001,7 @@ var a = $('&lt;a/&gt;', {
 					<section>
 						<h2>Events</h2>
 						<p><img src="assets/03/futurama_bendergun.jpg" alt="" title="" height="309" width="446" /></p>
-						<q>001100010010011110100001101101110011</q>
+						<q>0100100001101001</q>
 					</section>
 
 					<section>
@@ -1028,7 +1043,7 @@ var a = $('&lt;a/&gt;', {
 	&lt;li&gt;list item 5&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;script src=&quot;jquery-1.7.1.min.js&quot;&gt;&lt;/script&gt;
+&lt;script src=&quot;jquery-1.9.1.min.js&quot;&gt;&lt;/script&gt;
 &lt;script&gt;
 	$(document).ready(function() {
 		$('li').css('cursor','pointer').on('mouseover', function(e) {
@@ -1080,15 +1095,14 @@ var a = $('&lt;a/&gt;', {
 	}).bind('click', function(e) {
 		$(this).css('color', 'red');
 	});
-});
-&lt;/script&gt;</code></pre>
+});</code></pre>
 							</li>
 							<li class="fragment">Again, we will use <a href="http://api.jquery.com/on/">$.fn.on()</a> and <a href="http://api.jquery.com/off/">$.fn.off()</a></li>
 						</ul>
 					</section>
 
 					<section>
-						<h2>The eventObject</h2>
+						<h2>jQuery.Event</h2>
 						<ul>
 							<li class="fragment">
 								The <a href="http://api.jquery.com/category/events/event-object/">jQuery eventObject</a> is a normalized event object according to W3C Specifications through all browsers
@@ -1096,9 +1110,9 @@ var a = $('&lt;a/&gt;', {
 							<li class="fragment">
 								It works in the same manner as the W3C Event Object
 								<ul>
-									<li class="fragment">The property <code>event.target</code> holds the element that was clicked</li>
-									<li class="fragment">Call <code>event.preventDefault</code> to prevent the default action</li>
-									<li class="fragment">Call <code>event.stopPropagation</code> to stop bubbling of the event</li>
+									<li class="fragment">The property <code>jQuery.Event#target</code> holds the element that was clicked</li>
+									<li class="fragment">Call <code>jQuery.Event#preventDefault()</code> to prevent the default action</li>
+									<li class="fragment">Call <code>jQuery.Event#stopPropagation()</code> to stop bubbling of the event</li>
 								</ul>
 							</li>
 						</ul>
@@ -1125,36 +1139,12 @@ var a = $('&lt;a/&gt;', {
 
 });</code></pre>
 							</li>
-							<li class="fragment">Can be fixed by using <a href="http://api.jquery.com/delegate/">$.fn.delegate()</a></li>
+							<li class="fragment">Can be fixed by using an adjusted <a href="http://api.jquery.com/on/">$.fn.on()</a> syntax</li>
 						</ul>
 					</section>
 
 					<section>
-						<h2>.delegate</h2>
-						<ul>
-							<li class="fragment">
-								Example
-								<pre class="bigger"><code class="language-javascript dontrun" data-overlay-example="assets/03/examples/15b.html">$(document).ready(function() {
-
-	// Bind Events, using delegate
-	$('ul').delegate('li', 'mouseover', function(e) {
-		$(this).css('color', 'blue');
-	}).delegate('li', 'mouseout', function(e) {
-		$(this).css('color', 'black');
-	}).delegate('li', 'click', function(e) {
-		$(this).css('color', 'red');
-	}).css('cursor','pointer');
-
-	// Append new list item
-	$('ul').append('&lt;li&gt;new list item, injected after the event binding&lt;/li&gt;');
-
-});</code></pre>
-							</li>
-						</ul>
-					</section>
-
-					<section>
-						<h2>.delegate alternative #1</h2>
+						<h2>Binding events on future nodes (2)</h2>
 						<ul>
 							<li class="fragment">
 								Possible to use <a href="http://api.jquery.com/on/">$.fn.on()</a> with extra selector string to filter the descendants of the selected elements that trigger the event
@@ -1174,14 +1164,41 @@ var a = $('&lt;a/&gt;', {
 
 });</code></pre>
 							</li>
+						</ul>
+					</section>
+
+					<section>
+						<h2>.delegate() and .live() (1)</h2>
+						<ul>
+							<li class="fragment">
+								It's also possible to use <a href="http://api.jquery.com/delegate/">$.fn.delegate()</a>. Example:
+								<pre class="bigger"><code class="language-javascript dontrun" data-overlay-example="assets/03/examples/15b.html">$(document).ready(function() {
+
+	// Bind Events, using delegate
+	$('ul').delegate('li', 'mouseover', function(e) {
+		$(this).css('color', 'blue');
+	}).delegate('li', 'mouseout', function(e) {
+		$(this).css('color', 'black');
+	}).delegate('li', 'click', function(e) {
+		$(this).css('color', 'red');
+	}).css('cursor','pointer');
+
+	// Append new list item
+	$('ul').append('&lt;li&gt;new list item, injected after the event binding&lt;/li&gt;');
+
+});</code></pre>
+							</li>
 							<li class="fragment">
 								Internally, <a href="http://api.jquery.com/delegate/">$.fn.delegate()</a> is mapped to <a href="http://api.jquery.com/on/">$.fn.on()</a>, so no performance difference between the two
+							</li>
+							<li class="fragment">
+								We'll be using the <a href="http://api.jquery.com/on/">$.fn.on()</a> syntax though
 							</li>
 						</ul>
 					</section>
 
 					<section>
-						<h2>.delegate alternative #2</h2>
+						<h2>.delegate() and .live() (2)</h2>
 						<ul>
 							<li class="fragment">
 								Older versions of jQuery used <a href="http://api.jquery.com/live/">$.fn.live()</a> instead of <a href="http://api.jquery.com/delegate/">$.fn.delegate()</a>
@@ -1201,7 +1218,8 @@ var a = $('&lt;a/&gt;', {
 
 });</code></pre>
 								<ul>
-										<li class="fragment">Works, but performance <a href="http://forum.jquery.com/topic/jquery-live-jquery-fn-live-discussion">is slow</a> and <a href="http://stage.learn.jquery.com/events/using_delegate_and_undelegate/">doesn't play nice when traversing</a></li>
+										<li class="fragment">Deprecated since 1.7, removed since 1.9</li>
+										<li class="fragment">Performance <a href="http://forum.jquery.com/topic/jquery-live-jquery-fn-live-discussion">was slow</a> and it <a href="http://learn.jquery.com/events/using_delegate_and_undelegate/">doesn't play nice when traversing</a></li>
 										<li class="fragment">Recommended read: <a href="http://jupiterjs.com/news/why-you-should-never-use-jquery-live">Why You Should Never Use jQuery Live</a></li>
 										<li class="fragment">We will use <a href="http://api.jquery.com/delegate/">$.fn.delegate()</a> or <a href="http://api.jquery.com/on/">$.fn.on()</a> with extra selector string</li>
 								</ul>
@@ -1210,13 +1228,13 @@ var a = $('&lt;a/&gt;', {
 					</section>
 
 					<section>
-						<h2>More .delegate</h2>
+						<h2>Delegates use case</h2>
 						<ul>
 							<li class="fragment">
 								Use case: Don't bind <em>x</em> event listeners on <em>x</em> cells in a table, but bind 1 event listener on the table and catch the clicks on the cells
 								<pre class="bigger"><code class="language-javascript dontrun" data-overlay-example="assets/03/examples/15d.html">$(document).ready(function() {
 	// One delegate to rule them all
-	$('table').delegate('td', 'click', function(e) {
+	$('table').on('click', 'td', function(e) {
 		$(this).css('background', 'gray');
 	});
 });</code></pre>
@@ -1231,10 +1249,10 @@ var a = $('&lt;a/&gt;', {
 								Use <a href="http://api.jquery.com/one/">$.fn.on()</a> and <a href="http://api.jquery.com/off/">$.fn.off()</a> to bind/unbind event handlers
 							</li>
 							<li class="fragment">
-								Use <a href="http://api.jquery.com/delegate/">$.fn.delegate()</a> or <a href="http://api.jquery.com/on/">$.fn.on()</a> with extra selector string to bind event handlers if you know the DOM will change or if you want to optimize your event handling code
+								Use a delegate <em>(adjusted <a href="http://api.jquery.com/on/">$.fn.on()</a> with extra selector string)</em> to bind event handlers if you know the DOM will change or if you want to optimize your event handling code
 							</li>
 							<li class="fragment">
-								All other syntaxes work, but we won't be writing them ourselves
+								Don't use any of the other syntaxes (direct handlers, <code>$.fn.delegate()</code>, <code>$.fn.live()</code>). If you base your code on outdated examples, adjust them accordingly.
 							</li>
 						</ul>
 					</section>
@@ -1248,6 +1266,7 @@ var a = $('&lt;a/&gt;', {
 					<section>
 						<h2>Effects/Animation</h2>
 						<p><img src="assets/03/futurama_opening.jpg" alt="" title="" height="309" width="446" /></p>
+						<q>Made From 100% Recycled Pixels</q>
 					</section>
 
 					<section>
@@ -1258,7 +1277,7 @@ var a = $('&lt;a/&gt;', {
 								<pre class="bigger"><code class="language-html dontrun" data-overlay-example="assets/03/examples/19.html">&lt;button id=&quot;go&quot;&gt;Run&lt;/button&gt;
 &lt;div id=&quot;block&quot; style=&quot;background-color:#bca; width:100px; border:1px solid green;&quot;&gt;Hello!&lt;/div&gt;
 
-&lt;script src=&quot;jquery-1.7.1.min.js&quot;&gt;&lt;/script&gt;
+&lt;script src=&quot;jquery-1.9.1.min.js&quot;&gt;&lt;/script&gt;
 &lt;script&gt;
 	$(document).ready(function() {
 		$('#go').on('click', function() {
@@ -1358,7 +1377,7 @@ $.each({ foo : 'bar', baz : 'bim' }, function(k, v) {
 								Commonly used to allow defaults in functions &amp; plugins
 								<pre class="bigger"><code class="language-html dontrun" data-overlay-example="assets/03/examples/20.html">&lt;p&gt;(loading...)&lt;/p&gt;
 
-&lt;script src=&quot;jquery-1.7.1.min.js&quot;&gt;&lt;/script&gt;
+&lt;script src=&quot;jquery-1.9.1.min.js&quot;&gt;&lt;/script&gt;
 &lt;script&gt;
 	$(document).ready(function() {
 		var defaults = {
@@ -1408,6 +1427,33 @@ $.each({ foo : 'bar', baz : 'bim' }, function(k, v) {
 
 
 
+				<!-- jQuery 2.0 -->
+				<section>
+					<section>
+						<h2>jQuery 2.0</h2>
+						<p><img src="assets/03/futurama_worldoftomorrow.jpg" alt="" title="" width="500" /></p>
+						<q>Welcome to the world of tomorrow!</q>
+					</section>
+
+					<section>
+						<h2>jQuery 2.0</h2>
+
+						<ul>
+							<li class="fragment">Currently in beta</li>
+							<li class="fragment">Same as 1.9, but without oldIE (IE6-8) support
+								<ul>
+									<li>Result: a slimmer, faster jQuery</li>
+									<li>jQuery 1.9 <a href="http://blog.jquery.com/2012/07/01/jquery-1-9-and-2-0-tldr-edition/">will remain supported after 2.0 is released</a> until oldIE's market share is diminished</li>
+								</ul>
+							</li>
+							<li class="fragment">If your project needs oldIE support use 1.9, if not use 2.0</li>
+						</ul>
+						<footer class="fragment"><em>Context: jQuery Core has more fixes/patches for WebKit than any other browser engine</em></footer>
+					</section>
+				</section>
+
+
+
 				<!-- The END -->
 				<section>
 					<section>
@@ -1426,15 +1472,16 @@ $.each({ foo : 'bar', baz : 'bim' }, function(k, v) {
 						<h2>Sources</h2>
 						<ul>
 							<li>Most Futurama Screengrabs: <a href="http://www.ign.com/images/dvd/futurama-benders-big-score-954394/2205639">IGN.com</a></li>
-							<li>jQuery popularity: <a href="http://community.infragistics.com/blogs/taz_abdeali/archive/2012/02/16/what-is-jquery-and-how-big-is-it.aspx">Infragistics</a></li>
+							<li>jQuery popularity: <a href="http://w3techs.com/technologies/overview/javascript_library/all">http://w3techs.com/technologies/overview/javascript_library/all</a></li>
 							<li>jQuery History: <a href="http://jquery.org/history/">jquery.com</a></li>
-							<li>jQuery Basics: <a href="http://jqfundamentals.com/">jqfundamentals.com</a> &amp; <a href="http://stage.learn.jquery.com/">learn.jquery.com</a></li>
-							<li>jQuery Manipulating: <a href="http://stage.learn.jquery.com/jquery-basics/manipulating-elements/">learn.jquery.com</a> &amp; <a href="http://stage.learn.jquery.com/jquery-basics/css-styling-dimensions/">learn.jquery.com</a></li>
-							<li>jQuery Traversing: <a href="http://stage.learn.jquery.com/jquery-basics/traversing/">learn.jquery.com</a> &amp; <a href="http://api.jquery.com/category/traversing/tree-traversal/">jQuery API</a></li>
-							<li>Delegate/Undelegate: <a href="http://stage.learn.jquery.com/events/using_delegate_and_undelegate/">learn.jquery.com</a></li>
+							<li>jQuery Basics: <a href="http://jqfundamentals.com/">jqfundamentals.com</a> &amp; <a href="http://learn.jquery.com/">learn.jquery.com</a></li>
+							<li>jQuery Manipulating: <a href="http://learn.jquery.com/jquery-basics/manipulating-elements/">learn.jquery.com</a> &amp; <a href="http://learn.jquery.com/jquery-basics/css-styling-dimensions/">learn.jquery.com</a></li>
+							<li>jQuery Traversing: <a href="http://learn.jquery.com/jquery-basics/traversing/">learn.jquery.com</a> &amp; <a href="http://api.jquery.com/category/traversing/tree-traversal/">jQuery API</a></li>
+							<li>Delegate/Undelegate: <a href="http://learn.jquery.com/events/using_delegate_and_undelegate/">learn.jquery.com</a></li>
 							<li>Event Object: <a href="http://api.jquery.com/category/events/event-object/">jQuery API</a></li>
-							<li>jQuery Core: <a href="http://stage.learn.jquery.com/using-jquery-core/">learn.jquery.com</a></li>
+							<li>jQuery Core: <a href="http://learn.jquery.com/using-jquery-core/">learn.jquery.com</a></li>
 							<li>.on vs .bind vs. .delegate: <a href="http://www.elijahmanor.com/2012/02/differences-between-jquery-bind-vs-live.html">ElijahManor.com</a></li>
+							<li>jQuery Webkit fixes/bugs: <a href="http://blog.methvin.com/2013/02/tragedy-of-webkit-commons.html">http://blog.methvin.com/2013/02/tragedy-of-webkit-commons.html</a></li>
 						</ul>
 					</section>
 				</section>

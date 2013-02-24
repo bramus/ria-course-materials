@@ -4,12 +4,12 @@
 	<title>jQuery</title>
 </head>
 <body>
-	
+
 	<h1>$.extend</h1>
-	
+
 	<p>(loading...)</p>
 
-	<script src="jquery-1.7.1.min.js"></script>
+	<script src="jquery-1.9.1.min.js"></script>
 	<script>
 		$(document).ready(function() {
 			var defaults = {
@@ -18,14 +18,14 @@
 				'font-weight' : '700',
 				'font-family' : 'verdana'
 			}
-			
+
 			var write = function(what, options) {
 				var cssSettings = $.extend({}, defaults, options);
 				$('p').css(cssSettings).html(what);
 			}
-			
+
 			write('This will not be lime', {'color':'blue'});
-			
+
 		});
 	</script>
 </body>

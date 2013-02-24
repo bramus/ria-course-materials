@@ -17,7 +17,7 @@
 		<link rel="stylesheet" href="assets/02/examples.css">
 
 		<link rel="stylesheet" href="lib/zenburn.css">
-		
+
 		<script type="text/javascript">
 
 		  var _gaq = _gaq || [];
@@ -31,7 +31,19 @@
 		  })();
 
 		</script>
-		
+
+		<style>
+			#reveal .warning {
+				color: #553d00;
+				background: transparent url('assets/strong.png') repeat 50% 50%;
+				padding: 0.5em;
+			}
+
+			#reveal .warning p {
+				margin-bottom: 0;
+			}
+		</style>
+
 	</head>
 
 	<body>
@@ -133,15 +145,19 @@
 						<h2>Graded Browser Support (2)</h2>
 						<ul>
 							<li class="fragment">Wow, IE6? Seriously?</li>
-							<li class="fragment">Let's take a look at the current IE statistics</li>
+							<li class="fragment">Let's take a look at the IE statistics January 2009-2012</li>
 						</ul>
 						<figure class="fragment">
 							<img src="assets/02/iestats.png" alt="Internet Explorer Statistics (Jan 2009 - Jan 2012)" title="Internet Explorer Statistics (Jan 2009 - Jan 2012)" width="543" height="280" />
 							<figcaption>Internet Explorer Statistics (Jan 2009 - Jan 2012), by <a href="http://gs.statcounter.com/">StatCounter</a></figcaption>
 						</figure>
 						<ul>
-							<li class="fragment">IE6 &amp; IE7 nearly dead by now</li>
-							<li class="fragment">IE8 still quite popular even though IE9 is out</li>
+							<li class="fragment">January 2012:
+								<ul>
+									<li class="fragment">IE6 <em>(0.3%)</em> &amp; IE7 <em>(1%)</em> nearly dead</em></li>
+									<li class="fragment">IE8 <em>(6.4%)</em> still quite popular despite IE9 <em>(5.9%)</em> and IE10 <em>(0.8%)</em></li>
+								</ul>
+							</li>
 						</ul>
 					</section>
 
@@ -161,7 +177,7 @@
 					</section>
 
 					<section>
-						<h2>Browser Adoption Rates</h2>
+						<h2>Browser Adoption Rates (1)</h2>
 						<ul>
 							<li class="fragment">The faster a new version gets adopted by the users, the faster you can drop support for an older version
 							</li>
@@ -189,6 +205,31 @@
 					</section>
 
 					<section>
+						<h2>Browser Adoption Rates (2)</h2>
+						<ul>
+							<li class="fragment">
+								Chrome, and Firefox by now, have an auto-updater. We can safely assume most users run the latest version
+								<ul>
+									<li class="fragment">&rarr; Excellent adoption rate</li>
+								</ul>
+							</li>
+							<li class="fragment">
+								Safari versions are tied to the OS, yet most OS X users update <em>(due to the low price of new versions)</em>
+								<ul>
+									<li>&rarr; Good adoption rate</li>
+								</ul>
+							</li>
+							<li class="fragment">
+								Internet Explorer versions are released with each new version of the OS, but not tied to it. However, these new versions are optional updates to previous OSes.
+								<ul>
+									<li class="fragment">&rarr; Bad adoption rate</li>
+									<li class="fragment">Above that XP users can only upgrade up to version 8</li>
+								</ul>
+							</li>
+						</ul>
+					</section>
+
+					<section>
 						<h2>A-Grade Browsers (updated)</h2>
 						<ul>
 							<li class="fragment">
@@ -201,6 +242,7 @@
 								</ul>
 							</li>
 						</ul>
+						<div class="fragment warning"><p>Note: these are based on local visitor statistics. If your main audience is China based, <a href="http://www.ie6countdown.com/">you MUST support IE6</a> for example.</p></div>
 					</section>
 
 					<section>
@@ -222,7 +264,7 @@
 							<li class="fragment">
 								In the end, we want to write JavaScript, not fix browser inconsistencies
 								<ul>
-									<li class="fragment">Luckily for us, some smart people have already pondered these inconsistencies</li>
+									<li class="fragment">Luckily for us, some smart people have already pondered these inconsistencies and wrote a library that tackles the issues upfront</li>
 							</li>
 						</ul>
 					</section>
@@ -762,6 +804,51 @@ john.say('ahoy matey');
 
 
 
+				<!-- Frameworks -->
+				<section>
+					<section>
+						<h2>Frameworks?</h2>
+						<p><img src="assets/02/futurama_welding.jpg" alt="" title="" width="446" /></p>
+						<q>What is that?<br />One of those Led Zeppelins I've heard so much about?</q>
+					</section>
+					<section>
+						<h2>Framework</h2>
+						<ul>
+							<li class="fragment">
+								Framework &gt; Library
+								<ul>
+									<li class="fragment">Defines a structure to follow</li>
+									<li class="fragment">Your project must follow that structure</li>
+								</ul>
+							</li>
+							<li class="fragment">
+								Examples
+								<div class="columns fragment clearfix">
+									<div class="column column-12">
+										<ul>
+											<li>Backbone.js</li>
+											<li>AngularJS</li>
+											<li>Ember.js</li>
+											<li>KnockoutJS</li>
+										</ul>
+									</div>
+									<div class="column column-12">
+										<ul>
+											<li>Dojo</li>
+											<li>Agility.js</li>
+											<li>Knockback.js</li>
+											<li>&hellip;</li>
+										</ul>
+									</div>
+								</div>
+							</li>
+							<li class="fragment" style="clear: left;">If you want to use one of these, <a href="http://addyosmani.github.com/todomvc/">TodoMVC</a> is a great starting point.</li>
+						</ul>
+					</section>
+				</section>
+
+
+
 				<!-- The END -->
 				<section>
 					<section>
@@ -782,6 +869,7 @@ john.say('ahoy matey');
 							<li>JS is broken Quote: <a href="http://www.slideshare.net/simon/javascript-libraries-the-big-picture">Simon Willison</a></li>
 							<li>Graded Browser Support: <a href="http://yuilibrary.com/yui/docs/tutorials/gbs/">Yahoo!</a></li>
 							<li>Browser Adoption Rates: <a hre="http://www.netmagazine.com/features/developers-guide-browser-adoption-rates">NetMagazine.com</a></li>
+							<li>Recent browser statistics: <a href="http://www.w3schools.com/browsers/browsers_explorer.asp">http://www.w3schools.com/browsers/browsers_explorer.asp</a></li>
 							<li>IE8 attachEvents Problems: <a href="http://robertnyman.com/2008/11/04/internet-explorer-8-fix-event-handling-or-dont-release-it/">RobertNyman.com</a></li>
 							<li>Prototype &amp; YUI code examples: <a href="http://www.slideshare.net/simon/javascript-libraries-the-big-picture">slideshare/simon</a></li>
 							<li>JS Libraries Statistic: <a href="http://community.infragistics.com/blogs/taz_abdeali/archive/2012/02/16/what-is-jquery-and-how-big-is-it.aspx">infragistics.com</a></li>

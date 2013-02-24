@@ -4,14 +4,14 @@
     <title>jQuery</title>
 </head>
 <body>
-	
+
 	<h1>HTML, Attributes &amp; Values</h1>
 
 	<p>Once there was a <em title="huge, gigantic">large</em> dinosaur...</p>
-	
+
 	<p id="output">(loading...)</p>
-	
-    <script src="jquery-1.7.1.min.js"></script>
+
+    <script src="jquery-1.9.1.min.js"></script>
     <script>
 	    $(document).ready(function() {
 			$('#output').html('The emphasis is ' + $('em').attr('title'));
