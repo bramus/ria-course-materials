@@ -177,7 +177,7 @@
 &lt;/head&gt;
 &lt;body&gt;
 	&lt;h1&gt;Including jQuery<&lt;/h1&gt;
-	&lt;script src=&quot;assets/03/examples/jquery-1.7.1.min.js&quot;&gt;&lt;/script&gt;
+	&lt;script src=&quot;assets/03/examples/jquery-1.9.1.min.js&quot;&gt;&lt;/script&gt;
 	&lt;script&gt;
 		$(document).ready(function() {
 			alert('loaded');
@@ -195,7 +195,7 @@
 							<li class="fragment">
 								Also possible
 								<pre class="bigger"><code class="language-html dontrun" data-overlay-example="assets/03/examples/01a.html">...
-	&lt;script src=&quot;assets/03/examples/jquery-1.7.1.min.js&quot;&gt;&lt;/script&gt;
+	&lt;script src=&quot;assets/03/examples/jquery-1.9.1.min.js&quot;&gt;&lt;/script&gt;
 	&lt;script&gt;
 		$(function() {
 			alert('loaded');
@@ -368,7 +368,7 @@ $('td:parent');</code></pre>
 	&lt;li&gt;Bread&lt;/li&gt;
 	&lt;li&gt;Banana&lt;/li&gt;
 &lt;/ul&gt;
-&lt;script src=&quot;jquery-1.7.1.min.js&quot;&gt;&lt;/script&gt;
+&lt;script src=&quot;jquery-1.9.1.min.js&quot;&gt;&lt;/script&gt;
 &lt;script&gt;
 	$(document).ready(function() {
 
@@ -472,7 +472,7 @@ $('td:parent');</code></pre>
 		&lt;li&gt;Bread&lt;/li&gt;
 		&lt;li class=&quot;selected&quot;&gt;Banana&lt;/li&gt;
 	&lt;/ul&gt;
-    &lt;script src=&quot;jquery-1.7.1.min.js&quot;&gt;&lt;/script&gt;
+    &lt;script src=&quot;jquery-1.9.1.min.js&quot;&gt;&lt;/script&gt;
     &lt;script&gt;
 	    $(document).ready(function() {
 			$('li:last').addClass('highlight').removeClass('selected');
@@ -512,7 +512,7 @@ $('td:parent');</code></pre>
 
 &lt;p&gt;(loading...)&lt;/p&gt;
 
-&lt;script src=&quot;jquery-1.7.1.min.js&quot;&gt;&lt;/script&gt;
+&lt;script src=&quot;jquery-1.9.1.min.js&quot;&gt;&lt;/script&gt;
 &lt;script&gt;
 	$(document).ready(function() {
 		$('#pass').val('NEWP4SSWORD');
@@ -542,7 +542,7 @@ $('td:parent');</code></pre>
 
 &lt;p id=&quot;output&quot;&gt;(loading...)&lt;/p&gt;
 
-&lt;script src=&quot;jquery-1.7.1.min.js&quot;&gt;&lt;/script&gt;
+&lt;script src=&quot;jquery-1.9.1.min.js&quot;&gt;&lt;/script&gt;
 &lt;script&gt;
 	$(document).ready(function() {
 		$('#output').html('The emphasis is ' + $('em').attr('title'));
@@ -587,7 +587,7 @@ var a = $('&lt;a/&gt;', {
 	&lt;p&gt;Goodbye&lt;/p&gt;
 &lt;/div&gt;
 
-&lt;script src=&quot;jquery-1.7.1.min.js&quot;&gt;&lt;/script&gt;
+&lt;script src=&quot;jquery-1.9.1.min.js&quot;&gt;&lt;/script&gt;
 &lt;script&gt;
 	$(document).ready(function() {
 		$('p').after('&lt;p&gt;Injected After&lt;/p&gt;');
@@ -611,7 +611,7 @@ var a = $('&lt;a/&gt;', {
 	&lt;p&gt;Goodbye&lt;/p&gt;
 &lt;/div&gt;
 
-&lt;script src=&quot;jquery-1.7.1.min.js&quot;&gt;&lt;/script&gt;
+&lt;script src=&quot;jquery-1.9.1.min.js&quot;&gt;&lt;/script&gt;
 &lt;script&gt;
 	$(document).ready(function() {
 		$('&lt;p&gt;Injected After&lt;/p&gt;').insertAfter('p');
@@ -650,7 +650,7 @@ var a = $('&lt;a/&gt;', {
 	&lt;li&gt;Banana&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;script src=&quot;jquery-1.7.1.min.js&quot;&gt;&lt;/script&gt;
+&lt;script src=&quot;jquery-1.9.1.min.js&quot;&gt;&lt;/script&gt;
 &lt;script&gt;
 	$(document).ready(function() {
 		$('ul').prepend('&lt;li&gt;Apple&lt;/li&gt;').append('&lt;li&gt;Pear&lt;/li&gt;');
@@ -671,7 +671,7 @@ var a = $('&lt;a/&gt;', {
 	&lt;li&gt;Banana&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;script src=&quot;jquery-1.7.1.min.js&quot;&gt;&lt;/script&gt;
+&lt;script src=&quot;jquery-1.9.1.min.js&quot;&gt;&lt;/script&gt;
 &lt;script&gt;
 	$(document).ready(function() {
 		$('li:last').prependTo('ul');
@@ -692,7 +692,7 @@ var a = $('&lt;a/&gt;', {
 	&lt;li&gt;Banana&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;script src=&quot;jquery-1.7.1.min.js&quot;&gt;&lt;/script&gt;
+&lt;script src=&quot;jquery-1.9.1.min.js&quot;&gt;&lt;/script&gt;
 &lt;script&gt;
 	$(document).ready(function() {
 		$('li:last').clone().appendTo('ul');
@@ -715,7 +715,7 @@ var a = $('&lt;a/&gt;', {
 
 &lt;p&gt;A paragraph&lt;/p&gt;
 
-&lt;script src=&quot;jquery-1.7.1.min.js&quot;&gt;&lt;/script&gt;
+&lt;script src=&quot;jquery-1.9.1.min.js&quot;&gt;&lt;/script&gt;
 &lt;script&gt;
 	$(document).ready(function() {
 		$('p').remove();
@@ -895,7 +895,7 @@ var a = $('&lt;a/&gt;', {
 	&lt;li&gt;list item 5&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;script src=&quot;jquery-1.7.1.min.js&quot;&gt;&lt;/script&gt;
+&lt;script src=&quot;jquery-1.9.1.min.js&quot;&gt;&lt;/script&gt;
 &lt;script&gt;
 	$(document).ready(function() {
 		$('#third-item').siblings().css('border', '1px solid red');
@@ -924,7 +924,7 @@ var a = $('&lt;a/&gt;', {
 	&lt;li&gt;list item 5&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;script src=&quot;jquery-1.7.1.min.js&quot;&gt;&lt;/script&gt;
+&lt;script src=&quot;jquery-1.9.1.min.js&quot;&gt;&lt;/script&gt;
 &lt;script&gt;
 	$(document).ready(function() {
 		$('#third-item').next().css('border', '1px solid red');
@@ -948,7 +948,7 @@ var a = $('&lt;a/&gt;', {
 	&lt;li&gt;list item 5&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;script src=&quot;jquery-1.7.1.min.js&quot;&gt;&lt;/script&gt;
+&lt;script src=&quot;jquery-1.9.1.min.js&quot;&gt;&lt;/script&gt;
 &lt;script&gt;
 	$(document).ready(function() {
 		$('#third-item')
@@ -1012,7 +1012,7 @@ var a = $('&lt;a/&gt;', {
 	&lt;li&gt;list item 5&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;script src=&quot;jquery-1.7.1.min.js&quot;&gt;&lt;/script&gt;
+&lt;script src=&quot;jquery-1.9.1.min.js&quot;&gt;&lt;/script&gt;
 &lt;script&gt;
 	$(document).ready(function() {
 		$('li').css('cursor','pointer').on('mouseover', function(e) {
@@ -1246,7 +1246,7 @@ var a = $('&lt;a/&gt;', {
 								<pre class="bigger"><code class="language-html dontrun" data-overlay-example="assets/03/examples/19.html">&lt;button id=&quot;go&quot;&gt;Run&lt;/button&gt;
 &lt;div id=&quot;block&quot; style=&quot;background-color:#bca; width:100px; border:1px solid green;&quot;&gt;Hello!&lt;/div&gt;
 
-&lt;script src=&quot;jquery-1.7.1.min.js&quot;&gt;&lt;/script&gt;
+&lt;script src=&quot;jquery-1.9.1.min.js&quot;&gt;&lt;/script&gt;
 &lt;script&gt;
 	$(document).ready(function() {
 		$('#go').on('click', function() {
@@ -1346,7 +1346,7 @@ $.each({ foo : 'bar', baz : 'bim' }, function(k, v) {
 								Commonly used to allow defaults in functions &amp; plugins
 								<pre class="bigger"><code class="language-html dontrun" data-overlay-example="assets/03/examples/20.html">&lt;p&gt;(loading...)&lt;/p&gt;
 
-&lt;script src=&quot;jquery-1.7.1.min.js&quot;&gt;&lt;/script&gt;
+&lt;script src=&quot;jquery-1.9.1.min.js&quot;&gt;&lt;/script&gt;
 &lt;script&gt;
 	$(document).ready(function() {
 		var defaults = {

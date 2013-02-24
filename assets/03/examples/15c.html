@@ -4,8 +4,10 @@
 	<title>jQuery</title>
 </head>
 <body>
-	
+
 	<h1>Events</h1>
+
+	<p><strong>This example won't work as <code>$.fn.live()</code> has been removed since jQuery 1.9</strong></p>
 
 	<ul>
 		<li>list item 1</li>
@@ -15,11 +17,11 @@
 		<li>list item 5</li>
 	</ul>
 
-	<script src="jquery-1.7.1.min.js"></script>
+	<script src="jquery-1.9.1.min.js"></script>
 	<script>
 		$(document).ready(function() {
-			
-			// Bind events, using live (not recommended!)
+
+			// Bind events, using live (won't work remove since 1.9)
 			$('ul li').live('mouseover', function(e) {
 				$(this).css('color', 'blue');
 			}).live('mouseout', function(e) {
@@ -27,10 +29,10 @@
 			}).live('click', function(e) {
 				$(this).css('color', 'red');
 			}).css('cursor','pointer');
-			
+
 			// Append new list item
 			$('ul').append('<li>new list item, injected after the event binding</li>');
-			
+
 		});
 	</script>
 </body>

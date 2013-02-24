@@ -20,7 +20,7 @@
 	</style>
 </head>
 <body>
-	
+
 	<h1>Events</h1>
 
 	<table>
@@ -36,13 +36,13 @@
 		</tr>
 	</table>
 
-	<script src="jquery-1.7.1.min.js"></script>
+	<script src="jquery-1.9.1.min.js"></script>
 	<script>
 		$(document).ready(function() {
 			// One delegate to rule them all
 			$('table').on('click', 'td', function(e) {
 				$(this).css('background', 'gray');
-			});			
+			});
 		});
 	</script>
 </body>
