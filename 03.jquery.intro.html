@@ -17,6 +17,20 @@
 		<link rel="stylesheet" href="assets/03/examples.css">
 
 		<link rel="stylesheet" href="lib/zenburn.css">
+
+		<style>
+			.jquerycharts img {
+				cursor: pointer;
+			}
+
+			.jquerycharts img:hover {
+			    -webkit-transform: scale(2);
+			    -moz-transform: scale(2);
+			    -o-transform: scale(2);
+			    -ms-transform: scale(2);
+			    transform: scale(2);
+			}
+		</style>
 	</head>
 
 	<body>
@@ -86,13 +100,16 @@
 					<section>
 						<h2>How popular is jQuery Exactly?</h2>
 						<p class="fragment">1 in every 2 of the top 10K websites is using jQuery</p>
-						<figure class="fragment">
-							<img src="assets/03/jslibs_stat_jquery.png" alt="" title="" width="400" height="320" />
-						</figure>
-						<figure class="fragment">
-							<img src="assets/03/jslibs_stat.png" alt="" title="" width="355" height="320" />
-						</figure>
-						<p class="fragment">jQuery is used by 44.1% of all top 10K websites <br /><small>(JS market share 84.7%)</small></p>
+						<div class="jquerycharts">
+							<figure class="fragment">
+								<img src="assets/03/jslibs_stat_2013_all.png" alt="" title="" height="250" />
+							</figure>
+							<figure class="fragment">
+								<img src="assets/03/jslibs_stat_2013_jquery.png" alt="" title="" height="250" />
+							</figure>
+						</div>
+						<p class="fragment">jQuery is used by 55.7% of all top 10K websites <br /><small>(JS market share 90.7%)</small></p>
+						<footer class="fragment"><em>That's a 10% increase compared to last year!</em></footer>
 					</section>
 
 					<section>
@@ -1441,7 +1458,7 @@ $.each({ foo : 'bar', baz : 'bim' }, function(k, v) {
 						<h2>Sources</h2>
 						<ul>
 							<li>Most Futurama Screengrabs: <a href="http://www.ign.com/images/dvd/futurama-benders-big-score-954394/2205639">IGN.com</a></li>
-							<li>jQuery popularity: <a href="http://community.infragistics.com/blogs/taz_abdeali/archive/2012/02/16/what-is-jquery-and-how-big-is-it.aspx">Infragistics</a></li>
+							<li>jQuery popularity: <a href="http://w3techs.com/technologies/overview/javascript_library/all">http://w3techs.com/technologies/overview/javascript_library/all</a></li>
 							<li>jQuery History: <a href="http://jquery.org/history/">jquery.com</a></li>
 							<li>jQuery Basics: <a href="http://jqfundamentals.com/">jqfundamentals.com</a> &amp; <a href="http://learn.jquery.com/">learn.jquery.com</a></li>
 							<li>jQuery Manipulating: <a href="http://learn.jquery.com/jquery-basics/manipulating-elements/">learn.jquery.com</a> &amp; <a href="http://learn.jquery.com/jquery-basics/css-styling-dimensions/">learn.jquery.com</a></li>
