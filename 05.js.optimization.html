@@ -61,13 +61,43 @@
 							<li class="fragment">
 								A collection of tips and tricks to writing better JS
 							</li>
+							<li class="fragment">
+								A collection of tips and tricks to making better websites; speedwise and sizewise.
+							</li>
 						</ul>
+						<footer class="fragment">Note: the types of tips are intermingled on purpose, because they're all equally important</footer>
 					</section>
 
 					<section>
 						<h2>Put scripts at the bottom</h2>
 						<blockquote>The problem caused by scripts is that they block parallel downloads. The <a href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec8.html#sec8.1.4">HTTP/1.1 specification</a> suggests that browsers download no more than two components in parallel per hostname. If you serve your images from multiple hostnames, you can get more than two downloads to occur in parallel. While a script is downloading, however, the browser won't start any other downloads, even on different hostnames.</blockquote>
 						<p>Including External Scripts <small><a href="01.advanced.js.html#/8/38">&#9873;</a></small></p>
+					</section>
+
+					<section>
+						<h2>Keep HTTP requests to a minimum</h2>
+						<ul>
+							<li class="fragment">
+								<a href="https://developers.google.com/speed/docs/best-practices/caching">Optimize caching</a> by using <code>Expires</code> and <code>Cache-Control: max-age</code> headerfs
+							</li>
+							<li class="fragment">
+								Collate CSS/JS
+								<ul>
+									<li class="fragment">Combine scripts to get fewer files <em>(and thus less requests!)</em></li>
+								</ul>
+							</li>
+							<li class="fragment">base64 encode images where possible
+								<ul>
+									<li>viz. icons used in CSS</li>
+								</ul>
+							</li>
+							<li class="fragment">
+								Load libraries from a Content Delivery Network
+								<ul>
+									<li class="fragment"><a href="http://docs.jquery.com/Downloading_jQuery#CDN_Hosted_jQuery">CDN Hosted jQuery</a></li>
+								</ul>
+							</li>
+						</ul>
 					</section>
 
 					<section>
@@ -139,22 +169,23 @@
 							<li class="fragment">
 								Use shorthands where possible
 								<ul>
+									<li class="fragment">literals, <code>0px</code> &rarr; <code>0</code>, <code>#FFFFFF</code> &rarr; <code>#FFF</code>, etc.</li>
 									<li class="fragment">A character saved is a character less to download</li>
 								</ul>
 							</li>
 							<li class="fragment">
-								Collate &amp; Minify
+								Minify JS/CSS
 								<ul>
-									<li class="fragment">Collate: combine scripts to get fewer files</li>
-									<li class="fragment">Minify: strip all whitespace, comments, etc. to get smaller files</li>
+									<li class="fragment">Strip all whitespace, comments, etc. to get smaller files</li>
 								</ul>
 							</li>
 							<li class="fragment">
-								Load libraries from a Content Delivery Network
-								<ul>
-									<li class="fragment"><a href="http://docs.jquery.com/Downloading_jQuery#CDN_Hosted_jQuery">CDN Hosted jQuery</a></li>
-								</ul>
+								Use <a href="http://en.wikipedia.org/wiki/HTTP_compression">HTTP compression</a> (Gzip)
 							</li>
+							<li class="fragment">
+								Compress images using <a href="http://tinypng.org/">tinypng</a>, <a href="http://www.smushit.com/">smushit</a>, <a href="http://imageoptim.com/">ImageOptim</a>, etc.
+							</li>
+							<li class="fragment">Add a few extra DNS <code>CNAME</code> records to your domain to have your server serve more parallel requests</li>
 						</ul>
 					</section>
 
@@ -171,7 +202,7 @@
 					</section>
 
 					<section>
-						<h2>Keep lookups to a minimum</h2>
+						<h2>Keep DOM lookups to a minimum</h2>
 						<ul>
 							<li class="fragment">
 								Optimize Loops <small><a href="01.advanced.js.html#/4/3">&#9873;</a></small>
@@ -202,6 +233,26 @@ for (var i = 0; i &lt; 1000; i++) {
 }
 
 myList.html(myListItems);</code></pre>
+							</li>
+						</ul>
+					</section>
+
+					<section>
+						<h2>Prevent excessive redraws</h2>
+						<ul>
+							<li class="fragment">
+								Bad
+								<pre class="bigger"><code class="language-javascript dontrun">var items = $('li');
+items.css('background-color','red').css('color','lime').css('border','1px solid blue');</code></pre>
+							</li>
+							<li class="fragment">
+								Good
+								<pre class="bigger"><code class="language-javascript dontrun">var items = $('li');
+items.css({
+	'background-color': 'red',
+	'color': 'lime',
+	'border': '1px solid blue'
+});</code></pre>
 							</li>
 						</ul>
 					</section>
@@ -241,24 +292,21 @@ myList.html(myListItems);</code></pre>
 						<h2>Make good use of bubbling</h2>
 						<ul>
 							<li class="fragment">
-								Don't bind event handlers on 1000 table cells, but bind 1 event handler on the table and let the event bubble up
+								Use a delegate: Don't bind event handlers on 1000 table cells, but bind 1 event handler on the table and let the event bubble up
 							</li>
 							<li class="fragment">In jQuery
 								<ul>
 									<li class="fragment">
-										Use <code>.delegate()</code>
-										<pre class="bigger"><code class="language-javascript dontrun">$('table').delegate('td', 'click', function(e) { ... });</code></pre>
-									</li>
-									<li class="fragment">
-										Use <code>.on()</code> with extra selector string to filter the descendants of the selected elements that trigger the event
+										Use <code>$.fn.on()</code> with extra selector string to filter the descendants of the selected elements that trigger the event
 										<pre class="bigger"><code class="language-javascript dontrun">$('table').on('click', 'td', function(e) { ... });</code></pre>
 									</li>
 									<li class="fragment">
-										Never use <code>.live()</code>
+										Never use <code>$.fn.live()</code>
 										<ul>
 											<li><a href="http://jupiterjs.com/news/why-you-should-never-use-jquery-live">Never, ever</a></li>
 										</ul>
 									</li>
+									<li class="fragment">Use of <code>$.fn.delegate()</code> is possible, but we prefer the variant of <code>$.fn.on()</code></li>
 								</ul>
 							</li>
 						</ul>
@@ -307,17 +355,41 @@ myList.html(myListItems);</code></pre>
 					</section>
 
 					<section>
-						<h2>Don't use jQuery unless absolutely necessary</h2>
+						<h2>Make use of modern code</h2>
 						<ul>
 							<li class="fragment">
-								Bad
+								Use <code>requestAnimationFrame()</code> instead of <code>setTimeout()</code>
+								<ul>
+									<li class="fragment">Hardware acceleration!</li>
+									<li class="fragment">Aware if a tab is active or not</li>
+								</ul>
+							</li>
+							<li class="fragment">Use CSS3 animations instead of changing CSS properties via JS (<a href="http://paulirish.com/2012/why-moving-elements-with-translate-is-better-than-posabs-topleft/">video</a>)
+								<ul>
+									<li class="fragment">Again: Hardware acceleration!</li>
+								</ul>
+							</li>
+						</ul>
+					</section>
+
+					<section>
+						<h2>Go Plain Vanilla</h2>
+						<ul>
+							<li class="fragment">
+								&ldquo;Bad&rdquo;
 								<pre class="bigger"><code class="language-javascript dontrun">$('a').on('click', function(e) {
 	alert($(this).attr('href'));
 });</code></pre>
 							</li>
 							<li class="fragment">
-								Good
+								Better
 								<pre class="bigger"><code class="language-javascript dontrun">$('a').on('click', function(e) {
+	alert(this.href);
+});</code></pre>
+							</li>
+							<li class="fragment">
+								Best
+								<pre class="bigger"><code class="language-javascript dontrun">document.querySelectorAll('a').addEventListener('click', function(e) {
 	alert(this.href);
 });</code></pre>
 							</li>
