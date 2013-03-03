@@ -1125,7 +1125,7 @@ var a = $('&lt;a/&gt;', {
 
 });</code></pre>
 							</li>
-							<li class="fragment">Can be fixed by using an adjusted <a href="http://api.jquery.com/on/">$.fn.on()</a> syntax</li>
+							<li class="fragment">Can be fixed by using an adjusted <a href="http://api.jquery.com/on/">$.fn.on()</a> syntax so that it becomes a <em>delegate</em></li>
 						</ul>
 					</section>
 
@@ -1133,7 +1133,7 @@ var a = $('&lt;a/&gt;', {
 						<h2>Binding events on future nodes (2)</h2>
 						<ul>
 							<li class="fragment">
-								Possible to use <a href="http://api.jquery.com/on/">$.fn.on()</a> with extra selector string to filter the descendants of the selected elements that trigger the event
+								<a href="http://api.jquery.com/on/">$.fn.on()</a> <em>delegate</em>: alternate syntax with extra selector string to filter the descendants of the selected elements that trigger the event
 								<pre class="bigger"><code class="language-javascript dontrun" data-overlay-example="assets/03/examples/15b2.html">$(document).ready(function() {
 
 	// Bind Events, using delegate
@@ -1150,6 +1150,7 @@ var a = $('&lt;a/&gt;', {
 
 });</code></pre>
 							</li>
+							<li class="fragment">The eventhandler is now hooked to the parent element, allowing it to work with future nodes</li>
 						</ul>
 					</section>
 
@@ -1207,7 +1208,9 @@ var a = $('&lt;a/&gt;', {
 										<li class="fragment">Deprecated since 1.7, removed since 1.9</li>
 										<li class="fragment">Performance <a href="http://forum.jquery.com/topic/jquery-live-jquery-fn-live-discussion">was slow</a> and it <a href="http://learn.jquery.com/events/using_delegate_and_undelegate/">doesn't play nice when traversing</a></li>
 										<li class="fragment">Recommended read: <a href="http://jupiterjs.com/news/why-you-should-never-use-jquery-live">Why You Should Never Use jQuery Live</a></li>
-										<li class="fragment">We will use <a href="http://api.jquery.com/delegate/">$.fn.delegate()</a> or <a href="http://api.jquery.com/on/">$.fn.on()</a> with extra selector string</li>
+										<li class="fragment">
+											Again: We'll be using the <a href="http://api.jquery.com/on/">$.fn.on()</a> syntax though
+										</li>
 								</ul>
 							</li>
 						</ul>
