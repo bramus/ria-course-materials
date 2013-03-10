@@ -165,6 +165,9 @@ alert('I am outputted immediately (no delay)');</code></pre>
 									<li class="fragment">
 										Search Engines don't index content injected afterwards
 									</li>
+									<li class="fragment">
+										Requires a change in programming attitude
+									</li>
 								</ul>
 							</li>
 						</ul>
@@ -267,7 +270,7 @@ xhr = new XMLHttpRequest();
 							<li class="fragment">
 								Initial usage mostly used XML
 								<ul>
-									<li class="fragment">Server must send <code>Content-Type:text/xml</code> header, XHR will <em>automagically</em> parse the returned data as XML</li>
+									<li class="fragment">Server must send <code>Content-Type: text/xml</code> header, XHR will <em>automagically</em> parse the returned data as XML</li>
 								</ul>
 							</li>
 							<li class="fragment">
@@ -283,10 +286,27 @@ xhr = new XMLHttpRequest();
 					</section>
 
 					<section>
-						<h2>XML Example</h2>
+						<h2>XML Example (1)</h2>
 						<ul>
 							<li class="fragment">
-								Example
+								Data returned
+								<pre class="bigger"><code class="language-xml">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;sample&gt;
+	&lt;course&gt;RIA&lt;/course&gt;
+	&lt;lecturers&gt;
+		&lt;lecturer&gt;Bramus Van Damme&lt;/lecturer&gt;
+		&lt;lecturer&gt;Davy De Winne&lt;/lecturer&gt;
+	&lt;/lecturers&gt;
+&lt;/sample&gt;</code></pre>
+							</li>
+						</ul>
+					</section>
+
+					<section>
+						<h2>XML Example (2)</h2>
+						<ul>
+							<li class="fragment">
+								JS Implementation
 								<pre class="bigger"><code class="language-javascript" contenteditable>xhr = new XMLHttpRequest();
 
 xhr.onreadystatechange = function() {
@@ -314,10 +334,14 @@ xhr.send(null);</code></pre>
 						<ul>
 							<li class="fragment">
 								Why not let the server prepare a blob of HTML instead of building it after having parse the XML?
-							</li>
-							<li class="fragment">
-								Example
-								<pre class="bigger"><code class="language-javascript" contenteditable>xhr = new XMLHttpRequest();
+								<ul>
+									<li class="fragment">
+										Data returned
+										<pre class="bigger"><code class="language-html dontrun">&lt;p&gt;RIA is taught by Davy De Winne &amp;amp; Bramus Van Damme&lt;/p&gt;</code></pre>
+									</li>
+									<li class="fragment">
+										JS Implementation
+									<pre class="bigger"><code class="language-javascript" contenteditable>xhr = new XMLHttpRequest();
 
 xhr.onreadystatechange = function() {
 	if (xhr.readyState == 4) {
@@ -328,6 +352,8 @@ xhr.onreadystatechange = function() {
 
 xhr.open('GET', 'assets/06/examples/html.php', true);
 xhr.send(null);</code></pre>
+									</li>
+								</ul>
 							</li>
 						</ul>
 					</section>
@@ -337,7 +363,14 @@ xhr.send(null);</code></pre>
 						<ul>
 							<li class="fragment">
 								Load in a tad of JavaScript, and then <code>eval()</code> it.
-								<pre class="bigger"><code class="language-javascript" contenteditable>xhr = new XMLHttpRequest();
+								<ul>
+									<li class="fragment">
+										Data returned
+										<pre class="bigger"><code class="language-js dontrun">alert('&lt;p&gt;RIA is taught by Davy De Winne &amp;amp; Bramus Van Damme&lt;/p&gt;');</code></pre>
+									</li>
+									<li class="fragment">
+										JS Implementation
+										<pre class="bigger"><code class="language-javascript" contenteditable>xhr = new XMLHttpRequest();
 
 xhr.onreadystatechange = function() {
 	if (xhr.readyState == 4) {
@@ -348,11 +381,13 @@ xhr.onreadystatechange = function() {
 
 xhr.open('GET', 'assets/06/examples/js.php', true);
 xhr.send(null);</code></pre>
+									</li>
+								</ul>
 							</li>
 							<li class="fragment">
 								Beware when using <code>eval()</code> though: <a href="http://xkr.us/js/eval"><code>eval()</code> is evil</a>.
 								<ul>
-									<li class="fragment">In this case, it is allowed.</li>
+									<li class="fragment">But not always: In this case, it is allowed</li>
 								</ul>
 							</li>
 						</ul>
@@ -446,8 +481,12 @@ xhr.onreadystatechange = function() {
 xhr.open('GET', 'assets/06/examples/json.php', true);
 xhr.send(null);</code></pre>
 								<ul>
-									<li class="fragment">XHR doesn't parse the string to JSON <em>automagically</em>, you will need to parse it with <code>JSON.parse()</code> (reverse: <code>JSON.stringify()</code>)</li>
-									<li class="fragment">Parsing required <a href="https://github.com/douglascrockford/JSON-js">a library</a>, the browser <em>(couldn't)</em> do it natively.</li>
+									<li class="fragment">
+										XHR doesn't parse the string to JSON <em>automagically</em>, you will need to manually parse it using <code>JSON.parse()</code> (reverse: <code>JSON.stringify()</code>)
+										<ul>
+											<li class="fragment">Older browsers that don't support <code>JSON.parse()</code> require <a href="https://github.com/douglascrockford/JSON-js">a library</a> to do the parsing.</li>
+										</ul>
+									</li>
 								</ul>
 							</li>
 						</ul>
@@ -459,14 +498,14 @@ xhr.send(null);</code></pre>
 							<li class="fragment">
 								Since PHP 5.2, JSON in PHP is really easy
 								<ul>
-									<li class="fragment">Encode an Array to JSON with <a href="http://be.php.net/json_encode"><code>json_encode</code></a></li>
-									<li class="fragment">Decode JSON String into an Object or Associative Array with <a href="http://be.php.net/json_decode"><code>json_decode</code></a></li>
+									<li class="fragment">Encode an Array to JSON with <code>json_encode</code><small><a href="http://be.php.net/json_encode">&#9873;</a></small></li>
+									<li class="fragment">Decode JSON String into an Object or Associative Array with <code>json_decode</code><small><a href="http://be.php.net/json_decode">&#9873;</a></small></li>
 								</ul>
 							</li>
 							<li class="fragment">
 								Send a JSON header back with this header
 								<ul>
-									<li class="fragment"><code>Content-Type:application/json</code></li>
+									<li class="fragment"><code>Content-Type: application/json</code></li>
 								</ul>
 							</li>
 						</ul>
@@ -484,6 +523,7 @@ xhr.send(null);</code></pre>
 									<li class="fragment">All modern webapp API's output JSON</li>
 								</ul>
 							</li>
+							<blockquote class="fragment" style="text-align: center; margin-top: 1em;">Ajax: X is for JSON</blockquote>
 						</ul>
 					</section>
 
@@ -634,6 +674,22 @@ var queryString = values.join('&amp;');</code></pre>
 					</section>
 
 					<section>
+						<h2>Sidenote: Deferreds</h2>
+						<ul>
+							<li class="fragment">
+								Deferreds are awesome!
+								<ul>
+									<li class="fragment">When creating the ajax call, you get back a <strong>promise</strong></li>
+									<li class="fragment">The <code>success</code> and <code>error</code> functions are bound to the promise</li>
+									<li class="fragment">When the ajax call is completed, the promise is <strong>resolved</strong> and the attached functions are executed</li>
+								</ul>
+							</li>
+							<li class="fragment">You can create your own deferreds in jQuery</li>
+							<li class="fragment">jQuery has an easy <code>$.when(<em>deferred</em>).then(<em>function</em>)</code> shorthand<small><a href="http://api.jquery.com/jQuery.when/">&#9873;</a></small></li>
+						</ul>
+					</section>
+
+					<section>
 						<h2>Basic Shorthands</h2>
 						<ul>
 							<li class="fragment">
@@ -761,7 +817,7 @@ var queryString = values.join('&amp;');</code></pre>
 								In some cases, you'll need to do 2 requests before you have all needed data
 								<ul>
 									<li class="fragment">
-										Normal flow: chain calls
+										Oldskool solution: chain calls
 										<ul>
 											<li class="fragment">Invoke call #1</li>
 											<li class="fragment"><code>success</code> function of call #1 will invoke call #2</li>
@@ -769,7 +825,7 @@ var queryString = values.join('&amp;');</code></pre>
 										</ul>
 									</li>
 									<li class="fragment">
-										jQuery's deferreds allow us to do this
+										Better solution: use the <del>force</del> <ins>deferreds</ins>
 										<pre class="bigger"><code class="language-javascript dontrun">function doAjax() { return $.get('foo.htm'); }
 function doMoreAjax() { return $.get('bar.htm'); }
 
@@ -790,6 +846,9 @@ $.when(doAjax(), doMoreAjax())
 						<ul>
 							<li class="fragment">
 								Shorthands allowed, yet if you want to have full control use <code>$.ajax()</code>
+							</li>
+							<li class="fragment">
+								Use deferreds when requiring multiple resources
 							</li>
 						</ul>
 					</section>
@@ -812,7 +871,7 @@ $.when(doAjax(), doMoreAjax())
 							<li class="fragment">
 								When using Ajax, some usability challenges are faced
 								<ul>
-									<li class="fragment">How does the visitor know the site isn't broken bu data is loading?</li>
+									<li class="fragment">How does the visitor know the site isn't broken but data is loading?</li>
 									<li class="fragment">The back and previous button (and thus bookmarking of specific content) is broken.
 								</ul>
 							</li>
@@ -824,6 +883,10 @@ $.when(doAjax(), doMoreAjax())
 								</ul>
 							</li>
 						</ul>
+					</section>
+
+					<section>
+						<h2>Ajax Challenges<br /><br />I. User feedback</h2>
 					</section>
 
 					<section>
@@ -886,10 +949,17 @@ $.when(doAjax(), doMoreAjax())
 					</section>
 
 					<section>
+						<h2>Ajax Challenges<br /><br />II. Unbreaking History</h2>
+					</section>
+
+					<section>
 						<h2>History: Hashes</h2>
 						<ul>
 							<li class="fragment">
-								When building a single page interface (think GMail, or even this presentation), you must enable a way to directly link to a certain part/state of the page.
+								When building a single page interface <em>(think GMail, or even this presentation)</em>, you must enable a way to directly link to a certain part/state of the page.
+							</li>
+							<li class="fragment">
+								Oldskool solution: <em>hashbang URLs</em>
 								<ul>
 									<li class="fragment">Change the <code>hash</code> of the <code>window.location</code></li>
 									<li class="fragment">Listen for the <code>hashchange</code> event to detect wheter a user has clicked the back/forward button and re-apply the state</li>
@@ -897,7 +967,7 @@ $.when(doAjax(), doMoreAjax())
 								</ul>
 							</li>
 							<li class="fragment">
-								Some specific jQuery plugins exist to deal with <code>hashchange</code> which doesn't work in oldIE
+								But really, <a href="http://danwebb.net/2011/5/28/it-is-about-the-hashbangs">don't use hashbang URLs</a>
 							</li>
 						</ul>
 					</section>
@@ -920,6 +990,9 @@ $.when(doAjax(), doMoreAjax())
 								Whenever user presses back/forward, browser will trigger a <code>popstate</code> event
 							</li>
 						</ul>
+						<footer class="fragment">
+							Note: the <em>fabricated</em> URLs must also be available when doing a normal request
+						</footer>
 					</section>
 
 					<section>
@@ -931,7 +1004,7 @@ $.when(doAjax(), doMoreAjax())
 history.pushState(stateObj, "page 2", "bar.html");</code></pre>
 								<ul>
 									<li class="fragment"><code>stateObj</code> &mdash; An object you want to associate with the history entry. Will be returned when <code>popstate</code> is triggered</li>
-									<li class="fragment"><code>stateObj</code> &mdash; Title you wish to link to the history entry <em>(ingored)</em></li>
+									<li class="fragment"><code>title</code> &mdash; Title you wish to link to the history entry <em>(ingored!)</em></li>
 									<li class="fragment"><code>url</code> &mdash; URL to show in the address bar <em>(optional)</em></li>
 								</ul>
 							</li>
@@ -985,7 +1058,7 @@ history.pushState(stateObj, "page 2", "bar.html");</code></pre>
 	});
 	$(window).on('popstate', function(e) {
 		$('ul a').css('background', 'inherit');
-		if (e.originalEvent.state && e.originalEvent.state.id) {
+		if (e.originalEvent.state &amp;&amp; e.originalEvent.state.id) {
 			$('#' + e.originalEvent.state.id).css('background', '#FF9');
 		}
 	});
@@ -996,35 +1069,11 @@ history.pushState(stateObj, "page 2", "bar.html");</code></pre>
 					</section>
 
 					<section>
-						<h2>History: pushState Demo (3)</h2>
-						<ul>
-							<li class="fragment">
-								With <code>history.pushState()</code> and <code>location.hash</code>
-								<pre class="bigger"><code class="language-javascript dontrun">jQuery(document).ready(function($) {
-	$('ul').on('click', 'a', function(e) {
-		e.preventDefault();
-		$('ul a').css('background', 'inherit');
-		$(this).css('background', '#FF9');
-		history.pushState({'id':this.id}, 'clicked ' + this.id, '#' + this.id);
-	});
-	$(window).on('popstate', function(e) {
-		$('ul a').css('background', 'inherit');
-		if (e.originalEvent.state && e.originalEvent.state.id) {
-			$('#' + e.originalEvent.state.id).css('background', '#FF9');
-		} else {
-			if (window.location.hash) {
-				$(window.location.hash).css('background', '#FF9');
-			}
-		}
-	});
-});</code></pre>
-								<small><a href="assets/06/examples/challenges.history3.html">Show demo &rarr;</a></small>
-							</li>
-						</ul>
+						<h2>Ajax Challenges<br /><br />III. Cross-Domain</h2>
 					</section>
 
 					<section>
-						<h2>Cross Domain</h2>
+						<h2>Cross-Domain</h2>
 						<ul>
 							<li class="fragment">
 								Cross-Domain XHR Requests are not allowed
@@ -1051,7 +1100,7 @@ history.pushState(stateObj, "page 2", "bar.html");</code></pre>
 					</section>
 
 					<section>
-						<h2>Cross Domain: Proxy Script (1)</h2>
+						<h2>Cross-Domain: Proxy Script (1)</h2>
 						<ul>
 							<li class="fragment">
 								Put a little (PHP) Script on your own webserver which fetches the data from the remote server
@@ -1066,7 +1115,7 @@ history.pushState(stateObj, "page 2", "bar.html");</code></pre>
 					</section>
 
 					<section>
-						<h2>Cross Domain: Proxy Script (2)</h2>
+						<h2>Cross-Domain: Proxy Script (2)</h2>
 						<ul>
 							<li class="fragment">
 								Dataflow
@@ -1080,7 +1129,7 @@ history.pushState(stateObj, "page 2", "bar.html");</code></pre>
 								<code>proxy.php</code> Implementation
 								<ul>
 									<li class="fragment">From scratch with <a href="http://be.php.net/curl">curl</a></li>
-									<li class="fragment">With the help of PHP HTTP classes such as <a href="http://www.gen-x-design.com/archives/making-restful-requests-in-php/">RESTRequest</a> and <a href="http://code.google.com/p/xunuo/source/browse/trunk/UNDEAD/xunuo.com/class.xhttp.php?spec=svn766&amp;r=766">xhttp</a></li>
+									<li class="fragment">With the help of PHP HTTP classes such as <a href="http://www.gen-x-design.com/archives/making-restful-requests-in-php/">RESTRequest</a>/<a href="http://guzzlephp.org/">Guzzle</a></li>
 									<li class="fragment">Prefab with projects like <a href="https://github.com/hugeinc/ajax-proxy/">ajax-proxy</a></li>
 								</ul>
 							</li>
@@ -1088,13 +1137,13 @@ history.pushState(stateObj, "page 2", "bar.html");</code></pre>
 					</section>
 
 					<section>
-						<h2>Cross Domain: JSONP (1)</h2>
+						<h2>Cross-Domain: JSONP (1)</h2>
 						<ul>
 							<li class="fragment">
 								Short for <em>JSON with Padding</em>
 							</li>
 							<li class="fragment">
-								Exploits the fact that we <em>can</em> make requests to JavaScript code on other servers
+								<em>Exploits</em> the fact that we <em>can</em> make requests to JavaScript code on other servers
 								<ul>
 									<li class="fragment">
 										Return JSON wrapped inside a <em>callback function</em> instead of just JSON
@@ -1112,7 +1161,7 @@ history.pushState(stateObj, "page 2", "bar.html");</code></pre>
 					</section>
 
 					<section>
-						<h2>Cross Domain: JSONP (2)</h2>
+						<h2>Cross-Domain: JSONP (2)</h2>
 						<ul>
 							<li class="fragment">
 								In jQuery, working with JSONP is very easy
@@ -1144,7 +1193,7 @@ history.pushState(stateObj, "page 2", "bar.html");</code></pre>
 					</section>
 
 					<section>
-						<h2>Cross Domain: CORS</h2>
+						<h2>Cross-Domain: CORS</h2>
 						<ul>
 							<li class="fragment">
 								Short for <em>Cross-Origin Resource Sharing</em>
@@ -1181,7 +1230,7 @@ history.pushState(stateObj, "page 2", "bar.html");</code></pre>
 						<h2>Sidenote: XHR2</h2>
 						<ul>
 							<li class="fragment">
-								Is in the making
+								XHR on steroids
 								<ul>
 									<li class="fragment">Specify response format natively</li>
 									<li class="fragment">Send binary data (file uploads!)</li>
@@ -1192,13 +1241,13 @@ history.pushState(stateObj, "page 2", "bar.html");</code></pre>
 								More info on <a href="http://www.html5rocks.com/en/tutorials/cors/">html5rocks.com</a>
 							</li>
 							<li class="fragment">
-								Can we use it already? <a href="http://caniuse.com/xhr2">Kinda</a>
+								Can we use it already? <a href="http://caniuse.com/xhr2">It looks like it</a> :-)
 							</li>
 						</ul>
 					</section>
 
 					<section>
-						<h2>Sidenote: Authentication</h2>
+						<h2>Sidenote: App Authentication</h2>
 						<ul>
 							<li class="fragment">
 								When working with public API's, you'll sometimes need to authenticate your app with an API key
