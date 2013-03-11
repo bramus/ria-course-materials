@@ -1,6 +1,6 @@
 <?php header('Content-type: application/json');
 echo (isset($_GET['callback']) ? $_GET['callback'] : 'callback'); ?>({
-    "course": "RIA",
+    "course": "WMD",
     "lecturers": [
         {
             "id": 1,

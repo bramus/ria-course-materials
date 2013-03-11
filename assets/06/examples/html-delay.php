@@ -1,1 +1,1 @@
-<?php sleep(3); ?><p>RIA is taught by Davy De Winne &amp; Bramus Van Damme</p>
+<?php sleep(3); ?><p>WMD is taught by Davy De Winne &amp; Bramus Van Damme</p>
