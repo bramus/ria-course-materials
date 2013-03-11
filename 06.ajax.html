@@ -292,7 +292,7 @@ xhr = new XMLHttpRequest();
 								Data returned
 								<pre class="bigger"><code class="language-xml">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
 &lt;sample&gt;
-	&lt;course&gt;RIA&lt;/course&gt;
+	&lt;course&gt;WMD&lt;/course&gt;
 	&lt;lecturers&gt;
 		&lt;lecturer&gt;Bramus Van Damme&lt;/lecturer&gt;
 		&lt;lecturer&gt;Davy De Winne&lt;/lecturer&gt;
@@ -337,7 +337,7 @@ xhr.send(null);</code></pre>
 								<ul>
 									<li class="fragment">
 										Data returned
-										<pre class="bigger"><code class="language-html dontrun">&lt;p&gt;RIA is taught by Davy De Winne &amp;amp; Bramus Van Damme&lt;/p&gt;</code></pre>
+										<pre class="bigger"><code class="language-html dontrun">&lt;p&gt;WMD is taught by Davy De Winne &amp;amp; Bramus Van Damme&lt;/p&gt;</code></pre>
 									</li>
 									<li class="fragment">
 										JS Implementation
@@ -366,7 +366,7 @@ xhr.send(null);</code></pre>
 								<ul>
 									<li class="fragment">
 										Data returned
-										<pre class="bigger"><code class="language-js dontrun">alert('&lt;p&gt;RIA is taught by Davy De Winne &amp;amp; Bramus Van Damme&lt;/p&gt;');</code></pre>
+										<pre class="bigger"><code class="language-js dontrun">alert('&lt;p&gt;WMD is taught by Davy De Winne &amp;amp; Bramus Van Damme&lt;/p&gt;');</code></pre>
 									</li>
 									<li class="fragment">
 										JS Implementation
@@ -427,7 +427,7 @@ head.appendChild(script);</code></pre>
 							<li class="fragment">
 								Format Example
 								<pre class="bigger"><code class="language-javascript dontrun">{
-	&quot;course&quot;: &quot;RIA&quot;,
+	&quot;course&quot;: &quot;WMD&quot;,
 	&quot;lecturers&quot;: [
 		{
 			&quot;id&quot;: 1,
@@ -1218,7 +1218,7 @@ history.pushState(stateObj, "page 2", "bar.html");</code></pre>
 								</ul>
 							</li>
 							<li class="fragment">
-								oldIE Note
+								oldIE + IE9 Note
 								<ul>
 									<li>To mimic CORS in IE8&amp;9, you can use <a href="http://www.nczonline.net/blog/2010/05/25/cross-domain-ajax-with-cross-origin-resource-sharing/">a little helper function</a></li>
 								</ul>
@@ -1238,7 +1238,7 @@ history.pushState(stateObj, "page 2", "bar.html");</code></pre>
 								</ul>
 							</li>
 							<li class="fragment">
-								More info on <a href="http://www.html5rocks.com/en/tutorials/cors/">html5rocks.com</a>
+								More info on <a href="http://www.html5rocks.com/en/tutorials/cors/">html5rocks.com</a> and <a href="https://developer.mozilla.org/en-US/docs/DOM/XMLHttpRequest/FormData/Using_FormData_Objects">MDN</a>
 							</li>
 							<li class="fragment">
 								Can we use it already? <a href="http://caniuse.com/xhr2">It looks like it</a> :-)

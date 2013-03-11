@@ -1,5 +1,5 @@
 <?php header('Content-type: application/json'); ?>{
-    "course": "RIA",
+    "course": "WMD",
     "lecturers": [
         {
             "id": 1,

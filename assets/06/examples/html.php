@@ -1,1 +1,1 @@
-<p>RIA is taught by Davy De Winne &amp; Bramus Van Damme</p>
+<p>WMD is taught by Davy De Winne &amp; Bramus Van Damme</p>
