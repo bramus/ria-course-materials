@@ -1324,6 +1324,30 @@ $router->run(function() use ($response) {
 						</div>
 					</section>
 
+					<section>
+						<h2>One more thing</h2>
+						<ul>
+							<li class="fragment">There's no such thing as <code>$_PUT</code>, you'll need to fake it</li>
+						</ul>
+						<div class="fragment">
+							<pre class="bigger"><code class="language-php">&lt;?php
+
+//&hellip;
+
+$router-&gt;put('/movies/\d+', function() {
+
+	// Fake $_PUT
+	$_PUT  = array();
+	parse_str(file_get_contents('php://input'), $_PUT);
+
+	// &hellip;
+
+});
+
+//&hellip;</code></pre>
+						</div>
+					</section>
+
 				</section>
 
 				<!-- 5 : RESTful APIs in jQuery -->
