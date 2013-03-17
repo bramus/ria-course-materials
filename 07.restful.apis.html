@@ -963,7 +963,7 @@
 						<h2>MoviesDB (2)</h2>
 						<ul>
 							<li class="fragment">
-								Example API
+								Example API>
 							</li>
 							<li class="fragment">
 								Play around with the API Explorer to check it out
@@ -976,6 +976,360 @@
 
 				</section>
 
+
+
+
+				<!-- 3 : REST in PHP -->
+				<section>
+
+					<section>
+						<h2>RESTful APIs in PHP</h2>
+						<p><img src="assets/07/groin.png" alt="" title="" height="338" width="600" /></p>
+						<q>Would it cheer you up if I punch Fry in the groin?<br />Cause I'll do it, regardless.</q>
+					</section>
+
+					<section>
+						<h2>Prerequisite: Supporting nice URLs</h2>
+						<ul>
+							<li class="fragment">
+								Route all requests to non-existing files/folders to <code>index.php</code>
+							</li>
+							<li class="fragment" style="margin-top: 1em;">
+								Build <code>index.php</code> in such a way that it decides what to do based on the URL (found in <code>$_SERVER['REQUEST_URI']</code>)
+							</li>
+						</ul>
+					</section>
+
+					<section>
+						<h2>Nice URLs in Apache</h2>
+						<ul>
+							<li class="fragment">
+								Possible using the <code>mod_rewrite</code> Apache Module
+								<ul>
+									<li>Wampserver: not enabled by default (<a href="assets/07/wamp_url_rewrite.png">instructions</a>)</li>
+									<li>MAMP Pro: enabled by default</li>
+								</ul>
+							</li>
+							<li class="fragment" style="margin-top: 1em;">
+								Put a file named <code>.htaccess</code> in your root to redirect requests to non-existing files to <code>index.php</code>
+								<pre class="bigger"><code>&lt;IfModule mod_rewrite.c&gt;
+Options -MultiViews
+RewriteEngine On
+# RewriteBase /
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule &circ; /index.php [L]
+&lt;/IfModule&gt;</code></pre>
+							</li>
+						</ul>
+					</section>
+
+					<section>
+						<h2>Nice URLs in IIS</h2>
+						<ul>
+							<li class="fragment">
+								Possible using the <a href="http://www.iis.net/downloads/microsoft/url-rewrite">IIS Rewrite Module</a>
+							</li>
+							<li class="fragment">
+								Put a file named <code>web.config</code> in your root to redirect requests to non-existing files to <code>index.php</code>
+								<pre class="bigger"><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;configuration&gt;
+	&lt;system.webServer&gt;
+		&lt;rewrite&gt;
+			&lt;rules&gt;
+				&lt;rule name=&quot;Main Rule&quot; stopProcessing=&quot;true&quot;&gt;
+					&lt;match url=&quot;.*&quot; /&gt;
+					&lt;conditions logicalGrouping=&quot;MatchAll&quot;&gt;
+						&lt;add input=&quot;{REQUEST_FILENAME}&quot; matchType=&quot;IsFile&quot; negate=&quot;true&quot; /&gt;
+						&lt;add input=&quot;{REQUEST_FILENAME}&quot; matchType=&quot;IsDirectory&quot; negate=&quot;true&quot; /&gt;
+					&lt;/conditions&gt;
+					&lt;action type=&quot;Rewrite&quot; url=&quot;index.php&quot; /&gt;
+				&lt;/rule&gt;
+			&lt;/rules&gt;
+		&lt;/rewrite&gt;
+	&lt;/system.webServer&gt;
+&lt;/configuration&gt;</code></pre>
+							</li>
+						</ul>
+					</section>
+
+					<section>
+						<h2>Nice URLs in the PHP 5.4 server</h2>
+						<ul>
+							<li class="fragment">
+								<strong>All</strong> requests route to <code>index.php</code> by default
+								<ul>
+									<li class="fragment">You'll need to add some extra PHP code to <code>index.php</code> to force non-404 requests route to the correct file 
+									</li>
+								</ul>
+								<div class="fragment"><pre class="bigger"><code>&lt;?php
+
+$filename = __DIR__ . preg_replace('#(\?.*)$#', '', $_SERVER['REQUEST_URI']);
+if (php_sapi_name() === 'cli-server' &amp;&amp; is_file($filename)) {
+	return false;
+}
+
+// rest of your code here</code></pre></div>
+							</li>
+						</ul>
+						<footer class="fragment"><em>Note: You can start a server by running <code>php -S localhost:8080</code> in your project www-root</em></footer>
+					</section>
+
+					<section>
+						<h2>It's all about the routes</h2>
+						<ul>
+							<li class="fragment">
+								What we essentially need is a router of some sorts that takes the URL and the HTTP method into account
+								<ul>
+									<li class="fragment">If you do a <code>GET</code> request to <code>/movies</code>, show a list of movies</li>
+									<li class="fragment">If you do a <code>GET</code> request to <code>/movies/{id}</code>, show the one specific movie</li>
+									<li class="fragment">If you do a <code>POST</code> request to <code>/movies</code>, insert it</li>
+									<li class="fragment">&hellip;</li>
+								</ul>
+							</li>
+							<li class="fragment" style="margin-top: 1em;">
+								Codewise, it should be something like this
+								<pre class="bigger"><code class="language-php">$router = new Router();
+
+$router-&gt;get('', function() { &hellip; });
+$router-&gt;get('movies/', function() { &hellip; });
+$router-&gt;get('movies/\d+', function() { &hellip; });
+$router-&gt;post('movies/', function() { &hellip; });
+
+$router->run();</code></pre>
+							</li>
+						</ul>
+					</section>
+
+					<section>
+						<h2>Router Demo</h2>
+
+						<figure><img src="assets/07/example-router.png" alt="" title="" width="580" class="noborder" /></figure>
+
+						<p style="font-size: 75%">Let's take a look at <code>assets/07/examples/router/</code> <a href="assets/07/examples/router/">&rarr;</a></p>
+
+					</section>
+
+					<section>
+						<h2>Router Recap (1)</h2>
+						<ul>
+							<li class="fragment">
+								Definitions
+								<ul>
+									<li class="fragment">A route is a combination of a <strong>pattern</strong> and an <strong>HTTP method</strong></li>
+									<li class="fragment">A route is handled by a <strong>handling function</strong> which returns/does x/y</li>
+								</ul>
+							</li>
+
+							<li class="fragment" style="margin-top: 1em;">
+								Pass the baseURL to the constructor if app in subfolder
+								<pre class="bigger"><code class="language-php">$router = new Ikdoeict\Routing\Router('/assets/07/examples/router');</code></pre>
+							</li>
+							<li class="fragment">
+								Hook routes using <code>match()</code>
+								<pre class="bigger"><code class="language-php">$router->match('GET|POST', '<em>pattern</em>', function() { &hellip; });</code></pre>
+							</li>
+
+							<li class="fragment">
+								Or use a shorthand
+								<pre class="bigger"><code class="language-php">$router->get('<em>pattern</em>', function() { &hellip; });</code></pre>
+							</li>
+						</ul>
+					</section>
+
+					<section>
+						<h2>Router Recap (2)</h2>
+						<ul>
+							<li class="fragment">
+								Route patterns can be static or dynamic
+								<ul>
+									<li class="fragment">The dynamic parts of the pattern <em>(<code>\d+</code>, <code>\w+</code>, <code>.*</code>, or <code>.+</code>)</em> will be converted to <strong>route variables</strong> which you pass into the handling function</li>
+								</ul>
+								<pre class="bigger fragment"><code class="language-php">$router->get('movies/\d+', function($id) {
+	echo 'Movie #' . $movieId . ' detail';
+});</code></pre>
+								<pre class="bigger fragment"><code class="language-php">$router->get('movies/\d+/photos/\d+', function($movieId, $photoId) {
+	echo 'Movie #' . $movieId . ' photo #' . $photoId);
+});</code></pre>
+							</li>
+
+							<li class="fragment" style="margin-top: 1em;">
+								Only the first route matched will be handled
+							</li>
+							<li class="fragment">
+								When no matching route is found, a 404 will be returned
+								<ul>
+									<li class="fragment">Override the default 404 handler using <code>$router->set404(<em>function</em>);</code></li>
+								</ul>
+							</li>
+						</ul>
+					</section>
+
+					<section>
+						<h2>Router Recap (3)</h2>
+						<ul>
+							<li class="fragment">
+								Connect middleware before the routes are handled
+								<pre class="bigger fragment"><code class="language-php">$router->before('GET|POST', '<em>pattern</em>', function() {
+	// ...
+});</code></pre>
+							</li>
+							<li class="fragment">
+								Unlike regular routes it's possible to hook several middlewares to one and the same route
+								<pre class="bigger fragment"><code class="language-php">$router->before('GET|POST', 'admin/.*', function() {
+	if (!isset($_SESSION['userId'])) { &hellip; }
+});</code></pre>
+							</li>
+							<li class="fragment" style="margin-top: 1em;">
+								Possible to run one middleware after a route was handled
+								<ul>
+									<li class="fragment">Pass it along the <code>run</code> function</li>
+								</ul>
+								<pre class="bigger fragment"><code class="language-php">$router->run(function() { &hellip; });</code></pre>
+							</li>
+						</ul>
+					</section>
+
+					<section>
+						<h2>It's all about the responses (1)</h2>
+						<ul>
+							<li class="fragment">
+								To easily work with the hypermedia format we've described, let's introduce a <code>Response</code> class
+							</li>
+							<li class="fragment" style="margin-top: 1em;">
+								Class requirements
+								<ul>
+									<li class="fragment">Provide <code>$status</code> and <code>$content</code> datamembers + mutators</li>
+									<li class="fragment">Keep list of allowed HTTP Status Codes</li>
+									<li class="fragment">By default, set status to <code>200</code></li>
+								</ul>
+							</li>
+						</ul>
+					</section>
+
+
+					<section>
+						<h2>It's all about the responses (2)</h2>
+						<div class="fragment">
+							<pre class="bigger"><code class="language-php" style="max-height: 400px; overflow: scroll;">&lt;?php
+namespace Ikdoeict\Rest;
+
+class Response {
+
+	private $status, $content;
+
+	public function __construct() {
+		$this->setStatus(200);
+		$this->setContent('');
+	}
+
+	final public function setStatus($statusCode) {
+		$codes = array(
+			200 =&gt; 'OK',
+			// ... List of statuscode with status texts
+		);
+		$this->status = array(
+			'code' =&gt; $statusCode,
+			'text' =&gt; $codes[$statusCode]
+		);
+		<span style="white-space: nowrap;">header('HTTP/1.1 ' . $this-&gt;status['code'] . ' ' . $this-&gt;status['text']);</span>
+	}
+
+	final public function setContent($content) {
+		$this->content = $content;
+	}
+
+	public function finish() {
+
+		$json = json_encode(
+			array(
+				'status' =&gt; $this->status,
+				'content' =&gt; $this->content
+			)
+		);
+
+		header('Cache-Control: no-cache, must-revalidate');
+		header('Expires: Mon, 26 Jul 1997 05:00:00 GMT');
+		header('Content-type: application/json');
+		echo $json;
+
+		exit();
+	}
+
+}
+// EOF</code></pre>
+						</div>
+						<footer class="fragment">Call <code>$response-&gt;finish();</code> to let it show your response in the format we agreed upon</footer>
+					</section>
+
+					<section>
+						<h2>It's all about the responses (4)</h2>
+						<ul>
+							<li class="fragment">Supporting JSONP is also fairly easy: pass <code>$_GET['callback']</code> to the <code>finish</code> function</li>
+						</ul>
+						<div class="fragment">
+							<pre class="bigger"><code class="language-php" style="max-height: 400px; overflow: scroll;">public function finish($jsonp = null) {
+
+	$json = &hellip;
+
+	header('Cache-Control: no-cache, must-revalidate');
+	header('Expires: Mon, 26 Jul 1997 05:00:00 GMT');
+
+	if ($jsonp) {
+		header('Content-type: application/javascript');
+		echo $jsonp . '(' . $json . ');';
+	} else {
+		header('Content-type: application/json');
+		echo $json;
+	}
+
+	exit();
+
+}</code></pre>
+						</div>
+					</section>
+
+					<section>
+						<h2>Response Demo</h2>
+
+						<figure><img src="assets/07/example-response.png" alt="" title="" width="580" class="noborder" /></figure>
+
+						<p style="font-size: 75%">Let's take a look at <code>assets/07/examples/response/</code> <a href="assets/07/examples/response/">&rarr;</a></p>
+
+					</section>
+
+					<section>
+						<h2>And now, Router &amp; Response together</h2>
+						<div class="fragment">
+							<pre class="bigger"><code class="language-php">&lt;?php
+
+$router = new Ikdoeict\Routing\Router();
+$response = new Ikdoeict\Rest\Response();
+
+// Override the standard router 404
+$router->set404(function() use ($response) {
+	$response-&gt;setStatus('404');
+	$response-&gt;setContent('Invalid resource');
+	$response-&gt;finish();
+});
+
+// Define our routes
+$router-&gt;get('', function() use ($response) {
+	$response-&gt;setContent('Welcome!');
+});
+
+// &hellip; (more routes here)
+
+// Run the router
+$router->run(function() use ($response) {
+	$response-&gt;finish(isset($_GET['callback']) ? $_GET['callback'] : null);
+});
+
+// EOF</code></pre>
+						</div>
+					</section>
+
+				</section>
 
 				<!-- 5 : RESTful APIs in jQuery -->
 				<section>
@@ -1016,524 +1370,6 @@
 
 
 
-				<!-- 3 : REST in Plonk -->
-				<section>
-
-					<section>
-						<h2>REST in Plonk</h2>
-						<p><img src="assets/07/groin.png" alt="" title="" height="338" width="600" /></p>
-						<q>Would it cheer you up if I punch Fry in the groin?<br />Cause I'll do it, regardless.</q>
-					</section>
-
-					<section>
-						<h2>Why Plonk?</h2>
-						<ul>
-							<li class="fragment">
-								We've been using it for quite some time and know it
-							</li>
-							<li class="fragment">
-								With some minor adjustments we implement our API
-								<ol>
-									<li class="fragment">
-										Support <em>nice URLs</em> (<code>http://mysite.tld/module/view/other/params</code>) with <code>mode_rewrite</code>
-									</li>
-									<li class="fragment">
-										Build our own <code>PlonkApiController</code> on top of <code>PlonkController</code>
-										<ul>
-											<li class="fragment">Key difference: no processed templates but JSON as output</li>
-											<li class="fragment">Other difference: no <code>actions</code>, only <code>views</code> <em>(more on that later)</em></li>
-										</ul>
-									</li>
-									<li class="fragment">
-										Build our API implementation on <code>PlonkApiController</code>
-									</li>
-								</ol>
-							</li>
-						</ul>
-					</section>
-
-					<section>
-						<h2>Plonk OO Websites Recap</h2>
-						<ul>
-							<li class="fragment">
-								<code>index.php</code> creates an instance of <code>PlonkWebsite</code>
-							</li>
-							<li class="fragment">
-								<code>PlonkWebsite</code> is the <em>Front Controller</em> en decides which module to load based on the <code>module</code> URL parameter
-							</li>
-							<li class="fragment">
-								A module is built on top of <code>PlonkController</code> which
-								<ol>
-									<li class="fragment">Loads the main template</li>
-									<li class="fragment">Processes the action <em>(based on a sent in <code>moduleAction</code>)</em></li>
-									<li class="fragment">Loads the page template <em>(based on a <code>view</code> URL param)</em></li>
-									<li class="fragment">Processes the view</li>
-									<li class="fragment">Outputs the main template via the <code>display()</code> function</li>
-								</ol>
-							</li>
-						</ul>
-					</section>
-
-					<section>
-						<h2>Before we dive in</h2>
-						<ul>
-							<li class="fragment">
-								I like my code clean, concise, but most of all <strong>readable</strong>
-								<ul>
-									<li class="fragment">
-										Same goes for JSON API Responses
-									</li>
-								</ul>
-							</li>
-							<li class="fragment">
-								RIA Response format convention:
-								<ul>
-									<li class="fragment">
-										Next to sending the response code and text as an HTTP status, also send it in the response itself, in a <code>status</code> object
-									</li>
-									<li class="fragment">
-										Send the data in a <code>content</code> object
-									</li>
-								</ul>
-								<div class="fragment"><pre class="bigger language-javascript dontrun"><code>{
-   &quot;status&quot;:
-   {
-	   &quot;code&quot;: 401,
-	   &quot;text&quot;: &quot;Unauthorized&quot;
-   },
-   &quot;content&quot;: &quot;The API Key does not exist or is not valid for this domain&quot;
-}</code></pre></div>
-							</li>
-						</ul>
-					</section>
-
-					<section>
-						<h2>1. Support nice URLs (1)</h2>
-						<ul>
-							<li class="fragment">
-								Let <code>.htaccess</code> route all requests to non-existing files/directories to <code>index.php</code>
-								<pre class="bigger"><code>&lt;IfModule mod_rewrite.c&gt;
-RewriteEngine On
-RewriteBase /
-RewriteCond %{REQUEST_FILENAME} !-f
-RewriteCond %{REQUEST_FILENAME} !-d
-RewriteRule . /index.php [L]
-&lt;/IfModule&gt;</code></pre>
-							</li>
-							<li class="fragment">Note: In WampServer, you'll <a href="assets/07/wamp_url_rewrite.png">need to enable the Apache rewrite module first</a></li>
-							<li class="fragment">Note: Won't work in IIS <em>(alternative available: #lmgtfy)</em></li>
-						</ul>
-					</section>
-
-					<section>
-						<h2>1. Support nice URLs (2)</h2>
-						<ul>
-							<li class="fragment">
-								Adjust <code>PlonkWebsite-&gt;performPrerequisites()</code> to fetch the <em>module</em> from the URL
-								<pre class="bigger language-php"><code>// store the url string
-$this-&gt;urlString = $_SERVER['REQUEST_URI'];
-if (strstr($this-&gt;urlString, '?')) {
-	$this-&gt;urlParts = explode('/', substr($this-&gt;urlString, 1,
-	strpos($this-&gt;urlString, '?') - 1));
-} else {
-	$this-&gt;urlParts = explode('/', substr($this-&gt;urlString, 1));
-}</code></pre>
-								<ul>
-									<li class="fragment">The module is stored in <code>$this-&gt;urlParts[0]</code></li>
-									<li class="fragment">
-										Pass <code>$this-&gt;urlParts</code> to <code>PlonkController-&gt;__construct()</code> so that it can fetch the <em>view</em> from <code>$this-&gt;urlParts[1]</code>
-									</li>
-									<li class="fragment">
-										The module constructor should store <code>$this-&gt;urlParts</code> for future reference
-									</li>
-								</ul>
-							</li>
-							<li class="fragment">Note: Requires that your app is in the root of your server (use localhost or use <a href="http://mikebernat.com/blog/Adding_Virtual_Hosts_to_Apache_&amp;_Wampserver">vhosts</a>!)</li>
-						</ul>
-					</section>
-
-
-					<section>
-						<h2>2. PlonkApiController</h2>
-						<ul>
-							<li class="fragment">
-								Basic structure <em>(will change)</em>
-								<pre class="bigger language-php"><code>&lt;?php
-class PlonkApiController extends PlonkController {
-
-	public function __construct(array $urlParts) {
-		parent::__construct($urlParts);
-	}
-
-	protected function display($status, $content) {
-		header('Cache-Control: no-cache, must-revalidate');
-		header('Expires: Mon, 26 Jul 1997 05:00:00 GMT');
-		header('Content-type: application/json');
-		header('HTTP/1.1 ' . $this->status[0] . ' ' . $this->status[1]);
-		echo json_encode(array(
-			'status' => $this->status,
-			'content' => $this->content
-		));
-	}
-
-	protected function loadMainTemplate() { return; }
-	protected function loadPageTemplate() { return; }
-}
-// EOF</code></pre>
-							</li>
-						</ul>
-					</section>
-
-
-					<section>
-						<h2>3. Implementation</h2>
-						<ul>
-							<li class="fragment">
-								Very simple example
-								<pre class="bigger language-php"><code>&lt;?php
-class SampleapiController extends PlonkApiController {
-
-	protected $views = array('dogs');
-
-	public function showDogs() {
-		// detail
-		if (isset($this-&gt;urlParts[2]) &amp;&amp; trim($this-&gt;urlParts[2]) != '') {
-			$dog = SampleapiDB::getDog($this-&gt;urlParts[2]);
-
-			if ($dog) {
-				$this-&gt;display(array(200,'OK'), $dog);
-			} else {
-				$this-&gt;display(array(404,'Not Found'), 'Invalid Dog ID');
-			}
-		}
-		// overview
-		else {
-			$dogs = SampleapiDB::getDogs();
-			$this-&gt;display(array(200,'OK'), $dogs);
-		}
-	}
-}
-// EOF</code></pre>
-							</li>
-						<ul>
-					</section>
-
-					<section>
-						<h2>That's it?</h2>
-						<ul>
-							<li class="fragment">Basically, yes</li>
-							<li class="fragment">
-								Code can be optimized though
-								<ol>
-									<li class="fragment">Optimize working with statuses</li>
-									<li class="fragment">Support JSONP</li>
-									<li class="fragment">Implement other request methods</li>
-									<li class="fragment">Limit request methods (verbs) on resources</li>
-									<li class="fragment">Enable CORS</li>
-								</ol>
-							</li>
-						</ul>
-					</section>
-
-					<section>
-						<h2>1. Working with statuses (1)</h2>
-						<ul>
-							<li class="fragment">Provide <code>$status</code> and <code>$content</code> datamembers + mutators for them</li>
-							<li class="fragment">Keep list of allowed HTTP Status Codes</li>
-							<li class="fragment">By default, set status to <code>200</code></li>
-						</ul>
-					</section>
-
-					<section>
-						<h2>1. Working with statuses (2)</h2>
-						<div class="fragment">
-							<pre class="bigger language-php"><code>&lt;?php
-class PlonkApiController extends PlonkController {
-
-	private $status, $content;
-
-	final protected function setStatus($statusCode) {
-		$codes = array(
-			200 =&gt; 'OK',
-			// ... List of statuscode with status texts
-		);
-		$this->status = array(
-			'code' => $statusCode,
-			'text' => $codes[$statusCode]
-		);
-		header('HTTP/1.1 ' . $this->status['code'] . ' ' . $this->status['text']);
-	}
-
-	final protected function setContent($content) {
-		$this->content = $content;
-	}
-
-	...
-
-}
-// EOF</code></pre>
-						</div>
-					</section>
-
-					<section>
-						<h2>1. Working with statuses (3)</h2>
-						<div class="fragment">
-							<pre class="bigger language-php"><code>&lt;?php
-class PlonkApiController extends PlonkController {
-
-	...
-
-	protected function display() {
-		header('Cache-Control: no-cache, must-revalidate');
-		header('Expires: Mon, 26 Jul 1997 05:00:00 GMT');
-		header('Content-type: application/json');
-
-		echo json_encode(
-			array(
-				'status' => $this->status,
-				'content' => $this->content
-			)
-		);
-	}
-
-	...
-
-}
-// EOF</code></pre>
-						<p style="font-size: 50%;">No need to call <code>display()</code> from the implementation anymore, just call <code>setStatus()</code> and <code>setContent()</code></p>
-						</div>
-					</section>
-
-					<section>
-						<h2>2. JSONP</h2>
-						<ul>
-							<li class="fragment">When outputting, check if <code>callback</code> URL param is set</li>
-						</ul>
-						<div class="fragment">
-							<pre class="bigger language-php"><code>protected function display() {
-
-	...
-
-	$json = json_encode(
-		array(
-			'status' => $this->status,
-			'content' => $this->content
-		)
-	);
-
-	// jsonp
-	if (PlonkFilter::getGetValue('callback')) {
-		header('Content-type: application/javascript');
-		echo PlonkFilter::getGetValue('callback') . '(' . $json . ');';
-	}
-
-	// json
-	else {
-		header('Content-type: application/json');
-		echo $json;
-	}
-}</code></pre>
-						</div>
-					</section>
-
-					<section>
-						<h2>3. Other request methods (1)</h2>
-						<ul>
-							<li class="fragment">Keep track of the <code>$requestMethod</code> and implement according to its value</li>
-						</ul>
-						<div class="fragment">
-							<pre class="bigger language-php"><code>&lt;?php
-class PlonkApiController extends PlonkController {
-
-	public function __construct(array $urlParts) {
-
-		// Call Parent Class
-		parent::__construct($urlParts);
-
-		// store request method
-		$this->requestMethod = $_SERVER['REQUEST_METHOD'];
-
-	}
-
-}
-// EOF</code></pre>
-						</div>
-					</section>
-
-					<section>
-						<h2>3. Other request methods (2)</h2>
-						<div class="fragment">
-							<pre class="language-php"><code>public function showDogs() {
-	if (isset($this-&gt;urlParts[2]) &amp;&amp; trim($this-&gt;urlParts[2]) != '') { // detail or delete or update
-		$dog = SampleapiDB::getDog($this-&gt;urlParts[2]);
-		if ($dog) {
-			switch($this-&gt;requestMethod) {
-				case 'GET':
-					// get Dog + Return it + Status 200
-				break;
-				case 'PUT':
-					// Update Dog + Status 200 (all params set) or 400 (params missing)
-				break;
-				case 'DELETE':
-					// Delete Dog + Status 204
-				break;
-			}
-		} else {
-			$this-&gt;setStatus(404);
-			$this-&gt;setContent('Invalid Dog ID');
-		}
-	} else { // overview or insert
-		switch($this-&gt;requestMethod) {
-			case 'GET':
-				// get Dogs + Return them + Status 200
-			break;
-			case 'POST':
-				// Insert Dog + Status 201 (all params set) or 400 (params missing)
-			break;
-		}
-	}
-}</code></pre>
-						</div>
-					</section>
-
-					<section>
-						<h2>3. Other request methods (3)</h2>
-						<ul>
-							<li class="fragment">In PHP, there is no <code>$_PUT</code> ... but we can build that ourselves!</li>
-						</ul>
-						<div class="fragment">
-							<pre class="bigger language-php"><code>...
-case 'PUT':
-
-	$_PUT = array();
-	parse_str(file_get_contents('php://input'), $_PUT);
-
-	// Update Dog + Status 200 (all params set) or 400 (params missing)
-
-break;
-...</code></pre>
-						</div>
-						<ul>
-							<li class="fragment">Note that <code>$_PUT</code> isn't global!</li>
-						</ul>
-					</section>
-
-					<section>
-						<h2>4. Limit request methods (1)</h2>
-						<ul>
-							<li class="fragment">Manually check if the request method is allowed. If not, return a <code>405 &mdash; Method Not Allowed</code></li>
-						</ul>
-						<div class="fragment">
-							<pre class="bigger language-php"><code>public function showDogs() {
-	if (isset($this-&gt;urlParts[2]) &amp;&amp; trim($this-&gt;urlParts[2]) != '') { // detail or delete or update
-		$dog = SampleapiDB::getDog($this-&gt;urlParts[2]);
-		if ($dog) {
-			$this-&gt;setAllowedMethods(array('GET', 'PUT', 'DELETE'));
-			// ...
-		} else {
-			$this-&gt;setStatus(404);
-			$this-&gt;setContent('Invalid Dog ID');
-		}
-	} else { // overview or insert
-		$this-&gt;setAllowedMethods(array('GET, 'POST'));
-		// ...
-	}
-}</code></pre>
-						</div>
-					</section>
-
-					<section>
-						<h2>4. Limit request methods (2)</h2>
-						<div class="fragment">
-							<pre class="bigger language-php"><code>class PlonkApiController extends PlonkController {
-	...
-	public function setAllowedMethods(array $methods = array('get')) {
-		// We'll implement this one in the lab ;-)
-	}
-	...
-}</code></pre>
-						</div>
-					</section>
-
-					<section>
-						<h2>5. CORS (1)</h2>
-						<ul>
-							<li class="fragment">When using CORS, XHR2 does a preflight <code>OPTIONS</code> request to the API endpoint to check the headers if CORS is enabled</li>
-							<li class="fragment">CORS can be enabled via the <code>Access-Control-Allow-Origin</code> header</li>
-							<li class="fragment">XHR2 will also check the <code>Access-Control-Allow-Methods</code> header to see which methods are allowed</li>
-							<li class="fragment">Summarized: <code>PlonkApiController</code> needs to send back those headers if an <code>OPTIONS</code> is done</li>
-						</ul>
-					</section>
-
-					<section>
-						<h2>5. CORS (2)</h2>
-						<div class="fragment">
-							<pre class="language-php"><code>class PlonkApiController extends PlonkController {
-
-	...
-
-	public function __construct(array $urlParts) {
-
-		// Call Parent Class
-		parent::__construct($urlParts);
-
-		// store request method
-		$this-&gt;requestMethod = $_SERVER['REQUEST_METHOD'];
-
-		// Tell client that all methods are allowed (must be done first!)
-		if ($this-&gt;requestMethod == 'OPTIONS') {
-			header('Access-Control-Allow-Methods: GET, POST, PUT, DELETE');
-			exit();
-		} else {
-			$this-&gt;setStatus(200);
-			$this-&gt;setContent('');
-		}
-
-	}
-
-	...
-
-	final protected function setCors($cors = null) {
-		$this-&gt;cors = (string) $cors;
-		header('Access-Control-Allow-Origin: ' . $this-&gt;cors);
-	}
-
-	...
-
-}</code></pre>
-						</div>
-					</section>
-
-					<section>
-						<h2>5. CORS (3)</h2>
-						<div class="fragment">
-							<pre class="bigger language-php"><code>class SampleapiController extends PlonkApiController {
-
-	public function __construct(array $urlParts) {
-
-		// Set this before calling the parent constructor,
-		// so that it is outputted when an OPTIONS request comes in
-		$this->setCors('*');
-
-		// Call Parent Class Constructor
-		parent::__construct($urlParts);
-
-	}
-
-	...
-
-}</code></pre>
-						</div>
-					</section>
-
-					<section>
-						<h2>Phew!</h2>
-						<ul>
-							<li class="fragment">Yeah!</li>
-						</ul>
-					</section>
-
-				</section>
 
 				<!-- 4 : API Authentication -->
 				<section>
@@ -1563,25 +1399,17 @@ break;
 								Make use of API-Keys
 								<ul>
 									<li class="fragment">Require API-Key to be sent in via a header</li>
-									<li class="fragment">Check API-Key in constructor</li>
+									<li class="fragment">Check API-Key as a before middleware on all routes</li>
 								</ul>
 								<div class="fragment">
-									<pre class="bigger language-php"><code>public function __construct(array $urlParts) {
-	$this-&gt;setCors('*');
-	header('Access-Control-Allow-Headers: X-Api-Key');
-	parent::__construct($urlParts);
-	$this-&gt;checkApiKey();
-}
-
-private function checkApiKey() {
+									<pre class="bigger language-php"><code>$router->before('GET|POST|PUT|DELETE', '.*', function() use ($response) {
 	$headers = apache_request_headers();
-	if(!isset($headers['X-Api-Key'] || !ApiDB::isValidApiKey($headers['X-Api-Key']) {
-		$this-&gt;setStatus(401);
-		$this-&gt;setContent('Missing or invalid API Key.');
-		$this-&gt;display();
-		exit();
+	if(!isset($headers['X-Api-Key']) || !ApiDB::isValidApiKey($headers['X-Api-Key'])) {
+		$response-&gt;setStatus(401);
+		$response-&gt;setContent('Missing or invalid API Key.');
+		$response-&gt;finish();
 	}
-}</code></pre>
+});</code></pre>
 								</div>
 							</li>
 						</ul>
@@ -1608,7 +1436,7 @@ private function checkApiKey() {
 }</code></pre>
 								</div>
 							</li>
-							<li class="fragment">Also: won't work on IIS</li>
+							<li class="fragment"><em>Note: this won't work on IIS</em></li>
 						</ul>
 					</section>
 
