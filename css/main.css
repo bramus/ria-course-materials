@@ -1170,6 +1170,6 @@ ins code, code.ok {
 	margin-bottom: 0;
 }
 
-abbr {
+abbr, acronym {
 	border-bottom: 1px dotted #ccc;
 }
