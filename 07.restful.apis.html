@@ -702,6 +702,12 @@
 										</ul>
 									</li>
 									<li class="fragment">
+										Content negotiation:
+										<ul>
+											<li>e.g. <code>Accept: application/xml; q=0.8, application/json</code></li>
+										</ul>
+									</li>
+									<li class="fragment">
 										Also use this header for versioning
 										<ul>
 											<li>e.g. <code>Accept: application/vnd.ikdoeict.whatever-v2+json</code><br/>or <code>Accept: application/collection+json;v=2</code></li>
@@ -963,7 +969,7 @@
 						<h2>MoviesDB (2)</h2>
 						<ul>
 							<li class="fragment">
-								Example API>
+								Example API
 							</li>
 							<li class="fragment">
 								Play around with the API Explorer to check it out
@@ -1330,6 +1336,30 @@ $router->run(function() use ($response) {
 });
 
 // EOF</code></pre>
+						</div>
+					</section>
+
+					<section>
+						<h2>One more thing</h2>
+						<ul>
+							<li class="fragment">There's no such thing as <code>$_PUT</code>, you'll need to fake it</li>
+						</ul>
+						<div class="fragment">
+							<pre class="bigger"><code class="language-php">&lt;?php
+
+//&hellip;
+
+$router-&gt;put('/movies/\d+', function() {
+
+	// Fake $_PUT
+	$_PUT  = array();
+	parse_str(file_get_contents('php://input'), $_PUT);
+
+	// &hellip;
+
+});
+
+//&hellip;</code></pre>
 						</div>
 					</section>
 
