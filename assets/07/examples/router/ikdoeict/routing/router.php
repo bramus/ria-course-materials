@@ -28,12 +28,6 @@ class Router {
 	 */
 	private $notFound;
 
-	private $rewritebase;
-
-	public function __construct($rewritebase = null) {
-		$this->rewritebase = $rewritebase;
-	}
-
 	/**
 	* Before handlers
 	*
@@ -123,8 +117,9 @@ class Router {
 		// The current page URL
 		$uri = $_SERVER['REQUEST_URI'];
 
-		// remove rewrite base
-		if ($this->rewritebase) $uri = str_replace($this->rewritebase, '', $uri);
+		// remove rewrite basepath
+		$basepath = implode('/', array_slice(explode('/', $_SERVER["SCRIPT_NAME"]), 0, -1)) . '/';
+		$uri = substr($uri, strlen($basepath));
 
 		// Don't take query params into account on the URL
 		if (strstr($uri, '?')) $uri = substr($uri, 0, strpos($uri, '?'));
