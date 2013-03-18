@@ -1452,7 +1452,10 @@ $router-&gt;put('/movies/\d+', function() {
 						<h2>1. API Consumers (2)</h2>
 						<ul>
 							<li class="fragment">
-								Note: <code>apache_request_headers()</code> not always available!
+								Note: <code>apache_request_headers()</code> not always available (IIS)!
+									<ul>
+										<li class="fragment">Paste in the code below to always have it available</li>
+									</ul>
 								<div class="fragment">
 									<pre class="bigger language-php"><code>if (!function_exists('apache_request_headers')) {
 	eval('
@@ -1469,7 +1472,6 @@ $router-&gt;put('/movies/\d+', function() {
 }</code></pre>
 								</div>
 							</li>
-							<li class="fragment"><em>Note: this won't work on IIS</em></li>
 						</ul>
 					</section>
 
