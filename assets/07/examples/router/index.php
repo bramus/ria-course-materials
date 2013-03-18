@@ -14,7 +14,7 @@
 	// Before middleware
 	$router->before('GET|POST', '/admin/.*', function() {
 		if (!isset($_SESSION['userId'])) {
-			header('location: /assets/07/examples/router');
+			header('location: /assets/07/examples/router/admin');
 			exit();
 		}
 	});
