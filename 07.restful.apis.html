@@ -1136,7 +1136,7 @@ $router->run();</code></pre>
 								<ul>
 									<li class="fragment">The dynamic parts of the pattern <em>(<code>\d+</code>, <code>\w+</code>, <code>.*</code>, or <code>.+</code>)</em> will be converted to <strong>route variables</strong> which you pass into the handling function</li>
 								</ul>
-								<pre class="bigger fragment"><code class="language-php">$router->get('movies/\d+', function($id) {
+								<pre class="bigger fragment"><code class="language-php">$router->get('movies/\d+', function($movieId) {
 	echo 'Movie #' . $movieId . ' detail';
 });</code></pre>
 								<pre class="bigger fragment"><code class="language-php">$router->get('movies/\d+/photos/\d+', function($movieId, $photoId) {
