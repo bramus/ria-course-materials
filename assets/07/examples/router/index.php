@@ -9,7 +9,7 @@
 	require_once __DIR__ . '/ikdoeict/routing/router.php';
 
 	// Create a router and a response
-	$router = new Ikdoeict\Routing\Router('/assets/07/examples/router');
+	$router = new Ikdoeict\Routing\Router();
 
 	// Before middleware
 	$router->before('GET|POST', 'admin/.*', function() {
