@@ -42,6 +42,9 @@
 	$router->get('/hello', function() {
 		echo 'Hello, what is your name?';
 	});
+	$router->post('/hello', function() {
+		echo 'Hello POST, what is your name?';
+	});
 
 	// Hello name
 	$router->get('/hello/\w+', function($name) {
