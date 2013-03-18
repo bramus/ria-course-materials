@@ -12,7 +12,7 @@
 	$router = new Ikdoeict\Routing\Router();
 
 	// Before middleware
-	$router->before('GET|POST', 'admin/.*', function() {
+	$router->before('GET|POST', '/admin/.*', function() {
 		if (!isset($_SESSION['userId'])) {
 			header('location: /assets/07/examples/router');
 			exit();
@@ -34,27 +34,27 @@
 
 
 	// Index
-	$router->get('', function() {
+	$router->get('/', function() {
 		echo 'Welcome to my website!<br />Allowed routes: /hello, /hello/{name}<br />Subresources of /admin only allowed if you are logged in';
 	});
 
 	// Hello
-	$router->get('hello/', function() {
+	$router->get('/hello', function() {
 		echo 'Hello, what is your name?';
 	});
 
 	// Hello name
-	$router->get('hello/\w+', function($name) {
+	$router->get('/hello/\w+', function($name) {
 		echo 'Hello ' . htmlentities($name);
 	});
 
 	// Admin index
-	$router->get('admin/', function() {
+	$router->get('/admin', function() {
 		echo '(admin login form here)';
 	});
 
 	// Admin subpages
-	$router->get('admin/.*', function() {
+	$router->get('/admin/.*', function() {
 		echo 'This should only be visible if you are logged in';
 	});
 

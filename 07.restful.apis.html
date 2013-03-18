@@ -1086,10 +1086,10 @@ if (php_sapi_name() === 'cli-server' &amp;&amp; is_file($filename)) {
 								Codewise, it should be something like this
 								<pre class="bigger"><code class="language-php">$router = new Router();
 
-$router-&gt;get('', function() { &hellip; });
-$router-&gt;get('movies/', function() { &hellip; });
-$router-&gt;get('movies/\d+', function() { &hellip; });
-$router-&gt;post('movies/', function() { &hellip; });
+$router-&gt;get('/', function() { &hellip; });
+$router-&gt;get('/movies', function() { &hellip; });
+$router-&gt;get('/movies/\d+', function() { &hellip; });
+$router-&gt;post('/movies', function() { &hellip; });
 
 $router->run();</code></pre>
 							</li>
@@ -1136,10 +1136,10 @@ $router->run();</code></pre>
 								<ul>
 									<li class="fragment">The dynamic parts of the pattern <em>(<code>\d+</code>, <code>\w+</code>, <code>.*</code>, or <code>.+</code>)</em> will be converted to <strong>route variables</strong> which you pass into the handling function</li>
 								</ul>
-								<pre class="bigger fragment"><code class="language-php">$router->get('movies/\d+', function($movieId) {
+								<pre class="bigger fragment"><code class="language-php">$router->get('/movies/\d+', function($movieId) {
 	echo 'Movie #' . $movieId . ' detail';
 });</code></pre>
-								<pre class="bigger fragment"><code class="language-php">$router->get('movies/\d+/photos/\d+', function($movieId, $photoId) {
+								<pre class="bigger fragment"><code class="language-php">$router->get('/movies/\d+/photos/\d+', function($movieId, $photoId) {
 	echo 'Movie #' . $movieId . ' photo #' . $photoId);
 });</code></pre>
 							</li>
@@ -1167,7 +1167,7 @@ $router->run();</code></pre>
 							</li>
 							<li class="fragment">
 								Unlike regular routes it's possible to hook several middlewares to one and the same route
-								<pre class="bigger fragment"><code class="language-php">$router->before('GET|POST', 'admin/.*', function() {
+								<pre class="bigger fragment"><code class="language-php">$router->before('GET|POST', '/admin/.*', function() {
 	if (!isset($_SESSION['userId'])) { &hellip; }
 });</code></pre>
 							</li>
