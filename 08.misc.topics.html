@@ -983,6 +983,32 @@ move();
 				</section>
 
 
+				<!-- Node.js -->
+				<section>
+					<section>
+						<h2>Node.js</h2><ul>
+							<li class="fragment">
+								Event-Driven Model
+							</li>
+							<li class="fragment">
+								 Powered by Google's V8 (JavaScript!)
+							</li>
+							<li class="fragment">
+								Can be used as a webserver
+							</li>
+						</ul>
+						<pre class="bigger fragment"><code class="language-javscript dontrun">var http = require('http');
+
+http.createServer(function (req, res) {
+  res.writeHead(200, {'Content-Type': 'text/plain'});
+  res.end('Hello World\n');
+}).listen(1337, '127.0.0.1');
+
+console.log('Server running at http://127.0.0.1:1337/');</code></pre>
+					</section>
+				</section>
+
+
 				<!-- 14 : Reporting Bugs -->
 				<section>
 					<section>
