@@ -562,7 +562,7 @@ for (var i = 0; i &lt; 100; i++) {
 						<h2>The UI Thread</h2>
 						<ul>
 							<li class="fragment">
-								Solution: use <code>setTimeOut()</code> or <code>setInterval()</code>
+								Solution <em>(animations)</em>: use <code>setTimeOut()</code> or <code>setInterval()</code> or <code>requestAnimationFrame()</code>
 								<pre class="bigger"><code class="language-javascript">var square = document.getElementById('square2'),
     i = 0;
 var move = function() {
@@ -575,7 +575,7 @@ move();
 								<div id="square2" style="margin: 0 auto 0; background: lime; width: 100px; height: 100px; text-align: center; line-height: 100px; font-size: 14px; position: relative; left: 0;">#square</div>
 							</li>
 							<li class="fragment">
-								Other solution: use XHR asynchronously
+								Solution <em>(XHR)</em>: use it asynchronously
 							</li>
 						</ul>
 
