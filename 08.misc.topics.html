@@ -996,6 +996,9 @@ move();
 							<li class="fragment">
 								Can be used as a webserver
 							</li>
+							<li class="fragment">
+								Ships with a package manager <code>NPM</code> (cfr. Composer for PHP)
+							</li>
 						</ul>
 						<pre class="bigger fragment"><code class="language-javscript dontrun">var http = require('http');
 
@@ -1005,6 +1008,39 @@ http.createServer(function (req, res) {
 }).listen(1337, '127.0.0.1');
 
 console.log('Server running at http://127.0.0.1:1337/');</code></pre>
+					</section>
+				</section>
+
+
+				<!-- Grunt -->
+				<section>
+					<section>
+						<h2>Grunt</h2><ul>
+							<li class="fragment">
+								JavaScript Task Runner
+								<ul>
+									<li>Minification, compilation, unit testing, linting, etc, </li>
+								</ul>
+							</li>
+							<li class="fragment">
+								Installation via NPM
+							</li>
+						</ul>
+						<pre class="bigger fragment"><code class="language-javscript dontrun">module.exports = function(grunt) {
+  grunt.initConfig({
+    lint: { all: ['js/*.js'] },
+    concat: { 'build/pointer.js': [
+      'js/libs/modernizr-touch.js',
+      'js/gesture.js',
+      'js/doubletap.js',
+      'js/longpress.js',
+      'js/scale.js']
+    },
+    min: { 'build/pointer.min.js': ['build/pointer.js'] },
+  });
+
+  grunt.registerTask('default', 'lint concat min');
+};</code></pre>
 					</section>
 				</section>
 
