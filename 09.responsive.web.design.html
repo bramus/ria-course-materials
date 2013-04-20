@@ -89,6 +89,12 @@
 						</div>
 						-->
 					</section>
+
+					<section>
+						<h2>Responsive Web Design</h2>
+						<blockquote>Responsive design refers to an approach in web design that provides an <strong style="font-size: 100%; color: inherit; background: none; font-family: inherit; border-bottom: 1px solid hsl(185, 85%, 50%);">optimal viewing experience</strong> across a wide range of screen resolutions and devices. This includes easy reading and navigation with a minimum of resizing, panning, and scrolling. This is accomplished using <strong style="font-size: 100%; color: inherit; background: none; font-family: inherit; border-bottom: 1px solid hsl(185, 85%, 50%);">the same codebase and content</strong>, instead of separate sites for different devices.</blockquote>
+						<p style="text-align: right; width: 85%;"><small><em>&mdash; <a href="http://viget.com/advance/responsive-design-an-overview">Responsive Design, An Overview</a></em></small></p>
+					</section>
 				</section>
 
 
@@ -247,14 +253,9 @@
 								</ul>
 							</li>
 							<li class="fragment">
-								Use <code>box-sizing: border-box;</code> when working with borders to adjust the box model being used
+								Converting vertical values of the grid are a tad tricky, as percentages don't work
 								<ul>
-									<li>
-										That way <a href="http://css-tricks.com/box-sizing/">the rendered width will be the CSS <code>width</code> you specify</a>; the padding and border won't be added to it
-										<div style="text-align: center;">
-											<img src="assets/09/widthbox.png" alt="" title="" height="100" width="" class="zoom" />
-										</div>
-									</li>
+									<li>Use <code>em</code> for those instead</li>
 								</ul>
 							</li>
 						</ul>
@@ -330,7 +331,7 @@
 					</section>
 
 					<section>
-						<h2>Closing Notes</h2>
+						<h2>Closing Notes / Tips</h2>
 						<ul>
 							<li class="fragment">
 								Don't round the values that you've calculated.
@@ -339,9 +340,30 @@
 								</ul>
 							</li>
 							<li class="fragment">
-								When creating a fluid grid, it's not common to convert the vertical values.
+								Set the (max-)width of the wrapper in <code>em</code> too
+							</li>
+							<li class="fragment">
+								When working with border use <code>box-sizing: border-box;</code> to adjust the box model being used
+								<ul>
+									<li>
+										That way <a href="http://css-tricks.com/box-sizing/">the rendered width will be the CSS <code>width</code> you specify</a>; the padding and border won't be added to it
+										<div style="text-align: center;">
+											<img src="assets/09/widthbox.png" alt="" title="" height="100" width="" class="zoom" />
+										</div>
+									</li>
+								</ul>
 							</li>
 						</ul>
+					</section>
+
+					<section>
+						<h2>Do I really need this em stuff?</h2>
+
+						<ul>
+							<li class="fragment">Yes! It allows one to easily scale up/down a site: just adjust the <code>font-size</code> of the <code>&lt;body&gt;</code> and everything else will scape/up down with it!</li>
+						</ul>
+
+						<p class="fragment" style="-webkit-transform: rotate(2deg);"><img src="assets/09/obama-not-bad.png" width="447" alt="What I think of it" class="noborder"></p>
 					</section>
 
 				</section>
@@ -358,7 +380,7 @@
 					<section>
 						<h2>The &ldquo;problem&rdquo; with fluid</h2>
 						<ul>
-							<li class="fragment">Fluid alone won't save you
+							<li class="fragment">Fluid grids/font-sizes alone won't save you
 								<ul>
 									<li>
 										When the viewport becomes too narrow, it will look crappy
@@ -369,7 +391,7 @@
 								Need to change the layout when necesarry
 								<ul>
 									<li>
-										Hello <a href="http://www.w3.org/TR/css3-mediaqueries/">CSS Media Queries</a>!
+										Enter, stage left: <a href="http://www.w3.org/TR/css3-mediaqueries/">CSS Media Queries</a>!
 									</li>
 								</ul>
 							</li>
@@ -455,8 +477,30 @@ section#main { ... }
 						<h2>Implement Mobile First &amp; scale up (2)</h2>
 						<ul>
 							<li class="fragment">
+								Actually, define your media query <code>min-width</code> in <code>em</code> <small>(<a href="http://blog.cloudfour.com/the-ems-have-it-proportional-media-queries-ftw/">src</a>)</small>
+								<pre class="bigger"><code class="language-css dontrun">/* General CSS (fonts, colors, etc) + Mobile First Layout */
+html { ... }
+body { ... }
+h1 { ... }
+header { ... }
+section#main { ... }
+
+/* From 360 pixels width and up */
+@media (min-width: 22.5em) {
+	/* note: all styles above will be inherited! */
+	h1 { ... }
+	section#main { ... }
+}</code></pre>
+							</li>
+						</ul>
+					</section>
+
+					<section>
+						<h2>Implement Mobile First &amp; scale up (3)</h2>
+						<ul>
+							<li class="fragment">
 								Include <a href="https://github.com/scottjehl/Respond">respond.js</a> on your page to make oldIE interpret the rules
-								<pre class="bigger"><code class="language-html dontrun">&lt;!--[if (lt IE 9) &amp; (!IEMobile)]&gt;&lt;script src=&quot;js/respond.min.js&quot;&gt;&lt;/script&gt;&lt;![endif]--&gt;</code></pre>
+								<pre class="bigger"><code class="language-html dontrun" style="white-space: nowrap; overflow: scroll;">&lt;!--[if (lt IE 9) &amp; (!IEMobile)]&gt;&lt;script src=&quot;js/respond.min.js&quot;&gt;&lt;/script&gt;&lt;![endif]--&gt;</code></pre>
 							</li>
 							<li class="fragment">
 								Include a <code>viewport</code> metatag to let mobile browsers properly render the site
@@ -469,7 +513,7 @@ section#main { ... }
 						<h2>When to apply a different layout?</h2>
 						<ul>
 							<li class="fragment">
-								Don't use device breakpoints such as 320, 480, 768, etc.
+								<strong>Don't</strong> use device breakpoints such as 320, 480, 768, etc.
 								<ul>
 									<li class="fragment">Devices will change.</li>
 									<li class="fragment">Screen-sizes vary, a lot: <a href="http://stephanierieger.com/the-trouble-with-android/">The trouble with Android</a></li>
@@ -478,7 +522,13 @@ section#main { ... }
 							<li class="fragment">
 								Do set breakpoints when the layout becomes awkward or unusable
 								<ul>
-									<li class="fragment">e.g. column becomes too narrow</li>
+									<li class="fragment">
+										e.g. column becomes too narrow
+									</li>
+									<li class="fragment">
+										You'll be doing this stuff a lot
+										<p style="text-align: center;"><img src="assets/09/YkbaV.gif" width="250" /></p>
+									</li>
 								</ul>
 							</li>
 						</ul>
@@ -553,33 +603,41 @@ section#main { ... }
 						<h2>Fluid Images (2)</h2>
 						<ul>
 							<li class="fragment">
-								Scaling down images isn't small bandwidth friendly
+								Resizing imgs in the browser isn't bandwidth friendly
 								<ul>
 									<li class="fragment">
 										Some hacky solutions exist <a href="http://blog.cloudfour.com/responsive-imgs-part-2/">(list)</a>
 										<ul>
 											<li><code>.htaccess</code> redirect + resize script: <a href="http://adaptive-images.com/">Adaptive Images</a>, <a href="https://github.com/filamentgroup/Responsive-Images">Responsive-Images JS</a>, etc.</li>
 											<li>Define bigger image as URL part or via data attribute: <a href="https://github.com/joshje/Responsive-Enhance">Responsive Enhance</a>, etc.</li>
-											<li>...</li>
 										</ul>
 									</li>
 									<li class="fragment">
-										A <a href="http://www.w3.org/community/respimg/">W3C community group is pondering how to fix it properly</a>, preferably using a new syntax
-										<pre class="bigger"><code class="language-html dontrun">&lt;picture alt=&quot;A giant stone face at The Bayon temple in Cambodia&quot;&gt;
-    &lt;!-- small version --&gt;
-    &lt;source src=&quot;small.jpg&quot;&gt;
-    &lt;!-- medium version, from 400px width --&gt;
-    &lt;source src=&quot;medium.jpg&quot; media=&quot;(min-width: 400px)&quot;&gt;
-    &lt;!-- large version, from 800px width --&gt;
-    &lt;source src=&quot;large.jpg&quot; media=&quot;(min-width: 800px)&quot;&gt;
+										The solutions above basically scale down the images on the fly. Most of the time it's better to have a resized + cropped version though
 
-    &lt;!-- Fallback for browsers that don't support this elem/polyfill --&gt;
+										<p style="text-align: center;"><img src="assets/09/difimages.jpg" width="600" /></p>
+									</li>
+								</ul>
+							</li>
+						</ul>
+					</section>
+
+					<section>
+						<h2>Fluid Images (2)</h2>
+						<ul>
+							<li class="fragment">
+								Resizing imgs in the browser isn't bandwidth friendly <em>(continued)</em>
+								<ul>
+									<li class="fragment">
+										A <a href="http://www.w3.org/community/respimg/">W3C community group</a> is pondering how to properly fix it:
+										<pre class="bigger"><code class="language-html dontrun">&lt;picture alt=&quot;A giant stone face at The Bayon temple in Cambodia&quot;&gt;
+    &lt;source src=&quot;small.jpg&quot;&gt;
+    &lt;source src=&quot;medium.jpg&quot; media=&quot;(min-width: 400px)&quot;&gt;
+    &lt;source src=&quot;large.jpg&quot; media=&quot;(min-width: 800px)&quot;&gt;
     &lt;noscript&gt;&lt;img src=&quot;small.jpg&quot; alt=&quot;...&quot;&gt;&lt;/noscript&gt;
 &lt;/picture&gt;</code></pre>
-										<ul>
-											<li>Although not standarized, a polyfill <a href="https://github.com/scottjehl/picturefill">already exists</a>!</li>
-										</ul>
 									</li>
+									<li class="fragment">Although not standarized <em>yet</em>, a polyfill <a href="https://github.com/scottjehl/picturefill">already exists</a>!</li>
 								</ul>
 							</li>
 						</ul>
@@ -662,7 +720,7 @@ section#main { ... }
 					<section>
 						<h2>Test all mobile devices at once</h2>
 						<p class="fragment" style="text-align: center;"><img src="assets/09/shadow.png" width="560" height="316" alt="" title="" /></p>
-						<footer class="fragment"><a href="http://labs.adobe.com/technologies/shadow/">Adobe Shadow</a> (beta)</footer>
+						<footer class="fragment"><a href="http://html.adobe.com/edge/inspect/">Adobe Edge Inspect</a></footer>
 					</section>
 
 				</section>
@@ -678,10 +736,19 @@ section#main { ... }
 					</section>
 
 					<section>
+						<h2>Solid foundations</h2>
+						<ul>
+							<li class="fragment">
+								Structured and good HTML is a prerequisite before doing anything with CSS.
+							</li>
+						</ul>
+					</section>
+
+					<section>
 						<h2>Future Friendly</h2>
 						<ul>
 							<li class="fragment">
-								We can't predict the future. Things will indefinitely change
+								We can't predict the future. Things will change
 								<ul>
 									<li>New devices</li>
 									<li>New ways to accessing information</li>
@@ -701,9 +768,17 @@ section#main { ... }
 
 					<section>
 						<h2>There is no mobile web</h2>
-						<div style="margin: 160px auto 0; width: 700px;">
+						<div style="margin: 160px auto 0; width: 700px;" class="fragment">
 							<q>There is no Mobile Web. There is only The Web, which we view in different ways. There is also no Desktop Web. Or Tablet Web.</q>
 							<p style="text-align: right; margin-top: 40px;"><small>&mdash; <a href="http://www.the-haystack.com/2011/01/07/there-is-no-mobile-web/">Stephen Hay</a></small></p>
+						</div>
+					</section>
+
+					<section>
+						<h2>Embrace the medium</h2>
+						<div style="margin: 160px auto 0; width: 700px;" class="fragment">
+							<q>If you just make an HTML-Document and you put it on the Web it’s already responsive.</q>
+							<p style="text-align: right; margin-top: 40px;"><small>&mdash; Jeremy Keith</small></p>
 						</div>
 					</section>
 
@@ -733,11 +808,13 @@ section#main { ... }
 										</ul>
 									</li>
 									<li class="fragment">eg. <a href="http://www.html5rocks.com/en/mobile/cross-device/">MVC with Form-Factor Specific Views</a></li>
-									<li class="fragment">etc.</li>
 								</ul>
 							</li>
 							<li class="fragment">
-								In some cases you <strong>will need</strong> a separate app, or a separate website
+								In some cases you <strong>will need</strong> a separate app/website
+								<ul>
+									<li>Use <a href="http://cennydd.co.uk/2013/the-gradient-chart">The Gradient Chart</a> to decide</li>
+								</ul>
 							</li>
 						</ul>
 					</section>
